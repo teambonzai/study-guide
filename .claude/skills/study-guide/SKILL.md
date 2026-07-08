@@ -138,6 +138,23 @@ Work through these in order. `reference/build-pipeline.md` has the exact command
 - **Re-run the coverage audit (Step 4) one final time** against the finished materials to confirm
   nothing was dropped between docs and app data. It must return PASS. State the verdict to the user.
 
+### 9. Publish (auto-deploy)
+- The repo is hosted on **GitHub Pages** (public, `noindex`) at
+  **https://teambonzai.github.io/study-guide/**. `main` auto-deploys on push (~30–60s).
+- Only after the browser verify + final audit PASS, commit and push:
+  ```
+  git add -A
+  git commit -m "Add <topic> study guide"
+  git push
+  ```
+- The `.gitignore` already excludes the raw lecture originals (`src/`,
+  `**/source-materials/`), the intermediate slide PNGs (`**/assets/`), and Python
+  bytecode — so `git add -A` never publishes copyrighted source; only the
+  self-contained apps + `.md` docs go up. Do NOT force-add those ignored paths.
+- Confirm the deploy: after ~1 min, the new lecture is live at
+  `https://teambonzai.github.io/study-guide/courses/<course-id>/NN-<topic>/`.
+  Give the user that URL.
+
 ## Reference files
 - `reference/coverage-audit.md` — **the mandatory coverage-audit gate** (Step 4 + final
   re-check). Read and run for EVERY lecture; the build is not done until it passes.
@@ -161,3 +178,4 @@ Work through these in order. `reference/build-pipeline.md` has the exact command
 - [ ] Design matches `reference/design-rules.md` (teal, no gradients, sprite icons).
 - [ ] Registered in course README + root landing page + root README.
 - [ ] Verified in the browser — every tab, no console errors.
+- [ ] **Committed and pushed** — lecture is live on GitHub Pages; URL given to the user.
