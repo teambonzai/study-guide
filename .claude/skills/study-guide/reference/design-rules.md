@@ -164,6 +164,9 @@ Glossary · Progress. Single-letter hotkeys O R F Q S C D G P jump to each.
 - **Glossary**: grouped by category with headers; term (bold) and definition on
   their own lines. Click a term (rotating chevron aligned to the name) to
   expand/collapse. "Hide definitions (self-test)" collapses all. Keep search.
+  The **category filter is a dropdown** (`<select>` in a `.tool` span with a
+  filter icon), matching the concept-map and slide-group filters — NOT a segmented
+  control (`renderGlossCats`).
 - **Progress**: per-topic bars + icons in the topic colors.
 
 ## Callouts (doc blockquotes)
