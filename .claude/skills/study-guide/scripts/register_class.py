@@ -39,8 +39,10 @@ CARD_TMPL = '''    <a class="lecture" href="{path}">
     </a>
 '''
 
+# Course-section headings are title-only (no icon) — the user removed the per-course
+# icons so the landing page reads as a clean list. --course-icon is accepted but ignored.
 SECTION_TMPL = '''  <div class="course">
-    <h2><svg class="i"><use href="#i-{cicon}"/></svg>{cname}</h2>
+    <h2>{cname}</h2>
 {card}  </div>
 
 '''

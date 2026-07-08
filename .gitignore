@@ -5,6 +5,9 @@ src/
 # --- Intermediate slide PNGs: already base64-embedded in each index.html ---
 **/assets/
 
+# --- Per-slide text JSON: already embedded as `slidedata` in each index.html ---
+**/slides.json
+
 # --- Cruft ---
 .DS_Store
 *.zip

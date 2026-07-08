@@ -7,8 +7,8 @@ tooltip module), `LB` (multi-slide lightbox: `open`/`openSet`/`step`/`render`),
 `Search`, `enhanceDoc`, `enhanceQuotes` (color-code teacher quotes) /
 `enhanceGloss` / `enhanceSlideRefs` / `slideList` / `glossPop` (inline term &
 multi-slide linking in the Read docs), `loadDoc` (incl. the marker→icon-badge
-normalizer for both `.tbadge` and `.pill`), `renderMnem`, `renderMapFilter`/`renderSlideGroups`
-(dropdown filters), palette, hotkeys, the `makeMC` quiz engine
+normalizer for both `.tbadge` and `.pill`), `renderMnem`, `renderMapFilter`/`renderSlideGroups`/`renderGlossCats`
+(dropdown filters — the glossary category filter is a `<select>`, not a segmented control), palette, hotkeys, the `makeMC` quiz engine
 (auto-reveal-on-correct, `requeueMissed`, Back + `answers` memory, review-link `-fb`,
 `Missed only`/topic filters backed by `Store.qstate`),
 the Leitner flashcard engine (`Flash.prev`; question→answer only — no reverse

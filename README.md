@@ -57,3 +57,4 @@ shortcuts. The Overview tab also has a **printable one-page cheat sheet** and an
 ## Courses
 
 - [Microbiology (BIOL 2420)](courses/microbiology-biol2420/) — immune response & complement; determinants of health & disease; epidemiology; control of microorganisms; and future topics.
+- [Anatomy & Physiology II (BIOL 2402)](courses/anatomy-physiology-biol2402/) — digestive physiology (accessory organs, stomach & acid secretion, digestive phases & hormones, pancreas, liver, intestines, defecation); and future topics.
