@@ -1,0 +1,10 @@
+# --- Raw lecture originals: never publish (copyright) or commit (size) ---
+src/
+**/source-materials/
+
+# --- Intermediate slide PNGs: already base64-embedded in each index.html ---
+**/assets/
+
+# --- Cruft ---
+.DS_Store
+*.zip
