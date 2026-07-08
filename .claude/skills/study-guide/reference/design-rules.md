@@ -52,7 +52,12 @@ filler and inconsistency make them distrust the material.
 ## Layout & chrome
 - **Sticky header**, content-width `.hwrap` max 940px, **hamburger drawer nav**.
 - Header shows the lecture title as **text only (no icon)**; the home link is a
-  `home` icon button in the header actions. No "· Austin Community College".
+  plain `home` icon button in the header actions (**no `data-tip` tooltip**). No
+  "· Austin Community College".
+- **Truncate the title with an ellipsis at ALL widths**, not just mobile:
+  `.htitle{min-width:0}` + `.htitle h1{white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis}` in the base CSS. Any clipped text (class name, etc.)
+  must end in "…", never a hard mid-character cut.
 - **Drawer nav must not look ghosted.** Inactive items = CRISP dark icons
   (`#2f4a44`) + `--ink` labels; active item = SOLID teal fill with white text+icon.
 - **Tooltips are JS-positioned** (a single `.tipbubble` element via a `Tip` module
@@ -68,7 +73,10 @@ filler and inconsistency make them distrust the material.
   control rows (`.toolbar`, `#docNav`, `.seg-wrap`, `.slide-controls`, `#mapFilter`)
   `flex-wrap:nowrap;overflow-x:auto` so they **scroll instead of wrapping**; shrink
   the flashcard grade buttons to **icon-only** (`font-size:0`, colored `i-check`/`i-x`).
-  The page body must never scroll horizontally.
+  The page body must never scroll horizontally. **Modals become bottom sheets**
+  (`.modal{align-items:flex-end}`, `.sheet` full-width, `max-height:88vh`, rounded
+  top corners) so they're never cut off; the lightbox image caps at `58vh` so its
+  caption + multi-slide nav stay on-screen.
 
 ## Tabs (the 9 views)
 Overview · Read · Flashcards · Quiz · Scenarios · Concept Maps · Diagrams ·
@@ -110,14 +118,27 @@ Glossary · Progress. Single-letter hotkeys O R F Q S C D G P jump to each.
 - **Quiz / Scenarios**: small uppercase topic caption (**no icon**) + a large
   (~20px) question. **Answer options have NO borders** — states read by background +
   text color only. Rationales on scenarios. Call it "Scenarios," not "NCLEX-style".
-  - **A correct pick auto-reveals.** **A wrong pick colors YOUR choice red
-    immediately** (and locks the options) even when "instant" is off — the *correct*
-    answer stays hidden behind the "Reveal answer" button. So "Show answer
-    immediately" now only controls whether the correct answer shows on pick vs. on Reveal.
+  - **Filter toolbar (like flashcards): a "Missed only" toggle + a topic `<select>`.**
+    `makeMC` filters `order` by `this.topic`/`this.focus` in `start()`; `initFilters()`
+    populates the topic dropdown from the deck's own topics. **Per-question miss state
+    persists** in `Store.qstate(cfg.key)` (`{w,c,miss}`, keyed `'quiz'`/`'scen'`): a
+    first-attempt miss sets `miss:true`, a first-attempt correct clears it — so
+    "Missed only" surfaces exactly what you got wrong, across sessions. Empty state
+    explains itself. Each deck passes `key`/`focusBtn`/`topicSel` in its cfg.
+  - **A correct pick auto-reveals.** When "instant" is off, a **wrong pick colors
+    YOUR choice red immediately but does NOT lock** — you keep selecting until you
+    pick the correct one (which reveals), or hit "Reveal answer" to give up. Only the
+    *current* pick is highlighted; the correct answer stays hidden until reveal.
+    **Score by the FIRST attempt** (`firstPick`) so trial-and-error still counts as a
+    miss and requeues — reset `firstPick` in `render()`. "Show answer immediately"
+    only controls whether the correct answer shows on the first pick vs. on reveal.
   - **Nav buttons are consistent + bordered** (`.btn.qnav`, arrow on BOTH Back and
     Next) so they don't blend into the borderless options; Back is left, Next is
-    right (spacer between). **Score sits next to the progress** ("Score x/y" + "n of N"
-    up by the heading), not down in the button row.
+    right (spacer between). **"n of N" (left) + "Score x/y" (right) sit in a muted
+    row directly ABOVE the progress bar** — grouped with the bar, not up by the
+    heading and not down in the button row. The heading row is just the title. Give
+    the filter toolbar + progress row **generous vertical margins** (~20px) so the
+    top of the quiz doesn't feel cramped.
   - **Bring back missed questions** (default-on `SETTINGS.requeueMissed`, with a
     settings toggle): a missed question is spliced back a few slots later in the
     round (capped at 3 appearances) and re-shown with a `.qretry` "Seen before"
@@ -162,11 +183,14 @@ Labels are plain nouns: Slide / Note / Analogy / Important / Why / Quote — nev
 **Page legends are NOT callouts** — the "flagged on the test / not tested" key
 renders as a neutral gray `.doc-legend` with an info icon.
 
-**Color-code teacher quotes** — professor quotes are high-value (often flag exam
-scope). A *blockquote* quote → the indigo Quote callout; `coType` classifies it as a
-quote even when it opens with an attribution ("Professor: …", "on the exam", "be sure
-you know…"). An *inline* attributed quote in prose (`Professor: "…"`, "he said", "in
-class") is wrapped in an indigo `.tquote` span by `loadDoc`, so it stands out in place.
+**Color-code teacher quotes in ALL reading content** — professor quotes are
+high-value (often flag exam scope). A *blockquote* quote → the indigo Quote callout
+(`coType` catches it even when it opens with an attribution). An *inline* quote in
+prose is wrapped in an indigo `.tquote` span by **`enhanceQuotes(root)`** — a DOM pass
+in `enhanceDoc` (runs on every doc) that wraps a quote when it's **preceded by an
+attribution** (Professor / Prof / Dr / he said / in class / …) **OR contains exam
+language** ("on the exam", "be sure you know", "I'll test…"). Broaden by pattern, not
+by hand — the exam-language trigger catches quotes with no explicit attribution.
 
 ## Badges & markers
 - **On the test** = green `.tbadge on` = **solid `i-check`** (bg `#dcfce7` / text
@@ -211,8 +235,9 @@ class") is wrapped in an indigo `.tquote` span by `loadDoc`, so it stands out in
 - **Header: NO icon on the lecture name.** The class name is text only; the
   Study-Guide-home link is a `home` icon button in the header actions (with the
   search/print/settings icons), never a shield glued to the title.
-- **Table headers use `--ink`, never `--muted`** (`th{color:var(--ink)}`) — muted
-  headers read as disabled/greyed to this user.
+- **Table headers: `--ink` text + a light background** (`th{color:var(--ink);
+  font-weight:700;background:var(--panel2)}`) so the header row is clearly set off
+  from the body. Never `--muted` (reads as disabled/greyed to this user).
 - **Command-palette / result rows: vertically center the icon, label, and
   jump/run badge** (`.s-res{align-items:center}`, no `margin-top` nudge on the
   icon). Applies to any icon+text+trailing-badge row.
