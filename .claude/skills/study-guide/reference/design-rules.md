@@ -248,6 +248,9 @@ by hand — the exam-language trigger catches quotes with no explicit attributio
 ## Interactive patterns
 - **Mnemonics**: interactive reveal cards (tap to reveal), with a "Test me" toggle
   that hides all answers. Same active-recall pattern as the glossary self-test.
+  **Card layout stacks the key ABOVE the body** (`.mnem` is a CSS grid: key on row 1,
+  subtitle+answer on row 2, arrow spanning both rows on the right) — NOT a left key
+  column, whose varying widths misaligned the body text.
 - **Filters vs toggles are visually distinct.** Mutually-exclusive filters = `.seg`
   segmented control (connected, no per-item icons, active = white inset). On/off
   toggles = `.tool` (icon + label, `.on` = teal). Read toggle state via
