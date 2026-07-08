@@ -8,3 +8,7 @@ src/
 # --- Cruft ---
 .DS_Store
 *.zip
+
+# Python bytecode
+__pycache__/
+*.pyc
