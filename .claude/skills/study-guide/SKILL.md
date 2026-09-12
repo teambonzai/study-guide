@@ -39,11 +39,27 @@ lecture's files and copy the pattern exactly. Do not invent a new design.
   so it works offline via double-click and can be shared as a single file.
 - **Design = teal, light mode, no gradients, real inline-SVG icons, no emoji.**
   The complete rule set is in `reference/design-rules.md`. Follow all of it.
+- **Know whose class it is — the site has one profile per student.** The landing page
+  splits into profiles, each with its own active courses and an Archive:
+  - **`mindy`** — ACC nursing prerequisites (college). Professor's recordings usually exist;
+    scenarios may be clinical (never foregrounding NCLEX).
+  - **`macy`** — high school biology. Slide decks with speaker notes, no recordings. She needs
+    extra help and **must not be overwhelmed**: follow **`reference/audience-macy.md`** (plain
+    language, short sections, fewer and simpler cards/questions) for every file. Say "teacher",
+    no clinical content. Titles carry the lesson number ("2.2 Properties of Water"); landing
+    sections are per unit ("Biology · Unit 2: Biomolecules"). Assemble with
+    `--replacements reference/profile-macy.json` (violet theme, friendly labels, bulb icon for
+    Scenarios, "Source notes", home button → `#macy`).
+  Every other rule (source-only content, citations, flags, design) applies to both.
+- **Slide-only decks (no recording):** flags are deck emphasis, not the teacher's spoken scope —
+  say so in Exam scope; `transcript-corrections.md` becomes "Source Notes & Slide Corrections".
+  Speaker notes are lecture content — read them.
 
 ## Inputs and outputs
 
-**Input:** raw files in `src/` — a `.ppt`/`.pptx`/`.pdf` deck, a transcript
-(`.rtf`/`.txt`/`.vtt`), and optionally a YouTube `.webloc`.
+**Input:** raw files in `src/` (or Downloads) — the deck as **`.pptx` + a `.pdf` export**
+(PDF = slide images, pptx = exact text + speaker notes), a transcript
+(`.rtf`/`.txt`/`.vtt`) when one exists, and optionally a YouTube `.webloc`.
 
 **Output:** `courses/<course-id>/NN-<topic>/` containing:
 
@@ -70,6 +86,10 @@ Work through these in order. `reference/build-pipeline.md` has the exact command
 - Move the `src/` originals into `.../source-materials/`.
 - Run `scripts/extract.sh` to convert the deck to slide images
   (`assets/slides/slide-NN.png`) and pull per-slide text to `slides.json`.
+  `extract.sh` needs LibreOffice for `.ppt`/`.pptx`; if `soffice` is missing, ask the user
+  for a PDF export and render that (see `build-pipeline.md`). Check for **hidden slides**
+  (`slide._element.get('show')=='0'`) — PDF exports may include or skip them, which
+  shifts slide numbering; make page count match pptx numbering before authoring.
 - Convert the transcript to plain text (`textutil`/read the `.rtf`). Large
   transcripts exceed the Read limit — read in offset/limit chunks. **Read ALL of
   it, start to finish** — do not stop partway. Confirm you reached the closing
@@ -113,11 +133,17 @@ Work through these in order. `reference/build-pipeline.md` has the exact command
   hash router) — cloning carries it forward; you only swap data.
 
 ### 6. Assemble index.html
-- **Clone the template**: copy the gold-standard `index.html` to the new folder.
-  Keep ALL of its CSS, icon sprite, and JavaScript byte-for-byte — that code is
-  the design system and app engine; only the *data* changes.
-- Replace, in the clone: `<title>`, the header `<h1>`, the `TOPICS…MAPS` consts,
-  the `slidedata` JSON, the three `doc-*` script bodies, and the `imgdata` JSON.
+- **Clone the template** — keep ALL of its CSS, icon sprite, and JavaScript
+  byte-for-byte; only the *data* changes. Write each data block to
+  `<lecture>/build/<NAME>.js` plus `build/swaps.json`, then run
+  `scripts/assemble_app.py <lecture-dir> [--replacements reference/profile-<id>.json]`.
+  It clones the template (default: `04-control-of-microorganisms`, the newest engine),
+  swaps `TOPICS…PRINTCHEAT`, `<title>`, `<h1>`, **`Store.key`**, the Overview not-tested
+  note, the Diagrams search/deck table, and `slidedata`, and fails loudly if any anchor is
+  missing. (Self-test: extracting 04's own blocks and reassembling is byte-identical.)
+- **`Store.key` must be unique per lecture** (e.g. `hs_bio_water_v1`). Every app shares
+  one origin on GitHub Pages; a key left over from the clone makes two lectures overwrite
+  each other's progress (this happened to 01 and 03). `register_class.py` blocks duplicates.
 - Run `scripts/render_docs.py` to convert the four `.md` docs to the HTML that
   goes in `doc-outline` / `doc-guide` / `doc-transcript` (handles the blank-line-
   before-lists gotcha, emoji→icon/pill stripping, and `Slide N`→lightbox links).
@@ -126,9 +152,14 @@ Work through these in order. `reference/build-pipeline.md` has the exact command
   not PNG — the gold standard is 5.7MB; PNG would be far larger.)
 
 ### 7. Register it
-- Run `scripts/register_class.py` (or edit by hand) to add the lecture row to
-  `courses/<course-id>/README.md`, a card to the root `index.html` landing page,
-  and the course line to the root `README.md`. Match the existing markup exactly.
+- Run `scripts/register_class.py --profile <mindy|macy> …` to add a card under the
+  profile's active courses on the root `index.html` landing page; it prints the rows for
+  `courses/<course-id>/README.md` and the root `README.md` (pass
+  `--notes-label "source notes"` for slide-only decks). It refuses to run without a
+  passing `coverage-audit.md` or with a duplicate `Store.key`.
+- **Archive:** when a student finishes a class, move it with the same command plus
+  `--archive` (or `--restore` to bring it back). Archived classes sit in a collapsed
+  "Archive" at the bottom of that profile; the app itself is untouched.
 
 ### 8. Verify in the browser + final coverage re-check
 - Start the `study-app` preview server (serves repo root on :8790) and open
@@ -163,7 +194,9 @@ Work through these in order. `reference/build-pipeline.md` has the exact command
 - `reference/build-pipeline.md` — extraction toolchain, exact commands, gotchas.
 - `reference/app-template-map.md` — line-map of the template `index.html`: every
   data block, doc script, and swap point, with the data shapes.
-- `scripts/` — `extract.sh`, `render_docs.py`, `embed_images.py`, `register_class.py`.
+- `reference/profile-macy.json` — audience wording swaps for Macy's (high school) apps.
+- `scripts/` — `extract.sh`, `assemble_app.py`, `render_docs.py`, `embed_images.py`,
+  `register_class.py`.
 
 ## Checklist before calling it done
 - [ ] **Entire transcript read start-to-finish** (reached the closing remarks).

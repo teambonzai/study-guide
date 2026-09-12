@@ -1,8 +1,12 @@
 # Study Guide
 
-Personal study materials for the **Nursing program at Austin Community College (ACC)**.
-Source lectures come from professors/the university; everything else here is study aids built
-from those sources.
+Personal study materials for two students, each with a profile on the home page:
+
+- **Mindy** — Nursing program prerequisites at Austin Community College (ACC).
+- **Macy** — High school biology.
+
+Source lectures come from their teachers; everything else here is study aids built from those
+sources. Each profile lists its current classes, with finished classes in a collapsed **Archive**.
 
 ## How it's organized
 
@@ -57,4 +61,11 @@ shortcuts. The Overview tab also has a **printable one-page cheat sheet** and an
 ## Courses
 
 - [Microbiology (BIOL 2420)](courses/microbiology-biol2420/) — immune response & complement; determinants of health & disease; epidemiology; control of microorganisms; and future topics.
+**Mindy**
+
+- [Microbiology (BIOL 2420)](courses/microbiology-biol2420/) — immune response & complement; determinants of health & disease; epidemiology (archived); control of microorganisms; and future topics.
 - [Anatomy & Physiology II (BIOL 2402)](courses/anatomy-physiology-biol2402/) — digestive physiology (accessory organs, stomach & acid secretion, digestive phases & hormones, pancreas, liver, intestines, defecation); and future topics.
+
+**Macy**
+
+- [Biology (high school)](courses/biology-high-school/) — Unit Two: Biomolecules (properties of water; biomolecules overview; proteins & nucleic acids).

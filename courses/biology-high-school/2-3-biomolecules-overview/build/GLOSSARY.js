@@ -1,0 +1,27 @@
+const GLOSS_CATS={mol:"Molecules & carbon",energy:"Energy & reactions",build:"Building, breaking & ATP",bio:"The four biomolecules"};
+const GLOSSARY = [
+ ["Macromolecule","A big molecule built from smaller pieces.","mol"],
+ ["Monomer","One small building block.","mol"],
+ ["Polymer","Many monomers joined together.","mol"],
+ ["Organic / inorganic","Organic contains carbon. Inorganic does not.","mol"],
+ ["Energy","The ability to change or move matter.","energy"],
+ ["Entropy","Disorder. It always increases.","energy"],
+ ["Chemical reaction","Bonds break or form, so the chemical becomes something new.","energy"],
+ ["Physical change","Only the state or size changes. Melting ice is still water.","energy"],
+ ["Reactants / products","Starting substances on the left. New substances on the right.","energy"],
+ ["Coefficient","The number in front. It tells how many you need.","energy"],
+ ["Exothermic","A reaction that releases heat.","energy"],
+ ["Endothermic","A reaction that absorbs heat.","energy"],
+ ["Anabolism","Building big molecules from small ones. Uses energy.","build"],
+ ["Catabolism","Breaking big molecules into small ones. Releases energy.","build"],
+ ["Dehydration synthesis","Building molecules by removing water.","build"],
+ ["Hydrolysis","Splitting molecules by adding water.","build"],
+ ["ATP","The cell's energy currency. It has three phosphates.","build"],
+ ["ADP","What's left after ATP loses one phosphate.","build"],
+ ["Lipid","Built from fatty acids and glycerol. Stores long-term energy.","bio"],
+ ["Carbohydrate","Built from monosaccharides (single sugars). Gives short-term energy.","bio"],
+ ["Protein","Built from amino acids. Gives structure and forms enzymes.","bio"],
+ ["Nucleic acid","Built from nucleotides. Stores and carries genetic information.","bio"],
+ ["Enzyme","A protein that speeds up a reaction.","bio"],
+ ["kcal","A unit of energy in food.","bio"]
+];

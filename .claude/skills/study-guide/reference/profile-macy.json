@@ -1,0 +1,17 @@
+[
+  ["</head>", "<style>/* Macy's profile theme: violet instead of teal */\n  :root{--bg:#f7f5fc;--panel2:#f0ecfa;--ink:#1e1b2e;--muted:#645d78;--line:#e9e5f3;--accent:#7c3aed;--accent2:#6d28d9;--chip:#f1eafe}\n  .btn.qnav:hover{background:var(--panel2)} .gitem:hover{border-color:#ddd3f3}\n</style>\n</head>"],
+  ["Teal notes explain key diagrams and tables.", "Colored notes explain key pictures."],
+  ["<use href=\"#i-stethoscope\"/></svg>Scenarios</button>", "<use href=\"#i-bulb\"/></svg>Scenarios</button>"],
+  ["<use href=\"#i-stethoscope\"/></svg>Scenarios</h2>", "<use href=\"#i-bulb\"/></svg>Scenarios</h2>"],
+  ["Apply the concepts to a clinical situation", "Apply the concepts to a real-life situation"],
+  ["The full outline, study guide, and transcript fixes are in the", "The full outline, study guide, and source notes are in the"],
+  ["</svg>Lecture outline</button>", "</svg>Lesson outline</button>"],
+  ["</svg>Transcript fixes</button>", "</svg>Source notes</button>"],
+  ["{title:'Read — lecture outline'", "{title:'Read — lesson outline'"],
+  ["{title:'Read — transcript fixes'", "{title:'Read — source notes'"],
+  [",'Transcript fixes')", ",'Source notes')"],
+  ["href=\"../../../index.html\"", "href=\"../../../index.html#macy\""],
+  ["color:#0d9488", "color:#7c3aed", true],
+  ["solid #0d9488", "solid #7c3aed", true],
+  ["b{color:#0f766e}", "b{color:#6d28d9}", true]
+]

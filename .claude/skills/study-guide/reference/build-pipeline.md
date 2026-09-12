@@ -11,6 +11,13 @@ Converts the deck to slide images + per-slide text. Wraps:
 - **`soffice`** (LibreOffice, `/opt/homebrew/bin/soffice`) — old binary `.ppt` →
   pdf: `soffice --headless --convert-to pdf --outdir OUT "file.ppt"`
   (also `--convert-to pptx`). `.pptx`/`.pdf` inputs skip or adjust this step.
+  **LibreOffice was not installed as of Sep 2026.** Don't script Keynote (AppleScript export
+  hangs on its import dialogs). Ask the user for a PDF export of each deck and render it:
+  `pdftoppm -png -scale-to-x 1200 -scale-to-y -1 deck.pdf assets/slides/slide`, then
+  zero-pad names to `slide-NN.png` and write `slides.json` from the `.pptx` with python-pptx.
+- **Hidden slides:** python-pptx lists them (`slide._element.get('show')=='0'`); a PDF export
+  may include or skip them. Compare `pdfinfo` page count to the pptx slide count before
+  authoring so `Slide N` references line up with gallery images.
 - **`pdftoppm`/`pdfinfo`** (poppler) — pdf pages → PNG:
   `pdftoppm -png -r 90 file.pdf slide` → `slide-01.png …`. `pdfinfo` for page count.
 - **python-pptx** (`pip3 install --user --break-system-packages python-pptx`) —

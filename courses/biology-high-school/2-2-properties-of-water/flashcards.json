@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "course": "Biology (high school)",
+    "lecture": "Unit Two: Biomolecules — 2.2 Properties of Water",
+    "source": "Teacher's PowerPoint (9 slides; no speaker notes). No recording exists for this lesson.",
+    "note": "All cards come from the teacher's slides. Import into Anki/Quizlet as Q/A pairs.",
+    "topics": [
+      "polarity",
+      "hbond",
+      "cohesion",
+      "capillary",
+      "surface",
+      "heat",
+      "hydro",
+      "mixtures",
+      "density"
+    ]
+  },
+  "cards": [
+    {
+      "t": "polarity",
+      "q": "What does polar mean?",
+      "a": "One end negative, one end positive"
+    },
+    {
+      "t": "polarity",
+      "q": "Which atom in water is partial negative?",
+      "a": "Oxygen"
+    },
+    {
+      "t": "polarity",
+      "q": "Which atoms in water are partial positive?",
+      "a": "The two hydrogens"
+    },
+    {
+      "t": "polarity",
+      "q": "Why is oxygen partial negative?",
+      "a": "It pulls electrons toward itself"
+    },
+    {
+      "t": "hbond",
+      "q": "What is a hydrogen bond?",
+      "a": "Hydrogen pulled to another molecule's oxygen"
+    },
+    {
+      "t": "hbond",
+      "q": "Is a hydrogen bond inside or between molecules?",
+      "a": "Between molecules (intermolecular)"
+    },
+    {
+      "t": "hbond",
+      "q": "Besides oxygen, which atoms can hydrogen bond?",
+      "a": "Nitrogen and fluorine"
+    },
+    {
+      "t": "cohesion",
+      "q": "What is cohesion?",
+      "a": "Water sticking to water"
+    },
+    {
+      "t": "cohesion",
+      "q": "What is adhesion?",
+      "a": "Water sticking to something different"
+    },
+    {
+      "t": "capillary",
+      "q": "What is capillary action?",
+      "a": "Water rising up a thin tube"
+    },
+    {
+      "t": "capillary",
+      "q": "What two things cause capillary action?",
+      "a": "Cohesion and adhesion"
+    },
+    {
+      "t": "capillary",
+      "q": "Which tube does water climb highest in?",
+      "a": "The thinnest tube"
+    },
+    {
+      "t": "surface",
+      "q": "What is surface tension?",
+      "a": "Water's surface resisting an outside force"
+    },
+    {
+      "t": "surface",
+      "q": "What causes surface tension?",
+      "a": "Cohesion only"
+    },
+    {
+      "t": "heat",
+      "q": "What is specific heat capacity?",
+      "a": "Energy to raise temperature 1°C"
+    },
+    {
+      "t": "heat",
+      "q": "Does water heat up fast or slowly?",
+      "a": "Slowly"
+    },
+    {
+      "t": "heat",
+      "q": "What does water's high specific heat keep steady?",
+      "a": "Climates and body temperatures"
+    },
+    {
+      "t": "heat",
+      "q": "Water's high specific heat helps living things keep what?",
+      "a": "Homeostasis"
+    },
+    {
+      "t": "hydro",
+      "q": "What does hydrophilic mean?",
+      "a": "Water-loving; dissolves easily"
+    },
+    {
+      "t": "hydro",
+      "q": "What does hydrophobic mean?",
+      "a": "Water-fearing; does not dissolve"
+    },
+    {
+      "t": "hydro",
+      "q": "What does amphipathic mean?",
+      "a": "Has water-loving and water-fearing parts"
+    },
+    {
+      "t": "hydro",
+      "q": "What do amphipathic molecules help build?",
+      "a": "Cell membranes"
+    },
+    {
+      "t": "mixtures",
+      "q": "What is a suspension?",
+      "a": "Big bits that don't dissolve"
+    },
+    {
+      "t": "mixtures",
+      "q": "What is an emulsion?",
+      "a": "Two liquids that don't normally mix"
+    },
+    {
+      "t": "density",
+      "q": "Why does ice float?",
+      "a": "It is less dense than water"
+    }
+  ]
+}

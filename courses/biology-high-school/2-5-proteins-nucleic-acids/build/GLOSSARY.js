@@ -1,0 +1,26 @@
+const GLOSS_CATS={prot:"Protein building blocks",struct:"Levels of protein structure",nuc:"Nucleic acids & DNA"};
+const GLOSSARY = [
+ ["Protein","One or more chains of amino acids with a working 3D shape.","prot"],
+ ["Monomer","One small building block that links with others.","prot"],
+ ["Amino acid","The building block of proteins. There are about 20 kinds.","prot"],
+ ["Side chain (R-group)","The part of an amino acid that is different in each one.","prot"],
+ ["Peptide","A short chain of about 2-50 amino acids.","prot"],
+ ["Polypeptide","A long chain of about 51 or more amino acids.","prot"],
+ ["Enzyme","A protein that controls how fast reactions go.","prot"],
+ ["Primary structure","The order of amino acids in a chain.","struct"],
+ ["Peptide bond","The strong covalent bond that joins two amino acids.","struct"],
+ ["Dehydration synthesis","Joining two pieces by giving off water.","struct"],
+ ["Secondary structure","Small coils and zigzag sheets held by hydrogen bonds.","struct"],
+ ["Hydrogen bond","A weak pull between atoms (OpenStax Biology 2e).","struct"],
+ ["Tertiary structure","The whole 3D shape of one chain.","struct"],
+ ["Hydrophobic effect","Water-fearing amino acids hide in the center when a chain folds.","struct"],
+ ["Quaternary structure","Two or more chains fitted together. Not all proteins have it.","struct"],
+ ["Subunit","One polypeptide chain inside a bigger protein.","struct"],
+ ["Nucleic acid","A molecule that stores and passes on information from parents.","nuc"],
+ ["Nucleotide","The building block of nucleic acids: sugar, phosphate group, and base.","nuc"],
+ ["DNA","A nucleic acid with bases A, T, C, G and the sugar deoxyribose.","nuc"],
+ ["RNA","A nucleic acid with bases A, U, C, G and the sugar ribose.","nuc"],
+ ["Uracil (U)","The base RNA uses in place of thymine (T).","nuc"],
+ ["Double helix","DNA's shape: two strands twisted around each other.","nuc"],
+ ["Antiparallel","DNA's two strands run in opposite directions.","nuc"]
+];

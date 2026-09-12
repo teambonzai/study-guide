@@ -1,0 +1,147 @@
+{
+  "meta": {
+    "course": "Biology (high school)",
+    "lecture": "Unit Two: Biomolecules — 2.3 Biomolecules Overview",
+    "source": "Teacher's slides and speaker notes. No recording.",
+    "note": "Core ideas only, drawn from the slides and speaker notes. Import into Anki/Quizlet as Q/A pairs.",
+    "topics": [
+      "carbon",
+      "energy",
+      "reactions",
+      "exoendo",
+      "buildbreak",
+      "atp",
+      "lipids",
+      "carbs",
+      "proteins",
+      "nucleic"
+    ]
+  },
+  "cards": [
+    {
+      "t": "carbon",
+      "q": "Many monomers joined together make a…?",
+      "a": "A polymer"
+    },
+    {
+      "t": "carbon",
+      "q": "How many valence electrons does carbon have?",
+      "a": "Four"
+    },
+    {
+      "t": "carbon",
+      "q": "What does organic mean?",
+      "a": "It contains carbon"
+    },
+    {
+      "t": "energy",
+      "q": "What is energy?",
+      "a": "Ability to change or move matter"
+    },
+    {
+      "t": "energy",
+      "q": "What does the 1st law say about energy?",
+      "a": "It can't be created or destroyed"
+    },
+    {
+      "t": "energy",
+      "q": "What is entropy?",
+      "a": "Disorder"
+    },
+    {
+      "t": "reactions",
+      "q": "What happens to bonds in a chemical reaction?",
+      "a": "They break or form"
+    },
+    {
+      "t": "reactions",
+      "q": "What does a coefficient tell you?",
+      "a": "How many you need"
+    },
+    {
+      "t": "exoendo",
+      "q": "What does an exothermic reaction do with heat?",
+      "a": "Releases it"
+    },
+    {
+      "t": "exoendo",
+      "q": "What does an endothermic reaction do with heat?",
+      "a": "Absorbs it"
+    },
+    {
+      "t": "buildbreak",
+      "q": "What is anabolism?",
+      "a": "Building big molecules (uses energy)"
+    },
+    {
+      "t": "buildbreak",
+      "q": "What is catabolism?",
+      "a": "Breaking big molecules (releases energy)"
+    },
+    {
+      "t": "atp",
+      "q": "What is ATP's nickname?",
+      "a": "Energy currency of the cell"
+    },
+    {
+      "t": "atp",
+      "q": "ATP + water makes what?",
+      "a": "ADP + Pi + energy"
+    },
+    {
+      "t": "lipids",
+      "q": "What are the building blocks of lipids?",
+      "a": "Fatty acids and glycerol"
+    },
+    {
+      "t": "carbs",
+      "q": "What are the building blocks of carbohydrates?",
+      "a": "Monosaccharides"
+    },
+    {
+      "t": "proteins",
+      "q": "What are the building blocks of proteins?",
+      "a": "Amino acids"
+    },
+    {
+      "t": "nucleic",
+      "q": "What are the building blocks of nucleic acids?",
+      "a": "Nucleotides"
+    },
+    {
+      "t": "reactions",
+      "q": "Is melting ice a chemical change?",
+      "a": "No. It's still H₂O."
+    },
+    {
+      "t": "exoendo",
+      "q": "Products end lower than reactants. Which type of reaction?",
+      "a": "Exothermic"
+    },
+    {
+      "t": "buildbreak",
+      "q": "Which one adds water: dehydration synthesis or hydrolysis?",
+      "a": "Hydrolysis"
+    },
+    {
+      "t": "lipids",
+      "q": "Which stores long-term energy: lipids or carbs?",
+      "a": "Lipids (9 kcal per gram)"
+    },
+    {
+      "t": "carbs",
+      "q": "Which word ending marks a carbohydrate?",
+      "a": "-ose"
+    },
+    {
+      "t": "proteins",
+      "q": "Which biomolecule forms enzymes?",
+      "a": "Proteins"
+    },
+    {
+      "t": "nucleic",
+      "q": "Which biomolecule contains phosphorus (CHONP)?",
+      "a": "Nucleic acids"
+    }
+  ]
+}

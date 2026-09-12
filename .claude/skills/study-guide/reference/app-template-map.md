@@ -80,6 +80,13 @@ bare array. Getting the tail wrong silently breaks flashcard/quiz persistence.
   arrow must carry a label**; model decisions as top node → labeled arrow → two
   separated labeled columns.
 
+## 4b. Per-lecture values inside the engine
+- **`Store.key`** (`const Store = { key:"…"`) — the localStorage key for this lecture's
+  progress. **Must be unique across all lectures** (all apps share the GitHub Pages origin).
+  `assemble_app.py` sets it from `build/swaps.json`; `register_class.py` refuses duplicates.
+- `SUMMARY` (audio summary) and `printCheat()` (cheat sheet) are per-lecture too — they're
+  in `assemble_app.py`'s block list.
+
 ## 5. Rendered doc bodies (`<script type="text/html" id="doc-*">`)
 - `id="doc-outline"` (~line 1293) ← rendered `lecture-outline.md`
 - `id="doc-guide"` (~line 1427) ← rendered `study-guide.md`

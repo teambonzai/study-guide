@@ -1,0 +1,145 @@
+{
+ "meta": {
+  "course": "Biology (high school)",
+  "lecture": "Unit Two: Biomolecules — 2.5 Proteins & Nucleic Acids",
+  "source": "Teacher’s PowerPoint (14 slides, with speaker notes). No recording exists for this lesson.",
+  "note": "All cards are drawn from the slide deck and speaker notes. Import into Anki/Quizlet as Q/A pairs.",
+  "topics": [
+   "proteins",
+   "levels",
+   "primary",
+   "secondary",
+   "tertiary",
+   "quaternary",
+   "nucleic",
+   "dna"
+  ]
+ },
+ "cards": [
+  {
+   "t": "proteins",
+   "q": "What is the monomer (building block) of proteins?",
+   "a": "Amino acids."
+  },
+  {
+   "t": "proteins",
+   "q": "Which part is different in each amino acid?",
+   "a": "The side chain (R-group)."
+  },
+  {
+   "t": "proteins",
+   "q": "What do we call proteins that control reaction rates?",
+   "a": "Enzymes."
+  },
+  {
+   "t": "proteins",
+   "q": "What does STRUCTURE = FUNCTION mean?",
+   "a": "Shape decides a protein's job."
+  },
+  {
+   "t": "proteins",
+   "q": "About how many amino acids are in a peptide?",
+   "a": "About 2 to 50."
+  },
+  {
+   "t": "proteins",
+   "q": "About how many amino acids are in a polypeptide?",
+   "a": "About 51 or more."
+  },
+  {
+   "t": "levels",
+   "q": "Primary, secondary, tertiary... what is the fourth level?",
+   "a": "Quaternary."
+  },
+  {
+   "t": "levels",
+   "q": "Which three levels does every protein have?",
+   "a": "Primary, secondary, tertiary."
+  },
+  {
+   "t": "levels",
+   "q": "In the writing analogy, what matches primary structure?",
+   "a": "Letters."
+  },
+  {
+   "t": "levels",
+   "q": "In the writing analogy, what matches tertiary structure?",
+   "a": "Sentences."
+  },
+  {
+   "t": "primary",
+   "q": "What is primary structure?",
+   "a": "The order of amino acids."
+  },
+  {
+   "t": "primary",
+   "q": "What bond joins amino acids in a chain?",
+   "a": "Peptide bonds."
+  },
+  {
+   "t": "primary",
+   "q": "What process makes a peptide bond?",
+   "a": "Dehydration synthesis."
+  },
+  {
+   "t": "primary",
+   "q": "What sets the order of amino acids in a protein?",
+   "a": "The DNA of a gene."
+  },
+  {
+   "t": "secondary",
+   "q": "What are the two common secondary shapes?",
+   "a": "Alpha helix and beta pleated sheet."
+  },
+  {
+   "t": "secondary",
+   "q": "What bonds hold secondary structure in shape?",
+   "a": "Hydrogen bonds."
+  },
+  {
+   "t": "tertiary",
+   "q": "What is tertiary structure?",
+   "a": "One chain's whole 3D shape."
+  },
+  {
+   "t": "tertiary",
+   "q": "When a chain folds in water, where do nonpolar amino acids go?",
+   "a": "To the center."
+  },
+  {
+   "t": "quaternary",
+   "q": "Do all proteins have quaternary structure?",
+   "a": "No. Only proteins with 2+ chains."
+  },
+  {
+   "t": "nucleic",
+   "q": "What is the monomer (building block) of nucleic acids?",
+   "a": "Nucleotides."
+  },
+  {
+   "t": "nucleic",
+   "q": "What are the 3 parts of a nucleotide?",
+   "a": "Sugar, phosphate group, base."
+  },
+  {
+   "t": "nucleic",
+   "q": "Which base is in RNA but not in DNA?",
+   "a": "Uracil (U)."
+  },
+  {
+   "t": "dna",
+   "q": "Which bases pair up in DNA?",
+   "a": "A with T, C with G."
+  },
+  {
+   "t": "dna",
+   "q": "What holds DNA base pairs together?",
+   "a": "Hydrogen bonds."
+  },
+  {
+   "t": "dna",
+   "q": "What does antiparallel mean for DNA?",
+   "a": "Strands run in opposite directions."
+  }
+ ]
+}

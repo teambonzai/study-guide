@@ -1,0 +1,28 @@
+const GLOSS_CATS={mol:"The water molecule",prop:"Properties of water",subs:"Water and other substances",mix:"Mixtures and density",sym:"Symbols"};
+const GLOSSARY = [
+ ["Electron","A tiny particle with a negative charge.","mol"],
+ ["Polar","Having one partly negative end and one partly positive end.","mol"],
+ ["Partial charge (δ+ / δ−)","A small charge. In water, oxygen is δ− and hydrogen is δ+.","mol"],
+ ["Hydrogen bond","A hydrogen on one molecule pulled to an oxygen on another.","mol"],
+ ["Intermolecular force","A pull between two separate molecules.","mol"],
+ ["Polar covalent bond","The bond holding hydrogen to oxygen inside one water molecule.","mol"],
+ ["Cohesion","Water sticking to water.","prop"],
+ ["Adhesion","Water sticking to a different substance.","prop"],
+ ["Capillary action","Water rising up a thin tube, from cohesion and adhesion.","prop"],
+ ["Meniscus","The curved top of water in a tube.","prop"],
+ ["Xylem","The tubes that carry water up a plant (OpenStax Biology 2e).","prop"],
+ ["Surface tension","Water's surface resisting an outside force, caused by cohesion.","prop"],
+ ["Specific heat capacity","The energy needed to raise temperature by 1°C. Water's is high.","prop"],
+ ["Homeostasis","Keeping the inside of a living thing steady.","prop"],
+ ["Dissolve","To break apart and spread evenly through a liquid.","subs"],
+ ["Hydrophilic","Water-loving. Dissolves easily in water, like salt or sugar.","subs"],
+ ["Hydrophobic","Water-fearing. Does not dissolve in water, like oil or fat.","subs"],
+ ["Amphipathic","Having a water-loving part and a water-fearing part.","subs"],
+ ["Phospholipid","An amphipathic molecule with a water-loving head and water-fearing tails.","subs"],
+ ["Cell membrane","The thin outer layer of a cell.","subs"],
+ ["Suspension","Big bits in water that do not dissolve, like sand.","mix"],
+ ["Emulsion","Two liquids that don't normally mix, one spread through the other.","mix"],
+ ["Density","Mass per unit volume (D = m / V).","mix"],
+ ["δ","Partial, as in a partial charge (δ+ or δ−).","sym"],
+ ["ρ (rho)","Another symbol for density (ρ = M / V).","sym"]
+];
