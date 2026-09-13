@@ -1,81 +1,59 @@
-# 2.3 Biomolecules Overview — Coverage Audit (final gate)
+# 2.3 Biomolecules Overview — Coverage Audit (re-check after fixes)
 
-**Sources checked:** slides.json, the .pptx (speaker notes on slides 4–9 read in full), and every rendered slide image (1–29; slide 11 hidden and intentionally uncited). No recording.
-**Materials checked:** study-guide.md, lecture-outline.md, key-terms-glossary.md, transcript-corrections.md, flashcards.json, build/*.js, build/swaps.json.
-**Audience rules:** audience-macy.md.
+**Date:** 2026-09-13
+**Teacher sources checked:** slides.json; speaker notes read from the .pptx with python-pptx (notes exist only on slides 4–9); rendered slides 1–10 and 12–29; full-size pictures s24-1 (enzyme chart) and s28-1 (DNA vs. RNA). Slide 11 is hidden and left uncited on purpose. For slides 3–5, only what shows on the rendered slide counts. There is no recording.
+**Materials checked:** study-guide.md, lecture-outline.md, key-terms-glossary.md, transcript-corrections.md, flashcards.json, build/*.js, build/swaps.json. I also grepped index.html to confirm the built app has the fixes.
+**Rules:** reference/audience-macy.md (hard rules 1–4, plus the section rules).
 
-## A. Slide coverage
+---
 
-| Slide | Core idea (visible / notes) | Study guide | Outline |
-|---|---|---|---|
-| 1 | Title | Header | Header |
-| 2 | Monomers + monomers = polymer; carbon has 4 valence electrons (rings, chains); organic vs inorganic | §1 | §1 |
-| 3 | Energy = ability to change/move matter; changes form; 1st law; 2nd law (entropy); potential/kinetic map | §2 | §2 |
-| 4 | Chemical reaction = bonds break/form; physical change (melting) is not; reactants/products; coefficient; state letters (notes) | §3 | §3 |
-| 5 | Exothermic releases heat (hotter than surroundings); endothermic absorbs heat (cooler); notes on spontaneity | §4 | §4 |
-| 6 | Potential energy diagram; compare products vs reactants (notes) | §4 | §4 |
-| 7 | Energy released vs absorbed graphs; activation energy deferred (⛔) | §4 (⛔ flagged) | §4 (⛔ flagged) |
-| 8 | Anabolism builds (energy required); catabolism breaks (energy released) | §5 | §5 |
-| 9 | Dehydration synthesis (water out); hydrolysis (water in, digestion; starch to glucose in notes) | §5 | §5 |
-| 10 | ATP = energy currency; 3 phosphates, ribose, adenine | §6 | §6 |
-| 12 | ATP + H₂O → ADP + Pi + energy | §6 | §6 |
-| 13 | ATP/ADP cycle; charged vs dead battery; recharging requires energy, releases water | §6 | §6 |
-| 14 | Lipids CHO; fatty acids & glycerol; phospholipid bilayer picture | §7 | §7 |
-| 15 | Found in oils, butter, dairy, waxes | §7 | §7 |
-| 16 | Long-term storage, 9 kcal/g; membrane, storage, insulation, signaling; BONUS | §7 + Class discussion | §7 |
-| 17 | Partner talk (lipids in winter) | Class discussion ⛔ | Class discussion ⛔ |
-| 18 | Carbs CHO 1:2:1; monosaccharides; -ose; mono/di/polysaccharide picture | §8 | §8 |
-| 19 | Found in sugar, bread, pasta, rice, fruits | §8 | §8 |
-| 20 | Short-term storage, 4 kcal/g; cell walls, energy, recognition; BONUS | §8 + Class discussion | §8 |
-| 21 | Partner talk (non-animals need carbs?) | Class discussion ⛔ | Class discussion ⛔ |
-| 22 | Proteins CHON(S); amino acids; -ase | §9 (+ Source Notes clarification) | §9 |
-| 23 | Found in meat, eggs, beans, tofu, dairy, nuts | §9 | §9 |
-| 24 | Secondary energy, structure; enzymes, transport, signaling, immune defense; BONUS | §9 + Class discussion | §9 |
-| 25 | Partner talk (protein for gym-goers) | Class discussion ⛔ | Class discussion ⛔ |
-| 26 | Nucleic acids CHONP; nucleotides (phosphate, sugar, base picture) | §10 | §10 |
-| 27 | Found in any living cells as DNA & RNA | §10 | §10 |
-| 28 | Store/code/transport genetic info; DNA stores, RNA protein synthesis; BONUS | §10 + Class discussion | §10 |
-| 29 | Partner talk (foods without nucleic acids) | Class discussion ⛔ | Class discussion ⛔ |
+## Prior must-fix items
 
-Result: every visible slide's core idea is covered simply in both the guide and the outline. No gaps.
+1. **SLIDE_NOTES.js star flags: FIXED.** No `star` remains in build/SLIDE_NOTES.js or index.html. All 28 entries are `{note:"…"}`.
+2. **PRINTCHEAT.js Slide 7 note: FIXED.** The words match the speaker note exactly: "We will talk more about the 'activation energy' concept in a future unit, for now we are just focusing on the exo/endo thermic ideas (energy releasing/absorbing)". The only change is that the inner double quotes became single quotes, as usual when nesting a quote. It is attributed as "Teacher's note (Slide 7)". The guide, outline and swaps.json carry the same quote.
+3. **Slide 28 "single nucleobase": FIXED.** study-guide.md §11 says: "The Slide 28 picture also shows the label **single nucleobase**." lecture-outline.md §11 says: `Slide 28 picture label: "single nucleobase."` Neither adds an interpretation. The label is confirmed on s28-1 and on rendered slide 28.
+4. **QUIZ Q7 flipped option: FIXED.** The options are now "Exothermic" / "Melting ice" / "Dehydration synthesis". None is a prefix swap. index.html has the new options.
 
-## B. Accuracy and citations
+## 1. Coverage
 
-- No factual errors found. Content matches the slides and speaker notes.
-- Outside facts carry citations: macromolecule definition, valence electrons, potential/kinetic, dehydration/hydrolysis name meanings, enzyme definition, kcal, and the Source Notes clarifications (-ase, cell walls, inorganic carbon compounds, melting ice).
-- Class discussion answers: the section carries a blanket *(OpenStax Biology 2e)* citation, with per-line citations on Slides 16, 17, 20, 21. Slide 28 (deoxyribose) is visible on the slide itself. Slide 29 reasons from Slide 27 and says so. All are ⛔ and correct.
-- Spontaneity claim ("exothermic can happen on its own") is attributed to the notes in the guide. Acceptable at this level.
+- **Speaker notes (slides 4–9):** every point is in the guide, with a short version in the outline. That covers chemical vs. physical change, the misconception, ice/boiling/splitting water, coefficient, state letters, exo/endo, spontaneous, the "potential energy diagrams" name, product vs. reactant level, the Slide 7 quote, anabolism/catabolism, dehydration synthesis, hydrolysis, and starch → glucose.
+- **Slide text:** all visible text on slides 1–10 and 12–29 is covered. All 12 discussion and BONUS prompts are quoted word for word.
+- **Picture labels:** checked against every rendered slide. All are covered: polymerization; (a)/(b)/(c); the energy chart (10 kinds, with electrical on both sides); the cannon labels and caption; low/high entropy with highly ordered/more disordered; reactants/products; the red X; heat released/absorbed with hotter/cooler than surroundings; potential energy; reaction coordinate/progress; energy released/absorbed; activation energy; the anabolic/catabolic captions; OH + H → H₂O; digestion; the ATP parts; ATP/ADP/inorganic phosphate/energy/H₂O; charged/dead battery; requires/releases energy; the Slide 14 and 16 lipid labels; glycerol/carbon chain/fatty acids; the structure of glucose; mono/di/polysaccharide; glucose "gets converted to" ATP/energy; N-/C-terminus, peptide bond, amino acids, Leu/Phe/Ser/Cys; amine/carboxyl/variable (R) group; all 8 enzymes; the 6 muscle labels; nucleobases, base pair(s), helix of sugar-phosphates, sugar phosphate backbone; full names; all five bases; A–T and G–C; phosphate/ribose/base; double- vs. usually single-stranded; single nucleobase; deoxyribose/ribose H vs. OH; the Slide 29 caption.
+- **Missing:** none.
 
-## C. ⛔ items in drills
+## 2. No guessed scope
 
-- CARDS (25), QUIZ (15), SCENARIOS (5): no correct answer depends on activation energy, partner talk, BONUS answers, photos, or molecule drawings.
-- Energy-diagram items (card 20, quiz 8) rely only on products vs reactants height, which is core.
+- I scanned every material for flags, "core", "extra detail", "memorize", "background only", "scope", "On the test", "skip", "optional", "not tested", "star" and "key image". None are used as scope wording. The only hits were ordinary words like "starts", "starch" and "flex-start", plus the teacher's own "focusing" inside the exact Slide 7 quote.
+- "From your teacher" (guide, outline, swaps.json) says no test list was shared and quotes the Slide 7 note exactly.
+- "Any answer works — this is a warm-up" applies only to the opinion prompts on slides 19, 23 and 27. It does not describe what to study.
 
-## D. Readability
+## 3. No non-teacher content
 
-- Study guide: every sentence checked by script; none over 20 words.
-- Quiz: all 15 stems are short, single-sentence, and ask one clear thing. No "all/none of the above", no double negatives, no near-copy options.
-- Scenarios: all 5 stems are ≤ 2 sentences, everyday settings (snack, campfire, lemonade, bread, bus). Rationales ≤ 2 short sentences.
-- Flashcards: answers 1–6 words. flashcards.json matches build/CARDS.js (25 cards).
-- Jargon has plain meanings next to it (valence electrons, entropy, kcal, monosaccharides, phospholipid bilayer, enzyme).
-- Glossary: 24 terms, each ≤ 15 words.
+- Every outside explanation in the guide and Source Notes starts with **Outside source:** and has a citation. In the glossary, the teacher's wording comes first and each outside meaning follows "Outside source:".
+- Discussion answers are labeled correctly. "From the picture" is used on slides 15, 18 and 28. "Possible answer" plus Outside source is used on slides 16, 17, 20, 21, 24, 25 and 29. I confirmed each "from the picture" claim against the slide.
+- Bases are limited to what the pictures show. Uracil appears on slides 26 and 28.
+- The Exo/exit and Endo/enter memory trick is a memory aid, not a new fact.
 
-## E. Wording and titles
+## 4. Drills
 
-- No "professor", clinical, patient, or nursing wording anywhere.
-- Titles include "2.3": study guide, outline, glossary, Source Notes, swaps.json title/h1, app `<title>`, and cheat-sheet title.
+- **CARDS.js (45) = flashcards.json (45):** the content is identical (compared by script). Every answer is found in the slides, notes, or pictures.
+- **QUIZ (20):** every correct answer comes from the teacher. All stems are direct questions. There are no "…" blanks, no all/none options, and no flipped or one-letter-off options.
+- **SCENARIOS (6):** every stem is ≤ 2 sentences and ends with a question. Every answer and rationale comes from the teacher.
 
-## Must-fix
+## 5. Accuracy
 
-None.
+No blocking factual errors. I checked A–T/G–C pairing, strands, which sugar goes with which molecule, the ATP equation and cycle direction, 9 vs. 4 kcal/g, exo/endo on the diagrams, which food each enzyme is listed under (matches s24-1), and the typo table ("Sucrase-isomaltas"; notes "surrounding").
 
-## Minor polish (optional, does not affect verdict)
+## 6. Readability
 
-1. **Simple-opposite distractors.** Quiz "An exothermic reaction…" (Releases/Absorbs heat), "The 2nd law says entropy always…" (Increases/Decreases), "Anabolism…" (builds/breaks), and the sprint scenario (ATP breaking vs rebuilding). These test the exact core distinction and are not confusing, but a third clearly-different option already exists in each; fine as is.
-2. **Bullet count.** §7 Lipids, §8 Carbohydrates, and §9 Proteins have 5 bullets (rule says 2–4). Each section is still under ~120 words.
-3. **Two new terms in one sentence.** §2: "Energy can be **potential** (stored) or **kinetic** (moving)." Could split into two sentences.
-4. **Quick review wording.** "Proteins come from amino acids. Nucleic acids come from nucleotides." "Are built from" matches the rest of the package better than "come from."
-5. **Slide 20 picture caption** ("glucose gets converted to ATP") is not mentioned; "provides energy" already covers the idea.
-6. **Class discussion Slides 24–25** lack a per-line citation (muscle; muscles built from proteins). The section-level citation covers them.
+- A script checked every study-guide sentence, leaving out headings, tables and exact teacher quotes. None is over 20 words.
+
+## Advisory (not blocking)
+
+- **PRINTCHEAT.js**, nucleic acids row: "RNA protein synthesis (single, ribose, U)". The Slide 28 picture says "usually single-stranded", and the guide, cards and glossary say "usually". Consider "usually single".
+- **SUMMARY.js:** "Carbon has four valence electrons, so it forms rings and chains." The "so" adds a cause-and-effect link the slide doesn't state. "…and it forms rings and chains" would match the slide.
+- **MAPS.js map 3:** the "builds by" / "breaks by" arrows link anabolism to dehydration synthesis and catabolism to hydrolysis. The teacher never states that link.
+- **Glossary:** there are no rows for the picture labels "helix of sugar-phosphates" or "single nucleobase" (both are in the guide). The header credits all outside meanings to OpenStax Biology 2e.
+- **Slide 16 BONUS possible answer (fat cells):** has no everyday example.
 
 VERDICT: PASS

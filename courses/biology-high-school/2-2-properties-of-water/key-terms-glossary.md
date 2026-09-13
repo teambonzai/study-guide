@@ -1,53 +1,75 @@
 # Key Terms — 2.2 Properties of Water
 
-Only the words you need for this lesson. Each one has a short, plain meaning.
+Every word used in this lesson, including words from the slide pictures. Your teacher's wording comes first. Anything from outside the slides starts with **Outside source:**.
 
 ## The water molecule
 
 | Term | Meaning |
 |---|---|
-| **Electron** | A tiny particle with a negative charge. |
-| **Polar** | Having one partly negative end and one partly positive end. |
-| **Partial charge (δ+ / δ−)** | A small charge. In water, oxygen is δ− and hydrogen is δ+. |
-| **Hydrogen bond** | A hydrogen on one molecule pulled to an oxygen on another. |
-| **Intermolecular force** | A pull between two separate molecules. |
-| **Polar covalent bond** | The bond holding hydrogen to oxygen inside one water molecule. |
+| **Electron** | Slide 2: "Electrons are pulled toward oxygen." **Outside source:** A tiny particle with a negative charge. A static shock is electrons jumping. *(OpenStax Biology 2e)* |
+| **Polar** | Slide 2: hydrogens → partial +, oxygen → partial −. |
+| **Partial charge (δ+ / δ−)** | Slide 2: oxygen has a partial negative charge (δ−). Hydrogens have a partial positive charge (δ+). |
+| **Picometer (pm)** | The unit in "95.84 pm" on Slide 2. **Outside source:** One trillionth of a meter. Cut a one-meter baseball bat into a trillion pieces; each is one picometer. *(NIST)* |
+| **Basic geometric structure** | A Slide 2 label. The drawing uses letters and lines, with the angle and length. |
+| **Ball-and-stick model** | A Slide 2 label. The drawing uses balls joined by sticks. |
+| **Space-filling model** | A Slide 2 label. The drawing has balls pressed together. |
+| **Hydrogen bond** | Hydrogen from one molecule attracted to an oxygen atom on another molecule. Can involve nitrogen, oxygen, or fluorine. |
+| **Intermolecular force** | Slide 3 calls a hydrogen bond an intermolecular force. **Outside source:** "Inter" means between. An interstate highway runs between states. *(Merriam-Webster)* |
+| **Intramolecular** | Slide 3 label for the solid lines inside one water molecule. **Outside source:** "Intra" means inside. Intramural sports are played inside one school. *(Merriam-Webster)* |
+| **Polar covalent bond** | Slide 3 label: "intramolecular polar covalent bonding." **Outside source:** Two atoms share electrons unevenly, like two kids tugging one blanket. *(OpenStax Biology 2e)* |
 
 ## Properties of water
 
 | Term | Meaning |
 |---|---|
-| **Cohesion** | Water sticking to water. |
-| **Adhesion** | Water sticking to a different substance. |
-| **Capillary action** | Water rising up a thin tube, from cohesion and adhesion. |
-| **Meniscus** | The curved top of water in a tube. |
-| **Xylem** | The tubes that carry water up a plant *(OpenStax Biology 2e)*. |
-| **Surface tension** | Water's surface resisting an outside force, caused by cohesion. |
-| **Specific heat capacity** | The energy needed to raise temperature by 1°C. Water's is high. |
-| **Homeostasis** | Keeping the inside of a living thing steady. |
+| **Cohesion** | Attraction to one another. "Co" = together. |
+| **Adhesion** | Attraction to a different substance. "Ad" = between. |
+| **Xylem wall** | Labeled in the Slide 4 picture: the wall that water molecules stick to (adhesion). Outside source: xylem are tiny tubes that carry water up a plant, like the strings in celery. *(OpenStax Biology 2e)* |
+| **Capillary action** | The tendency of water to rise in a thin tube. Caused by cohesion and adhesion. |
+| **Capillary tube** | Slide 5 label for the thin tube standing in water. |
+| **Meniscus** | Slide 5 label for the curved top of the water in the tube. |
+| **Surface tension** | Tendency of the surface of water to resist an external force. Caused by cohesion. |
+| **External force** | Slide 6: the surface resists an external force. **Outside source:** A push or pull from outside, like a finger poking water. *(Merriam-Webster)* |
+| **Bulk** | Slide 6: surface molecules are "pulled more strongly into the bulk." **Outside source:** The main body of the water, like all the water under a pool's top layer. *(Merriam-Webster)* |
+| **Specific heat capacity** | Amount of energy needed to raise the temperature of water by 1°C. Water's is 4200 J/kg°C. |
+| **Joule (J)** | The "J" in J/kg°C on Slide 7. **Outside source:** A unit of energy. Lifting an apple one meter takes about one joule. *(NIST)* |
+| **Kilogram (kg)** | The "kg" in J/kg°C on Slide 7. **Outside source:** A unit of mass. A one-liter bottle of water is about one kilogram. *(NIST)* |
+| **J/kg°C** | The unit for the Slide 7 numbers. **Outside source:** Joules needed to warm 1 kilogram by 1°C, like a price tag for warming. *(NIST)* |
+| **Copper (Cu)** | Slide 7: copper block, specific heat 390 J/kg°C. |
+| **Aluminum (Al)** | Slide 7: aluminum block, specific heat 910 J/kg°C. |
+| **Homeostasis** | Slide 7: water helps organisms maintain homeostasis. **Outside source:** Keeping the inside of a living thing steady, like your body temperature. *(OpenStax Biology 2e)* |
 
 ## Water and other substances
 
 | Term | Meaning |
 |---|---|
-| **Dissolve** | To break apart and spread evenly through a liquid. |
-| **Hydrophilic** | Water-loving. Dissolves easily in water, like salt or sugar. |
-| **Hydrophobic** | Water-fearing. Does not dissolve in water, like oil or fat. |
-| **Amphipathic** | Having a water-loving part and a water-fearing part. |
-| **Phospholipid** | An amphipathic molecule with a water-loving head and water-fearing tails. |
-| **Cell membrane** | The thin outer layer of a cell. |
+| **Dissolve** | Slide 8: hydrophilic substances dissolve easily in water. **Outside source:** To break apart and spread evenly through a liquid, like sugar in tea. *(OpenStax Chemistry 2e)* |
+| **Hydrophilic** | "Water-loving"; substances that dissolve easily in water. Ex: salts, sugars. |
+| **Hydrophobic** | "Water-fearing"; substances that do not dissolve in water. Ex: oils, fats. |
+| **Amphipathic** | A molecule with both hydrophilic and hydrophobic regions. Ex: soap bubbles. |
+| **Lipids** | Slide 8: amphipathic molecules interact with both water and lipids. **Outside source:** A group that includes fats and oils, like butter. *(OpenStax Biology 2e)* |
+| **Phospholipid** | Slide 8 picture "Phospholipid Structure": a hydrophilic head and a hydrophobic tail. |
+| **Phospholipid bilayer** | Slide 8: cell membranes are phospholipid bilayers. **Outside source:** "Bi" means two, so two layers, like the two wheels of a bicycle. *(Merriam-Webster)* |
+| **Cell membrane** | Slide 8: amphipathic molecules allow cell membranes to form. **Outside source:** The thin outer layer of a cell, like a grape's skin. *(OpenStax Biology 2e)* |
 
 ## Mixtures and density
 
 | Term | Meaning |
 |---|---|
-| **Suspension** | Big bits in water that do not dissolve, like sand. |
-| **Emulsion** | Two liquids that don't normally mix, one spread through the other. |
-| **Density** | Mass per unit volume (D = m / V). |
+| **Suspension** | A mixture where large particles float in water but do not dissolve. Ex: blood cells in plasma, sand in water. |
+| **Plasma** | Slide 9: "Blood cells in plasma." **Outside source:** The liquid part of blood, mostly water. A donated blood bag holds cells in plasma. *(OpenStax Biology 2e)* |
+| **Emulsion** | A mixture of two liquids that don't normally mix, where one is dispersed in the other. Ex: oil droplets in water. |
+| **Dispersed** | Slide 9: one liquid is dispersed in the other. **Outside source:** Spread out in tiny bits, like seeds scattered over a field. *(Merriam-Webster)* |
+| **Bile** | Slide 9: "bile emulsifying fats." **Outside source:** A digestive juice your body makes. *(OpenStax Biology 2e)* |
+| **Emulsify** | Slide 9: "bile emulsifying fats." **Outside source:** To break fat into tiny drops in water, like dish soap on greasy pans. *(OpenStax Biology 2e)* |
+| **Density** | Mass per unit volume (D = m / V). Water is most dense at 4°C. |
+| **Mass** | The "M" labeled in the Slide 9 formula. **Outside source:** How much matter something has. A bowling ball has lots of mass. *(OpenStax Chemistry 2e)* |
+| **Volume** | The "V" labeled in the Slide 9 formula. **Outside source:** How much space something takes up. A beach ball has lots of volume. *(OpenStax Chemistry 2e)* |
 
 ## Symbols
 
 | Symbol | Meaning |
 |---|---|
-| **δ** | "Partial," as in a partial charge (δ+ or δ−). |
-| **ρ (rho)** | Another symbol for density (ρ = M / V). |
+| **δ** | Slide 2 puts δ− by "Partial negative charge" and δ+ by "Partial positive charge." |
+| **ρ (rho)** | Slide 9 picture labels ρ as density (ρ = M / V). **Outside source:** A Greek letter, like π (pi) in math. *(OpenStax Chemistry 2e)* |
+| **°C** | Used on Slides 7 and 9 (1°C, 4°C). **Outside source:** Degrees Celsius, a unit of temperature. A warm summer day is about 30°C. *(NIST)* |

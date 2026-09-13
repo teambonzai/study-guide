@@ -12,6 +12,9 @@ const SCENARIOS = [
   ["Hydrolysis","Dehydration synthesis","Anabolism"],0,
   "Hydrolysis splits molecules by adding water. Starch into glucose is the example from the notes.","buildbreak"],
  ["You sprint to catch the bus, and your muscles need energy fast. Which reaction releases it?",
-  ["ATP breaking into ADP + Pi","ADP + Pi joining back into ATP","Water freezing into ice"],0,
-  "Breaking ATP releases energy, like using a charged battery. Rebuilding ATP takes energy.","atp"]
+  ["ATP breaking into ADP + Pi","Glucose joining into starch","Water freezing into ice"],0,
+  "Breaking ATP releases energy, like using a charged battery.","atp"],
+ ["You make a fruit salad with strawberries. Does it contain nucleic acids?",
+  ["Yes, strawberries are made of living cells","No, only meat has DNA","No, fruit only has carbs"],0,
+  "Nucleic acids are in any living cells. That includes plants, meats, and mushrooms.","nucleic"]
 ].map((x,i)=>({id:i,q:x[0],opts:x[1],correct:x[2],rat:x[3],t:x[4]}));

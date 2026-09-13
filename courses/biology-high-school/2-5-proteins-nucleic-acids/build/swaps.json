@@ -2,8 +2,8 @@
  "title": "2.5 Proteins &amp; Nucleic Acids",
  "h1": "2.5 Proteins &amp; Nucleic Acids",
  "storeKey": "hs_bio_proteins_v1",
- "notTestedHeading": "Extra details",
- "notTestedHtml": "These are extra details, so you don't need to memorize them:<ul><li>The chart of all 20 amino acids (Slide 2)</li><li>Drawings of atoms and rings</li><li>End labels like N-terminus and 5′ end</li><li>Dimer, trimer, and tetramer examples (Slide 9)</li><li>The extra drawings on Slide 13</li></ul>",
+ "notTestedHeading": "From your teacher",
+ "notTestedHtml": "<p class=\"small muted\">Your teacher hasn't shared a test list for this lesson, so study every topic.</p>",
  "slideSearchPlaceholder": "Search slides (peptide, helix, DNA)",
- "deckBreakRows": "<tr><td><b>Slides 1–2</b></td><td>Protein jobs · amino acids · STRUCTURE = FUNCTION</td></tr><tr><td><b>Slides 3–10</b></td><td>The four levels of protein structure · hydrophobic effect · writing analogy</td></tr><tr><td><b>Slides 11–14</b></td><td>Nucleic acids · DNA vs. RNA · the double helix</td></tr>"
+ "deckBreakRows": "<tr><td><b>Slides 1–2</b></td><td>Protein jobs · amino acid parts and chart · peptides and polypeptides · STRUCTURE = FUNCTION</td></tr><tr><td><b>Slides 3–10</b></td><td>The four levels of protein structure · side-chain interactions · hydrophobic effect · dimers, trimers, tetramers · writing analogy</td></tr><tr><td><b>Slides 11–14</b></td><td>Nucleic acids · nucleotides and bases · DNA structure · more DNA drawings · DNA vs. RNA</td></tr>"
 }

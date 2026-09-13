@@ -51,9 +51,13 @@ lecture's files and copy the pattern exactly. Do not invent a new design.
     `--replacements reference/profile-macy.json` (violet theme, friendly labels, bulb icon for
     Scenarios, "Source notes", home button → `#macy`).
   Every other rule (source-only content, citations, flags, design) applies to both.
-- **Slide-only decks (no recording):** flags are deck emphasis, not the teacher's spoken scope —
-  say so in Exam scope; `transcript-corrections.md` becomes "Source Notes & Slide Corrections".
-  Speaker notes are lecture content — read them.
+- **Never guess test scope; never cut deck material.** On-test / not-tested flags come ONLY from the
+  teacher's own words (recording, slides, speaker notes), quoted. With no teacher scope, use no
+  flags at all — a student skips anything labeled optional. Simplify by wording, never by cutting.
+- **Slide-only decks (no recording):** `transcript-corrections.md` becomes "Source Notes & Slide
+  Corrections". Speaker notes are lecture content — read them.
+- **Cheat sheet opens in the app** (modal + Print button) — `assemble_app.py` applies
+  `scripts/cheat_view.py`; never rely on a print pop-up.
 
 ## Inputs and outputs
 

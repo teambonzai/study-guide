@@ -1,65 +1,52 @@
-# Coverage Audit — 2.2 Properties of Water (final gate re-audit, Macy rewrite)
+# Coverage Audit — 2.2 Properties of Water (re-audit after fixes, Macy rules 1–4)
 
-**Sources checked:** `slides.json`; `assets/slides/slide-01.png` … `slide-09.png` (all 9 opened). There is no recording and there are no speaker notes.
+**Sources opened:** `slides.json` (no speaker notes); rendered slides 2–9 re-viewed; prior audit's picture-label table re-checked against them.
 
-**Materials checked:** `study-guide.md`, `lecture-outline.md`, `key-terms-glossary.md`, `transcript-corrections.md`, `flashcards.json`, `build/*.js` (CARDS, GLOSSARY, MAPS, MNEMONICS, PRINTCHEAT, QUIZ, SCENARIOS, SLIDE_GROUPS, SLIDE_NOTES, SUMMARY, TESTCHIPS, TOPICS), `build/swaps.json`.
+**Materials checked:** `study-guide.md`, `lecture-outline.md`, `key-terms-glossary.md`, `transcript-corrections.md`, `flashcards.json`, `build/*.js` (all 12), `build/swaps.json`, plus string checks in the rebuilt `index.html` (it has the same timestamp as the edited sources).
 
-**Rules:** `.claude/skills/study-guide/reference/audience-macy.md`.
+## Prior must-fix items
 
-## (A) Coverage — PASS
+| # | Item | Result |
+|---|---|---|
+| 1 | "water strider" removed | **Fixed.** No "strider" in any .md, .js, .json, or `index.html`. The §5 bullet is gone. SCENARIOS S1 now reads "A small bug stands on a pond without sinking. What holds it up?" |
+| 2 | "dispersed" explanation | **Fixed.** §8: "One liquid is **dispersed** (spread out in tiny bits) in the other." The glossary keeps its labeled Outside source entry. |
+| 3 | "not to scale" explanation | **Fixed.** §5: "The drawing says "Diagram not to scale." (The sizes are not real sizes.)" This is a short plain gloss of the teacher's words, and no extra claim was added. |
+| 4 | Celery wording | **Fixed.** §3: "The strings in a celery stalk contain them." "bundles of them" is gone everywhere. |
+| 5 | Lipids wording | **Fixed.** Guide §7: "**Lipids** include fats and oils." `key-terms-glossary.md` and `build/GLOSSARY.js`: "A group that includes fats and oils, like butter." The old wording is not in `index.html`. |
 
-| Slide | Core idea | Guide | Outline |
-|---|---|---|---|
-| 1 | Title, Unit Two: Biomolecules | Header | Yes (⛔ decoration) |
-| 2 | Water is polar. H is partial +, O is partial −. Electrons pulled to O | §1 | Yes |
-| 3 | H-bond is an intermolecular force: H on one molecule to O on another. Other molecules too. N, O, F. Picture: intramolecular polar covalent bond | §2 | Yes |
-| 4 | Cohesion and adhesion, "Co"/"Ad" hook, plant-wall picture | §3 | Yes |
-| 5 | Capillary action in a thin tube, caused by cohesion + adhesion. Meniscus, tube-width photo | §4 | Yes |
-| 6 | Surface tension resists an outside force, caused by cohesion. Surface vs. inner molecule pull, water strider | §5 | Yes |
-| 7 | Specific heat definition. Resists fast temperature change, steadies climate and body temperature, homeostasis | §6 | Yes |
-| 8 | Amphipathic (membranes, water + lipids, soap bubbles), hydrophobic (oils, fats), hydrophilic (salts, sugars), phospholipid picture | §7 | Yes |
-| 9 | Suspension, emulsion (with slide examples). Density D = m/V, most dense at 4°C, ice floats | §8, §9 | Yes |
+## 1. Coverage — PASS
 
-Nothing on the slides is missing.
+Every slide's text and every picture label or number is still in the guide and the outline. Examples: 95.84 pm and 104.45°, all three model names, intramolecular polar covalent bonding, the Xylem wall chart, the meniscus and capillary tube, both surface-tension drawings (including "Diagram not to scale"), 390/910/4200 J/kg°C and the lower/higher boxes, Phospholipid Structure head/tail, and ρ = M / V with its labels. Removing the strider bullet cut no teacher content: the insect photo is still described.
 
-## (B) Accuracy — PASS
+## 2. No guessed scope — PASS
 
-- Everything I checked matches the slides. The simplifications are right for this level.
-- Outside facts are cited: xylem, plasma, bile, and pond ice/fish all cite OpenStax Biology 2e. In the source notes, "ad" = "to" cites Merriam-Webster, and suspensions settling cites OpenStax Chemistry 2e.
-- The source notes correctly fix three slide lines: "of water" in the specific-heat definition, "ad = between", and suspended particles "float".
-- "The thinner the tube, the higher the water climbs" is shown in the Slide 5 photo and is correct.
-- "Cohesion **only**" for surface tension adds emphasis to the slide's "caused by cohesion". It is a fair contrast with capillary action.
-- The celery scenario credits cohesion + adhesion. Transpiration also helps in real plants, but the answer is the best choice given and matches the lesson.
+None of these words appear in any material: on the test, exam scope, optional, skip, memorize, background only, extra detail, core. The guide ends with the allowed line. `swaps.json` uses "From your teacher" and the allowed note.
 
-## (C) ⛔ dependence — PASS
+## 3. No non-teacher content — PASS
 
-The ⛔ items are: Slide 2 angle/length numbers, Slide 2 model names, Slide 7 exact heat numbers, and Slide 1 decoration. No CARDS, QUIZ, or SCENARIOS answer needs any of them. MAPS #3 names copper and aluminum as "low" without numbers, and it is not a drill.
+- No added science terms.
+- Every outside explanation starts with "Outside source:" and has a citation. That includes electron, pm, inter/intra, polar covalent bond, xylem, the capillary mechanism, external, bulk, homeostasis, J/kg°C, joule, kilogram, dissolve, cell membrane, bilayer, lipids, plasma, bile/emulsify, mass, volume, ρ, °C, "ad," and imbalance of forces.
+- The only unlabeled glosses are short parentheticals that explain the teacher's own words ("dispersed," "not to scale," "regions (parts)"). Rule 3 allows these.
+- Scenario settings (pond, celery in dye, pool, copper pot, sugar/oil, ice) are everyday situations. The audience rules ask for these, and every answer is a teacher concept.
 
-## (D) Readability — PASS
+## 4. Drills — PASS
 
-- **Study guide:** a script checked every sentence, and none is over 20 words. Every section is 120 words or less (the longest is §9 at 112). Each section has at most one callout, and the §7 table has 3 columns and 3 rows. Each jargon word gets a plain meaning right next to it: electrons, intermolecular force, xylem, meniscus, homeostasis, lipids, cell membranes, phospholipid, plasma, bile, mass/volume, and ρ.
-- **Quiz (13 questions):** every stem is one short clear question. No option is "all/none of the above". The correct answers are correct.
-  - Q2 "Between two molecules" / "Inside one molecule" and Q5 "Cohesion and adhesion" / "Cohesion only" are close pairs. Each pair *is* the idea the guide teaches, so the pair helps rather than confuses (see polish).
-  - Q9/Q10 use hydrophilic/hydrophobic/amphipathic as options. The quiz can't avoid that, since these are the terms being tested.
-- **Scenarios (5):** every stem asks a clear question. S1, S3, S4, and S5 are 2 sentences. **S2 is 3 sentences** (each very short, see polish). Every rationale is 2 short sentences and names the idea.
-- **Flashcards (25):** each answer is 1–6 words. They go from "what is" to "which/why". `flashcards.json` matches `CARDS.js`.
-- **Glossary (25 entries):** every definition is 15 words or less.
-- **SLIDE_NOTES:** each is 20 words or less. **SUMMARY** is about 180 words in short sentences. **Mnemonics:** 3. **Maps:** 3, each with 6 nodes or fewer and every arrow labeled.
+- All 47 cards (same as `flashcards.json`), 19 quiz questions, and 6 scenarios have answers from the slides or slide pictures.
+- Quiz stems are direct questions. No option is a flipped copy of the answer. Every scenario stem ends with a question.
 
-## (E) Wording and titles — PASS
+## 5. Accuracy — PASS
 
-- There is no "professor", clinical, patient, or nursing wording anywhere. "Teacher" is used throughout.
-- "2.2" is in the titles of the study guide, outline, glossary, source notes, `swaps.json`, the `index.html` `<title>`, the cheat-sheet title, and the flashcards meta.
+The two earlier errors (celery, lipids) are fixed. No other factual errors were found.
+
+## Minor (not verdict)
+
+- QUIZ Q18 distractors "50°C" and "100°C" are not from the lesson. "1°C" (Slide 7) would follow the options rule.
+- `build/SUMMARY.js` is missing a space: "95.84 picometers long.Your slide" (also in `index.html`).
+- `key-terms-glossary.md` Xylem wall: "Outside source:" is not bold, unlike other rows. Its "like the strings in celery" is a loose comparison but not wrong.
+- As noted before: some glossary definitions run over 15 words, and a few lesson words have no glossary entry (mixture, molecule, atom, nitrogen, fluorine, organisms).
 
 ## Must-fix
 
 None.
-
-## Minor polish (optional, does not affect verdict)
-
-1. `build/SCENARIOS.js` S2: the stem "You put celery in dyed water. The next day, the dye is at the top. What moved the water up?" has 3 sentences, and the limit is 2. Suggested fix: "You put celery in dyed water, and the dye climbs to the top. What moved the water up?" Make the same change in `index.html` if it has its own copy.
-2. `build/CARDS.js` / `flashcards.json` card 1: the answer "One end negative, one end positive" could say "partly", like the glossary does. Suggested fix: "One end partly negative, one partly positive".
-3. `build/QUIZ.js` Q2: to avoid a strict "simple opposites" reading, the option "Inside one molecule" could be "Inside one oxygen atom". Current wording is fine as is.
-4. Specific heat definition (guide §6, glossary, card 15): "energy to raise the temperature by 1°C" leaves out "for a set amount (per gram)". It matches the slide and is fine at this level.
 
 VERDICT: PASS

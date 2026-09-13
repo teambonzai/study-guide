@@ -1,74 +1,59 @@
-# Coverage Audit — 2.5 Proteins & Nucleic Acids (final gate)
+# Coverage Audit — 2.5 Proteins & Nucleic Acids (Macy)
 
-Independent re-audit against slides.json, pptx speaker notes (slides 4, 5, 6, 12), all 14 rendered
-slide PNGs, and the audience-macy rules. No study materials were edited.
+Re-audit, 2026-09-13, after the five must-fix items from the previous FAIL. Rules checked:
+`.claude/skills/study-guide/reference/audience-macy.md` hard rules 1–4.
 
-## (A) Coverage — PASS
+Sources checked: slides.json; speaker notes for Slides 4, 5, 6, and 12 (python-pptx); rendered slides;
+full-size pictures, including s02-1, s02-2 (amino acid chart), and s10-1 (analogy).
 
-| Slide | Core idea | Guide | Outline |
-|---|---|---|---|
-| 1 | Title, Unit Two | header | §1 |
-| 2 | Functions, enzymes, amino acid monomer, ~20 AAs, R-group, peptide 2–50 / polypeptide 51+, protein 1+ polypeptides, STRUCTURE = FUNCTION | §1, §2 | §2 |
-| 3 | Four levels in order | §3 | §3 |
-| 4 | Order of AAs; peptide bond covalent, dehydration synthesis; DNA sets order (notes) | §4 | §4 |
-| 5 | α helix, β pleated sheet, hydrogen bonds, backbone (notes) | §5 | §5 |
-| 6 | 3D shape from side-chain interactions; bond names ⛔ | §6 | §6 |
-| 7–8 | Hydrophobic effect: nonpolar center, polar outside, hydration layer | §7 | §7–8 |
-| 9 | 2+ subunits; not all proteins; dimer/trimer/tetramer ⛔ | §8 | §9 |
-| 10 | Letters/words/sentences/paragraphs analogy | §9 | §10 |
-| 11 | Functions, DNA/RNA, nucleotide 3 parts, bases A T C G / A U C G | §10 | §11 |
-| 12 | Double helix, backbone outside, H-bonded pairs A–T C–G, antiparallel (notes) | §12 | §12 |
-| 13 | Extra drawings (⛔) | §12 📷 pointer | §13 |
-| 14 | Thymine/deoxyribose vs uracil/ribose; shared A C G | §11 | §14 |
+Materials checked: study-guide.md, lecture-outline.md, key-terms-glossary.md, transcript-corrections.md,
+flashcards.json, build/*.js, build/swaps.json. I also confirmed that index.html has the rebuilt text.
 
-All 📷 pointers describe things actually visible on the rendered slides (e.g. pink "STRUCTURE =
-FUNCTION" on Slide 2, "+2(H2O)" on Slide 4, red/yellow dots on Slides 7–8, P circles on Slide 12).
+## Previous must-fix items
 
-## (B) Accuracy — PASS
+| # | Item | Result |
+|---|---|---|
+| 1 | All 20 chart amino acids with codes, grouped as on the chart | **Fixed.** The guide's §2 lists each name with its one-letter and three-letter code. The groups match s02-2: Nonpolar (9) Gly, Ala, Val, Leu, Ile, Met, Phe, Trp, Pro. Polar (6) Ser, Thr, Cys, Tyr, Asn, Gln. Acidic (2) Asp, Glu. Basic (3) Lys, Arg, His. Every name is spelled correctly, including the chart's "aspartate" and "glutamate." Outline §2 gives all 20 in the same groups using both codes, which fits its short form. |
+| 2 | Slide 4 note about multi-subunit proteins | **Fixed.** Guide §5 "From the notes" says the gene may code for only part of a protein when the protein has more than one subunit. Outline §4 says "or part of it, for multi-subunit proteins." |
+| 3 | Alphabets box letters | **Fixed.** Guide §10 has "A, U, V, R, S, O, T, and P." Outline §10 has "A, U, V, R, S, O, T, P." Both match s10-1. |
+| 4 | "Five prime" wording | **Fixed.** Guide §13 has `**Outside source:** You say 5′ as "five prime"… *(OpenStax Biology 2e)*`, with an example. key-terms-glossary.md and build/GLOSSARY.js both have "Outside source: … (OpenStax Biology 2e)". |
+| 5 | Amino H glossary example | **Fixed.** Ammonia is gone from all materials and from index.html. The new example is "the N with two H's at the left of the Slide 2 amino acid drawing." It is accurate: s02-1 shows H–N–H, and those H's are bonded to N. It is labeled Outside source and has a citation. |
 
-No factual errors found. Outside facts (covalent = shared electrons, hydrogen bond = weak pull,
-hydrophobic = doesn't mix with water) are cited to OpenStax Biology 2e. Simplifications ("weak
-pull", "water-fearing parts hide in the middle") are acceptable for this level and not misleading.
-Slide typos (&mages, Quanternary, Set, "fourth levels") are correctly logged. Slide 6 notes'
-"polypeptide chains" wording is correctly clarified.
+## 1. Coverage — PASS
 
-## (C) ⛔ compliance — PASS
+Every slide's text, every speaker note, and the labels in the pictures appear in the guide, and in short form in the outline. I re-checked Slides 2, 4, 10, 11, and 12 against their pictures: chart groups and names, Leu-Phe-"Set"-Cys, aa₁–aa₃ with + 2(H₂O), amino and carboxyl ends, the A–T 2-line and C–G 3-line pairs, the P circles, backbone, and complementary base pairing. The Slide 4 multi-subunit clause is now included, so no notes are missing.
 
-No flashcard, quiz item, or scenario asks for the Slide 6 bond names (ionic, disulfide,
-hydrophobic interaction), end labels, dimer/trimer/tetramer, purine/pyrimidine, or H-bond atoms.
-Quiz "Tertiary structure comes from pulls between which parts?" → "Side chains" is core (slide
-bullet). "What holds DNA base pairs together?" → hydrogen bonds is core (Slide 12 notes + visible
-Slide 13 label), not a ⛔ item.
+## 2. No guessed scope — PASS
 
-## (D) Readability — PASS
+A grep for optional, skip, extra detail, memorize, background only, scope, on the test, core, bonus, 🎯, and ⛔ found nothing in any material. The "From your teacher" line and swaps.json `notTestedHtml` follow the rule. SLIDE_NOTES still has `star:true`, but profile-macy.json turns it off (`const star=false?`), so Macy sees no stars.
 
-- Study guide: scripted check found **no sentence over 20 words**.
-- Sections follow the shape (bold main idea, short bullets, ≤1 callout, 📷 line); tables ≤3 columns / ≤5 rows.
-- Quiz: 15 items, all direct questions, no "…" stems, no all/none-of-the-above.
-- Scenarios: 5, each ≤2 sentences and ending in a question; rationales ≤2 sentences.
-- Flashcards: 25, answers 1–6 words or ≤3-item lists.
-- Glossary: 23 terms, all definitions ≤15 words.
-- Jargon mostly glossed in place (monomer, covalent, dehydration synthesis, hydrophobic, subunit, antiparallel, hereditary information).
+## 3. No non-teacher content — PASS
 
-## (E) Wording / titles — PASS
+Every addition that isn't from the teacher starts with "Outside source:" and has a citation. That includes the five-prime line, and the chart names, which come from the s02-2 picture. List members match the slides: purines are adenine and guanine; pyrimidines are cytosine and thymine (in DNA); uracil appears only as "(in RNA)." Analogy callouts are the only other additions, which the voice rules allow.
 
-No "professor", clinical, or nursing wording anywhere ("your teacher's slides"). "2.5" appears in
-study-guide, outline, glossary, source notes, flashcards meta, swaps.json title/h1, and cheat sheet.
+## 4. Drills — PASS
+
+- **CARDS:** build/CARDS.js matches flashcards.json exactly (51 cards). Every answer comes from the slides, notes, or pictures.
+- **QUIZ:** all 20 questions are direct. The options are clearly different ideas, with nothing flipped or one letter off.
+- **SCENARIOS:** all 5 stems end with "?", and the answers are teacher facts (a 30-bead chain is a peptide, 4 subunits is a tetramer, A pairs with T).
+- **MAPS, MNEMONICS, PRINTCHEAT, SLIDE_NOTES, SUMMARY, TESTCHIPS:** consistent with the teacher's content.
+
+## 5. Accuracy — PASS
+
+No factual errors were found.
+
+## 6. Readability — PASS
+
+A script check found no study-guide sentence over 20 words. The only line it flagged was a false positive: two sentences ending in `."` that the splitter read as one. Each is under 12 words. The SUMMARY is 257 words, just over the ~250 target.
+
+## Advisory (not blocking)
+
+- Outline §11 still puts "A green box covers a small corner" on the small-drawing line. On slide-11.png, the box is at the bottom right of the big drawing. The guide's §11 has it right.
+- In the guide, §12 (DNA vs. RNA, Slide 14) comes before §13 (Slide 12), which is out of lesson order.
+- The glossary's 5′/3′ outside-source entry has no everyday example. The guide's version does.
 
 ## Must-fix
 
 None.
-
-## Minor polish (optional, not blocking)
-
-1. **build/QUIZ.js Q3** — option "Shape does not matter" is a simple opposite of the correct answer. Swap for a different idea, e.g. "Proteins are made of nucleotides".
-2. **build/QUIZ.js Q9** — correct option "Gather in the center" is the only one not starting with "They"; it stands out. Use "They gather in the center".
-3. **build/QUIZ.js Q15** — "Use different sugars" → "They use different sugars" (parallel grammar).
-4. **build/SCENARIOS.js #5** — options T-A-C-G / A-T-G-C / C-G-A-T / G-C-A-T are four arrangements of the same letters; careful reading needed. Consider keeping one look-alike (A-T-G-C) and making the other two clearly different ideas.
-5. **study-guide.md §4** — "Changing one amino acid can change its shape and job." "its" is vague → "the protein's shape and job".
-6. **study-guide.md §6** — "side chains pull on each other" and "Side chains stick to each other in a few different ways" say nearly the same thing; one could go.
-7. **study-guide.md §10** — "a 5-carbon sugar, a phosphate group, and a nitrogenous base" stacks three terms in one sentence; could add that the base is "the part with the letter" right there (already in the next sentence, so low priority).
-8. **study-guide.md §1** — "regulate" has no plain meaning; could add "(control)".
-9. **build/SUMMARY.js** — roughly 185–190 words, slightly over the ~180 target.
 
 VERDICT: PASS

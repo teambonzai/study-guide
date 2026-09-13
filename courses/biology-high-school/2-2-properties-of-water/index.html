@@ -328,6 +328,8 @@
     #lightbox img{max-height:58vh}
     #lightbox .lcap{font-size:13px;margin-top:8px}
   }
+  .modal .sheet.cheat{max-width:900px;height:88vh;display:flex;flex-direction:column}
+  #cheatFrame{flex:1;width:100%;border:0;border-radius:10px;background:#fff;margin-top:10px}
 </style>
 <style>/* Macy's profile theme: violet instead of teal */
   :root{--bg:#f7f5fc;--panel2:#f0ecfa;--ink:#1e1b2e;--muted:#645d78;--line:#e9e5f3;--accent:#7c3aed;--accent2:#6d28d9;--chip:#f1eafe}
@@ -365,10 +367,10 @@
 <!-- OVERVIEW -->
 <section class="view active" id="overview">
   <div class="card">
-    <h2><span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span>On the test</h2>
+    <h2><svg class="i"><use href="#i-list"/></svg>Topics in this lesson</h2>
     <div id="testChips"></div>
-    <h3><span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> Extra details</h3>
-    <p class="small muted">You don't need to memorize these extra details:</p><ul class="small muted"><li>The angle and length numbers on the Slide 2 picture</li><li>The three model names on Slide 2</li><li>The exact heat numbers on Slide 7</li><li>The waterfall and cartoon drop on Slide 1</li></ul>
+    <h3><svg class="i"><use href="#i-quote"/></svg> From your teacher</h3>
+    <p class="small muted">Your teacher hasn't shared a test list for this lesson, so study every topic.</p>
   </div>
 
   <div class="card">
@@ -382,7 +384,7 @@
   <div class="card">
     <h2><svg class="i"><use href="#i-book"/></svg>Study tools</h2>
     <div class="row">
-      <button class="btn primary" onclick="printCheat()"><svg class="i"><use href="#i-printer"/></svg>Print 1-page cheat sheet</button>
+      <button class="btn primary" onclick="printCheat()"><svg class="i"><use href="#i-doc"/></svg>View cheat sheet</button>
       <button class="btn" id="listenBtn" onclick="toggleSummary()"><svg class="i"><use href="#i-volume"/></svg>Listen to summary</button>
     </div>
     <p class="small muted" style="margin-top:12px">The full outline, study guide, and source notes are in the <b>Read</b> tab.</p>
@@ -507,7 +509,7 @@
 <section class="view" id="diagrams">
   <div class="card">
     <h2><svg class="i"><use href="#i-image"/></svg>Slide gallery</h2>
-    <p class="small muted">Captions are the slide's own text plus a plain-language note. Colored notes explain key pictures. Click to enlarge. <span class="pill" style="background:#fef3c7;color:#b45309"><svg class="i"><use href="#i-star"/></svg>key image</span> marks the deck's most important diagrams and tables.</p>
+    <p class="small muted">Captions are the slide's own text plus a plain-language note. Colored notes explain the pictures. Click to enlarge.</p>
     <input class="search" id="slideSearch" placeholder="Search slides (polar, cohesion, density)" style="width:100%;margin:18px 0 0">
     <div class="toolbar slide-controls" id="slideGroups" style="margin:16px 0 8px;align-items:center"></div>
     <div id="deckBreak" style="display:none;margin-top:12px">
@@ -559,6 +561,12 @@
 <button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg class="i"><use href="#i-up"/></svg></button>
 
 <!-- Settings modal -->
+<div class="modal" id="cheatModal" onclick="if(event.target===this)closeModal('cheatModal')">
+  <div class="sheet cheat">
+    <div class="modal-head"><h2><svg class="i"><use href="#i-doc"/></svg>Cheat sheet</h2><div class="spacer"></div><button class="btn" onclick="printCheatFrame()"><svg class="i"><use href="#i-printer"/></svg>Print</button><button class="iconbtn mh-x" onclick="closeModal('cheatModal')"><svg class="i"><use href="#i-x"/></svg></button></div>
+    <iframe id="cheatFrame" title="Cheat sheet"></iframe>
+  </div>
+</div>
 <div class="modal" id="settingsModal" onclick="if(event.target===this)closeModal('settingsModal')">
   <div class="sheet">
     <div class="modal-head"><h2><svg class="i"><use href="#i-gear"/></svg>Settings</h2><button class="iconbtn mh-x" onclick="closeModal('settingsModal')"><svg class="i"><use href="#i-x"/></svg></button></div>
@@ -703,106 +711,159 @@ const TOPICS = {
 };
 
 const CARDS = [
- ["polarity","What does polar mean?","One end negative, one end positive"],
+ ["polarity","What does polar mean?","One end partly negative, one partly positive"],
  ["polarity","Which atom in water is partial negative?","Oxygen"],
  ["polarity","Which atoms in water are partial positive?","The two hydrogens"],
- ["polarity","Why is oxygen partial negative?","It pulls electrons toward itself"],
+ ["polarity","Why is oxygen partial negative?","Electrons are pulled toward it"],
+ ["polarity","What does the δ sign mean?","Partial"],
+ ["polarity","What angle does Slide 2 show between water's hydrogens?","104.45°"],
+ ["polarity","How long is each oxygen-to-hydrogen bond on Slide 2?","95.84 pm"],
+ ["polarity","What three ways does Slide 2 draw water?","Geometric structure, ball-and-stick, space-filling"],
  ["hbond","What is a hydrogen bond?","Hydrogen pulled to another molecule's oxygen"],
  ["hbond","Is a hydrogen bond inside or between molecules?","Between molecules (intermolecular)"],
- ["hbond","Besides oxygen, which atoms can hydrogen bond?","Nitrogen and fluorine"],
+ ["hbond","Which atoms can hydrogen bonds involve?","Nitrogen, oxygen, or fluorine"],
+ ["hbond","Do hydrogen bonds happen only in water?","No, in other molecules too"],
+ ["hbond","What does Slide 3 call the solid lines inside one molecule?","Intramolecular polar covalent bonding"],
  ["cohesion","What is cohesion?","Water sticking to water"],
  ["cohesion","What is adhesion?","Water sticking to something different"],
+ ["cohesion","What do \"Co\" and \"Ad\" mean on Slide 4?","Co = together; Ad = between"],
+ ["cohesion","In the Slide 4 plant picture, what is the brown wall labeled?","Xylem wall"],
+ ["cohesion","In the Slide 4 plant picture, what are the dotted links?","Hydrogen bonds"],
  ["capillary","What is capillary action?","Water rising up a thin tube"],
  ["capillary","What two things cause capillary action?","Cohesion and adhesion"],
+ ["capillary","What is the curved top of water in a tube?","Meniscus"],
  ["capillary","Which tube does water climb highest in?","The thinnest tube"],
  ["surface","What is surface tension?","Water's surface resisting an outside force"],
- ["surface","What causes surface tension?","Cohesion only"],
- ["heat","What is specific heat capacity?","Energy to raise temperature 1°C"],
- ["heat","Does water heat up fast or slowly?","Slowly"],
+ ["surface","What causes surface tension?","Cohesion"],
+ ["surface","How is a surface molecule pulled?","Inward"],
+ ["surface","How is an inner molecule pulled?","In all directions"],
+ ["surface","Where are cohesive pulls stronger: surface or bulk?","At the surface"],
+ ["heat","What is specific heat capacity?","Energy to raise water 1°C"],
+ ["heat","What are the specific heats on Slide 7?","Copper 390, aluminum 910, water 4200"],
+ ["heat","How does a lower specific heat warm and cool?","Quickly"],
+ ["heat","How does a higher specific heat warm and cool?","Slowly"],
  ["heat","What does water's high specific heat keep steady?","Climates and body temperatures"],
  ["heat","Water's high specific heat helps living things keep what?","Homeostasis"],
- ["hydro","What does hydrophilic mean?","Water-loving; dissolves easily"],
- ["hydro","What does hydrophobic mean?","Water-fearing; does not dissolve"],
+ ["hydro","What does hydrophilic mean? Give examples.","Water-loving; dissolves (salts, sugars)"],
+ ["hydro","What does hydrophobic mean? Give examples.","Water-fearing; doesn't dissolve (oils, fats)"],
  ["hydro","What does amphipathic mean?","Has water-loving and water-fearing parts"],
- ["hydro","What do amphipathic molecules help build?","Cell membranes"],
- ["mixtures","What is a suspension?","Big bits that don't dissolve"],
+ ["hydro","What example of amphipathic is on Slide 8?","Soap bubbles"],
+ ["hydro","What do amphipathic molecules form?","Cell membranes (phospholipid bilayers)"],
+ ["hydro","What are the two parts of a phospholipid?","Hydrophilic head, hydrophobic tail"],
+ ["mixtures","What is a suspension?","Large particles that don't dissolve"],
+ ["mixtures","What are the suspension examples on Slide 9?","Blood cells in plasma; sand in water"],
  ["mixtures","What is an emulsion?","Two liquids that don't normally mix"],
+ ["mixtures","What are the emulsion examples on Slide 9?","Oil droplets in water; bile and fats"],
+ ["density","What is density?","Mass per unit volume"],
+ ["density","What is the density formula?","D = m / V (or ρ = M / V)"],
+ ["density","At what temperature is water most dense?","4°C"],
  ["density","Why does ice float?","It is less dense than water"]
 ].map((c,i)=>({id:i,t:c[0],q:c[1],a:c[2]}));
 
 const QUIZ = [
- ["Which atom in water is partial negative?",["Oxygen","Hydrogen","Both atoms equally"],0,"polarity"],
- ["Where does a hydrogen bond form?",["Between two molecules","Inside one molecule","Only inside ice"],0,"hbond"],
- ["What is water sticking to water called?",["Cohesion","Adhesion","Density"],0,"cohesion"],
- ["What is water sticking to a glass tube called?",["Adhesion","Cohesion","Specific heat"],0,"cohesion"],
- ["What causes capillary action?",["Cohesion and adhesion","Cohesion only","Density"],0,"capillary"],
- ["What causes surface tension?",["Cohesion","Adhesion","Specific heat"],0,"surface"],
- ["Water has a high specific heat. What does that mean for water?",["It warms up and cools down slowly","It dissolves oil easily","It floats when it freezes"],0,"heat"],
+ ["Which atom in water is partial negative?",["Oxygen","Hydrogen","Fluorine"],0,"polarity"],
+ ["What angle does Slide 2 show between water's two hydrogens?",["104.45°","95.84 pm","4200 J/kg°C"],0,"polarity"],
+ ["Which Slide 2 model shows atoms as balls joined by sticks?",["Ball-and-stick model","Space-filling model","Basic geometric structure"],0,"polarity"],
+ ["Where does a hydrogen bond form?",["Between two molecules","Inside an oxygen atom","Only inside ice"],0,"hbond"],
+ ["Besides oxygen, which atoms can hydrogen bonds involve?",["Nitrogen and fluorine","Copper and aluminum","Salts and sugars"],0,"hbond"],
+ ["What does Slide 3 call the solid lines inside one water molecule?",["Polar covalent bonding","Surface tension","An emulsion"],0,"hbond"],
+ ["What is water sticking to water called?",["Cohesion","Capillary action","Density"],0,"cohesion"],
+ ["What is water sticking to a glass tube called?",["Adhesion","Surface tension","Specific heat"],0,"cohesion"],
+ ["What causes capillary action?",["Cohesion and adhesion","Specific heat","Density"],0,"capillary"],
+ ["What is the curved top of water in a thin tube called?",["Meniscus","Phospholipid","Emulsion"],0,"capillary"],
+ ["What causes surface tension?",["Cohesion","Specific heat","Hydrophobic tails"],0,"surface"],
+ ["Which material on Slide 7 has the highest specific heat?",["Water","Copper","Aluminum"],0,"heat"],
  ["Water's high specific heat helps living things keep what steady?",["Their body temperature (homeostasis)","Their surface tension","Their capillary action"],0,"heat"],
- ["What are oils and fats?",["Hydrophobic","Hydrophilic","Amphipathic"],0,"hydro"],
- ["What do you call a molecule with a water-loving part and a water-fearing part?",["Amphipathic","Hydrophilic","Hydrophobic"],0,"hydro"],
- ["What is sand mixed into water?",["Suspension","Emulsion","Hydrogen bond"],0,"mixtures"],
- ["What do oil drops spread through water make?",["Emulsion","Suspension","Meniscus"],0,"mixtures"],
- ["At what temperature is water most dense?",["4°C","50°C","100°C"],0,"density"]
+ ["What are oils and fats?",["Hydrophobic","Amphipathic","Suspensions"],0,"hydro"],
+ ["What do you call a molecule with a water-loving part and a water-fearing part?",["Amphipathic","Polar covalent bond","Meniscus"],0,"hydro"],
+ ["What is sand mixed into water?",["Suspension","Hydrogen bond","Specific heat"],0,"mixtures"],
+ ["What is bile breaking up fats an example of?",["Emulsion","Capillary action","Homeostasis"],0,"mixtures"],
+ ["At what temperature is water most dense?",["4°C","50°C","100°C"],0,"density"],
+ ["In ρ = M / V, what does ρ stand for?",["Density","Picometer","Partial charge"],0,"density"]
 ].map((x,i)=>({id:i,q:x[0],opts:x[1],correct:x[2],t:x[3]}));
 
 const SCENARIOS = [
- ["A water strider walks across a pond. Why doesn't it sink?",
-  ["Surface tension","Adhesion to its legs","Water's high specific heat"],0,
+ ["A small bug stands on a pond without sinking. What holds it up?",
+  ["Surface tension","Water's high specific heat","Water is hydrophobic"],0,
   "Surface tension lets the top of the water resist a push. Cohesion causes it.","surface"],
  ["You put celery in dyed water, and the dye climbs to the top. What moved the water up?",
-  ["Cohesion and adhesion","Surface tension only","Density"],0,
-  "Water sticks to the plant's tubes and to itself. That is cohesion and adhesion.","capillary"],
+  ["Cohesion and adhesion","Density","Specific heat"],0,
+  "Water rising in a thin space is capillary action. Cohesion and adhesion cause it.","capillary"],
  ["On a sunny day, a metal slide is too hot to touch. Why does the pool stay cool?",
   ["Water has a high specific heat","Water is less dense than metal","Water is hydrophobic"],0,
-  "Water has a high specific heat. It soaks up heat without getting hot quickly.","heat"],
+  "Water has a high specific heat. It absorbs heat without getting hot quickly.","heat"],
+ ["You heat a copper pot with water inside. Which one gets hot first?",
+  ["The copper pot","The water","Both at the same time"],0,
+  "Copper's specific heat is 390 J/kg°C, and water's is 4200. Lower specific heat warms up quickly.","heat"],
  ["Sugar disappears in water, but oil stays in blobs. Why?",
-  ["Sugar is hydrophilic; oil is hydrophobic","Oil has a high specific heat","Both are amphipathic"],0,
+  ["Sugar is hydrophilic; oil is hydrophobic","Oil has a high specific heat","Sugar forms an emulsion"],0,
   "Hydrophilic things like sugar dissolve in water. Hydrophobic things like oil do not.","hydro"],
  ["In winter, ice forms on top of a pond. Why doesn't the ice sink?",
-  ["Ice is less dense than liquid water","Ice has a high specific heat","Ice sticks to the fish"],0,
+  ["Ice is less dense than liquid water","Ice has a high specific heat","Ice is hydrophobic"],0,
   "Ice is less dense than liquid water, so it floats. This is density.","density"]
 ].map((x,i)=>({id:i,q:x[0],opts:x[1],correct:x[2],rat:x[3],t:x[4]}));
 
 const GLOSS_CATS={mol:"The water molecule",prop:"Properties of water",subs:"Water and other substances",mix:"Mixtures and density",sym:"Symbols"};
 const GLOSSARY = [
- ["Electron","A tiny particle with a negative charge.","mol"],
- ["Polar","Having one partly negative end and one partly positive end.","mol"],
- ["Partial charge (δ+ / δ−)","A small charge. In water, oxygen is δ− and hydrogen is δ+.","mol"],
- ["Hydrogen bond","A hydrogen on one molecule pulled to an oxygen on another.","mol"],
- ["Intermolecular force","A pull between two separate molecules.","mol"],
- ["Polar covalent bond","The bond holding hydrogen to oxygen inside one water molecule.","mol"],
- ["Cohesion","Water sticking to water.","prop"],
- ["Adhesion","Water sticking to a different substance.","prop"],
- ["Capillary action","Water rising up a thin tube, from cohesion and adhesion.","prop"],
- ["Meniscus","The curved top of water in a tube.","prop"],
- ["Xylem","The tubes that carry water up a plant (OpenStax Biology 2e).","prop"],
- ["Surface tension","Water's surface resisting an outside force, caused by cohesion.","prop"],
- ["Specific heat capacity","The energy needed to raise temperature by 1°C. Water's is high.","prop"],
- ["Homeostasis","Keeping the inside of a living thing steady.","prop"],
- ["Dissolve","To break apart and spread evenly through a liquid.","subs"],
- ["Hydrophilic","Water-loving. Dissolves easily in water, like salt or sugar.","subs"],
- ["Hydrophobic","Water-fearing. Does not dissolve in water, like oil or fat.","subs"],
- ["Amphipathic","Having a water-loving part and a water-fearing part.","subs"],
- ["Phospholipid","An amphipathic molecule with a water-loving head and water-fearing tails.","subs"],
- ["Cell membrane","The thin outer layer of a cell.","subs"],
- ["Suspension","Big bits in water that do not dissolve, like sand.","mix"],
- ["Emulsion","Two liquids that don't normally mix, one spread through the other.","mix"],
- ["Density","Mass per unit volume (D = m / V).","mix"],
- ["δ","Partial, as in a partial charge (δ+ or δ−).","sym"],
- ["ρ (rho)","Another symbol for density (ρ = M / V).","sym"]
+ ["Electron","Slide 2: \"Electrons are pulled toward oxygen.\" Outside source: A tiny particle with a negative charge. A static shock is electrons jumping. (OpenStax Biology 2e)","mol"],
+ ["Polar","Slide 2: hydrogens → partial +, oxygen → partial −.","mol"],
+ ["Partial charge (δ+ / δ−)","Slide 2: oxygen has a partial negative charge (δ−). Hydrogens have a partial positive charge (δ+).","mol"],
+ ["Picometer (pm)","The unit in \"95.84 pm\" on Slide 2. Outside source: One trillionth of a meter. Cut a one-meter baseball bat into a trillion pieces; each is one picometer. (NIST)","mol"],
+ ["Basic geometric structure","A Slide 2 label. The drawing uses letters and lines, with the angle and length.","mol"],
+ ["Ball-and-stick model","A Slide 2 label. The drawing uses balls joined by sticks.","mol"],
+ ["Space-filling model","A Slide 2 label. The drawing has balls pressed together.","mol"],
+ ["Hydrogen bond","Hydrogen from one molecule attracted to an oxygen atom on another molecule. Can involve nitrogen, oxygen, or fluorine.","mol"],
+ ["Intermolecular force","Slide 3 calls a hydrogen bond an intermolecular force. Outside source: \"Inter\" means between. An interstate highway runs between states. (Merriam-Webster)","mol"],
+ ["Intramolecular","Slide 3 label for the solid lines inside one water molecule. Outside source: \"Intra\" means inside. Intramural sports are played inside one school. (Merriam-Webster)","mol"],
+ ["Polar covalent bond","Slide 3 label: \"intramolecular polar covalent bonding.\" Outside source: Two atoms share electrons unevenly, like two kids tugging one blanket. (OpenStax Biology 2e)","mol"],
+ ["Cohesion","Attraction to one another. \"Co\" = together.","prop"],
+ ["Adhesion","Attraction to a different substance. \"Ad\" = between.","prop"],
+ ["Xylem wall","Labeled in the Slide 4 picture: the wall that water molecules stick to (adhesion). Outside source: xylem are tiny tubes that carry water up a plant, like the strings in celery (OpenStax Biology 2e).","prop"],
+ ["Capillary action","The tendency of water to rise in a thin tube. Caused by cohesion and adhesion.","prop"],
+ ["Capillary tube","Slide 5 label for the thin tube standing in water.","prop"],
+ ["Meniscus","Slide 5 label for the curved top of the water in the tube.","prop"],
+ ["Surface tension","Tendency of the surface of water to resist an external force. Caused by cohesion.","prop"],
+ ["External force","Slide 6: the surface resists an external force. Outside source: A push or pull from outside, like a finger poking water. (Merriam-Webster)","prop"],
+ ["Bulk","Slide 6: surface molecules are \"pulled more strongly into the bulk.\" Outside source: The main body of the water, like all the water under a pool's top layer. (Merriam-Webster)","prop"],
+ ["Specific heat capacity","Amount of energy needed to raise the temperature of water by 1°C. Water's is 4200 J/kg°C.","prop"],
+ ["Joule (J)","The \"J\" in J/kg°C on Slide 7. Outside source: A unit of energy. Lifting an apple one meter takes about one joule. (NIST)","prop"],
+ ["Kilogram (kg)","The \"kg\" in J/kg°C on Slide 7. Outside source: A unit of mass. A one-liter bottle of water is about one kilogram. (NIST)","prop"],
+ ["J/kg°C","The unit for the Slide 7 numbers. Outside source: Joules needed to warm 1 kilogram by 1°C, like a price tag for warming. (NIST)","prop"],
+ ["Copper (Cu)","Slide 7: copper block, specific heat 390 J/kg°C.","prop"],
+ ["Aluminum (Al)","Slide 7: aluminum block, specific heat 910 J/kg°C.","prop"],
+ ["Homeostasis","Slide 7: water helps organisms maintain homeostasis. Outside source: Keeping the inside of a living thing steady, like your body temperature. (OpenStax Biology 2e)","prop"],
+ ["Dissolve","Slide 8: hydrophilic substances dissolve easily in water. Outside source: To break apart and spread evenly through a liquid, like sugar in tea. (OpenStax Chemistry 2e)","subs"],
+ ["Hydrophilic","\"Water-loving\"; substances that dissolve easily in water. Ex: salts, sugars.","subs"],
+ ["Hydrophobic","\"Water-fearing\"; substances that do not dissolve in water. Ex: oils, fats.","subs"],
+ ["Amphipathic","A molecule with both hydrophilic and hydrophobic regions. Ex: soap bubbles.","subs"],
+ ["Lipids","Slide 8: amphipathic molecules interact with both water and lipids. Outside source: A group that includes fats and oils, like butter. (OpenStax Biology 2e)","subs"],
+ ["Phospholipid","Slide 8 picture \"Phospholipid Structure\": a hydrophilic head and a hydrophobic tail.","subs"],
+ ["Phospholipid bilayer","Slide 8: cell membranes are phospholipid bilayers. Outside source: \"Bi\" means two, so two layers, like the two wheels of a bicycle. (Merriam-Webster)","subs"],
+ ["Cell membrane","Slide 8: amphipathic molecules allow cell membranes to form. Outside source: The thin outer layer of a cell, like a grape's skin. (OpenStax Biology 2e)","subs"],
+ ["Suspension","A mixture where large particles float in water but do not dissolve. Ex: blood cells in plasma, sand in water.","mix"],
+ ["Plasma","Slide 9: \"Blood cells in plasma.\" Outside source: The liquid part of blood, mostly water. A donated blood bag holds cells in plasma. (OpenStax Biology 2e)","mix"],
+ ["Emulsion","A mixture of two liquids that don't normally mix, where one is dispersed in the other. Ex: oil droplets in water.","mix"],
+ ["Dispersed","Slide 9: one liquid is dispersed in the other. Outside source: Spread out in tiny bits, like seeds scattered over a field. (Merriam-Webster)","mix"],
+ ["Bile","Slide 9: \"bile emulsifying fats.\" Outside source: A digestive juice your body makes. (OpenStax Biology 2e)","mix"],
+ ["Emulsify","Slide 9: \"bile emulsifying fats.\" Outside source: To break fat into tiny drops in water, like dish soap on greasy pans. (OpenStax Biology 2e)","mix"],
+ ["Density","Mass per unit volume (D = m / V). Water is most dense at 4°C.","mix"],
+ ["Mass","The \"M\" labeled in the Slide 9 formula. Outside source: How much matter something has. A bowling ball has lots of mass. (OpenStax Chemistry 2e)","mix"],
+ ["Volume","The \"V\" labeled in the Slide 9 formula. Outside source: How much space something takes up. A beach ball has lots of volume. (OpenStax Chemistry 2e)","mix"],
+ ["δ","Slide 2 puts δ− by \"Partial negative charge\" and δ+ by \"Partial positive charge.\"","sym"],
+ ["ρ (rho)","Slide 9 picture labels ρ as density (ρ = M / V). Outside source: A Greek letter, like π (pi) in math. (OpenStax Chemistry 2e)","sym"],
+ ["°C","Used on Slides 7 and 9 (1°C, 4°C). Outside source: Degrees Celsius, a unit of temperature. A warm summer day is about 30°C. (NIST)","sym"]
 ];
 
 const SLIDE_NOTES = {
- 1:{note:"Title slide for Properties of Water. The waterfall and cartoon drop are just decoration."},
- 2:{star:true,note:"Electrons pull toward oxygen, so oxygen is partial negative and the hydrogens are partial positive."},
- 3:{star:true,note:"Dotted lines are hydrogen bonds: a hydrogen on one molecule pulled to an oxygen on another."},
- 4:{star:true,note:"Cohesion is water sticking to water. Adhesion is water sticking to something different."},
- 5:{star:true,note:"Cohesion and adhesion lift water up a thin tube. The thinnest tube has the highest water."},
- 6:{star:true,note:"Surface tension comes from cohesion. It lets a water strider stand on water."},
- 7:{star:true,note:"Water has a high specific heat, so it warms slowly and keeps temperatures steady."},
- 8:{star:true,note:"Hydrophilic things dissolve, hydrophobic things don't, and amphipathic molecules have both parts."},
- 9:{star:true,note:"Suspensions and emulsions are mixtures. Ice floats because it is less dense than water."}
+ 1:{note:"Title slide for 2.2 Properties of Water. It shows a waterfall and a cartoon water drop."},
+ 2:{note:"Oxygen is partial negative and the hydrogens are partial positive. The bond angle is 104.45° and each bond is 95.84 pm."},
+ 3:{note:"Dotted lines are hydrogen bonds between molecules. Solid lines are polar covalent bonds inside one molecule."},
+ 4:{note:"Cohesion is water sticking to water. Adhesion is water sticking to something different, like the xylem wall in the plant picture."},
+ 5:{note:"Cohesion and adhesion lift water up a thin capillary tube. The thinnest tube has the highest water."},
+ 6:{note:"Surface tension comes from cohesion. Surface molecules are pulled inward, and the photo shows an insect standing on water."},
+ 7:{note:"Copper is 390, aluminum is 910, and water is 4200 J/kg°C. Higher specific heat warms and cools slowly."},
+ 8:{note:"Hydrophilic things dissolve and hydrophobic things don't. A phospholipid has a hydrophilic head and hydrophobic tail."},
+ 9:{note:"Suspensions and emulsions are mixtures. Density is ρ = M / V, and ice floats because it is less dense."}
 };
 
 /* ---------- STORAGE ---------- */
@@ -1099,7 +1160,7 @@ const MAPS = [
    ${down('lead to')}
    <div class="frow" style="align-items:flex-start;gap:22px">
      <div class="flow" style="gap:6px">
-       ${n(C['cohesion'].color,"Cohesion","water to water")}${down('alone causes')}${n(C['surface'].color,"Surface tension","a water strider stands on water")}
+       ${n(C['cohesion'].color,"Cohesion","water to water")}${down('alone causes')}${n(C['surface'].color,"Surface tension","the surface resists an outside force")}
      </div>
      <div class="flow" style="gap:6px">
        ${n('#0f766e',"Adhesion","water to something else")}${down('plus cohesion causes')}${n(C['capillary'].color,"Capillary action","water rises up a thin tube")}
@@ -1111,10 +1172,10 @@ const MAPS = [
    ${down('compare')}
    <div class="frow" style="align-items:flex-start;gap:22px">
      <div class="flow" style="gap:6px">
-       ${n('#ea580c',"Low: copper, aluminum","little energy needed")}${down('so they')}${n('#ea580c',"Warm up fast","and cool down fast")}
+       ${n('#ea580c',"Low: copper 390, aluminum 910","little energy needed")}${down('so they')}${n('#ea580c',"Warm up fast","and cool down fast")}
      </div>
      <div class="flow" style="gap:6px">
-       ${n('#0284c7',"High: water","lots of energy needed")}${down('so it')}${n('#0284c7',"Warms up slowly","keeps temperatures steady")}
+       ${n('#0284c7',"High: water 4200","lots of energy needed")}${down('so it')}${n('#0284c7',"Warms up slowly","keeps temperatures steady")}
      </div>
    </div>
  </div>`}
@@ -1153,7 +1214,7 @@ function renderSlideGroups(){
   document.getElementById('slideGroups').innerHTML=
     `<span class="tool" style="cursor:default"><svg class="i"><use href="#i-filter"/></svg><select onchange="setSlideGroup(this.value)">`
     +SLIDE_GROUPS.map(gr=>`<option value="${gr.k}"${slideGroup===gr.k?' selected':''}>${esc(gr.k==='all'?'All slides':'Slides '+gr.label)}</option>`).join('')+`</select></span>`
-    +`<button class="tool${slideKeyOnly?' on':''}" onclick="slideKeyOnly=!slideKeyOnly;renderSlideGroups();renderGallery(document.getElementById('slideSearch').value)"><svg class="i"><use href="#i-star"/></svg>Key images</button>`
+    +``
     +`<div class="spacer"></div>`
     +`<button class="tool${dOpen?' on':''}" id="deckToggle" onclick="toggleDeck()"><svg class="i"><use href="#i-list"/></svg>How the deck breaks down</button>`;
 }
@@ -1166,7 +1227,7 @@ function renderGallery(filter=''){
   g.innerHTML=SLIDES.filter(s=>{ if(s.n<gr.lo||s.n>gr.hi) return false;
       const sn=SLIDE_NOTES[s.n]; if(slideKeyOnly && !(sn&&sn.star)) return false;
       const note=sn?sn.note:''; return !f||(s.text+' '+note).toLowerCase().includes(f); })
-   .map(s=>{ const sn=SLIDE_NOTES[s.n]||{}; const star=sn.star?`<span class="tbadge" style="background:#fef3c7;color:#b45309"><svg class="i"><use href="#i-star"/></svg></span>`:'';
+   .map(s=>{ const sn=SLIDE_NOTES[s.n]||{}; const star=false?`<span class="tbadge" style="background:#fef3c7;color:#b45309"><svg class="i"><use href="#i-star"/></svg></span>`:'';
      const cap=s.text?s.text.split('\n')[0]:'(diagram — no text)';
      return `<div class="gitem"><img loading="lazy" src="${IMG[s.n]}" alt="Slide ${s.n}" onclick="LB.open(${s.n})">
        <div class="cap">${star}<span class="snum">Slide ${s.n}</span> <span class="stext">${esc(cap)}</span></div>${sn.note?`<div class="note">${esc(sn.note)}</div>`:''}</div>`; }).join('');
@@ -1234,12 +1295,14 @@ function speak(text){ if(!('speechSynthesis'in window))return; window.speechSynt
   const u=new SpeechSynthesisUtterance(text); u.rate=.98; u.onend=()=>{speaking=false;updateListen();}; speaking=true; window.speechSynthesis.speak(u); updateListen(); }
 function stopSpeak(){ if('speechSynthesis'in window)window.speechSynthesis.cancel(); speaking=false; updateListen(); }
 function updateListen(){ const b=document.getElementById('listenBtn'); if(b) b.innerHTML=(speaking?icon('x')+'Stop':icon('volume')+'Listen to summary'); }
-const SUMMARY="A water molecule has one oxygen and two hydrogens. Water is polar. Oxygen pulls the electrons closer, so oxygen is partial negative. The hydrogens are partial positive. The hydrogen of one molecule is pulled to the oxygen of another. That pull is a hydrogen bond. Hydrogen bonds make water sticky. Cohesion is water sticking to water. Adhesion is water sticking to something else. Together, they make water climb up a thin tube. That is capillary action. Cohesion alone makes surface tension. That is why a water strider can stand on a pond. Water also has a high specific heat. It warms up slowly and cools down slowly. This keeps climates and body temperatures steady. Some things mix with water. Salt and sugar are hydrophilic, so they dissolve. Oil and fat are hydrophobic, so they don't. Amphipathic molecules have both parts, and they build cell membranes. Sand in water is a suspension. Oil drops in water are an emulsion. Last, water is most dense at four degrees Celsius. Ice is less dense, so it floats. Nice work.";
+const SUMMARY="A water molecule has one oxygen and two hydrogens. Water is polar. Oxygen pulls the electrons closer, so oxygen is partial negative. The hydrogens are partial positive. The angle between the hydrogens is 104.45 degrees. Each bond is 95.84 picometers long. Your slide draws water three ways: a geometric structure, a ball-and-stick model, and a space-filling model. The hydrogen of one molecule is pulled to the oxygen of another. That pull is a hydrogen bond. It happens between molecules. Cohesion is water sticking to water. Adhesion is water sticking to something else. Together, they make water climb up a thin tube. That is capillary action. Cohesion also makes surface tension. Surface molecules are pulled inward. The surface resists an outside force. Water has a high specific heat. Copper is 390, aluminum is 910, and water is 4200. Things with a low specific heat warm up and cool down quickly. Water warms up and cools down slowly. This keeps climates and body temperatures steady. Salt and sugar are hydrophilic, so they dissolve. Oil and fat are hydrophobic, so they don't. Amphipathic molecules have both parts. Phospholipids have a water-loving head and a water-fearing tail, and they build cell membranes. Sand in water is a suspension. Oil drops in water are an emulsion. Density is mass divided by volume. Water is most dense at four degrees Celsius. Ice is less dense, so it floats. Nice work.";
 function toggleSummary(){ if(speaking) stopSpeak(); else speak(SUMMARY); }
 
 /* ---------- PRINT CHEAT SHEET ---------- */
+function showCheat(html){ document.getElementById('cheatFrame').srcdoc=html; openModal('cheatModal'); }
+function printCheatFrame(){ const w=document.getElementById('cheatFrame').contentWindow; w.focus(); w.print(); }
 function printCheat(){
-  const w=window.open('','_blank');
+  
   const css=`body{font:13px/1.5 -apple-system,Arial,sans-serif;color:#111;margin:24px;max-width:780px}
    h1{font-size:20px;color:#7c3aed;margin:0 0 2px} .sub{color:#555;font-size:12px;margin-bottom:12px}
    h2{font-size:13px;color:#7c3aed;border-bottom:1.5px solid #7c3aed;padding-bottom:2px;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.5px}
@@ -1253,276 +1316,471 @@ function printCheat(){
   <h1>2.2 Properties of Water — Cheat Sheet</h1><div class="sub">Biology · Unit Two: Biomolecules</div>
   <div class="cols">
   <div class="blk"><h2>Water is polar</h2><ul>
-   <li><b>Oxygen</b> = partial negative</li>
-   <li><b>Hydrogens</b> = partial positive</li>
-   <li>Oxygen pulls the electrons closer</li></ul></div>
+   <li><b>Oxygen</b> = partial negative (δ−)</li>
+   <li><b>Hydrogens</b> = partial positive (δ+)</li>
+   <li>Oxygen pulls the electrons closer</li>
+   <li>Bond angle <b>104.45°</b>; bond length <b>95.84 pm</b></li>
+   <li>Drawn 3 ways: geometric, ball-and-stick, space-filling</li></ul></div>
   <div class="blk"><h2>Hydrogen bonds</h2><ul>
    <li>H of one molecule pulled to O of another</li>
-   <li>A pull <b>between</b> molecules</li>
-   <li>Can involve N, O, or F</li></ul></div>
-  <div class="blk"><h2>Sticking</h2><ul>
-   <li><b>Cohesion</b> = water to water</li>
-   <li><b>Adhesion</b> = water to something else</li></ul></div>
-  <div class="blk"><h2>Climbing and skin</h2><ul>
-   <li><b>Capillary action</b> = rises up a thin tube</li>
+   <li>A pull <b>between</b> molecules (intermolecular)</li>
+   <li>Other molecules too; can involve N, O, or F</li>
+   <li>Inside one molecule: <b>polar covalent bond</b> (intramolecular)</li></ul></div>
+  <div class="blk"><h2>Cohesion and adhesion</h2><ul>
+   <li><b>Cohesion</b> = water to water ("Co" = together)</li>
+   <li><b>Adhesion</b> = water to something else ("Ad" = between)</li>
+   <li>Both are hydrogen bonds in the wall picture</li></ul></div>
+  <div class="blk"><h2>Capillary action</h2><ul>
+   <li>Water rises up a thin <b>capillary tube</b></li>
    <li>Caused by cohesion + adhesion</li>
-   <li><b>Surface tension</b> = surface resists a push</li>
-   <li>Caused by cohesion only</li></ul></div>
+   <li>Curved top = <b>meniscus</b>; thinnest tube = highest water</li></ul></div>
+  <div class="blk"><h2>Surface tension</h2><ul>
+   <li>Surface resists an outside force</li>
+   <li>Caused by <b>cohesion</b>; an insect stands on it (photo)</li>
+   <li>Surface molecule pulled <b>inward</b></li>
+   <li>Inner molecule pulled <b>all directions</b></li>
+   <li>Stronger pulls at surface, weaker in the bulk</li></ul></div>
   <div class="blk"><h2>Specific heat</h2><ul>
-   <li>Energy to raise temperature <b>1°C</b></li>
-   <li>Water's is <b>high</b>, so it warms slowly</li>
-   <li>Keeps temperatures steady (<b>homeostasis</b>)</li></ul></div>
+   <li>Energy to raise the temperature of water <b>1°C</b></li>
+   <li>Copper <b>390</b> · aluminum <b>910</b> · water <b>4200</b> J/kg°C</li>
+   <li>Lower = warms and cools <b>quickly</b></li>
+   <li>Higher = warms and cools <b>slowly</b></li>
+   <li>Keeps climates and body temperatures steady (<b>homeostasis</b>)</li></ul></div>
   <div class="blk"><h2>Mixing with water</h2><ul>
-   <li><b>Hydrophilic</b> = dissolves (salt, sugar)</li>
-   <li><b>Hydrophobic</b> = doesn't (oil, fat)</li>
-   <li><b>Amphipathic</b> = both parts (cell membranes)</li></ul></div>
+   <li><b>Hydrophilic</b> = dissolves (salts, sugars)</li>
+   <li><b>Hydrophobic</b> = doesn't (oils, fats)</li>
+   <li><b>Amphipathic</b> = both parts (soap bubbles)</li>
+   <li>Forms cell membranes (phospholipid bilayers)</li>
+   <li>Phospholipid: hydrophilic head, hydrophobic tail</li></ul></div>
   <div class="blk"><h2>Mixtures</h2><ul>
-   <li><b>Suspension</b> = bits don't dissolve (sand)</li>
-   <li><b>Emulsion</b> = liquids don't mix (oil drops)</li></ul></div>
+   <li><b>Suspension</b> = large bits don't dissolve (blood cells in plasma, sand)</li>
+   <li><b>Emulsion</b> = liquids don't mix (oil droplets, bile and fats)</li></ul></div>
   <div class="blk"><h2>Density</h2><ul>
-   <li><b>D = m / V</b></li>
+   <li><b>D = m / V</b> (also <b>ρ = M / V</b>)</li>
    <li>Water is densest at <b>4°C</b></li>
    <li>Ice is less dense, so it <b>floats</b></li></ul></div>
   </div></body></html>`;
-  w.document.write(html); w.document.close(); w.focus(); setTimeout(()=>w.print(),350);
+  showCheat(html);
 }
 </script>
 
 <script type="text/html" id="doc-outline"><h1>2.2 Properties of Water — Lesson Outline</h1>
-<p>One section per slide, in order. <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span> = core idea. <span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> = extra detail.</p>
+<p>One section per slide, in order. Every fact from the slides and their pictures is here. Word meanings from outside sources are in the study guide.</p>
 <hr />
-<h2><span class="slidelink" onclick="LB.open(1)">Slide 1</span> — Title <span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span></h2>
+<h2><span class="slidelink" onclick="LB.open(1)">Slide 1</span> — Title</h2>
 <ul>
 <li>2.2 Properties of Water, part of Unit Two: Biomolecules.</li>
-<li><span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> The waterfall and cartoon drop are just decoration.</li>
+<li>Pictures: a waterfall photo and a cartoon water drop.</li>
 </ul>
-<h2><span class="slidelink" onclick="LB.open(2)">Slide 2</span> — The water molecule <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2><span class="slidelink" onclick="LB.open(2)">Slide 2</span> — The water molecule</h2>
 <ul>
 <li>Water (H₂O) is <strong>polar</strong>.</li>
-<li>Electrons are pulled toward oxygen, so <strong>oxygen is partial negative</strong>.</li>
-<li>The <strong>hydrogens are partial positive</strong>. <span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> Skip the picture's numbers and model names.</li>
+<li>Electrons are pulled toward oxygen, so <strong>oxygen is partial negative</strong> (δ−).</li>
+<li>The <strong>hydrogens are partial positive</strong> (δ+).</li>
+<li>Angle between the hydrogens: <strong>104.45°</strong>.</li>
+<li>Each oxygen-to-hydrogen bond: <strong>95.84 pm</strong> long.</li>
+<li>Three drawings: <strong>basic geometric structure</strong>, <strong>ball-and-stick model</strong>, <strong>space-filling model</strong>.</li>
+<li>In the models, red = oxygen and white = hydrogen.</li>
 </ul>
-<h2><span class="slidelink" onclick="LB.open(3)">Slide 3</span> — Hydrogen bonds <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2><span class="slidelink" onclick="LB.open(3)">Slide 3</span> — Hydrogen bonds</h2>
 <ul>
-<li>A hydrogen on one molecule is pulled to an oxygen on another.</li>
-<li>It is an <strong>intermolecular force</strong> (a force between molecules).</li>
-<li>It happens in other molecules too. It can involve nitrogen, oxygen, or fluorine.</li>
+<li>A hydrogen on one molecule is attracted to an oxygen on another.</li>
+<li>It is an <strong>intermolecular force</strong> (the slide underlines "Inter").</li>
+<li>It happens with other molecules too. It can involve nitrogen, oxygen, or fluorine.</li>
+<li>Picture: dotted lines = <strong>hydrogen bonds</strong>, each linking δ+ H to δ− O.</li>
+<li>Picture: solid lines = <strong>intramolecular polar covalent bonding</strong> (inside one molecule).</li>
+<li>Picture: the middle molecule bonds to three others.</li>
 </ul>
-<h2><span class="slidelink" onclick="LB.open(4)">Slide 4</span> — Cohesion and adhesion <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2><span class="slidelink" onclick="LB.open(4)">Slide 4</span> — Cohesion and adhesion</h2>
 <ul>
-<li><strong>Cohesion</strong> = water sticking to water. "Co" = together.</li>
-<li><strong>Adhesion</strong> = water sticking to a different substance. "Ad" = between.</li>
-<li>In a plant, water sticks to itself and to the xylem wall.</li>
+<li><strong>Cohesion</strong> = attraction to one another (water sticking to water). "Co" = together.</li>
+<li><strong>Adhesion</strong> = attraction to a different substance. "Ad" = between.</li>
+<li>Cartoon: handshake between molecules = cohesion. Grabbing ropes = adhesion.</li>
+<li>Plant picture: <strong>Water molecule</strong> chain beside a <strong>Xylem wall</strong>. Molecule-to-molecule = cohesion, molecule-to-xylem wall = adhesion. Links are hydrogen bonds.</li>
+<li>Droplet picture: zoom circles at the edge and middle of a water drop.</li>
 </ul>
-<h2><span class="slidelink" onclick="LB.open(5)">Slide 5</span> — Capillary action <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2><span class="slidelink" onclick="LB.open(5)">Slide 5</span> — Capillary action</h2>
 <ul>
-<li>Water rising up a thin tube.</li>
+<li>The tendency of water to rise in a thin tube.</li>
 <li>Caused by <strong>cohesion and adhesion</strong>.</li>
-<li>Thinnest tube = highest water. The curved top is the meniscus.</li>
+<li>Drawing: a <strong>capillary tube</strong> in water. Water moves upward by capillary action.</li>
+<li>The curved top of the water is the <strong>meniscus</strong>.</li>
+<li>Photo: the thinnest tube has the highest water.</li>
 </ul>
-<h2><span class="slidelink" onclick="LB.open(6)">Slide 6</span> — Surface tension <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2><span class="slidelink" onclick="LB.open(6)">Slide 6</span> — Surface tension</h2>
 <ul>
-<li>The water's surface resists an outside force.</li>
-<li>Caused by <strong>cohesion</strong> only.</li>
-<li>A water strider can stand on the water.</li>
+<li>The water's surface resists an <strong>external</strong> (outside) force.</li>
+<li>Caused by <strong>cohesion</strong>.</li>
+<li>Photo: an insect stands on the water.</li>
+<li><strong>Surface molecule</strong> is pulled inward. <strong>Inner molecule</strong> is pulled in all directions.</li>
+<li>Stronger cohesive pulls at the surface, from an imbalance of forces. Pulled into the <strong>bulk</strong>.</li>
+<li>Weaker cohesive pulls in the bulk, since pulls come from all directions.</li>
+<li>Labels: air, water droplet, water molecules. "Diagram not to scale."</li>
+<li>A ball presses a dip into the surface.</li>
 </ul>
-<h2><span class="slidelink" onclick="LB.open(7)">Slide 7</span> — Specific heat capacity <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2><span class="slidelink" onclick="LB.open(7)">Slide 7</span> — Specific heat capacity</h2>
 <ul>
-<li>Energy needed to raise the temperature by 1°C.</li>
-<li>Water warms and cools slowly. This keeps climates and body temperatures steady.</li>
-<li>It helps living things keep <strong>homeostasis</strong>. <span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> Skip the exact numbers.</li>
+<li>Energy needed to raise the temperature of water by 1°C.</li>
+<li>Water resists fast temperature change. This keeps climates and body temperatures steady.</li>
+<li>Water absorbs heat without getting hot quickly. This helps <strong>homeostasis</strong>.</li>
+<li>Copper (Cu) = <strong>390 J/kg°C</strong>. Aluminum (Al) = <strong>910 J/kg°C</strong>. Water = <strong>4200 J/kg°C</strong>.</li>
+<li><strong>Lower</strong> specific heat: warms and cools <strong>quickly</strong> (needs much less energy).</li>
+<li><strong>Higher</strong> specific heat: warms and cools <strong>slowly</strong> (needs much more energy).</li>
 </ul>
-<h2><span class="slidelink" onclick="LB.open(8)">Slide 8</span> — Hydrophilic, hydrophobic, amphipathic <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2><span class="slidelink" onclick="LB.open(8)">Slide 8</span> — Hydrophilic, hydrophobic, amphipathic ("H2O Polarity Characteristics")</h2>
 <ul>
 <li><strong>Hydrophilic</strong> = water-loving, dissolves easily (salts, sugars).</li>
 <li><strong>Hydrophobic</strong> = water-fearing, doesn't dissolve (oils, fats).</li>
-<li><strong>Amphipathic</strong> = has both parts (soap bubbles). Builds cell membranes.</li>
+<li><strong>Amphipathic</strong> = has hydrophilic and hydrophobic regions (soap bubbles).</li>
+<li>Amphipathic molecules allow cell membranes (<strong>phospholipid bilayers</strong>) to form.</li>
+<li>They let molecules interact with both water and lipids.</li>
+<li>Picture "Phospholipid Structure": <strong>hydrophilic head</strong>, <strong>hydrophobic tail</strong>.</li>
 </ul>
-<h2><span class="slidelink" onclick="LB.open(9)">Slide 9</span> — Suspensions and emulsions <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2><span class="slidelink" onclick="LB.open(9)">Slide 9</span> — Suspensions and emulsions ("Liquid Forms")</h2>
 <ul>
-<li><strong>Suspension</strong> = big bits in water that don't dissolve (sand in water).</li>
-<li><strong>Emulsion</strong> = two liquids that don't normally mix (oil drops in water).</li>
+<li><strong>Suspension</strong> = large particles float in water but don't dissolve.</li>
+<li>Suspension examples: blood cells in plasma, sand in water.</li>
+<li><strong>Emulsion</strong> = two liquids that don't normally mix. One is dispersed in the other.</li>
+<li>Emulsion examples: oil droplets in water, bile emulsifying fats.</li>
 </ul>
-<h2><span class="slidelink" onclick="LB.open(9)">Slide 9</span> — Density <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2><span class="slidelink" onclick="LB.open(9)">Slide 9</span> — Density</h2>
 <ul>
 <li><strong>Density</strong> = mass per unit volume (D = m / V).</li>
+<li>Picture: <strong>ρ = M / V</strong>, with density (ρ), mass (M), and Volume (V) labeled.</li>
 <li>Water is most dense at <strong>4°C</strong>.</li>
 <li>Ice is less dense than liquid water, so it floats.</li>
 </ul></script>
 <script type="text/html" id="doc-guide"><h1>2.2 Properties of Water — Study Guide</h1>
 <p><strong>Course:</strong> Biology (high school) · <strong>Unit:</strong> Unit Two: Biomolecules
 <strong>Source:</strong> Your teacher's slides (9 slides). There is no recording.</p>
-<p><span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span> = core idea to learn. <span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> = extra detail. You don't need to memorize it.</p>
+<p>Anything not from your teacher's slides starts with <strong>Outside source:</strong> and ends with where it came from.</p>
+<p><span class="slidelink" onclick="LB.open(1)">Slide 1</span> is the title slide. It shows a waterfall photo and a cartoon water drop.</p>
 <hr />
 <h2>What you'll learn</h2>
 <ul>
-<li>Why water is <strong>polar</strong></li>
-<li>How <strong>hydrogen bonds</strong> pull water molecules together</li>
+<li>Why water is <strong>polar</strong>, and how a water molecule is drawn</li>
+<li>How <strong>hydrogen bonds</strong> pull molecules together</li>
 <li>How water sticks to itself and to other things</li>
-<li>Why water heats up slowly</li>
+<li>How water climbs up a thin tube</li>
+<li>How the top of water resists an outside force</li>
+<li>Why water heats up slowly, with the numbers from the slide</li>
 <li>Which things mix with water and which don't</li>
-<li>Why ice floats</li>
+<li>What suspensions and emulsions are</li>
+<li>What density is, and why ice floats</li>
 </ul>
 <hr />
-<h2>1. Water is polar <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>1. Water is polar</h2>
 <p><strong>Water is polar: one end is a little negative, and the other end is a little positive.</strong></p>
+<p><strong>What it is:</strong></p>
 <ul>
 <li>A water molecule (<strong>H₂O</strong>) has one oxygen and two hydrogens.</li>
-<li><strong>Electrons</strong> (tiny negative particles) are pulled toward the oxygen.</li>
-<li>So the <strong>oxygen</strong> is partial negative (<strong>δ−</strong>).</li>
-<li>The two <strong>hydrogens</strong> are partial positive (<strong>δ+</strong>). The δ sign means "partial."</li>
+<li><strong>Electrons</strong> are pulled toward the oxygen.</li>
+<li><strong>Outside source:</strong> An <strong>electron</strong> is a tiny particle with a negative charge. A static shock from a doorknob is electrons jumping. <em>(OpenStax Biology 2e)</em></li>
+<li>So the <strong>oxygen</strong> has a <strong>partial negative charge</strong> (<strong>δ−</strong>).</li>
+<li>The two <strong>hydrogens</strong> have a <strong>partial positive charge</strong> (<strong>δ+</strong>).</li>
+<li>The δ sign stands for "partial." The slide puts δ− next to "Partial negative charge."</li>
+</ul>
+<p><strong>Numbers on the slide:</strong></p>
+<ul>
+<li>The angle between the two hydrogens is <strong>104.45°</strong> (degrees).</li>
+<li>Each oxygen-to-hydrogen bond is <strong>95.84 pm</strong> long.</li>
+<li><strong>Outside source:</strong> <strong>pm</strong> stands for <strong>picometer</strong>, a super tiny unit of length. One picometer is one trillionth of a meter. A baseball bat is about one meter long. Cut it into a trillion equal pieces, and each piece is one picometer. <em>(NIST)</em></li>
+</ul>
+<p><strong>In the picture:</strong></p>
+<ul>
+<li>The left picture draws water in three ways.</li>
+<li><strong>Basic geometric structure:</strong> letters and lines. It shows the angle and the length.</li>
+<li><strong>Ball-and-stick model:</strong> balls joined by sticks.</li>
+<li><strong>Space-filling model:</strong> the balls are pressed together.</li>
+<li>In both models, the red ball is oxygen. The white balls are hydrogen.</li>
+<li>The right picture says "Electrons are pulled toward oxygen."</li>
+<li>Its top label is "Partial negative charge," next to the oxygen.</li>
+<li>Its bottom label is "Partial positive charge," next to the hydrogens.</li>
 </ul>
 <blockquote>
-<p><strong>Analogy:</strong> Two kids share a blanket, but one kid keeps pulling it closer. Oxygen is that kid. The electrons are the blanket.</p>
-<p> See <strong><span class="slidelink" onclick="LB.open(2)">Slide 2</span></strong> — the right picture shows electrons pulled toward the red oxygen. <span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> Skip the numbers on the left picture.</p>
+<p> See <strong><span class="slidelink" onclick="LB.open(2)">Slide 2</span></strong> — left: three ways to draw water, with 104.45° and 95.84 pm. Right: electrons pulled toward the red oxygen.</p>
 </blockquote>
 <hr />
-<h2>2. Hydrogen bonds <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>2. Hydrogen bonds</h2>
 <p><strong>A hydrogen bond is a pull between two molecules.</strong></p>
+<p><strong>What it is:</strong></p>
 <ul>
+<li>The slide says: "Hydrogen from one molecule attracted to oxygen atom on another molecule."</li>
 <li>The δ+ hydrogen of one molecule is pulled to the δ− oxygen of another.</li>
-<li>It is an <strong>intermolecular force</strong>. That means a force <em>between</em> molecules.</li>
-<li>It happens in other molecules too, not just water.</li>
-<li>It can involve nitrogen, oxygen, or fluorine.</li>
+<li>It is an <strong>intermolecular force</strong>. The slide underlines "Inter."</li>
+<li><strong>Outside source:</strong> The prefix <strong>inter</strong> means between. An <em>interstate</em> highway runs between states. So an intermolecular force is a force between molecules. <em>(Merriam-Webster)</em></li>
+<li>Hydrogen bonds happen with other molecules too, not just water.</li>
+<li>They can involve nitrogen, oxygen, or fluorine. It is not just oxygen.</li>
+</ul>
+<p><strong>In the pictures:</strong></p>
+<ul>
+<li>The bottom drawing shows three water molecules with δ+ and δ− signs.</li>
+<li>Its red dotted lines are labeled <strong>hydrogen bonding</strong>.</li>
+<li>They run from one molecule to another molecule.</li>
+<li>Its solid lines are labeled <strong>intramolecular polar covalent bonding</strong>.</li>
+<li>The solid lines join the O and H inside one molecule.</li>
+<li><strong>Outside source:</strong> The prefix <strong>intra</strong> means inside. <em>Intramural</em> sports are games played inside one school. So an intramolecular bond is inside one molecule. <em>(Merriam-Webster)</em></li>
+<li><strong>Outside source:</strong> In a <strong>polar covalent bond</strong>, two atoms share electrons, but not evenly. One atom pulls the shared electrons closer. It's like two kids sharing a blanket, and one tugs harder. In water, oxygen pulls harder than hydrogen. <em>(OpenStax Biology 2e)</em></li>
+<li>The right picture shows four water molecules.</li>
+<li>Its blue dotted lines are labeled <strong>Hydrogen bonds</strong>.</li>
+<li>Each dotted line links a δ+ hydrogen to a δ− oxygen.</li>
+<li>The middle molecule is bonded to three other molecules at once.</li>
 </ul>
 <blockquote>
-<p><strong>Analogy:</strong> Think of magnets. The + end of one snaps toward the − end of the next.</p>
-<p> See <strong><span class="slidelink" onclick="LB.open(3)">Slide 3</span></strong> — dotted lines are hydrogen bonds between molecules. The line inside one molecule is a different bond. It is called a polar covalent bond. It holds one water molecule together.</p>
+<p> See <strong><span class="slidelink" onclick="LB.open(3)">Slide 3</span></strong> — dotted lines are hydrogen bonds between molecules. Solid lines are bonds inside one molecule.</p>
 </blockquote>
 <hr />
-<h2>3. Cohesion and adhesion <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>3. Cohesion and adhesion</h2>
 <p><strong>Water sticks to itself, and it also sticks to other things.</strong></p>
+<p><strong>What it is:</strong></p>
 <ul>
-<li><strong>Cohesion</strong> means water sticking to water.</li>
-<li><strong>Adhesion</strong> means water sticking to a different substance.</li>
+<li><strong>Cohesion</strong> is attraction to one another. For water, it means water sticking to water.</li>
+<li><strong>Adhesion</strong> is attraction to a different substance. It means water sticking to something else.</li>
 <li>The slide's memory hook: "Co" = together. "Ad" = between.</li>
-<li>In a plant, water sticks to itself and to the <strong>xylem</strong> walls. Xylem is the tubes that carry water up <em>(OpenStax Biology 2e)</em>.</li>
+</ul>
+<p><strong>In the pictures:</strong></p>
+<ul>
+<li>Cartoon: two water molecules shake hands. The handshake is labeled <strong>Cohesion</strong>.</li>
+<li>The same molecules grab a rope on each side. Each grip is labeled <strong>Adhesion</strong>.</li>
+<li>Plant picture: a chain of molecules, each labeled <strong>Water molecule</strong>, sits next to a brown wall labeled <strong>Xylem wall</strong>.</li>
+<li><strong>Outside source:</strong> Xylem are tiny tubes inside a plant. They carry water up from the roots to the leaves. The strings in a celery stalk contain them. <em>(OpenStax Biology 2e)</em></li>
+<li>Links between the molecules are labeled <strong>Cohesion</strong>.</li>
+<li>The link from a molecule to the xylem wall is labeled <strong>Adhesion</strong>.</li>
+<li>The dotted links are labeled <strong>Hydrogen bonds</strong>.</li>
+<li>Droplet picture: a <strong>water droplet</strong> sits on a flat surface.</li>
+<li>Two zoom circles show the molecules inside the drop up close.</li>
+<li>One circle is at the drop's edge. The other is in the middle.</li>
+<li>Arrows point from each molecule toward the molecules around it.</li>
 </ul>
 <blockquote>
-<p><strong>Analogy:</strong> Cohesion is classmates holding hands. Adhesion is a student holding the stair rail.</p>
-<p> See <strong><span class="slidelink" onclick="LB.open(4)">Slide 4</span></strong> — cartoon water molecules hold hands (cohesion) and grab ropes (adhesion).</p>
+<p> See <strong><span class="slidelink" onclick="LB.open(4)">Slide 4</span></strong> — cartoon molecules shake hands (cohesion) and grab ropes (adhesion).</p>
 </blockquote>
 <hr />
-<h2>4. Capillary action <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>4. Capillary action</h2>
 <p><strong>Capillary action is water rising up a thin tube.</strong></p>
+<p><strong>What it is:</strong></p>
 <ul>
-<li>It is caused by cohesion <strong>and</strong> adhesion working together.</li>
-<li>Adhesion pulls water up along the tube's walls.</li>
-<li>Cohesion pulls the rest of the water up behind it.</li>
-<li>The thinner the tube, the higher the water climbs.</li>
+<li>The slide calls it "the tendency of water to rise in a thin tube."</li>
+<li>It is caused by cohesion <strong>and</strong> adhesion.</li>
+<li><strong>Outside source:</strong> Adhesion pulls water up along the tube's walls. Cohesion pulls the rest of the water up behind it. A paper towel dipped in a spill soaks water upward this way. <em>(OpenStax Biology 2e)</em></li>
+</ul>
+<p><strong>In the pictures:</strong></p>
+<ul>
+<li>The drawing shows a thin <strong>capillary tube</strong> standing in a container of water.</li>
+<li>Its label says "water moves upward by capillary action."</li>
+<li>The water inside the tube is higher than the water outside.</li>
+<li>The curved top of the water in the tube is labeled <strong>meniscus</strong>.</li>
+<li>The photo shows glass tubes of different widths, joined at the bottom.</li>
+<li>The thinner the tube, the higher the blue water climbs.</li>
 </ul>
 <blockquote>
-<p> See <strong><span class="slidelink" onclick="LB.open(5)">Slide 5</span></strong> — water climbs inside a thin tube. Its curved top is called the <strong>meniscus</strong>. In the photo, the thinnest tube has the highest water.</p>
+<p> See <strong><span class="slidelink" onclick="LB.open(5)">Slide 5</span></strong> — water climbs inside a thin tube. In the photo, the thinnest tube has the highest water.</p>
 </blockquote>
 <hr />
-<h2>5. Surface tension <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>5. Surface tension</h2>
 <p><strong>Surface tension means the top of the water resists an outside force.</strong></p>
+<p><strong>What it is:</strong></p>
 <ul>
-<li>It is caused by cohesion <strong>only</strong>.</li>
-<li>A molecule deep in the water is pulled in all directions.</li>
-<li>A molecule at the surface is pulled inward.</li>
-<li>So the surface holds together like a stretchy skin.</li>
+<li>The slide says it is the "tendency of the surface of water to resist an external force."</li>
+<li><strong>Outside source:</strong> <strong>External</strong> means from outside. An external force is a push or pull from outside, like your finger poking the water. <em>(Merriam-Webster)</em></li>
+<li>It is caused by <strong>cohesion</strong>.</li>
+</ul>
+<p><strong>In the pictures:</strong></p>
+<ul>
+<li>The photo shows an insect standing on water without sinking.</li>
+<li>The droplet drawing labels the <strong>air</strong>, the <strong>water droplet</strong>, and the <strong>water molecules</strong>.</li>
+<li>A <strong>surface molecule is pulled inward</strong>.</li>
+<li>An <strong>inner molecule is pulled in all directions</strong>.</li>
+<li>The drawing says "Diagram not to scale." (The sizes are not real sizes.)</li>
+<li>The other drawing shows a ball pressing a dip into the water's surface.</li>
+<li>At the surface, cohesive pulls are <strong>stronger</strong>.</li>
+<li>That is because of an "imbalance of forces" there.</li>
+<li>Surface molecules get pulled more strongly into the <strong>bulk</strong>.</li>
+<li><strong>Outside source:</strong> The <strong>bulk</strong> is the main body of the water. In a pool, the bulk is all the water under the top layer. <em>(Merriam-Webster)</em></li>
+<li>In the bulk, cohesive pulls are <strong>weaker</strong>.</li>
+<li>That is because each molecule there feels pulls from all directions.</li>
 </ul>
 <blockquote>
-<p><strong>Analogy:</strong> A trampoline bends when you press on it, but it doesn't tear.</p>
-<p> See <strong><span class="slidelink" onclick="LB.open(6)">Slide 6</span></strong> — a water strider (an insect) stands on water without sinking.</p>
+<p> See <strong><span class="slidelink" onclick="LB.open(6)">Slide 6</span></strong> — an insect standing on the water, and molecules pulled inward at the surface.</p>
 </blockquote>
 <hr />
-<h2>6. Specific heat capacity <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>6. Specific heat capacity</h2>
 <p><strong>Water takes a lot of energy to heat up, so it warms slowly.</strong></p>
+<p><strong>What it is:</strong></p>
 <ul>
-<li><strong>Specific heat capacity</strong> is the energy needed to raise the temperature by 1°C.</li>
-<li>Water's specific heat is high. It soaks up heat without getting hot quickly.</li>
+<li><strong>Specific heat capacity</strong> is the amount of energy needed to raise the temperature of water by 1°C.</li>
+<li>Water absorbs heat without getting hot quickly.</li>
+</ul>
+<p><strong>Why it matters:</strong></p>
+<ul>
+<li>Water resists fast temperature change.</li>
 <li>This keeps climates and body temperatures steady.</li>
-<li>It helps living things keep <strong>homeostasis</strong> (a steady inside).</li>
+<li>It helps living things keep <strong>homeostasis</strong>.</li>
+<li><strong>Outside source:</strong> <strong>Homeostasis</strong> means keeping the inside of a living thing steady. Your body stays near the same temperature on hot and cold days. <em>(OpenStax Biology 2e)</em></li>
+</ul>
+<p><strong>Numbers on the slide:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Material</th>
+<th>Symbol</th>
+<th>Specific heat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Copper block</td>
+<td>Cu</td>
+<td>390 J/kg°C</td>
+</tr>
+<tr>
+<td>Aluminum block</td>
+<td>Al</td>
+<td>910 J/kg°C</td>
+</tr>
+<tr>
+<td>Water</td>
+<td>H₂O</td>
+<td>4200 J/kg°C</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Copper has the lowest number. Water has the highest.</li>
+<li>Water's number is more than 10 times copper's number.</li>
+<li><strong>Outside source:</strong> <strong>J/kg°C</strong> means joules per kilogram per degree Celsius. Each number is the joules needed to warm 1 kilogram by 1°C. It's like a price tag for warming things up. <em>(NIST)</em></li>
+<li><strong>Outside source:</strong> A <strong>joule (J)</strong> is a unit of energy. Lifting an apple one meter off a table takes about one joule. <em>(NIST)</em></li>
+<li><strong>Outside source:</strong> A <strong>kilogram (kg)</strong> is a unit of mass. A one-liter bottle of water has a mass of about one kilogram. <em>(NIST)</em></li>
+</ul>
+<p><strong>In the picture:</strong></p>
+<ul>
+<li>A green arrow runs from lower specific heat to higher specific heat.</li>
+<li><strong>Lower specific heat capacity:</strong> warms up and cools down quickly.</li>
+<li>That is because it takes much less energy to change its temperature.</li>
+<li><strong>Higher specific heat capacity:</strong> warms up and cools down slowly.</li>
+<li>That is because it takes much more energy to change its temperature.</li>
 </ul>
 <blockquote>
-<p><strong>Analogy:</strong> On a sunny day, a metal slide gets too hot to touch. The pool next to it stays cool.</p>
-<p> See <strong><span class="slidelink" onclick="LB.open(7)">Slide 7</span></strong> — copper and aluminum warm up fast. Water warms up slowly. <span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> Skip the exact numbers.</p>
+<p> See <strong><span class="slidelink" onclick="LB.open(7)">Slide 7</span></strong> — copper (390) and aluminum (910) warm up fast. Water (4200) warms up slowly.</p>
 </blockquote>
 <hr />
-<h2>7. Hydrophilic, hydrophobic, and amphipathic <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>7. Hydrophilic, hydrophobic, and amphipathic</h2>
 <p><strong>Some things mix with water, some don't, and some molecules do both.</strong></p>
+<p>The slide's title is "H2O Polarity Characteristics."</p>
 <table>
 <thead>
 <tr>
 <th>Word</th>
-<th>Plain meaning</th>
+<th>Slide's meaning</th>
 <th>Examples</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>Hydrophilic</strong></td>
-<td>Water-loving. Dissolves easily in water.</td>
+<td>"Water-loving." Dissolves easily in water.</td>
 <td>Salts, sugars</td>
 </tr>
 <tr>
 <td><strong>Hydrophobic</strong></td>
-<td>Water-fearing. Does not dissolve in water.</td>
+<td>"Water-fearing." Does not dissolve in water.</td>
 <td>Oils, fats</td>
 </tr>
 <tr>
 <td><strong>Amphipathic</strong></td>
-<td>Has a water-loving part and a water-fearing part.</td>
+<td>Has both hydrophilic and hydrophobic regions.</td>
 <td>Soap bubbles</td>
 </tr>
 </tbody>
 </table>
 <ul>
-<li>Amphipathic molecules can work with both water and <strong>lipids</strong> (fats and oils).</li>
-<li>They build <strong>cell membranes</strong>, the thin outer layer of a cell.</li>
+<li><strong>Outside source:</strong> To <strong>dissolve</strong> means to break apart and spread evenly through a liquid. Sugar stirred into tea dissolves and disappears. <em>(OpenStax Chemistry 2e)</em></li>
+</ul>
+<p><strong>More about amphipathic:</strong></p>
+<ul>
+<li>An amphipathic molecule has both hydrophilic and hydrophobic <strong>regions</strong> (parts).</li>
+<li>It allows formation of <strong>cell membranes</strong>.</li>
+<li><strong>Outside source:</strong> A <strong>cell membrane</strong> is the thin outer layer around a cell. It works like the skin of a grape. <em>(OpenStax Biology 2e)</em></li>
+<li>The slide calls cell membranes <strong>phospholipid bilayers</strong>.</li>
+<li><strong>Outside source:</strong> "Bi" means two, so a <strong>bilayer</strong> is two layers. A <em>bicycle</em> has two wheels. <em>(Merriam-Webster)</em></li>
+<li>It enables molecules to interact with both water and <strong>lipids</strong>.</li>
+<li><strong>Outside source:</strong> <strong>Lipids</strong> include fats and oils. Butter and cooking oil are lipids. <em>(OpenStax Biology 2e)</em></li>
+</ul>
+<p><strong>In the picture:</strong></p>
+<ul>
+<li>The picture is titled <strong>Phospholipid Structure</strong>.</li>
+<li>A <strong>phospholipid</strong> is the molecule in a phospholipid bilayer.</li>
+<li>The round blue top is labeled <strong>Hydrophilic head</strong>.</li>
+<li>The two wavy orange lines are labeled <strong>Hydrophobic tail</strong>.</li>
 </ul>
 <blockquote>
-<p> See <strong><span class="slidelink" onclick="LB.open(8)">Slide 8</span></strong> — a <strong>phospholipid</strong> has a water-loving head and water-fearing tails.</p>
+<p> See <strong><span class="slidelink" onclick="LB.open(8)">Slide 8</span></strong> — a phospholipid has a water-loving head and water-fearing tails.</p>
 </blockquote>
 <hr />
-<h2>8. Suspensions and emulsions <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>8. Suspensions and emulsions</h2>
 <p><strong>Suspensions and emulsions are two kinds of mixtures.</strong></p>
+<p>The slide's title is "Liquid Forms." It covers suspensions, emulsions, and density.</p>
+<p><strong>Suspension:</strong></p>
 <ul>
-<li><strong>Suspension:</strong> big bits are in water, but they do not dissolve.</li>
-<li>Examples: sand in water, or blood cells in <strong>plasma</strong> (the liquid part of blood) <em>(OpenStax Biology 2e)</em>.</li>
-<li><strong>Emulsion:</strong> two liquids that don't normally mix. One spreads out in the other.</li>
-<li>Examples: oil drops in water, or <strong>bile</strong> (a digestive juice) breaking up fats <em>(OpenStax Biology 2e)</em>.</li>
+<li>A mixture where large particles float in water but do not dissolve.</li>
+<li>Example: blood cells in plasma.</li>
+<li><strong>Outside source:</strong> <strong>Plasma</strong> is the liquid part of blood. It is mostly water. A bag of donated blood holds cells floating in plasma. <em>(OpenStax Biology 2e)</em></li>
+<li>Example: sand in water.</li>
+</ul>
+<p><strong>Emulsion:</strong></p>
+<ul>
+<li>A mixture of two liquids that don't normally mix.</li>
+<li>One liquid is <strong>dispersed</strong> (spread out in tiny bits) in the other.</li>
+<li>Example: oil droplets in water.</li>
+<li>Example: bile emulsifying fats.</li>
+<li><strong>Outside source:</strong> <strong>Bile</strong> is a digestive juice your body makes. <strong>Emulsifying</strong> means breaking fat into tiny drops that spread through water. Dish soap does this to grease on a pan. <em>(OpenStax Biology 2e)</em></li>
 </ul>
 <blockquote>
-<p><strong>Analogy:</strong> Shake a bottle of oil-and-vinegar dressing. The oil breaks into tiny drops. That's an emulsion.</p>
 <p> See <strong><span class="slidelink" onclick="LB.open(9)">Slide 9</span></strong> — the top half of the slide lists both mixtures with examples.</p>
 </blockquote>
 <hr />
-<h2>9. Density and why ice floats <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>9. Density and why ice floats</h2>
 <p><strong>Ice floats because it is less dense than liquid water.</strong></p>
+<p><strong>What it is:</strong></p>
 <ul>
 <li><strong>Density</strong> is mass per unit volume: <strong>D = m / V</strong>.</li>
-<li>Mass is how much matter something has. Volume is how much space it takes up.</li>
 <li>Water is most dense at <strong>4°C</strong>.</li>
 <li>Ice is less dense than liquid water, so it floats.</li>
+<li><strong>Outside source:</strong> <strong>Mass</strong> is how much matter something has. A bowling ball has more mass than a beach ball. <em>(OpenStax Chemistry 2e)</em></li>
+<li><strong>Outside source:</strong> <strong>Volume</strong> is how much space something takes up. A beach ball has more volume than a baseball. <em>(OpenStax Chemistry 2e)</em></li>
+</ul>
+<p><strong>In the picture:</strong></p>
+<ul>
+<li>The picture writes the formula as <strong>ρ = M / V</strong>.</li>
+<li>Arrows label <strong>density</strong> (ρ), <strong>mass</strong> (M), and <strong>Volume</strong> (V).</li>
+<li>So ρ = M / V means the same thing as D = m / V.</li>
+<li><strong>Outside source:</strong> <strong>ρ</strong> is the Greek letter "rho." Like π (pi) in math class, it is a Greek letter used as a symbol. <em>(OpenStax Chemistry 2e)</em></li>
 </ul>
 <blockquote>
-<p><strong>Why:</strong> Floating ice stays on top of a pond. The water below stays liquid, so fish can live through winter <em>(OpenStax Biology 2e)</em>.</p>
-<p> See <strong><span class="slidelink" onclick="LB.open(9)">Slide 9</span></strong> — the picture uses ρ ("rho") for density: ρ = M / V. It means the same as D = m / V.</p>
+<p> See <strong><span class="slidelink" onclick="LB.open(9)">Slide 9</span></strong> — the right picture labels each letter in ρ = M / V.</p>
 </blockquote>
 <hr />
 <h2>Quick review</h2>
 <ul>
 <li>Oxygen is partial negative. The hydrogens are partial positive.</li>
-<li>Hydrogen bonds pull water molecules toward each other.</li>
+<li>Water's bond angle is 104.45°. Each bond is 95.84 pm long.</li>
+<li>Water can be drawn as a geometric structure, a ball-and-stick model, or a space-filling model.</li>
+<li>Hydrogen bonds are between molecules. Polar covalent bonds are inside one molecule.</li>
+<li>Hydrogen bonds can involve nitrogen, oxygen, or fluorine.</li>
 <li>Cohesion = water to water. Adhesion = water to something else.</li>
-<li>Capillary action = cohesion + adhesion. Surface tension = cohesion only.</li>
-<li>Water heats up slowly, so it keeps temperatures steady.</li>
+<li>Capillary action = cohesion + adhesion. The thinnest tube has the highest water.</li>
+<li>Surface tension = cohesion. Surface molecules are pulled inward.</li>
+<li>Specific heat: copper 390, aluminum 910, water 4200 J/kg°C.</li>
+<li>Lower specific heat warms and cools quickly. Higher warms and cools slowly.</li>
 <li>Hydrophilic dissolves. Hydrophobic doesn't. Amphipathic has both parts.</li>
+<li>A phospholipid has a hydrophilic head and a hydrophobic tail.</li>
 <li>A suspension has bits that don't dissolve. An emulsion has liquids that don't mix.</li>
+<li>Density = mass ÷ volume (D = m / V, or ρ = M / V).</li>
 <li>Water is densest at 4°C, and ice floats.</li>
 </ul>
 <hr />
-<h2>Exam scope</h2>
-<p>Your teacher did not give a test list for this lesson. The <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span> items are the core ideas from the slides. The <span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> items are extra details you don't need to memorize.</p>
-<ul>
-<li><span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> The angle and length numbers on the <span class="slidelink" onclick="LB.open(2)">Slide 2</span> picture</li>
-<li><span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> The three model names on <span class="slidelink" onclick="LB.open(2)">Slide 2</span>, like "ball and stick"</li>
-<li><span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> The exact heat numbers for copper, aluminum, and water on <span class="slidelink" onclick="LB.open(7)">Slide 7</span></li>
-<li><span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> The waterfall and cartoon drop on <span class="slidelink" onclick="LB.open(1)">Slide 1</span></li>
-</ul></script>
+<h2>What to study</h2>
+<p>Your teacher hasn't shared a test list for this lesson, so study everything here.</p></script>
 <script type="text/html" id="doc-transcript"><h1>Source Notes — 2.2 Properties of Water</h1>
 <p>There is no recording for this lesson. Everything here comes from your teacher's 9 slides and the pictures on them. The slides have no speaker notes and no discussion questions.</p>
 <h2>Small typos on the slides</h2>
@@ -1537,8 +1795,8 @@ function printCheat(){
 <tbody>
 <tr>
 <td>"H2O"</td>
-<td>H₂O (the 2 sits low)</td>
-<td>2, 8</td>
+<td>H₂O (the 2 sits low, as in the <span class="slidelink" onclick="LB.open(2)">Slide 2</span> title)</td>
+<td>8</td>
 </tr>
 <tr>
 <td>"attraction to different substance"</td>
@@ -1546,19 +1804,29 @@ function printCheat(){
 <td>4</td>
 </tr>
 <tr>
+<td>"temparature" (in the picture)</td>
+<td>temperature</td>
+<td>7</td>
+</tr>
+<tr>
+<td>"Hydrophobic tail" (two tails drawn)</td>
+<td>The picture draws two wavy tails.</td>
+<td>8</td>
+</tr>
+<tr>
 <td>"D = m / V" and "ρ = M / V"</td>
-<td>Same formula. D and ρ both mean density.</td>
+<td>Same formula. The picture labels ρ as density.</td>
 <td>9</td>
 </tr>
 </tbody>
 </table>
 <h2>A few slide lines made clearer</h2>
 <ul>
-<li><strong>Specific heat capacity (<span class="slidelink" onclick="LB.open(7)">Slide 7</span>).</strong> The slide says "of water." But every substance has a specific heat, and water's is high <em>(OpenStax Biology 2e)</em>.</li>
-<li><strong>"Ad" = between (<span class="slidelink" onclick="LB.open(4)">Slide 4</span>).</strong> The prefix "ad" really means "to," so adhesion is water sticking <strong>to</strong> something else <em>(Merriam-Webster)</em>.</li>
-<li><strong>Suspensions "float" (<span class="slidelink" onclick="LB.open(9)">Slide 9</span>).</strong> Big bits like sand don't dissolve, and if you wait, they sink to the bottom <em>(OpenStax Chemistry 2e)</em>.</li>
-</ul>
-<p>None of this changes what you need to learn.</p></script>
+<li><strong>Specific heat capacity (<span class="slidelink" onclick="LB.open(7)">Slide 7</span>).</strong> The definition says "of water." But the picture also gives specific heats for copper and aluminum. So other materials have one too.</li>
+<li><strong>Units on <span class="slidelink" onclick="LB.open(7)">Slide 7</span>.</strong> <strong>Outside source:</strong> "/kg" means the numbers are for 1 kilogram of each material. A one-liter bottle of water is about one kilogram. <em>(NIST)</em></li>
+<li><strong>"Ad" = between (<span class="slidelink" onclick="LB.open(4)">Slide 4</span>).</strong> <strong>Outside source:</strong> In dictionaries, the prefix "ad" means "to." So adhesion is water sticking <strong>to</strong> something else. Tape <em>adheres</em>, or sticks, to paper. <em>(Merriam-Webster)</em></li>
+<li><strong>"Imbalance of forces" (<span class="slidelink" onclick="LB.open(6)">Slide 6</span>).</strong> The picture shows inner molecules pulled in all directions. Surface molecules are pulled inward. <strong>Outside source:</strong> Surface molecules have no water above them, so the pulls are uneven. Think of people at a crowd's edge, pulled only toward the middle. <em>(OpenStax Chemistry 2e)</em></li>
+</ul></script>
 <script>
 /* ---------- READ tab: render embedded docs ---------- */
 const CO_META={
@@ -1802,7 +2070,7 @@ const PAL_PAGES=[
   {title:'Progress',ic:'trend',v:'progress'}
 ];
 const PAL_ACTIONS=[
-  {title:'Print 1-page cheat sheet',ic:'printer',fn:()=>printCheat()},
+  {title:'View cheat sheet',ic:'doc',fn:()=>printCheat()},
   {title:'Print this section',ic:'printer',fn:()=>printView()},
   {title:'Listen to the summary',ic:'volume',fn:()=>{goView('overview');toggleSummary();}},
   {title:'Open settings',ic:'gear',fn:()=>openModal('settingsModal')},

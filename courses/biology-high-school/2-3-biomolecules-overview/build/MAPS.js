@@ -1,11 +1,11 @@
 const MAPS = [
  {title:"1 · The four biomolecules", html:`<div class="flow">
-   <div class="frow">${n(C['carbon'].color,"Macromolecules","big molecules made of monomers")}</div>
+   <div class="frow">${n(C['carbon'].color,"Macromolecules","monomers + monomers = polymer")}</div>
    ${down('four groups')}
    <div class="frow" style="align-items:flex-start;gap:14px">
      ${n(C['lipids'].color,"Lipids","fatty acids & glycerol · long-term energy")}
      ${n(C['carbs'].color,"Carbohydrates","monosaccharides · short-term energy")}
-     ${n(C['proteins'].color,"Proteins","amino acids · structure, enzymes")}
+     ${n(C['proteins'].color,"Proteins","amino acids · structural support, enzymes")}
      ${n(C['nucleic'].color,"Nucleic acids","nucleotides · genetic information")}
    </div>
  </div>`},

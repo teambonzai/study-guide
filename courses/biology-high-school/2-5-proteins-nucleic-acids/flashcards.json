@@ -1,145 +1,275 @@
 {
- "meta": {
-  "course": "Biology (high school)",
-  "lecture": "Unit Two: Biomolecules — 2.5 Proteins & Nucleic Acids",
-  "source": "Teacher’s PowerPoint (14 slides, with speaker notes). No recording exists for this lesson.",
-  "note": "All cards are drawn from the slide deck and speaker notes. Import into Anki/Quizlet as Q/A pairs.",
-  "topics": [
-   "proteins",
-   "levels",
-   "primary",
-   "secondary",
-   "tertiary",
-   "quaternary",
-   "nucleic",
-   "dna"
+  "meta": {
+    "course": "Biology (high school)",
+    "lecture": "Unit Two: Biomolecules — 2.5 Proteins & Nucleic Acids",
+    "source": "Teacher’s PowerPoint (14 slides, with speaker notes). No recording exists for this lesson.",
+    "note": "All cards are drawn from the slide deck and speaker notes. Import into Anki/Quizlet as Q/A pairs.",
+    "topics": [
+      "proteins",
+      "levels",
+      "primary",
+      "secondary",
+      "tertiary",
+      "quaternary",
+      "nucleic",
+      "dna"
+    ]
+  },
+  "cards": [
+    {
+      "t": "proteins",
+      "q": "What four jobs of proteins are on Slide 2?",
+      "a": "Regulate, transport, structure, control reaction rates."
+    },
+    {
+      "t": "proteins",
+      "q": "What are proteins that control reaction rates called?",
+      "a": "Enzymes."
+    },
+    {
+      "t": "proteins",
+      "q": "What does STRUCTURE = FUNCTION mean?",
+      "a": "Shape decides a protein's job."
+    },
+    {
+      "t": "proteins",
+      "q": "What is the monomer (building block) of proteins?",
+      "a": "Amino acids."
+    },
+    {
+      "t": "proteins",
+      "q": "About how many different amino acids are there?",
+      "a": "About 20."
+    },
+    {
+      "t": "proteins",
+      "q": "What are the three parts of an amino acid?",
+      "a": "Amino group, carboxyl group, side chain."
+    },
+    {
+      "t": "proteins",
+      "q": "Which part is different in each amino acid?",
+      "a": "The side chain (R-group)."
+    },
+    {
+      "t": "proteins",
+      "q": "What three groups does the amino acid chart show?",
+      "a": "Nonpolar, polar, electrically charged."
+    },
+    {
+      "t": "proteins",
+      "q": "What two groups are charged side chains split into?",
+      "a": "Acidic and basic."
+    },
+    {
+      "t": "proteins",
+      "q": "About how many amino acids are in a peptide?",
+      "a": "About 2 to 50."
+    },
+    {
+      "t": "proteins",
+      "q": "About how many amino acids are in a polypeptide?",
+      "a": "About 51 or more."
+    },
+    {
+      "t": "proteins",
+      "q": "How many polypeptides make up a protein?",
+      "a": "1 or more."
+    },
+    {
+      "t": "levels",
+      "q": "What are the four levels of protein structure, in order?",
+      "a": "Primary, secondary, tertiary, quaternary."
+    },
+    {
+      "t": "levels",
+      "q": "Which three levels does every protein have?",
+      "a": "Primary, secondary, tertiary."
+    },
+    {
+      "t": "levels",
+      "q": "In the writing analogy, what matches the four levels?",
+      "a": "Letters, words, sentences, paragraphs."
+    },
+    {
+      "t": "primary",
+      "q": "What is primary structure?",
+      "a": "The order of amino acids."
+    },
+    {
+      "t": "primary",
+      "q": "What bond joins amino acids in a chain?",
+      "a": "Peptide bonds."
+    },
+    {
+      "t": "primary",
+      "q": "What kind of bond is a peptide bond?",
+      "a": "Covalent."
+    },
+    {
+      "t": "primary",
+      "q": "What process makes a peptide bond?",
+      "a": "Dehydration synthesis."
+    },
+    {
+      "t": "primary",
+      "q": "What are the two ends of a protein chain called?",
+      "a": "N-terminus and C-terminus."
+    },
+    {
+      "t": "primary",
+      "q": "What sets the order of amino acids in a protein?",
+      "a": "The DNA of a gene."
+    },
+    {
+      "t": "primary",
+      "q": "What can happen if just one amino acid changes?",
+      "a": "The shape and job can change."
+    },
+    {
+      "t": "secondary",
+      "q": "What are the two most common secondary shapes?",
+      "a": "Alpha helix and beta pleated sheet."
+    },
+    {
+      "t": "secondary",
+      "q": "What causes secondary structure?",
+      "a": "Hydrogen bonds."
+    },
+    {
+      "t": "secondary",
+      "q": "What is the backbone of a protein chain?",
+      "a": "The chain without the R-groups."
+    },
+    {
+      "t": "secondary",
+      "q": "In secondary structure, a hydrogen bond links which two atoms?",
+      "a": "Carbonyl O and amino H."
+    },
+    {
+      "t": "tertiary",
+      "q": "What is tertiary structure?",
+      "a": "One chain's whole 3D shape."
+    },
+    {
+      "t": "tertiary",
+      "q": "Tertiary structure is due to interactions between which parts?",
+      "a": "Amino acid side chains."
+    },
+    {
+      "t": "tertiary",
+      "q": "What four side-chain interactions are on Slide 6?",
+      "a": "Ionic bond, hydrogen bond, disulfide bridge, hydrophobic interaction."
+    },
+    {
+      "t": "tertiary",
+      "q": "When a chain folds in water, where do nonpolar amino acids go?",
+      "a": "To the center."
+    },
+    {
+      "t": "tertiary",
+      "q": "When a chain folds in water, where do polar amino acids go?",
+      "a": "To the outside."
+    },
+    {
+      "t": "tertiary",
+      "q": "On Slide 8, what is the blue layer around the chain labeled?",
+      "a": "Hydration layer."
+    },
+    {
+      "t": "quaternary",
+      "q": "What is quaternary structure?",
+      "a": "2 or more subunits together."
+    },
+    {
+      "t": "quaternary",
+      "q": "Do all proteins have quaternary structure?",
+      "a": "No. Only proteins with 2+ chains."
+    },
+    {
+      "t": "quaternary",
+      "q": "What is a dimer with 2 matching subunits called?",
+      "a": "Homodimer."
+    },
+    {
+      "t": "quaternary",
+      "q": "What is the trimer example on Slide 9?",
+      "a": "Collagen."
+    },
+    {
+      "t": "quaternary",
+      "q": "What is the tetramer example on Slide 9?",
+      "a": "Hemoglobin."
+    },
+    {
+      "t": "nucleic",
+      "q": "What are the two jobs of nucleic acids?",
+      "a": "Store hereditary info; encode proteins."
+    },
+    {
+      "t": "nucleic",
+      "q": "What is the monomer (building block) of nucleic acids?",
+      "a": "Nucleotides."
+    },
+    {
+      "t": "nucleic",
+      "q": "What are the 3 parts of a nucleotide?",
+      "a": "5-carbon sugar, phosphate group, nitrogenous base."
+    },
+    {
+      "t": "nucleic",
+      "q": "What are the four bases in DNA?",
+      "a": "A, T, C, G."
+    },
+    {
+      "t": "nucleic",
+      "q": "Which base is in RNA but not in DNA?",
+      "a": "Uracil (U)."
+    },
+    {
+      "t": "nucleic",
+      "q": "Which bases are labeled purines on Slide 11?",
+      "a": "Adenine and guanine."
+    },
+    {
+      "t": "nucleic",
+      "q": "Which bases are labeled pyrimidines on Slide 11?",
+      "a": "Cytosine and thymine (in DNA)."
+    },
+    {
+      "t": "nucleic",
+      "q": "Which sugar is in RNA?",
+      "a": "Ribose."
+    },
+    {
+      "t": "dna",
+      "q": "What is the shape of DNA called?",
+      "a": "Double helix."
+    },
+    {
+      "t": "dna",
+      "q": "What is on the outside of the DNA helix?",
+      "a": "The sugar-phosphate backbone."
+    },
+    {
+      "t": "dna",
+      "q": "Which bases pair up in DNA?",
+      "a": "A with T, C with G."
+    },
+    {
+      "t": "dna",
+      "q": "What holds DNA base pairs together?",
+      "a": "Hydrogen bonds."
+    },
+    {
+      "t": "dna",
+      "q": "What does antiparallel mean for DNA?",
+      "a": "Strands run in opposite directions."
+    },
+    {
+      "t": "dna",
+      "q": "How many strands do DNA and RNA have?",
+      "a": "DNA two; RNA one."
+    }
   ]
- },
- "cards": [
-  {
-   "t": "proteins",
-   "q": "What is the monomer (building block) of proteins?",
-   "a": "Amino acids."
-  },
-  {
-   "t": "proteins",
-   "q": "Which part is different in each amino acid?",
-   "a": "The side chain (R-group)."
-  },
-  {
-   "t": "proteins",
-   "q": "What do we call proteins that control reaction rates?",
-   "a": "Enzymes."
-  },
-  {
-   "t": "proteins",
-   "q": "What does STRUCTURE = FUNCTION mean?",
-   "a": "Shape decides a protein's job."
-  },
-  {
-   "t": "proteins",
-   "q": "About how many amino acids are in a peptide?",
-   "a": "About 2 to 50."
-  },
-  {
-   "t": "proteins",
-   "q": "About how many amino acids are in a polypeptide?",
-   "a": "About 51 or more."
-  },
-  {
-   "t": "levels",
-   "q": "Primary, secondary, tertiary... what is the fourth level?",
-   "a": "Quaternary."
-  },
-  {
-   "t": "levels",
-   "q": "Which three levels does every protein have?",
-   "a": "Primary, secondary, tertiary."
-  },
-  {
-   "t": "levels",
-   "q": "In the writing analogy, what matches primary structure?",
-   "a": "Letters."
-  },
-  {
-   "t": "levels",
-   "q": "In the writing analogy, what matches tertiary structure?",
-   "a": "Sentences."
-  },
-  {
-   "t": "primary",
-   "q": "What is primary structure?",
-   "a": "The order of amino acids."
-  },
-  {
-   "t": "primary",
-   "q": "What bond joins amino acids in a chain?",
-   "a": "Peptide bonds."
-  },
-  {
-   "t": "primary",
-   "q": "What process makes a peptide bond?",
-   "a": "Dehydration synthesis."
-  },
-  {
-   "t": "primary",
-   "q": "What sets the order of amino acids in a protein?",
-   "a": "The DNA of a gene."
-  },
-  {
-   "t": "secondary",
-   "q": "What are the two common secondary shapes?",
-   "a": "Alpha helix and beta pleated sheet."
-  },
-  {
-   "t": "secondary",
-   "q": "What bonds hold secondary structure in shape?",
-   "a": "Hydrogen bonds."
-  },
-  {
-   "t": "tertiary",
-   "q": "What is tertiary structure?",
-   "a": "One chain's whole 3D shape."
-  },
-  {
-   "t": "tertiary",
-   "q": "When a chain folds in water, where do nonpolar amino acids go?",
-   "a": "To the center."
-  },
-  {
-   "t": "quaternary",
-   "q": "Do all proteins have quaternary structure?",
-   "a": "No. Only proteins with 2+ chains."
-  },
-  {
-   "t": "nucleic",
-   "q": "What is the monomer (building block) of nucleic acids?",
-   "a": "Nucleotides."
-  },
-  {
-   "t": "nucleic",
-   "q": "What are the 3 parts of a nucleotide?",
-   "a": "Sugar, phosphate group, base."
-  },
-  {
-   "t": "nucleic",
-   "q": "Which base is in RNA but not in DNA?",
-   "a": "Uracil (U)."
-  },
-  {
-   "t": "dna",
-   "q": "Which bases pair up in DNA?",
-   "a": "A with T, C with G."
-  },
-  {
-   "t": "dna",
-   "q": "What holds DNA base pairs together?",
-   "a": "Hydrogen bonds."
-  },
-  {
-   "t": "dna",
-   "q": "What does antiparallel mean for DNA?",
-   "a": "Strands run in opposite directions."
-  }
- ]
 }

@@ -328,6 +328,8 @@
     #lightbox img{max-height:58vh}
     #lightbox .lcap{font-size:13px;margin-top:8px}
   }
+  .modal .sheet.cheat{max-width:900px;height:88vh;display:flex;flex-direction:column}
+  #cheatFrame{flex:1;width:100%;border:0;border-radius:10px;background:#fff;margin-top:10px}
 </style>
 <style>/* Macy's profile theme: violet instead of teal */
   :root{--bg:#f7f5fc;--panel2:#f0ecfa;--ink:#1e1b2e;--muted:#645d78;--line:#e9e5f3;--accent:#7c3aed;--accent2:#6d28d9;--chip:#f1eafe}
@@ -365,10 +367,10 @@
 <!-- OVERVIEW -->
 <section class="view active" id="overview">
   <div class="card">
-    <h2><span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span>On the test</h2>
+    <h2><svg class="i"><use href="#i-list"/></svg>Topics in this lesson</h2>
     <div id="testChips"></div>
-    <h3><span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> Extra details</h3>
-    <p class="small muted">Good news: you don't need to memorize these.</p><ul class="small muted"><li>Activation energy on the energy graphs (a later unit)</li><li>Partner talk and BONUS questions</li><li>Food and animal photos</li><li>Exact molecule drawings in the pictures</li></ul>
+    <h3><svg class="i"><use href="#i-quote"/></svg> From your teacher</h3>
+    <p class="small muted">Your teacher's note on Slide 7: “We will talk more about the ‘activation energy’ concept in a future unit, for now we are just focusing on the exo/endo thermic ideas (energy releasing/absorbing)” Your teacher hasn't shared any other test list for this lesson, so study every topic.</p>
   </div>
 
   <div class="card">
@@ -382,7 +384,7 @@
   <div class="card">
     <h2><svg class="i"><use href="#i-book"/></svg>Study tools</h2>
     <div class="row">
-      <button class="btn primary" onclick="printCheat()"><svg class="i"><use href="#i-printer"/></svg>Print 1-page cheat sheet</button>
+      <button class="btn primary" onclick="printCheat()"><svg class="i"><use href="#i-doc"/></svg>View cheat sheet</button>
       <button class="btn" id="listenBtn" onclick="toggleSummary()"><svg class="i"><use href="#i-volume"/></svg>Listen to summary</button>
     </div>
     <p class="small muted" style="margin-top:12px">The full outline, study guide, and source notes are in the <b>Read</b> tab.</p>
@@ -507,12 +509,12 @@
 <section class="view" id="diagrams">
   <div class="card">
     <h2><svg class="i"><use href="#i-image"/></svg>Slide gallery</h2>
-    <p class="small muted">Captions are the slide's own text plus a plain-language note. Colored notes explain key pictures. Click to enlarge. <span class="pill" style="background:#fef3c7;color:#b45309"><svg class="i"><use href="#i-star"/></svg>key image</span> marks the deck's most important diagrams and tables.</p>
+    <p class="small muted">Captions are the slide's own text plus a plain-language note. Colored notes explain the pictures. Click to enlarge.</p>
     <input class="search" id="slideSearch" placeholder="Search slides (ATP, lipids, water)" style="width:100%;margin:18px 0 0">
     <div class="toolbar slide-controls" id="slideGroups" style="margin:16px 0 8px;align-items:center"></div>
     <div id="deckBreak" style="display:none;margin-top:12px">
       <table>
-        <tr><td><b>Slides 1–7</b></td><td>Monomers and carbon · energy · chemical reactions · exothermic and endothermic</td></tr><tr><td><b>Slides 8–13</b></td><td>Building and breaking molecules · ATP</td></tr><tr><td><b>Slides 14–21</b></td><td>Lipids · carbohydrates</td></tr><tr><td><b>Slides 22–29</b></td><td>Proteins · nucleic acids</td></tr>
+        <tr><td><b>Slides 1–7</b></td><td>Monomers and carbon · energy and its laws · chemical reactions · exothermic and endothermic · potential energy diagrams and activation energy</td></tr><tr><td><b>Slides 8–13</b></td><td>Building and breaking molecules · ATP</td></tr><tr><td><b>Slides 14–21</b></td><td>Lipids · carbohydrates · class discussion</td></tr><tr><td><b>Slides 22–29</b></td><td>Proteins · nucleic acids · class discussion</td></tr>
       </table>
     </div>
     <div class="gallery" id="gallery"></div>
@@ -559,6 +561,12 @@
 <button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg class="i"><use href="#i-up"/></svg></button>
 
 <!-- Settings modal -->
+<div class="modal" id="cheatModal" onclick="if(event.target===this)closeModal('cheatModal')">
+  <div class="sheet cheat">
+    <div class="modal-head"><h2><svg class="i"><use href="#i-doc"/></svg>Cheat sheet</h2><div class="spacer"></div><button class="btn" onclick="printCheatFrame()"><svg class="i"><use href="#i-printer"/></svg>Print</button><button class="iconbtn mh-x" onclick="closeModal('cheatModal')"><svg class="i"><use href="#i-x"/></svg></button></div>
+    <iframe id="cheatFrame" title="Cheat sheet"></iframe>
+  </div>
+</div>
 <div class="modal" id="settingsModal" onclick="if(event.target===this)closeModal('settingsModal')">
   <div class="sheet">
     <div class="modal-head"><h2><svg class="i"><use href="#i-gear"/></svg>Settings</h2><button class="iconbtn mh-x" onclick="closeModal('settingsModal')"><svg class="i"><use href="#i-x"/></svg></button></div>
@@ -704,49 +712,74 @@ const TOPICS = {
 };
 
 const CARDS = [
- ["carbon","Many monomers joined together make a…?","A polymer"],
+ ["carbon","What do many monomers joined together make?","A polymer"],
  ["carbon","How many valence electrons does carbon have?","Four"],
  ["carbon","What does organic mean?","It contains carbon"],
  ["energy","What is energy?","Ability to change or move matter"],
- ["energy","What does the 1st law say about energy?","It can't be created or destroyed"],
- ["energy","What is entropy?","Disorder"],
- ["reactions","What happens to bonds in a chemical reaction?","They break or form"],
- ["reactions","What does a coefficient tell you?","How many you need"],
+ ["energy","What two kinds of energy are on the Slide 3 chart?","Potential and kinetic"],
+ ["energy","Chemical, nuclear, elastic: potential or kinetic?","Potential"],
+ ["energy","Light, sound, wind: potential or kinetic?","Kinetic"],
+ ["energy","What does the 1st law say about energy?","Can't destroy or create it"],
+ ["energy","What does the 2nd law say?","Entropy always increases"],
+ ["energy","When the cannonball lands, its energy turns into what?","Heat"],
+ ["reactions","What happens to bonds in a chemical reaction?","They break and/or form"],
+ ["reactions","Is melting ice a chemical change?","No, it's still water"],
+ ["reactions","What does a coefficient tell you?","How many of that substance"],
+ ["reactions","What does (aq) mean?","Aqueous (dissolved)"],
  ["exoendo","What does an exothermic reaction do with heat?","Releases it"],
  ["exoendo","What does an endothermic reaction do with heat?","Absorbs it"],
- ["buildbreak","What is anabolism?","Building big molecules (uses energy)"],
- ["buildbreak","What is catabolism?","Breaking big molecules (releases energy)"],
- ["atp","What is ATP's nickname?","Energy currency of the cell"],
- ["atp","ATP + water makes what?","ADP + Pi + energy"],
- ["lipids","What are the building blocks of lipids?","Fatty acids and glycerol"],
- ["carbs","What are the building blocks of carbohydrates?","Monosaccharides"],
- ["proteins","What are the building blocks of proteins?","Amino acids"],
- ["nucleic","What are the building blocks of nucleic acids?","Nucleotides"],
- ["reactions","Is melting ice a chemical change?","No. It's still H₂O."],
+ ["exoendo","Which kind can happen on its own?","Exothermic"],
  ["exoendo","Products end lower than reactants. Which type of reaction?","Exothermic"],
- ["buildbreak","Which one adds water: dehydration synthesis or hydrolysis?","Hydrolysis"],
- ["lipids","Which stores long-term energy: lipids or carbs?","Lipids (9 kcal per gram)"],
- ["carbs","Which word ending marks a carbohydrate?","-ose"],
+ ["exoendo","What does the blue arrow on the Slide 7 graphs show?","Activation energy"],
+ ["buildbreak","What is anabolism?","Building large molecules (uses energy)"],
+ ["buildbreak","What is catabolism?","Breaking large molecules (releases energy)"],
+ ["buildbreak","What is dehydration synthesis?","Building molecules by losing water"],
+ ["buildbreak","What is hydrolysis?","Splitting a compound by adding water"],
+ ["atp","What does ATP stand for?","Adenosine triphosphate"],
+ ["atp","What are ATP's three parts?","Three phosphates, ribose, adenine"],
+ ["atp","ATP + water makes what?","ADP + Pi + energy"],
+ ["atp","In the ATP cycle, what is the dead battery?","ADP + Pi"],
+ ["lipids","What are the building blocks of lipids?","Fatty acids and glycerol"],
+ ["lipids","How many kcal per gram: lipids vs. carbs?","Lipids 9, carbs 4"],
+ ["lipids","What is a triglyceride made of?","Glycerol + three fatty acids"],
+ ["lipids","What three lipid types are in the Slide 14 picture?","Phospholipid, triglyceride, cholesterol"],
+ ["carbs","What are the building blocks of carbohydrates?","Monosaccharides"],
+ ["carbs","Which suffix identifies a carbohydrate?","-ose"],
+ ["carbs","What is drawn as two rings joined together?","A disaccharide"],
+ ["carbs","What does glucose get converted to?","ATP (energy)"],
+ ["proteins","What are the building blocks of proteins?","Amino acids"],
+ ["proteins","What are the three labeled groups on an amino acid?","Amine, carboxyl, variable (R)"],
  ["proteins","Which biomolecule forms enzymes?","Proteins"],
- ["nucleic","Which biomolecule contains phosphorus (CHONP)?","Nucleic acids"]
+ ["proteins","Which digestive enzyme on Slide 24 is for oil?","Lipase"],
+ ["nucleic","What are the building blocks of nucleic acids?","Nucleotides"],
+ ["nucleic","What are the three parts of a nucleotide?","Phosphate, sugar, base"],
+ ["nucleic","What sugar is in DNA?","Deoxyribose"],
+ ["nucleic","Which base is in RNA but not DNA?","Uracil"],
+ ["nucleic","How many strands: DNA vs. RNA?","DNA two, RNA usually one"],
+ ["nucleic","What is RNA involved with?","Protein synthesis"]
 ].map((c,i)=>({id:i,t:c[0],q:c[1],a:c[2]}));
 
 const QUIZ = [
- ["What do many monomers joined together make?",["Polymer","Atom","Reactant","Enzyme"],0,"carbon"],
- ["What makes a molecule organic?",["Contains carbon","Contains water","Is a gas","Is dissolved"],0,"carbon"],
- ["What does the 1st law say about energy?",["Can't be created or destroyed","Disappears over time","Is made by cells","Never changes form"],0,"energy"],
- ["What does the 2nd law say entropy always does?",["Increases","Turns into heat","Makes new atoms"],0,"energy"],
- ["Which one is a chemical change?",["Splitting water into hydrogen and oxygen gas","Ice melting","Water boiling","Cutting paper"],0,"reactions"],
- ["In 2 H₂ + O₂ → 2 H₂O, what is the 2 in front of H₂ called?",["Coefficient","Product","State letter"],0,"reactions"],
- ["What does an exothermic reaction do?",["Releases heat","Builds a polymer","Stores genetic information"],0,"exoendo"],
- ["On an energy diagram, products end higher than reactants. What kind of reaction is it?",["Endothermic","Exothermic","A physical change"],0,"exoendo"],
- ["What does anabolism do?",["Builds big molecules and uses energy","Stores genetic information","Melts solids into liquids"],0,"buildbreak"],
+ ["What do many monomers joined together make?",["Polymer","Enzyme","Nucleotide","Reactant"],0,"carbon"],
+ ["What makes a molecule organic?",["It contains carbon","It contains water","It is a gas","It is dissolved"],0,"carbon"],
+ ["What does the 1st law of thermodynamics say?",["You can't destroy or create energy","Molecules lose water when they join","Carbon has four valence electrons"],0,"energy"],
+ ["Which is a kind of kinetic energy on the Slide 3 chart?",["Sound","Nuclear","Gravitational","Elastic"],0,"energy"],
+ ["Which one is a chemical change?",["Breaking water into hydrogen and oxygen gas","Ice melting","Water boiling","Cutting something into pieces"],0,"reactions"],
+ ["In 2 H₂ + O₂ → 2 H₂O, what is the 2 in front of H₂ called?",["Coefficient","Product","Letter in parentheses"],0,"reactions"],
+ ["Which reaction can happen on its own, without energy put in?",["Exothermic","Melting ice","Dehydration synthesis"],0,"exoendo"],
+ ["On an energy diagram, products end higher than reactants. What kind of reaction is it?",["Endothermic","A physical change","Hydrolysis"],0,"exoendo"],
+ ["What does the blue arrow on the Slide 7 graphs show?",["Activation energy","The products","The reaction progress axis"],0,"exoendo"],
+ ["What does catabolism do?",["Breaks large molecules and releases energy","Stores genetic information","Melts solids into liquids"],0,"buildbreak"],
  ["What is breaking starch into glucose by adding water called?",["Hydrolysis","Dehydration synthesis","Melting"],0,"buildbreak"],
- ["What is ATP called?",["Energy currency of the cell","Building block of fats","Cell membrane"],0,"atp"],
+ ["What does ATP stand for?",["Adenosine triphosphate","Amino acid chain","Carboxyl group"],0,"atp"],
+ ["When water splits ATP into ADP and Pi, what else is released?",["Energy","Glucose","Oxygen gas"],0,"atp"],
+ ["What is a triglyceride made of?",["Glycerol and three fatty acids","Amino acids","Nucleotides"],0,"lipids"],
  ["Which biomolecule stores long-term energy at 9 kcal per gram?",["Lipids","Carbohydrates","Proteins","Nucleic acids"],0,"lipids"],
- ["Monosaccharides are the building blocks of which biomolecule?",["Carbohydrates","Proteins","Lipids","Nucleic acids"],0,"carbs"],
- ["Which biomolecule is made of CHON(S)?",["Proteins","Lipids","Carbohydrates","Nucleic acids"],0,"proteins"],
- ["What does DNA do?",["Stores genetic information","Stores fat","Forms cell walls"],0,"nucleic"]
+ ["What is drawn as many rings joined in a branching chain?",["Polysaccharide","Phospholipid","Amino acid"],0,"carbs"],
+ ["Which group on the Slide 22 amino acid is labeled R?",["The variable group","The amine group","The carboxyl group"],0,"proteins"],
+ ["On the Slide 24 chart, which digestive enzyme is for oil?",["Lipase","Pepsin","Amylase"],0,"proteins"],
+ ["Which base is found in RNA but not in DNA?",["Uracil","Adenine","Glucose"],0,"nucleic"],
+ ["What sugar is in DNA?",["Deoxyribose","Glucose","Glycerol"],0,"nucleic"]
 ].map((x,i)=>({id:i,q:x[0],opts:x[1],correct:x[2],t:x[3]}));
 
 const SCENARIOS = [
@@ -763,67 +796,161 @@ const SCENARIOS = [
   ["Hydrolysis","Dehydration synthesis","Anabolism"],0,
   "Hydrolysis splits molecules by adding water. Starch into glucose is the example from the notes.","buildbreak"],
  ["You sprint to catch the bus, and your muscles need energy fast. Which reaction releases it?",
-  ["ATP breaking into ADP + Pi","ADP + Pi joining back into ATP","Water freezing into ice"],0,
-  "Breaking ATP releases energy, like using a charged battery. Rebuilding ATP takes energy.","atp"]
+  ["ATP breaking into ADP + Pi","Glucose joining into starch","Water freezing into ice"],0,
+  "Breaking ATP releases energy, like using a charged battery.","atp"],
+ ["You make a fruit salad with strawberries. Does it contain nucleic acids?",
+  ["Yes, strawberries are made of living cells","No, only meat has DNA","No, fruit only has carbs"],0,
+  "Nucleic acids are in any living cells. That includes plants, meats, and mushrooms.","nucleic"]
 ].map((x,i)=>({id:i,q:x[0],opts:x[1],correct:x[2],rat:x[3],t:x[4]}));
 
-const GLOSS_CATS={mol:"Molecules & carbon",energy:"Energy & reactions",build:"Building, breaking & ATP",bio:"The four biomolecules"};
+const GLOSS_CATS={mol:"Molecules & carbon",energy:"Energy",react:"Reactions & energy graphs",build:"Building & breaking",atp:"ATP",lipid:"Lipids",carb:"Carbohydrates",prot:"Proteins",nuc:"Nucleic acids"};
 const GLOSSARY = [
- ["Macromolecule","A big molecule built from smaller pieces.","mol"],
- ["Monomer","One small building block.","mol"],
- ["Polymer","Many monomers joined together.","mol"],
- ["Organic / inorganic","Organic contains carbon. Inorganic does not.","mol"],
+ ["Macromolecule","Slide 2's heading. Outside source: a big molecule made of smaller pieces.","mol"],
+ ["Monomer","Monomers + monomers = polymer.","mol"],
+ ["Polymer","What monomers make when they join.","mol"],
+ ["Polymerization","The label on the arrow from monomers to polymer.","mol"],
+ ["Valence electrons","Carbon has four. Outside source: outer electrons an atom uses to bond.","mol"],
+ ["Organic","Contains carbon.","mol"],
+ ["Inorganic","Does not contain carbon.","mol"],
  ["Energy","The ability to change or move matter.","energy"],
- ["Entropy","Disorder. It always increases.","energy"],
- ["Chemical reaction","Bonds break or form, so the chemical becomes something new.","energy"],
- ["Physical change","Only the state or size changes. Melting ice is still water.","energy"],
- ["Reactants / products","Starting substances on the left. New substances on the right.","energy"],
- ["Coefficient","The number in front. It tells how many you need.","energy"],
- ["Exothermic","A reaction that releases heat.","energy"],
- ["Endothermic","A reaction that absorbs heat.","energy"],
- ["Anabolism","Building big molecules from small ones. Uses energy.","build"],
- ["Catabolism","Breaking big molecules into small ones. Releases energy.","build"],
- ["Dehydration synthesis","Building molecules by removing water.","build"],
- ["Hydrolysis","Splitting molecules by adding water.","build"],
- ["ATP","The cell's energy currency. It has three phosphates.","build"],
- ["ADP","What's left after ATP loses one phosphate.","build"],
- ["Lipid","Built from fatty acids and glycerol. Stores long-term energy.","bio"],
- ["Carbohydrate","Built from monosaccharides (single sugars). Gives short-term energy.","bio"],
- ["Protein","Built from amino acids. Gives structure and forms enzymes.","bio"],
- ["Nucleic acid","Built from nucleotides. Stores and carries genetic information.","bio"],
- ["Enzyme","A protein that speeds up a reaction.","bio"],
- ["kcal","A unit of energy in food.","bio"]
+ ["Laws of thermodynamics","The 1st and 2nd laws about energy on Slide 3.","energy"],
+ ["1st law of thermodynamics","Can't destroy or create energy. It just changes forms.","energy"],
+ ["2nd law of thermodynamics","Entropy always increases.","energy"],
+ ["Entropy","Low entropy is highly ordered. High entropy is more disordered.","energy"],
+ ["Potential energy","Chart: chemical, gravitational, electrical, nuclear, elastic. Outside source: stored energy.","energy"],
+ ["Kinetic energy","Chart: electrical, light, sound, thermal, wind. Outside source: energy of motion.","energy"],
+ ["Chemical energy","Potential energy; the cannon starts with it. Outside source: energy stored in bonds.","energy"],
+ ["Gravitational energy","A potential energy on the chart. Outside source: stored energy from height.","energy"],
+ ["Electrical energy","On both sides of the chart. Outside source: energy from electric charges.","energy"],
+ ["Nuclear energy","A potential energy on the chart. Outside source: energy stored inside atoms.","energy"],
+ ["Elastic energy","A potential energy on the chart. Outside source: energy in stretched things.","energy"],
+ ["Light energy","A kinetic energy on the chart.","energy"],
+ ["Sound energy","A kinetic energy on the chart. Outside source: energy carried by vibrations.","energy"],
+ ["Thermal energy","A kinetic energy on the chart. Outside source: heat energy.","energy"],
+ ["Wind energy","A kinetic energy on the chart.","energy"],
+ ["Heat","The kinetic energy of molecules (cannon picture).","energy"],
+ ["Chemical reaction","Bonds break and/or form. The chemical itself changes.","react"],
+ ["Physical change","Changing state or being cut into pieces. Melted ice is still water.","react"],
+ ["Reactants","The substances on the left of the arrow.","react"],
+ ["Products","The substances on the right of the arrow.","react"],
+ ["Coefficient","The number in front. It tells how many of that substance are needed.","react"],
+ ["Letter in parentheses","Tells the state of matter: (g) gas, (l) liquid, (s) solid, (aq) aqueous.","react"],
+ ["Aqueous (aq)","Dissolved.","react"],
+ ["Exothermic","Releases energy as heat. Hotter than its surroundings.","react"],
+ ["Endothermic","Absorbs energy from its surroundings as heat. Cooler than its surroundings.","react"],
+ ["Spontaneously","Happening on its own.","react"],
+ ["Potential energy diagram","A graph that shows if a reaction is endothermic or exothermic.","react"],
+ ["Reaction coordinate / reaction progress","The across axis on the potential energy diagrams.","react"],
+ ["Activation energy","The blue arrow up to the hump. Outside source: energy needed to start a reaction.","react"],
+ ["Anabolism (anabolic)","Creating large molecules from smaller ones, using energy.","build"],
+ ["Catabolism (catabolic)","Breaking large molecules into smaller ones, releasing energy.","build"],
+ ["Dehydration synthesis","Builds up molecules by losing water molecules.","build"],
+ ["Hydrolysis","Splits a compound into pieces by adding water.","build"],
+ ["Digestion","Slide 9's label for hydrolysis. Outside source: breaking down food in your body.","build"],
+ ["Starch","Hydrolysis breaks starch into glucose.","build"],
+ ["ATP (adenosine triphosphate)","The energy currency of the cell.","atp"],
+ ["Phosphate group","ATP has three. Outside source: a group containing phosphorus.","atp"],
+ ["Ribose","ATP's sugar. Also the sugar in RNA.","atp"],
+ ["Adenine","ATP's nitrogenous base. Also a base in DNA and RNA.","atp"],
+ ["Nitrogenous base","What the slide calls adenine. Outside source: a base containing nitrogen.","atp"],
+ ["ADP (adenosine diphosphate)","What's left of ATP, with two phosphates.","atp"],
+ ["Inorganic phosphate (Pi)","The phosphate that breaks off in ATP hydrolysis.","atp"],
+ ["ATP hydrolysis","ATP + H₂O → Pi + ADP + energy.","atp"],
+ ["Lipid","CHO; fatty acids and glycerol; long-term energy storage.","lipid"],
+ ["Fatty acid","A lipid building block, drawn as a carbon chain.","lipid"],
+ ["Glycerol","A lipid building block. It holds three fatty acids in a triglyceride.","lipid"],
+ ["Triglyceride","Glycerol plus three fatty acids.","lipid"],
+ ["Phospholipid","A lipid type. Phospholipids form the bilayer (cell membrane).","lipid"],
+ ["Omega-3 phospholipid","A phospholipid shown fitting into the cell membrane lipid bilayer.","lipid"],
+ ["Cholesterol","A lipid type shown on Slide 14.","lipid"],
+ ["Phospholipid bilayer","The cell membrane.","lipid"],
+ ["Cell membrane","Formed by the phospholipid bilayer. Outside source: a cell's outer layer.","lipid"],
+ ["kcal","Lipids: 9 per gram. Carbs: 4. Outside source: a food-label Calorie.","lipid"],
+ ["Insulation","A lipid job. Outside source: keeping heat in.","lipid"],
+ ["Cell signaling","A lipid job. Outside source: cells sending messages.","lipid"],
+ ["Carbohydrate","CHO in a 1:2:1 ratio; monosaccharides; short-term energy storage.","carb"],
+ ["Monosaccharide","The carb building block. Drawn as one ring.","carb"],
+ ["Disaccharide","Drawn as two rings joined.","carb"],
+ ["Polysaccharide","Drawn as many rings in a branching chain.","carb"],
+ ["Glucose","A carb that gets converted to ATP.","carb"],
+ ["-ose","The carbohydrate suffix identifier.","carb"],
+ ["Cell wall","Carbs form cell walls. Outside source: a stiff layer around plant cells.","carb"],
+ ["Cell recognition","A carb job. Outside source: cells identifying each other.","carb"],
+ ["Protein","CHON(S); amino acids; secondary energy source and structural support.","prot"],
+ ["Amino acid","The protein building block.","prot"],
+ ["Amine group","The H–N–H part of the amino acid picture.","prot"],
+ ["Carboxyl group","The C=O with OH part of the amino acid picture.","prot"],
+ ["Variable group (R)","The R part of the amino acid. Outside source: different in each amino acid.","prot"],
+ ["Peptide bond","The label on the link between amino acids in the chain.","prot"],
+ ["N-terminus / C-terminus","Labels on the two ends of the protein chain.","prot"],
+ ["-ase","The protein suffix identifier. Outside source: it marks enzymes.","prot"],
+ ["Secondary energy source","A protein job. Outside source: a backup energy source.","prot"],
+ ["Enzyme","Proteins form enzymes. Outside source: a protein that speeds up a reaction.","prot"],
+ ["Digestive enzymes","The Slide 24 chart. Outside source: enzymes that break down food.","prot"],
+ ["Amylase","A digestive enzyme for bread on the chart.","prot"],
+ ["Sucrase-isomaltase","A digestive enzyme for bread on the chart.","prot"],
+ ["Maltase","A digestive enzyme for bread on the chart.","prot"],
+ ["Lactase","A digestive enzyme for bread on the chart.","prot"],
+ ["Pepsin","A digestive enzyme for meat on the chart.","prot"],
+ ["Trypsin","A digestive enzyme for meat on the chart.","prot"],
+ ["Peptidase","A digestive enzyme for meat on the chart.","prot"],
+ ["Lipase","The digestive enzyme for oil on the chart.","prot"],
+ ["Cell transport","A protein job. Outside source: moving things into and out of cells.","prot"],
+ ["Structural support","A protein job. Outside source: giving shape and strength.","prot"],
+ ["Signaling","A protein job. Outside source: cells sending messages.","prot"],
+ ["Immune defense","A protein job. Outside source: the body fighting off germs.","prot"],
+ ["Myofiber","A muscle picture label. Outside source: one muscle fiber.","prot"],
+ ["Myofibril","A muscle picture label. Outside source: a thin thread inside a muscle fiber.","prot"],
+ ["Actin","A muscle picture label. Outside source: a protein that helps muscle shorten.","prot"],
+ ["Myosin","A muscle picture label. Outside source: a protein that pulls on actin.","prot"],
+ ["Troponin","A muscle picture label. Outside source: a protein that helps switch contraction on.","prot"],
+ ["Tropomyosin","A muscle picture label. Outside source: a protein that helps control contraction.","prot"],
+ ["Nucleic acid","CHONP; nucleotides; stores and carries genetic information.","nuc"],
+ ["Nucleotide","The building block: a phosphate, a sugar, and a base.","nuc"],
+ ["Base (nucleobase)","A nucleotide part: adenine, thymine, guanine, cytosine, or uracil.","nuc"],
+ ["DNA (deoxyribonucleic acid)","Stores genetic information. Double-stranded, with deoxyribose.","nuc"],
+ ["RNA (ribonucleic acid)","Involved with protein synthesis. Usually single-stranded, with ribose.","nuc"],
+ ["Deoxyribose","The sugar in DNA.","nuc"],
+ ["Double-stranded / single-stranded","DNA has two strands. RNA usually has one.","nuc"],
+ ["Base pair","Adenine with thymine, guanine with cytosine (Slide 27).","nuc"],
+ ["Sugar phosphate backbone","The label along the long sides of DNA.","nuc"],
+ ["Thymine (T)","A DNA base. Pairs with adenine.","nuc"],
+ ["Uracil (U)","An RNA base.","nuc"],
+ ["Guanine (G)","A DNA and RNA base. Pairs with cytosine.","nuc"],
+ ["Cytosine (C)","A DNA and RNA base. Pairs with guanine.","nuc"],
+ ["Protein synthesis","What RNA is involved with. Outside source: making proteins.","nuc"],
+ ["Genetic information","What DNA stores. The cartoon calls DNA a blueprint for a living thing.","nuc"]
 ];
 
 const SLIDE_NOTES = {
  1:{note:"Title slide: 2.3 Biomolecules Overview, from Unit Two."},
- 2:{star:true,note:"Monomers join into a polymer. Carbon forms rings and chains. Organic means it contains carbon."},
- 3:{note:"Energy can't be created or destroyed. Entropy, or disorder, always increases."},
- 4:{star:true,note:"Reactants are on the left, products on the right. Melting ice is not a chemical reaction."},
- 5:{note:"Exothermic reactions release heat. Endothermic reactions absorb heat."},
- 6:{note:"An energy diagram. The products end lower than they started, so this one is exothermic."},
- 7:{star:true,note:"Products lower means energy released. Products higher means energy absorbed. Skip activation energy for now."},
- 8:{star:true,note:"Anabolism builds big molecules and uses energy. Catabolism breaks them and releases energy."},
- 9:{star:true,note:"Dehydration synthesis removes water to join pieces. Hydrolysis adds water to split them."},
- 10:{star:true,note:"ATP has three phosphates, one ribose sugar, and one adenine."},
- 12:{note:"Water breaks ATP into ADP plus one phosphate, and energy is released."},
- 13:{star:true,note:"ATP is a charged battery. ADP plus Pi is a dead battery. Recharging takes energy."},
- 14:{star:true,note:"Lipids are made of CHO. Their building blocks are fatty acids and glycerol."},
- 15:{note:"Lipids are found in oils, butter, dairy, and waxes."},
- 16:{note:"Lipids store long-term energy, 9 kcal per gram, and form the cell membrane."},
- 17:{note:"Partner talk: which animals use fat to get through winter? Extra detail."},
- 18:{star:true,note:"Carbs are CHO in a 1:2:1 ratio, built from monosaccharides. Names end in -ose."},
- 19:{note:"Carbs are found in sugar, bread, pasta, rice, and fruits."},
- 20:{note:"Carbs store short-term energy, 4 kcal per gram, and form cell walls."},
- 21:{note:"Partner talk: do plants need carbs too? Extra detail."},
- 22:{star:true,note:"Proteins are CHON(S), built from amino acids. Enzyme names end in -ase."},
+ 2:{note:"Monomers join into a polymer (polymerization). Carbon has four valence electrons and forms rings and chains."},
+ 3:{note:"The chart sorts energy into potential and kinetic. The cannon shows energy changing forms, and the dots show entropy increasing."},
+ 4:{note:"Reactants are on the left, products on the right. The red X means melting ice is not a chemical reaction."},
+ 5:{note:"Exothermic releases heat and is hotter than its surroundings. Endothermic absorbs heat and is cooler."},
+ 6:{note:"A potential energy diagram. Compare the products to the reactants to tell exothermic from endothermic."},
+ 7:{note:"Red arrows show energy released or absorbed. The blue arrow is labeled activation energy."},
+ 8:{note:"Anabolic: small molecules join into large ones, and energy is required. Catabolic: large ones break down, and energy is released."},
+ 9:{note:"Dehydration synthesis loses water to join pieces. Hydrolysis, labeled digestion, adds water to split them."},
+ 10:{note:"ATP, adenosine triphosphate, has three phosphate groups, one ribose sugar, and one adenine."},
+ 12:{note:"Water splits ATP into ADP plus inorganic phosphate (Pi), and energy is released."},
+ 13:{note:"ATP is a charged battery. ADP plus Pi is a dead battery. Recharging requires energy and releases water."},
+ 14:{note:"Lipids are CHO, built from fatty acids and glycerol. Shown: phospholipid, triglyceride, cholesterol, and the bilayer."},
+ 15:{note:"Lipids are found in oils, butter, dairy, and waxes. Think of examples you ate today."},
+ 16:{note:"Lipids store long-term energy, 9 kcal per gram, and form the cell membrane. BONUS: guess the cell type."},
+ 17:{note:"Partner talk: which animals, besides polar bears, rely on lipids in winter?"},
+ 18:{note:"Carbs are CHO in a 1:2:1 ratio, built from monosaccharides. Shown: glucose and mono, di, and polysaccharides."},
+ 19:{note:"Carbs are found in sugar, bread, pasta, rice, and fruits. What candies do you like?"},
+ 20:{note:"Carbs store short-term energy, 4 kcal per gram, and form cell walls. Glucose gets converted to ATP."},
+ 21:{note:"Partner talk: do organisms other than animals need carbohydrates?"},
+ 22:{note:"Proteins are CHON(S), built from amino acids. An amino acid has an amine group, a carboxyl group, and a variable R group."},
  23:{note:"Proteins are found in meat, eggs, beans, tofu, dairy, and nuts."},
- 24:{note:"Proteins give structure, form enzymes, and help with transport, signaling, and immune defense."},
- 25:{note:"Partner talk: why do gym-goers need protein? Extra detail."},
- 26:{star:true,note:"Nucleic acids are CHONP, built from nucleotides."},
- 27:{note:"Nucleic acids are in any living cells, as DNA and RNA."},
- 28:{note:"DNA stores genetic information. RNA helps make proteins."},
- 29:{note:"Partner talk: which foods have no nucleic acids? Extra detail."}
+ 24:{note:"Proteins form enzymes and give structural support. The chart shows digestive enzymes, and the BONUS picture shows muscle labels."},
+ 25:{note:"Partner talk: why do gym-goers always need protein?"},
+ 26:{note:"Nucleic acids are CHONP, built from nucleotides: a phosphate, a sugar, and a base. RNA and DNA are compared."},
+ 27:{note:"Nucleic acids are in any living cells, as DNA and RNA. DNA bases pair: A with T, G with C."},
+ 28:{note:"DNA stores genetic information and RNA is involved with protein synthesis. DNA has deoxyribose and thymine; RNA has ribose and uracil."},
+ 29:{note:"Partner talk: which foods have no nucleic acids? The cartoon calls DNA a blueprint for building a living thing."}
 };
 
 /* ---------- STORAGE ---------- */
@@ -920,16 +1047,18 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.querySel
 /* Overview test chips — each links to its section in the Study guide (Read tab) */
 document.getElementById('testChips').innerHTML = [
  ["polymers","Monomers, polymers & carbon"],
- ["thermodynamics","Laws of energy"],
- ["chemical reactions","Chemical vs. physical change"],
- ["exothermic","Exothermic vs. endothermic"],
+ ["thermodynamics","Energy and the laws of thermodynamics"],
+ ["chemical reactions","Chemical reactions"],
+ ["exothermic and endothermic","Exothermic and endothermic"],
+ ["diagrams","Potential energy diagrams"],
  ["building and breaking","Building and breaking molecules"],
  ["atp","ATP"],
  ["lipids","Lipids"],
  ["carbohydrates","Carbohydrates"],
  ["proteins","Proteins"],
  ["nucleic acids","Nucleic acids"],
- ["compare","Compare the four biomolecules"]
+ ["compare","Compare the four biomolecules"],
+ ["discussion","Class discussion"]
 ].map(([kw,label])=>`<button class="chip chip-link" onclick="openGuide('${kw}')">${esc(label)} ${icon('arrowright')}</button>`).join('');
 
 /* Overview mnemonics — interactive reveal cards */
@@ -1109,12 +1238,12 @@ function down(lbl){return `<div class="arrow">${icon('arrowdown')}${lbl?`<small>
 const C=TOPICS;
 const MAPS = [
  {title:"1 · The four biomolecules", html:`<div class="flow">
-   <div class="frow">${n(C['carbon'].color,"Macromolecules","big molecules made of monomers")}</div>
+   <div class="frow">${n(C['carbon'].color,"Macromolecules","monomers + monomers = polymer")}</div>
    ${down('four groups')}
    <div class="frow" style="align-items:flex-start;gap:14px">
      ${n(C['lipids'].color,"Lipids","fatty acids & glycerol · long-term energy")}
      ${n(C['carbs'].color,"Carbohydrates","monosaccharides · short-term energy")}
-     ${n(C['proteins'].color,"Proteins","amino acids · structure, enzymes")}
+     ${n(C['proteins'].color,"Proteins","amino acids · structural support, enzymes")}
      ${n(C['nucleic'].color,"Nucleic acids","nucleotides · genetic information")}
    </div>
  </div>`},
@@ -1173,7 +1302,7 @@ function renderSlideGroups(){
   document.getElementById('slideGroups').innerHTML=
     `<span class="tool" style="cursor:default"><svg class="i"><use href="#i-filter"/></svg><select onchange="setSlideGroup(this.value)">`
     +SLIDE_GROUPS.map(gr=>`<option value="${gr.k}"${slideGroup===gr.k?' selected':''}>${esc(gr.k==='all'?'All slides':'Slides '+gr.label)}</option>`).join('')+`</select></span>`
-    +`<button class="tool${slideKeyOnly?' on':''}" onclick="slideKeyOnly=!slideKeyOnly;renderSlideGroups();renderGallery(document.getElementById('slideSearch').value)"><svg class="i"><use href="#i-star"/></svg>Key images</button>`
+    +``
     +`<div class="spacer"></div>`
     +`<button class="tool${dOpen?' on':''}" id="deckToggle" onclick="toggleDeck()"><svg class="i"><use href="#i-list"/></svg>How the deck breaks down</button>`;
 }
@@ -1186,7 +1315,7 @@ function renderGallery(filter=''){
   g.innerHTML=SLIDES.filter(s=>{ if(s.n<gr.lo||s.n>gr.hi) return false;
       const sn=SLIDE_NOTES[s.n]; if(slideKeyOnly && !(sn&&sn.star)) return false;
       const note=sn?sn.note:''; return !f||(s.text+' '+note).toLowerCase().includes(f); })
-   .map(s=>{ const sn=SLIDE_NOTES[s.n]||{}; const star=sn.star?`<span class="tbadge" style="background:#fef3c7;color:#b45309"><svg class="i"><use href="#i-star"/></svg></span>`:'';
+   .map(s=>{ const sn=SLIDE_NOTES[s.n]||{}; const star=false?`<span class="tbadge" style="background:#fef3c7;color:#b45309"><svg class="i"><use href="#i-star"/></svg></span>`:'';
      const cap=s.text?s.text.split('\n')[0]:'(diagram — no text)';
      return `<div class="gitem"><img loading="lazy" src="${IMG[s.n]}" alt="Slide ${s.n}" onclick="LB.open(${s.n})">
        <div class="cap">${star}<span class="snum">Slide ${s.n}</span> <span class="stext">${esc(cap)}</span></div>${sn.note?`<div class="note">${esc(sn.note)}</div>`:''}</div>`; }).join('');
@@ -1254,12 +1383,14 @@ function speak(text){ if(!('speechSynthesis'in window))return; window.speechSynt
   const u=new SpeechSynthesisUtterance(text); u.rate=.98; u.onend=()=>{speaking=false;updateListen();}; speaking=true; window.speechSynthesis.speak(u); updateListen(); }
 function stopSpeak(){ if('speechSynthesis'in window)window.speechSynthesis.cancel(); speaking=false; updateListen(); }
 function updateListen(){ const b=document.getElementById('listenBtn'); if(b) b.innerHTML=(speaking?icon('x')+'Stop':icon('volume')+'Listen to summary'); }
-const SUMMARY="Let's go over biomolecules, one step at a time. Big molecules are built from small pieces called monomers. Many monomers joined together make a polymer. Molecules with carbon are called organic. Energy can change form, but it can't be created or destroyed. And disorder, called entropy, always increases. In a chemical reaction, bonds break or form. Melting ice is not a reaction, because it is still water. Exothermic reactions give off heat. Endothermic reactions take heat in. Cells build big molecules by removing water. They break them apart by adding water, and that is called hydrolysis. A T P is the cell's energy currency. Think of it as a charged battery. Now the four biomolecules. Lipids are built from fatty acids and glycerol. They store long-term energy. Carbohydrates are built from single sugars. They give quick, short-term energy. Proteins are built from amino acids. They give structure and form enzymes. Nucleic acids are built from nucleotides. D N A stores genetic information, and R N A helps make proteins. You're doing great. Take it one section at a time.";
+const SUMMARY="Let's go over biomolecules, one step at a time. Monomers plus monomers make a polymer. Carbon has four valence electrons, so it forms rings and chains. Molecules with carbon are called organic. Energy is the ability to change or move matter. The chart splits it into potential and kinetic energy. You can't destroy or create energy. It just changes forms. And entropy always increases. In a chemical reaction, bonds break or form. Melting ice is not a reaction, because it is still water. The number in front of a substance is the coefficient. Exothermic reactions release heat. Endothermic reactions absorb heat. On an energy graph, products lower means exothermic, and products higher means endothermic. The blue arrow up to the hump is labeled activation energy. Cells build big molecules by losing water. They break them apart by adding water, and that is called hydrolysis. A T P is the cell's energy currency. The slide shows it as a charged battery. Now the four biomolecules. Lipids are built from fatty acids and glycerol. They store long-term energy, nine kcal per gram. Carbohydrates are built from monosaccharides, and their names end in o s e. They store short-term energy, four kcal per gram. Proteins are built from amino acids. They give structural support and form enzymes. Nucleic acids are built from nucleotides. D N A stores genetic information, and R N A is involved with protein synthesis. You're doing great. Take it one section at a time.";
 function toggleSummary(){ if(speaking) stopSpeak(); else speak(SUMMARY); }
 
 /* ---------- PRINT CHEAT SHEET ---------- */
+function showCheat(html){ document.getElementById('cheatFrame').srcdoc=html; openModal('cheatModal'); }
+function printCheatFrame(){ const w=document.getElementById('cheatFrame').contentWindow; w.focus(); w.print(); }
 function printCheat(){
-  const w=window.open('','_blank');
+  
   const css=`body{font:13px/1.5 -apple-system,Arial,sans-serif;color:#111;margin:22px;max-width:800px}
    h1{font-size:19px;color:#7c3aed;margin:0 0 2px} .sub{color:#555;font-size:11px;margin-bottom:10px}
    h2{font-size:12px;color:#7c3aed;border-bottom:1.5px solid #7c3aed;padding-bottom:2px;margin:12px 0 4px;text-transform:uppercase;letter-spacing:.5px}
@@ -1273,247 +1404,672 @@ function printCheat(){
 </head><body>
   <h1>2.3 Biomolecules Overview — Cheat Sheet</h1><div class="sub">Biology · Unit Two: Biomolecules</div>
   <div class="cols">
-  <div class="blk"><h2>Carbon &amp; energy</h2><ul>
-   <li>Monomers join to make a <b>polymer</b></li>
-   <li>Carbon has <b>4 valence electrons</b></li>
-   <li><b>Organic</b> = contains carbon</li>
-   <li><b>1st law:</b> energy can't be made or destroyed</li>
-   <li><b>2nd law:</b> entropy (disorder) increases</li></ul></div>
-  <div class="blk"><h2>Reactions</h2><ul>
-   <li><b>Chemical:</b> bonds break or form</li>
-   <li><b>Physical:</b> melting ice is still H₂O</li>
+  <div class="blk"><h2>1 · Monomers &amp; carbon</h2><ul>
+   <li>Monomers + monomers = <b>polymer</b> (polymerization)</li>
+   <li>Carbon has <b>4 valence electrons</b>: rings and chains</li>
+   <li><b>Organic</b> = contains carbon · <b>inorganic</b> = no carbon</li></ul></div>
+  <div class="blk"><h2>2 · Energy</h2><ul>
+   <li><b>Energy:</b> ability to change or move matter</li>
+   <li><b>Potential:</b> chemical, gravitational, electrical, nuclear, elastic</li>
+   <li><b>Kinetic:</b> electrical, light, sound, thermal, wind</li>
+   <li><b>1st law:</b> can't destroy or create energy</li>
+   <li><b>2nd law:</b> entropy always increases (ordered → disordered)</li>
+   <li>Cannon: chemical → kinetic + potential → heat</li></ul></div>
+  <div class="blk"><h2>3 · Chemical reactions</h2><ul>
+   <li><b>Chemical:</b> bonds break and/or form</li>
+   <li><b>Physical:</b> melting, boiling, freezing (still H₂O)</li>
    <li><b>Reactants</b> left · <b>products</b> right</li>
-   <li><b>Exothermic</b> releases heat · <b>endothermic</b> absorbs heat</li></ul></div>
-  <div class="blk"><h2>Building &amp; breaking</h2><ul>
-   <li><b>Anabolism</b> builds, uses energy</li>
-   <li><b>Catabolism</b> breaks, releases energy</li>
+   <li><b>Coefficient:</b> how many are needed</li>
+   <li>(s) solid · (l) liquid · (g) gas · (aq) aqueous, dissolved</li></ul></div>
+  <div class="blk"><h2>4 · Exothermic &amp; endothermic</h2><ul>
+   <li><b>Exothermic:</b> releases heat, hotter, can happen on its own</li>
+   <li><b>Endothermic:</b> absorbs heat, cooler, needs energy input</li></ul></div>
+  <div class="blk"><h2>5 · Potential energy diagrams</h2><ul>
+   <li>Products lower = <b>exothermic</b> (energy released)</li>
+   <li>Products higher = <b>endothermic</b> (energy absorbed)</li>
+   <li><b>Activation energy:</b> blue arrow up to the hump</li>
+   <li>Teacher's note (Slide 7): &ldquo;We will talk more about the &lsquo;activation energy&rsquo; concept in a future unit, for now we are just focusing on the exo/endo thermic ideas (energy releasing/absorbing)&rdquo;</li>
+   <li>Outside source: activation energy is the energy needed to start a reaction</li></ul></div>
+  <div class="blk"><h2>6 · Building &amp; breaking</h2><ul>
+   <li><b>Anabolism</b> builds, energy required</li>
+   <li><b>Catabolism</b> breaks, energy released</li>
    <li><b>Dehydration synthesis:</b> water out</li>
-   <li><b>Hydrolysis:</b> water in</li></ul></div>
-  <div class="blk"><h2>ATP</h2><ul>
-   <li>Energy currency of the cell</li>
-   <li>ATP + water gives <b>ADP + Pi + energy</b></li>
-   <li>Charged battery, then dead battery</li></ul></div>
-  <div class="blk"><h2>The four biomolecules</h2><table>
-   <tr><td><b>Lipids</b></td><td>CHO · fatty acids &amp; glycerol · long-term energy, 9 kcal/g</td></tr>
-   <tr><td><b>Carbs</b></td><td>CHO 1:2:1 · monosaccharides · -ose · short-term energy, 4 kcal/g</td></tr>
-   <tr><td><b>Proteins</b></td><td>CHON(S) · amino acids · structure, enzymes</td></tr>
-   <tr><td><b>Nucleic acids</b></td><td>CHONP · nucleotides · DNA stores info, RNA helps make proteins</td></tr></table></div>
+   <li><b>Hydrolysis</b> (digestion): water in, starch → glucose</li></ul></div>
+  <div class="blk"><h2>7 · ATP</h2><ul>
+   <li>Adenosine triphosphate: energy currency of the cell</li>
+   <li>3 phosphates · ribose · adenine (nitrogenous base)</li>
+   <li>ATP + H₂O → <b>ADP + Pi + energy</b></li>
+   <li>Charged battery → dead battery · recharging requires energy</li></ul></div>
+  <div class="blk"><h2>8–11 · The four biomolecules</h2><table>
+   <tr><td><b>Lipids</b></td><td>CHO · fatty acids &amp; glycerol · oils, butter, dairy, waxes · long-term energy, 9 kcal/g · membrane, stores energy, insulation, signaling · phospholipid, triglyceride (glycerol + 3 fatty acids), cholesterol</td></tr>
+   <tr><td><b>Carbs</b></td><td>CHO 1:2:1 · monosaccharides · -ose · sugar, bread, pasta, rice, fruits · short-term energy, 4 kcal/g · cell walls, energy, recognition · mono/di/polysaccharide · glucose → ATP</td></tr>
+   <tr><td><b>Proteins</b></td><td>CHON(S) · amino acids (amine, carboxyl, variable R group) · -ase · meat, eggs, beans, tofu, dairy, nuts · secondary energy, structural support · enzymes, transport, signaling, immune defense · digestive enzymes: amylase, sucrase-isomaltase, maltase, lactase; pepsin, trypsin, peptidase; lipase</td></tr>
+   <tr><td><b>Nucleic acids</b></td><td>CHONP · nucleotides (phosphate, sugar, base) · any living cells · DNA stores genetic info (double, deoxyribose, T) · RNA protein synthesis (usually single, ribose, U)</td></tr></table></div>
   </div></body></html>`;
-  w.document.write(html); w.document.close(); w.focus(); setTimeout(()=>w.print(),350);
+  showCheat(html);
 }
 </script>
 
 <script type="text/html" id="doc-outline"><h1>2.3 Biomolecules Overview — Lesson Outline</h1>
-<p>The quick-scan version, in slide order. No recording exists. <strong><span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span> = core idea · <span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> = extra detail.</strong></p>
+<p>The quick-scan version, in slide order. No recording exists. Anything not from your teacher starts with <strong>Outside source:</strong>.</p>
 <hr />
-<h2>1. Monomers, polymers, and carbon <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>1. Monomers, polymers, and carbon</h2>
 <ul>
-<li>Monomers + monomers = polymer. <em>(<span class="slidelink" onclick="LB.open(2)">Slide 2</span>)</em></li>
-<li>Carbon has four valence electrons, so it forms rings and chains.</li>
+<li>Macromolecules: monomers + monomers = polymer! <em>(<span class="slidelink" onclick="LB.open(2)">Slide 2</span>)</em></li>
+<li>The arrow from monomers to polymer is labeled polymerization.</li>
+<li>Carbon has four valence electrons.</li>
+<li>Carbon forms rings, chains, and bonds to other carbon and other elements.</li>
 <li>Organic contains carbon. Inorganic does not.</li>
+<li>Pictures: a long carbon chain (a), a small molecule (b), a ring (c).</li>
 </ul>
-<h2>2. Energy and the laws of thermodynamics <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>2. Energy and the laws of thermodynamics</h2>
 <ul>
-<li>Energy is the ability to change or move matter. It can change form. <em>(<span class="slidelink" onclick="LB.open(3)">Slide 3</span>)</em></li>
-<li>1st law: energy can't be created or destroyed.</li>
-<li>2nd law: entropy (disorder) always increases.</li>
+<li>Energy is the ability to change or move matter. It can convert forms. <em>(<span class="slidelink" onclick="LB.open(3)">Slide 3</span>)</em></li>
+<li>Potential: chemical, gravitational, electrical, nuclear, elastic.</li>
+<li>Kinetic: electrical, light, sound, thermal, wind.</li>
+<li>1st law: you can't destroy or create energy. It just changes forms.</li>
+<li>Cannon: chemical → kinetic + potential → less kinetic + more potential → heat.</li>
+<li>Heat = kinetic energy of molecules.</li>
+<li>2nd law: entropy always increases.</li>
+<li>Dots: low entropy (highly ordered) → high entropy (more disordered).</li>
 </ul>
-<h2>3. Chemical reactions <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>3. Chemical reactions</h2>
 <ul>
-<li>Chemical reaction: bonds break or form. Melting ice is only a physical change. <em>(<span class="slidelink" onclick="LB.open(4)">Slide 4</span>)</em></li>
-<li>Reactants on the left, products on the right. The coefficient tells how many.</li>
-<li>(s) solid, (l) liquid, (g) gas, (aq) dissolved in water.</li>
+<li>Chemical reaction: bonds break and/or form. The chemical itself changes. <em>(<span class="slidelink" onclick="LB.open(4)">Slide 4</span>)</em></li>
+<li>Physical change: changing state or being cut into pieces.</li>
+<li>Melting, boiling, and freezing are NOT chemical reactions. Melted ice is still water.</li>
+<li>Boiled water is still H₂O, just a gas.</li>
+<li>Breaking water into hydrogen and oxygen gas is a chemical change.</li>
+<li>2 H₂ + O₂ → 2 H₂O: reactants on the left, products on the right.</li>
+<li>Coefficient = number in front = how many are needed (2 H₂, 1 O₂, 2 H₂O).</li>
+<li>Letters in parentheses: (g) gas, (l) liquid, (s) solid, (aq) aqueous (dissolved). O₂ (g) = oxygen gas.</li>
+<li>Red X over melting ice: not a chemical reaction.</li>
 </ul>
-<h2>4. Exothermic and endothermic reactions <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>4. Exothermic and endothermic reactions</h2>
 <ul>
-<li>Exothermic releases heat and can happen on its own. Endothermic absorbs heat and needs energy. <em>(<span class="slidelink" onclick="LB.open(5)">Slide 5</span>)</em></li>
-<li>Energy diagram: compare products to reactants. <em>(<span class="slidelink" onclick="LB.open(6)">Slide 6</span>)</em></li>
-<li>Products lower = exothermic. Products higher = endothermic. <span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> Activation energy is a later unit. <em>(<span class="slidelink" onclick="LB.open(7)">Slide 7</span>)</em></li>
+<li>Exothermic releases energy as heat. Hotter than surroundings (fire). <em>(<span class="slidelink" onclick="LB.open(5)">Slide 5</span>)</em></li>
+<li>Endothermic absorbs energy from surroundings as heat. Cooler than surroundings (ice cube).</li>
+<li>Exothermic can happen on its own (spontaneously).</li>
+<li>Endothermic can't happen without an input of energy.</li>
 </ul>
-<h2>5. Building and breaking molecules <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>5. Potential energy diagrams</h2>
 <ul>
-<li>Anabolism builds big molecules and uses energy. Catabolism breaks them and releases energy. <em>(<span class="slidelink" onclick="LB.open(8)">Slide 8</span>)</em></li>
-<li>Dehydration synthesis builds by removing water. <em>(<span class="slidelink" onclick="LB.open(9)">Slide 9</span>)</em></li>
-<li>Hydrolysis splits by adding water, like starch into glucose.</li>
+<li>Axes: potential energy (up) and reaction coordinate or reaction progress (across). <em>(Slides 6–7)</em></li>
+<li>Compare the energy level of products versus reactants.</li>
+<li>Products lower = energy released = exothermic. <em>(<span class="slidelink" onclick="LB.open(7)">Slide 7</span>)</em></li>
+<li>Products higher = energy absorbed = endothermic.</li>
+<li>Blue arrow = activation energy, from reactants to the top of the hump.</li>
+<li>Outside source: activation energy is the energy needed to start a reaction. <em>(OpenStax Biology 2e)</em></li>
+<li>Teacher's note on <span class="slidelink" onclick="LB.open(7)">Slide 7</span>: “We will talk more about the ‘activation energy’ concept in a future unit, for now we are just focusing on the exo/endo thermic ideas (energy releasing/absorbing)”</li>
 </ul>
-<h2>6. ATP, the cell's energy currency <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>6. Building and breaking molecules</h2>
 <ul>
-<li>ATP: three phosphates, one ribose sugar, one adenine. <em>(<span class="slidelink" onclick="LB.open(10)">Slide 10</span>)</em></li>
-<li>ATP + water → ADP + Pi + energy. <em>(<span class="slidelink" onclick="LB.open(12)">Slide 12</span>)</em></li>
-<li>ATP is a charged battery. Recharging ADP + Pi takes energy. <em>(<span class="slidelink" onclick="LB.open(13)">Slide 13</span>)</em></li>
+<li>Anabolism: creates large molecules from smaller ones, using energy. <em>(<span class="slidelink" onclick="LB.open(8)">Slide 8</span>)</em></li>
+<li>Catabolism: breaks large molecules into smaller ones, releasing energy.</li>
+<li>Picture: anabolic = small assembled into large, energy required.</li>
+<li>Picture: catabolic = large broken into small, energy released.</li>
+<li>Dehydration synthesis: builds molecules by losing water. <em>(<span class="slidelink" onclick="LB.open(9)">Slide 9</span>)</em></li>
+<li>Hydrolysis: splits a compound by adding water. Breaks polymers, like starch into glucose.</li>
+<li>Picture: OH + H leave as H₂O when rings join. Water splits them back.</li>
+<li>Hydrolysis is labeled "digestion."</li>
 </ul>
-<h2>7. Lipids <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>7. ATP, the cell's energy currency</h2>
+<ul>
+<li>ATP = adenosine triphosphate, the "energy currency of the cell." <em>(<span class="slidelink" onclick="LB.open(10)">Slide 10</span>)</em></li>
+<li>Parts: three phosphate groups, one ribose sugar, one adenine (nitrogenous base).</li>
+<li>ATP + H₂O → Pi (inorganic phosphate) + ADP (adenosine diphosphate) + energy. <em>(<span class="slidelink" onclick="LB.open(12)">Slide 12</span>)</em></li>
+<li>Cycle: ATP = charged battery. Water in, releases energy. <em>(<span class="slidelink" onclick="LB.open(13)">Slide 13</span>)</em></li>
+<li>ADP + Pi = dead battery. Rebuilding ATP requires energy, and water comes out.</li>
+</ul>
+<h2>8. Lipids</h2>
 <ul>
 <li>Made of CHO. Building blocks: fatty acids and glycerol. <em>(<span class="slidelink" onclick="LB.open(14)">Slide 14</span>)</em></li>
-<li>Found in oils, butter, dairy, and waxes. <em>(<span class="slidelink" onclick="LB.open(15)">Slide 15</span>)</em></li>
-<li>Job: long-term energy, 9 kcal/g. Cell membrane, insulation, cell signaling. <em>(<span class="slidelink" onclick="LB.open(16)">Slide 16</span>)</em></li>
+<li>Picture: phospholipid, triglyceride, cholesterol; phospholipid bilayer (cell membrane).</li>
+<li>Triglyceride = glycerol + three fatty acids (carbon chains).</li>
+<li>Found in oils, butter, dairy, and waxes. Photos: butter, milk. <em>(<span class="slidelink" onclick="LB.open(15)">Slide 15</span>)</em></li>
+<li>Job: long-term energy storage, 9 kcal per gram. <em>(<span class="slidelink" onclick="LB.open(16)">Slide 16</span>)</em></li>
+<li>Cell jobs: phospholipid bilayer (membrane), stores energy, insulation, cell signaling.</li>
+<li>Picture: omega-3 phospholipid, cell membrane lipid bilayer, phospholipid, protein, cell.</li>
 </ul>
-<h2>8. Carbohydrates <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>9. Carbohydrates</h2>
 <ul>
-<li>Made of CHO in a 1:2:1 ratio. Building blocks: monosaccharides. Ending: -ose. <em>(<span class="slidelink" onclick="LB.open(18)">Slide 18</span>)</em></li>
-<li>Found in sugar, bread, pasta, rice, and fruits. <em>(<span class="slidelink" onclick="LB.open(19)">Slide 19</span>)</em></li>
-<li>Job: short-term energy, 4 kcal/g. Cell walls, energy, cell recognition. <em>(<span class="slidelink" onclick="LB.open(20)">Slide 20</span>)</em></li>
+<li>Made of CHO in a 1:2:1 ratio. Building blocks: monosaccharides. <em>(<span class="slidelink" onclick="LB.open(18)">Slide 18</span>)</em></li>
+<li>Suffix identifier: -ose.</li>
+<li>Picture: the structure of glucose (chain, ring, 3-D model).</li>
+<li>Picture: monosaccharide (1 ring), disaccharide (2), polysaccharide (many, branched).</li>
+<li>Found in sugar, bread, pasta, rice, and fruits. Photos: rice, candy. <em>(<span class="slidelink" onclick="LB.open(19)">Slide 19</span>)</em></li>
+<li>Job: short-term energy storage, 4 kcal per gram. <em>(<span class="slidelink" onclick="LB.open(20)">Slide 20</span>)</em></li>
+<li>Cell jobs: forms cell walls, provides energy, cell recognition.</li>
+<li>Picture: glucose gets converted to ATP (energy). Photo: fruit.</li>
 </ul>
-<h2>9. Proteins <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>10. Proteins</h2>
 <ul>
-<li>Made of CHON(S). Building blocks: amino acids. Ending: -ase. <em>(<span class="slidelink" onclick="LB.open(22)">Slide 22</span>)</em></li>
+<li>Made of CHON(S). Building blocks: amino acids. Suffix identifier: -ase. <em>(<span class="slidelink" onclick="LB.open(22)">Slide 22</span>)</em></li>
+<li>Amino acid picture: center C, H, amine group, carboxyl group, variable group (R).</li>
+<li>Chain picture: amino acids, peptide bond, N-terminus and C-terminus ends.</li>
 <li>Found in meat, eggs, beans, tofu, dairy, and nuts. <em>(<span class="slidelink" onclick="LB.open(23)">Slide 23</span>)</em></li>
-<li>Job: backup energy and structure. Enzymes, transport, signaling, immune defense. <em>(<span class="slidelink" onclick="LB.open(24)">Slide 24</span>)</em></li>
+<li>Job: secondary energy source, structural support. <em>(<span class="slidelink" onclick="LB.open(24)">Slide 24</span>)</em></li>
+<li>Cell jobs: enzymes, cell transport, structural support, signaling, immune defense.</li>
+<li>Digestive enzymes for bread: amylase, sucrase-isomaltase, maltase, lactase.</li>
+<li>For meat: pepsin, trypsin, peptidase. For oil: lipase.</li>
+<li>Muscle picture: myofiber, myofibril, actin, troponin, tropomyosin, myosin.</li>
 </ul>
-<h2>10. Nucleic acids <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>11. Nucleic acids</h2>
 <ul>
 <li>Made of CHONP. Building blocks: nucleotides. <em>(<span class="slidelink" onclick="LB.open(26)">Slide 26</span>)</em></li>
-<li>Found in any living cells as DNA and RNA. <em>(<span class="slidelink" onclick="LB.open(27)">Slide 27</span>)</em></li>
-<li>Job: genetic information. DNA stores it. RNA helps make proteins. <em>(<span class="slidelink" onclick="LB.open(28)">Slide 28</span>)</em></li>
+<li>Nucleotide picture: phosphate, ribose (sugar), base.</li>
+<li>RNA vs DNA picture: RNA bases C, G, A, U. DNA bases C, G, A, T.</li>
+<li>Picture labels: nucleobases, base pair, helix of sugar-phosphates.</li>
+<li>Found in any living cells (meats, plants, mushrooms) as DNA &amp; RNA. <em>(<span class="slidelink" onclick="LB.open(27)">Slide 27</span>)</em></li>
+<li>Picture: base pairs (adenine–thymine, guanine–cytosine), sugar phosphate backbone.</li>
+<li>Job: information storage; codes and transports genetic information. <em>(<span class="slidelink" onclick="LB.open(28)">Slide 28</span>)</em></li>
+<li>DNA stores genetic information. RNA is involved with protein synthesis.</li>
+<li>DNA: double-stranded, deoxyribose, thymine. RNA: usually single-stranded, ribose, uracil.</li>
+<li><span class="slidelink" onclick="LB.open(28)">Slide 28</span> picture label: "single nucleobase."</li>
+<li>BONUS picture: deoxyribose (H) vs ribose (OH).</li>
+<li>Cartoon: "A DNA strand like me is a blueprint for building a living thing!" <em>(<span class="slidelink" onclick="LB.open(29)">Slide 29</span>)</em></li>
 </ul>
-<h2>Class discussion <span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span></h2>
+<h2>Compare the four biomolecules</h2>
 <ul>
-<li>Partner talk on Slides 17, 21, 25, and 29. BONUS guesses on Slides 16, 20, 24, and 28.</li>
+<li>Lipids: CHO · fatty acids &amp; glycerol · long-term energy, 9 kcal/g.</li>
+<li>Carbs: CHO 1:2:1 · monosaccharides · short-term energy, 4 kcal/g.</li>
+<li>Proteins: CHON(S) · amino acids · secondary energy, structural support, enzymes.</li>
+<li>Nucleic acids: CHONP · nucleotides · genetic information.</li>
+</ul>
+<h2>Class discussion</h2>
+<ul>
+<li>Warm-ups: examples you ate today (15), favorite candies (19), one protein forever (23), favorite food (27).</li>
+<li>Partner talk: winter lipid animals (17), non-animals and carbs (21), gym protein (25), foods without nucleic acids (29).</li>
+<li>-ose examples (18). BONUS guesses: cell type (16), carb in fruit (20), body part (24), carb in DNA (28).</li>
+<li>Answers are in the study guide, marked "from the picture," "possible answer," or "Outside source."</li>
+</ul>
+<h2>From your teacher</h2>
+<ul>
+<li>No test list shared for this lesson, so study everything.</li>
 </ul></script>
 <script type="text/html" id="doc-guide"><h1>2.3 Biomolecules Overview — Study Guide</h1>
 <p><strong>Course:</strong> Biology (high school) · <strong>Unit:</strong> Unit Two: Biomolecules · <strong>Sources:</strong> Teacher's slides and speaker notes. No recording.</p>
+<p>Everything here comes from your teacher's slides, notes, and pictures. A few plain explanations come from other books. Each of those starts with <strong>Outside source:</strong> so you always know.</p>
 <hr />
 <h2>What you'll learn</h2>
 <ul>
 <li>What monomers and polymers are, and why carbon matters</li>
-<li>Two big rules about energy</li>
+<li>What energy is, its kinds, and the two laws of energy</li>
 <li>How a chemical change is different from a physical change</li>
-<li>Reactions that give off heat or take in heat</li>
-<li>How cells build and break molecules, and how ATP stores energy</li>
-<li>The four biomolecules: what they're made of, where they're found, and their jobs</li>
+<li>Reactions that release heat or absorb heat</li>
+<li>How to read a potential energy diagram</li>
+<li>How cells build and break molecules</li>
+<li>How ATP stores and releases energy</li>
+<li>Lipids: what they're made of, where they're found, and their jobs</li>
+<li>Carbohydrates: what they're made of, where they're found, and their jobs</li>
+<li>Proteins: what they're made of, where they're found, and their jobs</li>
+<li>Nucleic acids: what they're made of, where they're found, and their jobs</li>
+<li>A table that compares the four biomolecules</li>
+<li>The class discussion questions</li>
 </ul>
 <hr />
-<h2>1. Monomers, polymers, and carbon <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
-<p><strong>Macromolecules are big molecules built from small pieces joined together.</strong> <em>(OpenStax Biology 2e)</em></p>
+<h2>1. Monomers, polymers, and carbon</h2>
+<p><strong>Macromolecules: monomers + monomers = polymer!</strong></p>
+<p><strong>The pieces:</strong></p>
 <ul>
-<li>A <strong>monomer</strong> is one small building block.</li>
-<li>A <strong>polymer</strong> is many monomers joined together. Monomers + monomers = polymer.</li>
-<li><strong>Carbon</strong> has four <strong>valence electrons</strong> (outer electrons used for bonds). So carbon can form rings and chains. <em>(OpenStax Biology 2e)</em></li>
-<li><strong>Organic</strong> molecules contain carbon. <strong>Inorganic</strong> molecules do not.</li>
+<li>Monomers join with other monomers.</li>
+<li>Many monomers joined together make a <strong>polymer</strong>.</li>
 </ul>
 <blockquote>
-<p><strong>Analogy:</strong> A monomer is one train car. A polymer is the whole train.</p>
-<p> See <strong><span class="slidelink" onclick="LB.open(2)">Slide 2</span></strong> — loose green monomers join into one long polymer chain.</p>
+<p><strong>Outside source:</strong> "Macro" means big. A macromolecule is a giant molecule made of many smaller pieces. Example: starch, which hydrolysis breaks into glucose (<span class="slidelink" onclick="LB.open(9)">Slide 9</span> notes). <em>(OpenStax Biology 2e)</em></p>
+</blockquote>
+<p><strong>Carbon:</strong></p>
+<ul>
+<li>Carbon has <strong>four</strong> valence electrons.</li>
+<li>Carbon can form rings and chains.</li>
+<li>Carbon can bond to other carbon atoms.</li>
+<li>It can also bond to other elements.</li>
+<li><strong>Organic</strong> molecules contain carbon.</li>
+<li><strong>Inorganic</strong> molecules do not contain carbon.</li>
+</ul>
+<blockquote>
+<p><strong>Outside source:</strong> Valence electrons are an atom's outermost electrons. An atom uses them to make bonds. Carbon has four, like a connector with four plugs. <em>(OpenStax Biology 2e)</em></p>
+</blockquote>
+<p><strong>In the pictures:</strong></p>
+<ul>
+<li>Loose monomers join into one long polymer.</li>
+<li>The arrow from monomers to polymer is labeled <strong>polymerization</strong>.</li>
+<li>Three carbon molecules are drawn: a long chain (a), a small molecule (b), and a ring (c).</li>
+</ul>
+<blockquote>
+<p> See <strong><span class="slidelink" onclick="LB.open(2)">Slide 2</span></strong> — green monomers join into a polymer chain. Below are three carbon molecules.</p>
 </blockquote>
 <hr />
-<h2>2. Energy and the laws of thermodynamics <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>2. Energy and the laws of thermodynamics</h2>
 <p><strong>Energy is the ability to change or move matter.</strong></p>
+<p><strong>What energy is:</strong></p>
 <ul>
-<li>Energy can change from one form to another.</li>
-<li><strong>1st law:</strong> Energy can't be created or destroyed. It only changes form.</li>
-<li><strong>2nd law:</strong> <strong>Entropy</strong> always increases. Entropy means disorder.</li>
-<li>Energy can be <strong>potential</strong> (stored) or <strong>kinetic</strong> (moving). <em>(OpenStax Biology 2e)</em></li>
+<li>Energy can convert from one form to another.</li>
+<li>The chart splits energy into two groups: <strong>potential</strong> and <strong>kinetic</strong>.</li>
 </ul>
 <blockquote>
-<p><strong>Analogy:</strong> Your room gets messy on its own. Cleaning it up takes energy.</p>
-<p> See <strong><span class="slidelink" onclick="LB.open(3)">Slide 3</span></strong> — neat rows of dots spread out into a messy scatter. That is entropy increasing.</p>
+<p><strong>Outside source:</strong> Potential energy is stored energy. A stretched rubber band has it. Kinetic energy is the energy of motion. A rolling ball has it. <em>(OpenStax Biology 2e)</em></p>
 </blockquote>
-<hr />
-<h2>3. Chemical reactions <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
-<p><strong>In a chemical reaction, bonds break or form. The chemical becomes something new.</strong></p>
+<p><strong>In the energy chart (top right):</strong></p>
 <ul>
-<li>A <strong>physical change</strong> only changes state or size. Melting ice is still H₂O.</li>
-<li>In 2 H₂ + O₂ → 2 H₂O, <strong>reactants</strong> are on the left. <strong>Products</strong> are on the right.</li>
-<li>The <strong>coefficient</strong> is the number in front. It tells how many you need.</li>
-<li>Letters show the state: (s) solid, (l) liquid, (g) gas, (aq) dissolved in water.</li>
+<li>Kinds of potential energy: chemical, gravitational, electrical, nuclear, and elastic.</li>
+<li>Kinds of kinetic energy: electrical, light, sound, thermal, and wind.</li>
+<li>Electrical shows up on both sides. Source Notes explains why.</li>
+</ul>
+<p><strong>The two laws:</strong></p>
+<ul>
+<li><strong>1st law:</strong> You can't destroy or create energy.</li>
+<li><strong>2nd law:</strong> <strong>Entropy</strong> always increases.</li>
+</ul>
+<p><strong>In the cannon picture (1st law):</strong></p>
+<ul>
+<li>The picture says "Energy Cannot Be Created or Destroyed (It just changes forms)."</li>
+<li>The cannon starts with <strong>chemical energy</strong>.</li>
+<li>When it fires, the ball has kinetic energy plus potential energy.</li>
+<li>As the ball flies up, it has less kinetic energy and more potential energy.</li>
+<li>When the ball lands, the energy turns into heat.</li>
+<li>The picture calls heat the "kinetic energy of molecules."</li>
+</ul>
+<p><strong>In the dot picture (2nd law):</strong></p>
+<ul>
+<li>Neat rows of dots show low entropy. The slide calls it "highly ordered."</li>
+<li>Scattered dots show high entropy. The slide calls it "more disordered."</li>
+<li>The arrow between them says "increase in entropy."</li>
+<li>So more entropy means more disorder.</li>
 </ul>
 <blockquote>
-<p><strong>Why:</strong> Boiling water is still H₂O, so it's a physical change. Splitting water into hydrogen and oxygen gas makes new chemicals. That is a chemical change.</p>
-<p> See <strong><span class="slidelink" onclick="LB.open(4)">Slide 4</span></strong> — the big red X over melting ice means melting is not a chemical reaction.</p>
+<p> See <strong><span class="slidelink" onclick="LB.open(3)">Slide 3</span></strong> — the energy chart, the cannon's path, and the dots spreading out.</p>
 </blockquote>
 <hr />
-<h2>4. Exothermic and endothermic reactions <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
-<p><strong>Some reactions give off heat. Others take heat in.</strong></p>
+<h2>3. Chemical reactions</h2>
+<p><strong>In a chemical reaction, bonds break or form. The chemical itself changes.</strong></p>
+<p><strong>Chemical or physical?</strong></p>
 <ul>
-<li><strong>Exothermic</strong> reactions release heat. They feel hotter than their surroundings.</li>
-<li><strong>Endothermic</strong> reactions absorb heat. They feel cooler than their surroundings.</li>
-<li>The notes say exothermic reactions can happen on their own. Endothermic reactions need energy put in.</li>
-<li>On a <strong>potential energy diagram</strong>, compare products to reactants. Products lower means exothermic. Products higher means endothermic.</li>
+<li>A <strong>chemical reaction</strong> breaks bonds, forms bonds, or both.</li>
+<li>A <strong>physical change</strong> is different.</li>
+<li>In a physical change, something changes state or gets cut into pieces.</li>
+<li>Melting, boiling, and freezing are physical changes.</li>
+<li>Many people think melting is a chemical reaction. It is NOT.</li>
+<li>For a chemical change, the chemical itself must change in some way.</li>
+<li>A melted ice cube is still water.</li>
+<li>Boiled water is still H₂O. It is just a gas now instead of a liquid.</li>
+<li>Breaking water into hydrogen gas and oxygen gas is a chemical change.</li>
+<li>That's because it is no longer H₂O.</li>
+</ul>
+<p><strong>Reading a reaction:</strong></p>
+<ul>
+<li>The slide's reaction is 2 H₂ + O₂ → 2 H₂O.</li>
+<li><strong>Reactants</strong> are on the left of the arrow.</li>
+<li><strong>Products</strong> are on the right of the arrow.</li>
+<li>The <strong>coefficient</strong> is the number in front of a substance.</li>
+<li>It tells how many of that substance the reaction needs.</li>
+<li>Here, you need 2 molecules of H₂ and only 1 molecule of O₂.</li>
+<li>Together they form 2 molecules of H₂O.</li>
+</ul>
+<p><strong>Letters in parentheses:</strong></p>
+<ul>
+<li>Some reactions have a letter in parentheses after each substance.</li>
+<li>The letter tells that substance's state of matter.</li>
+<li>(s) means solid.</li>
+<li>(l) means liquid.</li>
+<li>(g) means gas.</li>
+<li>(aq) means <strong>aqueous</strong>, which means dissolved.</li>
+<li>Example: O₂ (g) means oxygen gas.</li>
+</ul>
+<p><strong>In the pictures:</strong></p>
+<ul>
+<li>Two H₂ molecules and one O₂ molecule become two H₂O molecules.</li>
+<li>A big red X covers ice melting into water.</li>
+<li>The X means melting is not a chemical reaction.</li>
 </ul>
 <blockquote>
-<p><strong>Analogy:</strong> <strong>Exo</strong> sounds like <strong>exit</strong>, so heat leaves. <strong>Endo</strong> sounds like <strong>enter</strong>, so heat comes in.</p>
-<p> See <strong><span class="slidelink" onclick="LB.open(7)">Slide 7</span></strong> — two energy graphs with red "energy released" and "energy absorbed" arrows. <span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> Skip the blue activation energy arrow.</p>
+<p> See <strong><span class="slidelink" onclick="LB.open(4)">Slide 4</span></strong> — the reaction with reactants and products, and the red X over melting ice.</p>
 </blockquote>
 <hr />
-<h2>5. Building and breaking molecules <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>4. Exothermic and endothermic reactions</h2>
+<p><strong>Some reactions release heat. Others absorb heat.</strong></p>
+<p><strong>The two kinds:</strong></p>
+<ul>
+<li>An <strong>exothermic</strong> reaction releases energy as heat.</li>
+<li>An <strong>endothermic</strong> reaction absorbs energy from its surroundings as heat.</li>
+<li>Exothermic reactions can happen on their own. The notes call this "spontaneously."</li>
+<li>Endothermic reactions can't happen unless energy is put in.</li>
+</ul>
+<p><strong>In the pictures:</strong></p>
+<ul>
+<li>Exothermic: a fire with heat arrows pointing out.</li>
+<li>The exothermic reaction is hotter than its surroundings.</li>
+<li>Endothermic: an ice cube with heat arrows pointing in.</li>
+<li>The endothermic reaction is cooler than its surroundings.</li>
+</ul>
+<blockquote>
+<p><strong>Memory trick:</strong> <strong>Exo</strong> sounds like <strong>exit</strong>, so heat leaves. <strong>Endo</strong> sounds like <strong>enter</strong>, so heat comes in.</p>
+<p> See <strong><span class="slidelink" onclick="LB.open(5)">Slide 5</span></strong> — "Heat released" (fire) or "Heat absorbed" (ice cube).</p>
+</blockquote>
+<hr />
+<h2>5. Potential energy diagrams</h2>
+<p><strong>A potential energy diagram shows if a reaction is exothermic or endothermic.</strong></p>
+<p><strong>How to read it:</strong></p>
+<ul>
+<li>The up-and-down axis is labeled <strong>potential energy</strong>.</li>
+<li><span class="slidelink" onclick="LB.open(6)">Slide 6</span> labels the across axis "reaction coordinate."</li>
+<li><span class="slidelink" onclick="LB.open(7)">Slide 7</span> labels the across axis "reaction progress."</li>
+<li>Look at the energy level of the products versus the reactants.</li>
+<li>Products lower than reactants: "energy released." It's <strong>exothermic</strong>.</li>
+<li>Products higher than reactants: "energy absorbed." It's <strong>endothermic</strong>.</li>
+</ul>
+<p><strong>In the pictures:</strong></p>
+<ul>
+<li><span class="slidelink" onclick="LB.open(6)">Slide 6</span>: the line climbs over a hump. Then it ends lower than it started.</li>
+<li><span class="slidelink" onclick="LB.open(7)">Slide 7</span>, left graph: an exothermic reaction.</li>
+<li>Its products sit below its reactants. A red arrow says "energy released."</li>
+<li><span class="slidelink" onclick="LB.open(7)">Slide 7</span>, right graph: an endothermic reaction.</li>
+<li>Its products sit above its reactants. A red arrow says "energy absorbed."</li>
+<li>Both graphs also have a blue arrow labeled "activation energy."</li>
+<li>The blue arrow goes from the reactants up to the top of the hump.</li>
+</ul>
+<blockquote>
+<p><strong>Outside source:</strong> Activation energy is the energy a reaction needs to get started. Think of pushing a sled up a hill before it can slide down. <em>(OpenStax Biology 2e)</em></p>
+<p><strong>Your teacher's note on <span class="slidelink" onclick="LB.open(7)">Slide 7</span>:</strong> “We will talk more about the ‘activation energy’ concept in a future unit, for now we are just focusing on the exo/endo thermic ideas (energy releasing/absorbing)”</p>
+<p> See <strong>Slides 6 and 7</strong> — compare where the products end up. Find the red and blue arrows.</p>
+</blockquote>
+<hr />
+<h2>6. Building and breaking molecules</h2>
 <p><strong>Building big molecules uses energy. Breaking them apart releases energy.</strong></p>
+<p><strong>Anabolism and catabolism (<span class="slidelink" onclick="LB.open(8)">Slide 8</span>):</strong></p>
 <ul>
-<li><strong>Anabolism</strong> builds large molecules from small ones. It uses energy.</li>
-<li><strong>Catabolism</strong> breaks large molecules into small ones. It releases energy.</li>
-<li><strong>Dehydration synthesis</strong> builds molecules by removing water.</li>
-<li><strong>Hydrolysis</strong> splits molecules by adding water. Example: starch breaks into glucose.</li>
+<li><strong>Anabolism</strong> creates large molecules from smaller molecules. It uses energy.</li>
+<li><strong>Catabolism</strong> breaks large molecules into smaller molecules. It releases energy.</li>
+</ul>
+<p><strong>In the <span class="slidelink" onclick="LB.open(8)">Slide 8</span> picture:</strong></p>
+<ul>
+<li>"Anabolic: Small molecules are assembled into large ones. Energy is required."</li>
+<li>Four separate circles plus energy become one chain.</li>
+<li>"Catabolic: Large molecules are broken down into small ones. Energy is released."</li>
+<li>One chain breaks into four circles, plus energy.</li>
+</ul>
+<p><strong>Water out, water in (<span class="slidelink" onclick="LB.open(9)">Slide 9</span>):</strong></p>
+<ul>
+<li><strong>Dehydration synthesis</strong> builds up molecules by losing water molecules.</li>
+<li><strong>Hydrolysis</strong> splits a compound into pieces by adding water.</li>
+<li>Hydrolysis is used to break polymers into simpler units.</li>
+<li>Example from the notes: starch breaks into glucose.</li>
+</ul>
+<p><strong>In the <span class="slidelink" onclick="LB.open(9)">Slide 9</span> picture:</strong></p>
+<ul>
+<li>Dehydration synthesis: two rings join together.</li>
+<li>An OH comes off one ring. An H comes off the other.</li>
+<li>Those pieces leave as water (H₂O).</li>
+<li>Hydrolysis: water is added where the two rings join.</li>
+<li>The rings split apart again.</li>
+<li>The slide labels hydrolysis "digestion."</li>
 </ul>
 <blockquote>
-<p><strong>Why:</strong> The names give it away. "De-hydration" means losing water. "Hydro-lysis" means splitting with water. <em>(OpenStax Biology 2e)</em></p>
-<p> See <strong><span class="slidelink" onclick="LB.open(9)">Slide 9</span></strong> — water leaves when two rings join. Water is added back to split them (digestion).</p>
+<p><strong>Outside source:</strong> "Hydro" means water, and "lysis" means splitting. "De-" means taking away. You already know this: being dehydrated means your body lost water. <em>(OpenStax Biology 2e)</em></p>
+<p> See <strong>Slides 8 and 9</strong> — circles joining and breaking, and water leaving or being added.</p>
 </blockquote>
 <hr />
-<h2>6. ATP, the cell's energy currency <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
-<p><strong>ATP (adenosine triphosphate) is the "energy currency of the cell."</strong></p>
+<h2>7. ATP, the cell's energy currency</h2>
+<p><strong>ATP is the "energy currency of the cell."</strong></p>
+<p><strong>What ATP is (<span class="slidelink" onclick="LB.open(10)">Slide 10</span>):</strong></p>
 <ul>
-<li>ATP has three phosphate groups, one ribose sugar, and one adenine (a base with nitrogen).</li>
-<li><strong>ATP hydrolysis:</strong> ATP + water → ADP + Pi + energy.</li>
-<li><strong>ADP</strong> has two phosphates. <strong>Pi</strong> is the one phosphate that broke off.</li>
-<li>Turning ADP + Pi back into ATP takes energy. Water comes out.</li>
+<li>ATP stands for <strong>adenosine triphosphate</strong>.</li>
+<li>The slide underlines A, T, and P in the name. That's where "ATP" comes from.</li>
+<li>ATP has three phosphate groups.</li>
+<li>It has one <strong>ribose</strong> sugar.</li>
+<li>It has one <strong>adenine</strong>, which the slide calls a nitrogenous base.</li>
 </ul>
 <blockquote>
-<p><strong>Analogy:</strong> ATP is a charged battery. Using it leaves a dead battery (ADP + Pi). Recharging takes energy.</p>
-<p> See <strong><span class="slidelink" onclick="LB.open(13)">Slide 13</span></strong> — the cycle between the charged battery (ATP) and the dead battery (ADP + Pi).</p>
+<p><strong>Outside source:</strong> "Nitrogenous" means it contains nitrogen. You can spot it in the drawing: each N is a nitrogen atom. <em>(OpenStax Biology 2e)</em></p>
+</blockquote>
+<p><strong>ATP hydrolysis (<span class="slidelink" onclick="LB.open(12)">Slide 12</span>):</strong></p>
+<ul>
+<li>ATP + H₂O → Pi + ADP + energy.</li>
+<li><strong>ADP</strong> stands for adenosine diphosphate. The picture shows it with two phosphates.</li>
+<li><strong>Pi</strong> stands for inorganic phosphate. It's the one phosphate that broke off.</li>
+<li>In the picture, each circled P is a phosphate.</li>
+<li>The slide title calls this "ATP Hydrolysis," because water splits ATP.</li>
+</ul>
+<p><strong>The ATP cycle (<span class="slidelink" onclick="LB.open(13)">Slide 13</span>):</strong></p>
+<ul>
+<li>ATP is the charged battery.</li>
+<li>Water (H₂O) goes in, and ATP splits into ADP + Pi.</li>
+<li>This step releases energy.</li>
+<li>ADP + Pi is the dead battery.</li>
+<li>Turning ADP + Pi back into ATP requires energy.</li>
+<li>In that step, water (H₂O) comes out.</li>
+</ul>
+<blockquote>
+<p> See <strong>Slides 10, 12, and 13</strong> — ATP's three parts, ATP splitting, and the battery cycle.</p>
 </blockquote>
 <hr />
-<h2>7. Lipids <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>8. Lipids</h2>
 <p><strong>Lipids store energy for the long term.</strong></p>
 <ul>
 <li><strong>Made of:</strong> carbon, hydrogen, and oxygen (CHO).</li>
 <li><strong>Building blocks:</strong> fatty acids and glycerol.</li>
 <li><strong>Found in:</strong> oils, butter, dairy, and waxes.</li>
-<li><strong>Job:</strong> long-term energy storage. One gram holds 9 <strong>kcal</strong> (a unit of food energy).</li>
-<li>Lipids form the <strong>phospholipid bilayer</strong> (the cell membrane). They also keep heat in and help cells send signals.</li>
+<li><strong>Job:</strong> long-term energy storage, 9 <strong>kcal</strong> per gram.</li>
 </ul>
 <blockquote>
-<p><strong>Why:</strong> A gram of lipid holds 9 kcal. A gram of carbohydrate holds only 4. So lipids pack more energy.</p>
-<p> See <strong><span class="slidelink" onclick="LB.open(14)">Slide 14</span></strong> — a blue glycerol piece with fatty acid chains attached.</p>
+<p><strong>Outside source:</strong> A kcal is a unit of energy in food. The "Calories" on a food label are kcal. <em>(OpenStax Biology 2e)</em></p>
+</blockquote>
+<p><strong>Jobs in the cell (<span class="slidelink" onclick="LB.open(16)">Slide 16</span>):</strong></p>
+<ul>
+<li>Lipids form the <strong>phospholipid bilayer</strong>. That is the cell membrane.</li>
+<li>Lipids store energy.</li>
+<li>Lipids provide insulation.</li>
+<li>Lipids aid in cell signaling.</li>
+</ul>
+<blockquote>
+<p><strong>Outside source:</strong> Insulation means keeping heat in, like a winter coat. Cell signaling means cells sending messages to each other, like passing notes. <em>(OpenStax Biology 2e)</em></p>
+</blockquote>
+<p><strong>In the <span class="slidelink" onclick="LB.open(14)">Slide 14</span> pictures:</strong></p>
+<ul>
+<li>Three kinds of lipids are shown: <strong>phospholipid</strong>, <strong>triglyceride</strong>, and <strong>cholesterol</strong>.</li>
+<li>Phospholipids line up in two layers around a cell.</li>
+<li>That double layer is labeled "phospholipid bilayer (cell membrane)."</li>
+<li>A <strong>triglyceride</strong> is one glycerol plus three fatty acids.</li>
+<li>Each fatty acid is drawn as a carbon chain.</li>
+</ul>
+<p><strong>In the <span class="slidelink" onclick="LB.open(16)">Slide 16</span> pictures:</strong></p>
+<ul>
+<li>An <strong>omega-3 phospholipid</strong> is shown.</li>
+<li>An arrow shows it fitting into the cell membrane lipid bilayer.</li>
+<li>Other labels: cell, cell membrane, phospholipid, and protein.</li>
+<li>The protein sits inside the bilayer.</li>
+</ul>
+<p><strong>Food photos (<span class="slidelink" onclick="LB.open(15)">Slide 15</span>):</strong> butter and a glass of milk.</p>
+<p><strong>Compare:</strong> A gram of lipid holds 9 kcal. A gram of carbohydrate holds 4 kcal (<span class="slidelink" onclick="LB.open(20)">Slide 20</span>).</p>
+<blockquote>
+<p> See <strong>Slides 14 and 16</strong> — the three lipid types, the triglyceride, and the membrane bilayer.</p>
 </blockquote>
 <hr />
-<h2>8. Carbohydrates <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>9. Carbohydrates</h2>
 <p><strong>Carbohydrates ("carbs") store energy for the short term.</strong></p>
 <ul>
-<li><strong>Made of:</strong> carbon, hydrogen, and oxygen in a 1:2:1 ratio.</li>
-<li><strong>Building blocks:</strong> <strong>monosaccharides</strong> (single sugars). Their names end in <strong>-ose</strong>, like glucose.</li>
+<li><strong>Made of:</strong> carbon, hydrogen, and oxygen (CHO) in a 1:2:1 ratio.</li>
+<li><strong>Building blocks:</strong> <strong>monosaccharides</strong>.</li>
+<li><strong>Name clue:</strong> the suffix identifier is <strong>-ose</strong>.</li>
 <li><strong>Found in:</strong> sugar, bread, pasta, rice, and fruits.</li>
-<li><strong>Job:</strong> short-term energy storage. One gram holds 4 kcal.</li>
-<li>Carbs also form cell walls and help cells recognize each other.</li>
+<li><strong>Job:</strong> short-term energy storage, 4 kcal per gram.</li>
+</ul>
+<p><strong>Jobs in the cell (<span class="slidelink" onclick="LB.open(20)">Slide 20</span>):</strong></p>
+<ul>
+<li>Carbs form cell walls.</li>
+<li>Carbs provide energy.</li>
+<li>Carbs help with cell recognition.</li>
 </ul>
 <blockquote>
-<p><strong>Analogy:</strong> Carbs are like cash in your pocket, quick to spend. Lipids are like savings in the bank.</p>
-<p> See <strong><span class="slidelink" onclick="LB.open(18)">Slide 18</span></strong> — one sugar ring, two rings joined, and a big branched chain of many rings.</p>
+<p><strong>Outside source:</strong> Cell recognition means cells identifying each other. Carbs on a cell work a bit like name tags. <em>(OpenStax Biology 2e)</em></p>
+</blockquote>
+<p><strong>In the <span class="slidelink" onclick="LB.open(18)">Slide 18</span> pictures:</strong></p>
+<ul>
+<li>"The Structure of Glucose" shows glucose three ways.</li>
+<li>It's drawn as a straight chain, as a ring, and as a 3-D model.</li>
+<li>A <strong>monosaccharide</strong> is drawn as one ring.</li>
+<li>A <strong>disaccharide</strong> is drawn as two rings joined together.</li>
+<li>A <strong>polysaccharide</strong> is drawn as many rings in a big, branching chain.</li>
+</ul>
+<blockquote>
+<p><strong>Outside source:</strong> "Mono" means one, "di" means two, and "poly" means many. "Saccharide" means sugar. You see "mono" in monorail (one rail) and "poly" in polygon (many sides). <em>(OpenStax Biology 2e)</em></p>
+</blockquote>
+<p><strong>In the <span class="slidelink" onclick="LB.open(20)">Slide 20</span> picture:</strong></p>
+<ul>
+<li>Glucose "gets converted to" ATP.</li>
+<li>The ATP is labeled "energy."</li>
+</ul>
+<p><strong>Food photos (Slides 19 and 20):</strong> rice, candy, and fruit.</p>
+<blockquote>
+<p> See <strong>Slides 18 and 20</strong> — glucose, the mono/di/polysaccharide shapes, and glucose turning into ATP.</p>
 </blockquote>
 <hr />
-<h2>9. Proteins <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
-<p><strong>Proteins give structure and form enzymes in your cells.</strong></p>
+<h2>10. Proteins</h2>
+<p><strong>Proteins give structural support and form enzymes.</strong></p>
 <ul>
 <li><strong>Made of:</strong> carbon, hydrogen, oxygen, nitrogen, and sometimes sulfur (CHON(S)).</li>
-<li><strong>Building blocks:</strong> amino acids. Enzyme names end in <strong>-ase</strong>.</li>
+<li><strong>Building blocks:</strong> amino acids.</li>
+<li><strong>Name clue:</strong> the suffix identifier is <strong>-ase</strong>. Source Notes explains more.</li>
 <li><strong>Found in:</strong> meat, eggs, beans, tofu, dairy, and nuts.</li>
-<li><strong>Job:</strong> a backup energy source and structural support.</li>
-<li>Proteins form enzymes. They also help with cell transport, signaling, and immune defense.</li>
+<li><strong>Job:</strong> secondary energy source and structural support.</li>
 </ul>
 <blockquote>
-<p><strong>Why:</strong> An <strong>enzyme</strong> is a protein that speeds up a reaction. Enzyme names usually end in -ase. <em>(OpenStax Biology 2e)</em></p>
-<p> See <strong><span class="slidelink" onclick="LB.open(22)">Slide 22</span></strong> — a protein is a long chain of beads. Each bead is an amino acid.</p>
+<p><strong>Outside source:</strong> "Secondary" means second in line, like a backup plan. <em>(Merriam-Webster)</em></p>
+</blockquote>
+<p><strong>Jobs in the cell (<span class="slidelink" onclick="LB.open(24)">Slide 24</span>):</strong></p>
+<ul>
+<li>Proteins form <strong>enzymes</strong>.</li>
+<li>Proteins aid in cell transport.</li>
+<li>Proteins give structural support.</li>
+<li>Proteins help with signaling.</li>
+<li>Proteins help with immune defense.</li>
+</ul>
+<blockquote>
+<p><strong>Outside source:</strong> An enzyme is a protein that speeds up a reaction. It's like a helper that makes a job go faster. <em>(OpenStax Biology 2e)</em></p>
+<p><strong>Outside source:</strong> Cell transport means moving things into and out of cells. It's like doors letting people in and out of a building. <em>(OpenStax Biology 2e)</em></p>
+<p><strong>Outside source:</strong> Immune defense means your body fighting off germs. It's what happens when you get over a cold. <em>(OpenStax Biology 2e)</em></p>
+</blockquote>
+<p><strong>Parts of an amino acid (<span class="slidelink" onclick="LB.open(22)">Slide 22</span> picture):</strong></p>
+<ul>
+<li>A carbon (C) sits in the middle.</li>
+<li>An <strong>amine group</strong> (H–N–H) is on one side.</li>
+<li>A <strong>carboxyl group</strong> (C=O with OH) is on the other side.</li>
+<li>An H sits on top.</li>
+<li>The <strong>variable group</strong>, labeled <strong>R</strong>, is on the bottom.</li>
+</ul>
+<blockquote>
+<p><strong>Outside source:</strong> "Variable" means it changes. The R group is different in each kind of amino acid. It's like keys cut from the same blank, each with different teeth. <em>(OpenStax Biology 2e)</em></p>
+</blockquote>
+<p><strong>The protein chain (<span class="slidelink" onclick="LB.open(22)">Slide 22</span> picture):</strong></p>
+<ul>
+<li>A protein is drawn as a long chain of amino acids, like beads on a string.</li>
+<li>A <strong>peptide bond</strong> label points to the link between amino acids.</li>
+<li>The two ends of the chain are labeled <strong>N-terminus</strong> and <strong>C-terminus</strong>.</li>
+<li>Small labels on the beads say Leu, Phe, Ser, and Cys.</li>
+</ul>
+<blockquote>
+<p><strong>Outside source:</strong> Leu, Phe, Ser, and Cys are short nicknames for amino acids. It's like writing "Sept." for September. <em>(OpenStax Biology 2e)</em></p>
+</blockquote>
+<p><strong>Digestive enzymes (<span class="slidelink" onclick="LB.open(24)">Slide 24</span> picture):</strong></p>
+<ul>
+<li>The chart is titled "Functions of Key Digestive Enzymes."</li>
+<li>Enzymes for bread: amylase, sucrase-isomaltase, maltase, and lactase.</li>
+<li>Enzymes for meat: pepsin, trypsin, and peptidase.</li>
+<li>The enzyme for oil: lipase.</li>
+<li>Each enzyme's arrow leads to small pieces of the food.</li>
+<li>Most of these enzyme names end in -ase.</li>
+</ul>
+<p><strong>Muscle picture (<span class="slidelink" onclick="LB.open(24)">Slide 24</span>):</strong></p>
+<ul>
+<li>Labels: myofiber, myofibril, actin, troponin, tropomyosin, and myosin.</li>
+</ul>
+<blockquote>
+<p><strong>Outside source:</strong> A myofiber is one muscle fiber, and myofibrils are thinner threads inside it. Actin and myosin are proteins that slide past each other to shorten the muscle. Troponin and tropomyosin work like an on/off switch for that. You use them when you lift a backpack. <em>(OpenStax Biology 2e)</em></p>
+</blockquote>
+<p><strong>Food photos (<span class="slidelink" onclick="LB.open(23)">Slide 23</span>):</strong> a spread of protein foods and a tofu dish.</p>
+<blockquote>
+<p> See <strong>Slides 22 and 24</strong> — the amino acid parts, the protein chain, the enzyme chart, and the muscle.</p>
 </blockquote>
 <hr />
-<h2>10. Nucleic acids <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>11. Nucleic acids</h2>
 <p><strong>Nucleic acids store and carry genetic information.</strong></p>
 <ul>
 <li><strong>Made of:</strong> carbon, hydrogen, oxygen, nitrogen, and phosphorus (CHONP).</li>
-<li><strong>Building blocks:</strong> nucleotides.</li>
-<li><strong>Found in:</strong> any living cells, like meats, plants, and mushrooms. They are there as DNA and RNA.</li>
-<li><strong>Job:</strong> store, code, and carry genetic information. <strong>DNA</strong> stores it. <strong>RNA</strong> helps make proteins.</li>
+<li><strong>Building blocks:</strong> <strong>nucleotides</strong>.</li>
+<li><strong>Found in:</strong> any living cells, like meats, plants, and mushrooms.</li>
+<li>They are in those cells as DNA and RNA.</li>
+<li><strong>Job:</strong> information storage.</li>
+<li>They also code and transport genetic information.</li>
+</ul>
+<p><strong>Jobs in the cell (<span class="slidelink" onclick="LB.open(28)">Slide 28</span>):</strong></p>
+<ul>
+<li><strong>DNA</strong> stores genetic information.</li>
+<li><strong>RNA</strong> is involved with protein synthesis.</li>
 </ul>
 <blockquote>
-<p><strong>Analogy:</strong> DNA is like a blueprint, the plan for building a living thing.</p>
-<p> See <strong><span class="slidelink" onclick="LB.open(26)">Slide 26</span></strong> — one nucleotide: a phosphate, a sugar, and a base joined together.</p>
+<p><strong>Outside source:</strong> "Synthesis" means making or putting together. So protein synthesis means making proteins, like building with blocks. <em>(OpenStax Biology 2e)</em></p>
+</blockquote>
+<p><strong>Parts of a nucleotide (<span class="slidelink" onclick="LB.open(26)">Slide 26</span> picture):</strong></p>
+<ul>
+<li>A <strong>phosphate</strong>.</li>
+<li>A sugar. This picture labels it <strong>ribose</strong>.</li>
+<li>A <strong>base</strong>. The pictures also call bases "nucleobases."</li>
+</ul>
+<p><strong>The bases (Slides 26, 27, and 28 pictures):</strong></p>
+<ul>
+<li>DNA bases: adenine (A), thymine (T), guanine (G), and cytosine (C).</li>
+<li>RNA bases: adenine (A), uracil (U), guanine (G), and cytosine (C).</li>
+<li>DNA has thymine. RNA has uracil in its place.</li>
+<li><span class="slidelink" onclick="LB.open(27)">Slide 27</span> shows <strong>base pairs</strong> in DNA.</li>
+<li>Adenine pairs with thymine.</li>
+<li>Guanine pairs with cytosine.</li>
+<li>The long sides of DNA are labeled <strong>sugar phosphate backbone</strong>.</li>
+<li><span class="slidelink" onclick="LB.open(26)">Slide 26</span> labels those sides "helix of sugar-phosphates."</li>
+</ul>
+<p><strong>DNA vs. RNA (Slides 26 and 28 pictures):</strong></p>
+<ul>
+<li>The <span class="slidelink" onclick="LB.open(28)">Slide 28</span> picture also shows the label <strong>single nucleobase</strong>.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>DNA</th>
+<th>RNA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Full name</td>
+<td>Deoxyribonucleic acid</td>
+<td>Ribonucleic acid</td>
+</tr>
+<tr>
+<td>Strands</td>
+<td>Double-stranded</td>
+<td>Usually single-stranded</td>
+</tr>
+<tr>
+<td>Sugar</td>
+<td>Deoxyribose</td>
+<td>Ribose</td>
+</tr>
+<tr>
+<td>Base only in this one</td>
+<td>Thymine</td>
+<td>Uracil</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Both have cytosine, guanine, and adenine.</li>
+<li>The BONUS picture on <span class="slidelink" onclick="LB.open(28)">Slide 28</span> shows deoxyribose next to ribose.</li>
+<li>Deoxyribose has an H in one spot. Ribose has an OH there.</li>
+</ul>
+<p><strong><span class="slidelink" onclick="LB.open(29)">Slide 29</span> cartoon:</strong> "A DNA strand like me is a blueprint for building a living thing!"</p>
+<p><strong>Food photo (<span class="slidelink" onclick="LB.open(27)">Slide 27</span>):</strong> a table of many foods.</p>
+<blockquote>
+<p> See <strong>Slides 26, 27, and 28</strong> — a nucleotide's three parts, base pairs, and DNA next to RNA.</p>
 </blockquote>
 <hr />
 <h2>Compare the four biomolecules</h2>
@@ -1534,59 +2090,76 @@ function printCheat(){
 </tr>
 <tr>
 <td><strong>Carbohydrates</strong> (CHO, 1:2:1)</td>
-<td>Monosaccharides</td>
+<td>Monosaccharides (-ose)</td>
 <td>Short-term energy, 4 kcal/g</td>
 </tr>
 <tr>
 <td><strong>Proteins</strong> (CHON(S))</td>
-<td>Amino acids</td>
-<td>Structure and enzymes</td>
+<td>Amino acids (-ase)</td>
+<td>Secondary energy, structural support</td>
 </tr>
 <tr>
 <td><strong>Nucleic acids</strong> (CHONP)</td>
 <td>Nucleotides</td>
-<td>Store genetic information</td>
+<td>Store and carry genetic information</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2>Class discussion <span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span></h2>
-<p>For class talk only. You don't need to memorize these. <em>(OpenStax Biology 2e)</em></p>
-<ul>
-<li><strong><span class="slidelink" onclick="LB.open(16)">Slide 16</span> BONUS: What cell type is this?</strong> Fat cells, which store lipids. <em>(OpenStax Biology 2e)</em></li>
-<li><strong><span class="slidelink" onclick="LB.open(17)">Slide 17</span>: Which animals besides polar bears use lipids in winter?</strong> Seals, whales, and hibernating bears. <em>(OpenStax Biology 2e)</em></li>
-<li><strong><span class="slidelink" onclick="LB.open(20)">Slide 20</span> BONUS: What carb is in fruit?</strong> Fructose, the sugar in fruit. Notice the -ose ending. <em>(OpenStax Biology 2e)</em></li>
-<li><strong><span class="slidelink" onclick="LB.open(21)">Slide 21</span>: Do living things besides animals need carbs?</strong> Yes. Plants make and use sugars. <em>(OpenStax Biology 2e)</em></li>
-<li><strong><span class="slidelink" onclick="LB.open(24)">Slide 24</span> BONUS: What body part is this?</strong> Muscle.</li>
-<li><strong><span class="slidelink" onclick="LB.open(25)">Slide 25</span>: Why do gym-goers need protein?</strong> Muscles are built from proteins.</li>
-<li><strong><span class="slidelink" onclick="LB.open(28)">Slide 28</span> BONUS: What carb is in DNA?</strong> Deoxyribose.</li>
-<li><strong><span class="slidelink" onclick="LB.open(29)">Slide 29</span>: What foods have no nucleic acids?</strong> Things that were never living cells, like water and salt (<span class="slidelink" onclick="LB.open(27)">Slide 27</span> says nucleic acids are in living cells).</li>
-</ul>
+<h2>Class discussion</h2>
+<p>These are the questions on the slides, word for word. The slides don't give answers. An answer marked "from the picture" is shown on that slide. A "possible answer" is one good answer, not your teacher's answer.</p>
+<p><strong><span class="slidelink" onclick="LB.open(15)">Slide 15</span>:</strong> “Can you think of some examples that you ate today?”</p>
+<p><strong>Answer (from the <span class="slidelink" onclick="LB.open(15)">Slide 15</span> picture):</strong> butter and milk. Any food from the slide's list works, like oils.</p>
+<p><strong><span class="slidelink" onclick="LB.open(16)">Slide 16</span> BONUS:</strong> “Can you guess what cell type this might be?”</p>
+<p><strong>Possible answer:</strong> fat cells. <strong>Outside source:</strong> Fat cells are packed with stored lipids. That's why they look round and puffy in the picture. <em>(OpenStax Biology 2e)</em></p>
+<p><strong><span class="slidelink" onclick="LB.open(17)">Slide 17</span>:</strong> “What animals (other than polar bears) rely heavily on lipids during Winter and the cold seasons?”</p>
+<p><strong>Possible answer:</strong> seals and whales. <strong>Outside source:</strong> They have a thick layer of fat called blubber under their skin. Like a winter coat, it keeps their body heat in. <em>(OpenStax Biology 2e)</em></p>
+<p><strong><span class="slidelink" onclick="LB.open(18)">Slide 18</span>:</strong> “What are some examples of things that you can think of that end in -ose?”</p>
+<p><strong>Answer (from the <span class="slidelink" onclick="LB.open(18)">Slide 18</span> picture):</strong> glucose.</p>
+<p><strong><span class="slidelink" onclick="LB.open(19)">Slide 19</span>:</strong> “What are some of your favorite candies?”</p>
+<p><strong>Any answer works — this is a warm-up.</strong> <span class="slidelink" onclick="LB.open(19)">Slide 19</span> lists sugar as a carb source.</p>
+<p><strong><span class="slidelink" onclick="LB.open(20)">Slide 20</span> BONUS:</strong> “Can you guess what the name of the carb in this is?”</p>
+<p><strong>Possible answer:</strong> fructose. <strong>Outside source:</strong> Fructose is a sugar found in fruit. It ends in -ose because it's a carb. It's part of why fruit tastes sweet. <em>(OpenStax Biology 2e)</em></p>
+<p><strong><span class="slidelink" onclick="LB.open(21)">Slide 21</span>:</strong> “Do you think organisms other than animals need carbohydrates?”</p>
+<p><strong>Possible answer:</strong> yes. <strong>Outside source:</strong> Plants make sugar using sunlight, then use it for energy. Picture the sunflower on the slide soaking up the sun. <em>(OpenStax Biology 2e)</em></p>
+<p><strong><span class="slidelink" onclick="LB.open(23)">Slide 23</span>:</strong> “If you could eat only one protein for the rest of your life, what would you choose?”</p>
+<p><strong>Any answer works — this is a warm-up.</strong> <span class="slidelink" onclick="LB.open(23)">Slide 23</span> lists meat, eggs, beans, tofu, dairy, and nuts.</p>
+<p><strong><span class="slidelink" onclick="LB.open(24)">Slide 24</span> BONUS:</strong> “Can you guess what part of the body this is?”</p>
+<p><strong>Possible answer:</strong> muscle. <strong>Outside source:</strong> "Myo" in myofiber and myofibril means muscle. You use your muscles every time you walk. <em>(OpenStax Biology 2e)</em></p>
+<p><strong><span class="slidelink" onclick="LB.open(25)">Slide 25</span>:</strong> “Why do you think gym peeps always need PROTEIN?”</p>
+<p><strong>Possible answer:</strong> to build and repair muscle. <strong>Outside source:</strong> Hard exercise makes tiny tears in muscle. The body uses amino acids from food to fix it. Think of eggs or milk after practice. <em>(OpenStax Biology 2e)</em></p>
+<p><strong><span class="slidelink" onclick="LB.open(27)">Slide 27</span>:</strong> “What is your favorite food?”</p>
+<p><strong>Any answer works — this is a warm-up.</strong> <span class="slidelink" onclick="LB.open(27)">Slide 27</span> says nucleic acids are in any living cells.</p>
+<p><strong><span class="slidelink" onclick="LB.open(28)">Slide 28</span> BONUS:</strong> “Can you guess what carb is in DNA?”</p>
+<p><strong>Answer (from the <span class="slidelink" onclick="LB.open(28)">Slide 28</span> picture):</strong> deoxyribose. The picture labels it next to ribose.</p>
+<p><strong><span class="slidelink" onclick="LB.open(29)">Slide 29</span>:</strong> “Can you think of any foods that do not contain nucleic acids?”</p>
+<p><strong>Possible answer:</strong> salt and water. <strong>Outside source:</strong> <span class="slidelink" onclick="LB.open(27)">Slide 27</span> says nucleic acids are in living cells. Salt and water were never alive, so they have no DNA or RNA. <em>(OpenStax Biology 2e)</em></p>
 <hr />
 <h2>Quick review</h2>
 <ul>
-<li>Monomers join to make polymers.</li>
-<li>Organic means it contains carbon.</li>
-<li>Energy can't be created or destroyed. Entropy always increases.</li>
-<li>Exothermic releases heat. Endothermic absorbs heat.</li>
+<li>Monomers join to make polymers. Carbon has four valence electrons. Organic means it contains carbon.</li>
+<li>Energy can't be created or destroyed. Entropy always increases. Energy is potential or kinetic.</li>
+<li>A chemical reaction breaks or forms bonds. Melting is only a physical change.</li>
+<li>Exothermic releases heat and can happen on its own. Endothermic absorbs heat and needs energy.</li>
+<li>On an energy diagram, products lower means exothermic. Products higher means endothermic.</li>
+<li>Activation energy is the blue arrow up to the top of the hump.</li>
+<li>Anabolism builds and uses energy. Catabolism breaks and releases energy.</li>
 <li>Dehydration synthesis builds (water out). Hydrolysis breaks (water in).</li>
-<li>ATP + water → ADP + Pi + energy.</li>
-<li>Lipids: 9 kcal/g, long-term. Carbs: 4 kcal/g, short-term.</li>
-<li>Proteins come from amino acids. Nucleic acids come from nucleotides.</li>
+<li>ATP has three phosphates, ribose, and adenine. ATP + water → ADP + Pi + energy.</li>
+<li>Lipids: CHO, fatty acids and glycerol, 9 kcal/g, long-term energy, cell membrane.</li>
+<li>Carbs: CHO 1:2:1, monosaccharides, -ose, 4 kcal/g, short-term energy, cell walls.</li>
+<li>Proteins: CHON(S), amino acids, -ase, enzymes, structural support, secondary energy.</li>
+<li>Nucleic acids: CHONP, nucleotides, DNA stores genetic information, RNA does protein synthesis.</li>
 </ul>
 <hr />
-<h2>Exam scope</h2>
-<p>There is no teacher test list for this lesson. The <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span> items are the core ideas from the slides. The <span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> items are extra details you don't need to memorize.</p>
-<p><span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> Extra details:</p>
-<ul>
-<li>Activation energy, the hump on the energy graphs (a later unit)</li>
-<li>The partner talk and BONUS questions</li>
-<li>The food and animal photos</li>
-<li>Exact molecule drawings inside the pictures</li>
-</ul></script>
+<h2>From your teacher</h2>
+<p>Your teacher hasn't shared a test list for this lesson, so study everything here.</p>
+<blockquote>
+<p><strong>Your teacher's note on <span class="slidelink" onclick="LB.open(7)">Slide 7</span>:</strong> “We will talk more about the ‘activation energy’ concept in a future unit, for now we are just focusing on the exo/endo thermic ideas (energy releasing/absorbing)”</p>
+</blockquote></script>
 <script type="text/html" id="doc-transcript"><h1>2.3 Biomolecules Overview — Source Notes &amp; Slide Corrections</h1>
 <p><strong>There is no recording of this lesson.</strong> Everything comes from the teacher's slides and speaker notes. So there is nothing to fix from a recording.</p>
-<p>One slide in the deck is hidden, so it is skipped. That's why the slide numbers jump from 10 to 12.</p>
+<p>One slide in the deck is hidden, so it is left out. That's why the slide numbers jump from 10 to 12.</p>
 <h2>Small typos</h2>
 <table>
 <thead>
@@ -1610,12 +2183,17 @@ function printCheat(){
 </tbody>
 </table>
 <h2>A few clearer versions</h2>
-<p>These slide ideas are fine to learn as written. Here is a clearer version, so they don't confuse you later.</p>
+<p>Learn the slides as written. These notes explain a few ideas more clearly. They come from other books, so each one starts with <strong>Outside source:</strong>.</p>
 <ul>
-<li><strong>"-ase" for proteins</strong> <em>(<span class="slidelink" onclick="LB.open(22)">Slide 22</span>)</em>: -ase really marks enzymes, which are one kind of protein. <em>(OpenStax Biology 2e)</em></li>
-<li><strong>"Forms cell walls"</strong> <em>(<span class="slidelink" onclick="LB.open(20)">Slide 20</span>)</em>: Plant cells have cell walls. Animal cells do not. <em>(OpenStax Biology 2e)</em></li>
-<li><strong>"Inorganic does not contain carbon"</strong> <em>(<span class="slidelink" onclick="LB.open(2)">Slide 2</span>)</em>: A few simple carbon compounds, like carbon dioxide, still count as inorganic. <em>(OpenStax Chemistry 2e)</em></li>
-<li><strong>Melting ice as "endothermic"</strong> <em>(<span class="slidelink" onclick="LB.open(5)">Slide 5</span>)</em>: The ice picture only shows heat flowing in. Melting is still a physical change, not a chemical reaction (<span class="slidelink" onclick="LB.open(4)">Slide 4</span>). <em>(OpenStax Chemistry 2e)</em></li>
+<li><strong>Electrical energy on both sides of the chart</strong> <em>(<span class="slidelink" onclick="LB.open(3)">Slide 3</span>)</em>: <strong>Outside source:</strong> Electrical energy can be stored or moving. Static charge on a rubbed balloon is stored. Electricity flowing through a lamp cord is moving. <em>(OpenStax Physics 2e)</em></li>
+<li><strong>"Entropy always increases"</strong> <em>(<span class="slidelink" onclick="LB.open(3)">Slide 3</span>)</em>: <strong>Outside source:</strong> This is true for the universe as a whole. Living things can build order, but they use energy to do it. It's like cleaning your room: it gets neater, but you get hot and tired. <em>(OpenStax Biology 2e)</em></li>
+<li><strong>Exothermic reactions "can happen on their own"</strong> <em>(<span class="slidelink" onclick="LB.open(5)">Slide 5</span> notes)</em>: <strong>Outside source:</strong> Some exothermic reactions still need a push to start. That push is activation energy (<span class="slidelink" onclick="LB.open(7)">Slide 7</span>). Burning wood gives off heat, but it needs a match first. <em>(OpenStax Biology 2e)</em></li>
+<li><strong>The melting ice cube as "endothermic"</strong> <em>(<span class="slidelink" onclick="LB.open(5)">Slide 5</span>)</em>: <strong>Outside source:</strong> The ice picture shows heat flowing in. Melting is still a physical change, not a chemical reaction (<span class="slidelink" onclick="LB.open(4)">Slide 4</span>). A melting popsicle is still the same stuff. <em>(OpenStax Chemistry 2e)</em></li>
+<li><strong>Fatty acids and glycerol as "monomers"</strong> <em>(<span class="slidelink" onclick="LB.open(14)">Slide 14</span>)</em>: <strong>Outside source:</strong> Lipids aren't true polymers. A polymer is a long chain of repeating monomers, like beads on a necklace. A triglyceride is just one glycerol with three fatty acids (<span class="slidelink" onclick="LB.open(14)">Slide 14</span>). <em>(OpenStax Biology 2e)</em></li>
+<li><strong>"CHO in a 1:2:1 ratio"</strong> <em>(<span class="slidelink" onclick="LB.open(18)">Slide 18</span>)</em>: <strong>Outside source:</strong> This ratio fits simple sugars best. Glucose (<span class="slidelink" onclick="LB.open(18)">Slide 18</span>) has 6 carbons, 12 hydrogens, and 6 oxygens. That's 1:2:1, like a recipe of 1 cup, 2 cups, 1 cup. <em>(OpenStax Biology 2e)</em></li>
+<li><strong>Carbs "form cell walls"</strong> <em>(<span class="slidelink" onclick="LB.open(20)">Slide 20</span>)</em>: <strong>Outside source:</strong> Plant cells have cell walls. Animal cells do not. The crunch in celery comes from its cell walls. <em>(OpenStax Biology 2e)</em></li>
+<li><strong>"-ase" for proteins</strong> <em>(<span class="slidelink" onclick="LB.open(22)">Slide 22</span>)</em>: <strong>Outside source:</strong> -ase really marks enzymes, which are one kind of protein. Not every protein ends in -ase. Lactase and lipase end in -ase, but actin and myosin (<span class="slidelink" onclick="LB.open(24)">Slide 24</span>) don't. <em>(OpenStax Biology 2e)</em></li>
+<li><strong>The sugar labeled "ribose"</strong> <em>(<span class="slidelink" onclick="LB.open(26)">Slide 26</span>)</em>: <strong>Outside source:</strong> Ribose is the sugar in RNA. DNA nucleotides have deoxyribose instead (<span class="slidelink" onclick="LB.open(28)">Slide 28</span>). "Deoxy" means one oxygen is missing. Compare the <span class="slidelink" onclick="LB.open(28)">Slide 28</span> BONUS picture: H instead of OH. <em>(OpenStax Biology 2e)</em></li>
 </ul></script>
 <script>
 /* ---------- READ tab: render embedded docs ---------- */
@@ -1860,7 +2438,7 @@ const PAL_PAGES=[
   {title:'Progress',ic:'trend',v:'progress'}
 ];
 const PAL_ACTIONS=[
-  {title:'Print 1-page cheat sheet',ic:'printer',fn:()=>printCheat()},
+  {title:'View cheat sheet',ic:'doc',fn:()=>printCheat()},
   {title:'Print this section',ic:'printer',fn:()=>printView()},
   {title:'Listen to the summary',ic:'volume',fn:()=>{goView('overview');toggleSummary();}},
   {title:'Open settings',ic:'gear',fn:()=>openModal('settingsModal')},

@@ -1,6 +1,11 @@
 [
   ["</head>", "<style>/* Macy's profile theme: violet instead of teal */\n  :root{--bg:#f7f5fc;--panel2:#f0ecfa;--ink:#1e1b2e;--muted:#645d78;--line:#e9e5f3;--accent:#7c3aed;--accent2:#6d28d9;--chip:#f1eafe}\n  .btn.qnav:hover{background:var(--panel2)} .gitem:hover{border-color:#ddd3f3}\n</style>\n</head>"],
-  ["Teal notes explain key diagrams and tables.", "Colored notes explain key pictures."],
+  ["Teal notes explain key diagrams and tables.", "Colored notes explain the pictures."],
+  [" <span class=\"pill\" style=\"background:#fef3c7;color:#b45309\"><svg class=\"i\"><use href=\"#i-star\"/></svg>key image</span> marks the deck's most important diagrams and tables.", ""],
+  ["<button class=\"tool${slideKeyOnly?' on':''}\" onclick=\"slideKeyOnly=!slideKeyOnly;renderSlideGroups();renderGallery(document.getElementById('slideSearch').value)\"><svg class=\"i\"><use href=\"#i-star\"/></svg>Key images</button>", ""],
+  ["const star=sn.star?", "const star=false?"],
+  ["<h2><span class=\"tbadge on\"><svg class=\"i\"><use href=\"#i-check\"/></svg></span>On the test</h2>", "<h2><svg class=\"i\"><use href=\"#i-list\"/></svg>Topics in this lesson</h2>"],
+  ["<span class=\"tbadge off\"><svg class=\"i\"><use href=\"#i-x\"/></svg></span> From your teacher</h3>", "<svg class=\"i\"><use href=\"#i-quote\"/></svg> From your teacher</h3>"],
   ["<use href=\"#i-stethoscope\"/></svg>Scenarios</button>", "<use href=\"#i-bulb\"/></svg>Scenarios</button>"],
   ["<use href=\"#i-stethoscope\"/></svg>Scenarios</h2>", "<use href=\"#i-bulb\"/></svg>Scenarios</h2>"],
   ["Apply the concepts to a clinical situation", "Apply the concepts to a real-life situation"],

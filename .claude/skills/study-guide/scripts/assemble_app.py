@@ -26,6 +26,8 @@ import re
 import sys
 from pathlib import Path
 
+from cheat_view import add_cheat_view
+
 DEFAULT_TEMPLATE = (Path(__file__).resolve().parents[4]
                     / "courses/microbiology-biol2420/04-control-of-microorganisms/index.html")
 
@@ -142,6 +144,8 @@ def main() -> None:
     slides = (d / "slides.json").read_text(encoding="utf-8").strip()
     html = sub_once(html, r'(<script id="slidedata" type="application/json">).*?(</script>)',
                     lambda m: m.group(1) + slides + m.group(2), "slidedata")
+
+    html = add_cheat_view(html)
 
     if a.replacements:
         # [old, new] must match; [old, new, true] is optional (for text authored per lesson).

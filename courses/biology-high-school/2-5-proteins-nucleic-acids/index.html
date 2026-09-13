@@ -328,6 +328,8 @@
     #lightbox img{max-height:58vh}
     #lightbox .lcap{font-size:13px;margin-top:8px}
   }
+  .modal .sheet.cheat{max-width:900px;height:88vh;display:flex;flex-direction:column}
+  #cheatFrame{flex:1;width:100%;border:0;border-radius:10px;background:#fff;margin-top:10px}
 </style>
 <style>/* Macy's profile theme: violet instead of teal */
   :root{--bg:#f7f5fc;--panel2:#f0ecfa;--ink:#1e1b2e;--muted:#645d78;--line:#e9e5f3;--accent:#7c3aed;--accent2:#6d28d9;--chip:#f1eafe}
@@ -365,10 +367,10 @@
 <!-- OVERVIEW -->
 <section class="view active" id="overview">
   <div class="card">
-    <h2><span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span>On the test</h2>
+    <h2><svg class="i"><use href="#i-list"/></svg>Topics in this lesson</h2>
     <div id="testChips"></div>
-    <h3><span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> Extra details</h3>
-    These are extra details, so you don't need to memorize them:<ul><li>The chart of all 20 amino acids (Slide 2)</li><li>Drawings of atoms and rings</li><li>End labels like N-terminus and 5′ end</li><li>Dimer, trimer, and tetramer examples (Slide 9)</li><li>The extra drawings on Slide 13</li></ul>
+    <h3><svg class="i"><use href="#i-quote"/></svg> From your teacher</h3>
+    <p class="small muted">Your teacher hasn't shared a test list for this lesson, so study every topic.</p>
   </div>
 
   <div class="card">
@@ -382,7 +384,7 @@
   <div class="card">
     <h2><svg class="i"><use href="#i-book"/></svg>Study tools</h2>
     <div class="row">
-      <button class="btn primary" onclick="printCheat()"><svg class="i"><use href="#i-printer"/></svg>Print 1-page cheat sheet</button>
+      <button class="btn primary" onclick="printCheat()"><svg class="i"><use href="#i-doc"/></svg>View cheat sheet</button>
       <button class="btn" id="listenBtn" onclick="toggleSummary()"><svg class="i"><use href="#i-volume"/></svg>Listen to summary</button>
     </div>
     <p class="small muted" style="margin-top:12px">The full outline, study guide, and source notes are in the <b>Read</b> tab.</p>
@@ -507,12 +509,12 @@
 <section class="view" id="diagrams">
   <div class="card">
     <h2><svg class="i"><use href="#i-image"/></svg>Slide gallery</h2>
-    <p class="small muted">Captions are the slide's own text plus a plain-language note. Colored notes explain key pictures. Click to enlarge. <span class="pill" style="background:#fef3c7;color:#b45309"><svg class="i"><use href="#i-star"/></svg>key image</span> marks the deck's most important diagrams and tables.</p>
+    <p class="small muted">Captions are the slide's own text plus a plain-language note. Colored notes explain the pictures. Click to enlarge.</p>
     <input class="search" id="slideSearch" placeholder="Search slides (peptide, helix, DNA)" style="width:100%;margin:18px 0 0">
     <div class="toolbar slide-controls" id="slideGroups" style="margin:16px 0 8px;align-items:center"></div>
     <div id="deckBreak" style="display:none;margin-top:12px">
       <table>
-        <tr><td><b>Slides 1–2</b></td><td>Protein jobs · amino acids · STRUCTURE = FUNCTION</td></tr><tr><td><b>Slides 3–10</b></td><td>The four levels of protein structure · hydrophobic effect · writing analogy</td></tr><tr><td><b>Slides 11–14</b></td><td>Nucleic acids · DNA vs. RNA · the double helix</td></tr>
+        <tr><td><b>Slides 1–2</b></td><td>Protein jobs · amino acid parts and chart · peptides and polypeptides · STRUCTURE = FUNCTION</td></tr><tr><td><b>Slides 3–10</b></td><td>The four levels of protein structure · side-chain interactions · hydrophobic effect · dimers, trimers, tetramers · writing analogy</td></tr><tr><td><b>Slides 11–14</b></td><td>Nucleic acids · nucleotides and bases · DNA structure · more DNA drawings · DNA vs. RNA</td></tr>
       </table>
     </div>
     <div class="gallery" id="gallery"></div>
@@ -559,6 +561,12 @@
 <button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg class="i"><use href="#i-up"/></svg></button>
 
 <!-- Settings modal -->
+<div class="modal" id="cheatModal" onclick="if(event.target===this)closeModal('cheatModal')">
+  <div class="sheet cheat">
+    <div class="modal-head"><h2><svg class="i"><use href="#i-doc"/></svg>Cheat sheet</h2><div class="spacer"></div><button class="btn" onclick="printCheatFrame()"><svg class="i"><use href="#i-printer"/></svg>Print</button><button class="iconbtn mh-x" onclick="closeModal('cheatModal')"><svg class="i"><use href="#i-x"/></svg></button></div>
+    <iframe id="cheatFrame" title="Cheat sheet"></iframe>
+  </div>
+</div>
 <div class="modal" id="settingsModal" onclick="if(event.target===this)closeModal('settingsModal')">
   <div class="sheet">
     <div class="modal-head"><h2><svg class="i"><use href="#i-gear"/></svg>Settings</h2><button class="iconbtn mh-x" onclick="closeModal('settingsModal')"><svg class="i"><use href="#i-x"/></svg></button></div>
@@ -702,111 +710,195 @@ const TOPICS = {
 };
 
 const CARDS = [
- ["proteins","What is the monomer (building block) of proteins?","Amino acids."],
- ["proteins","Which part is different in each amino acid?","The side chain (R-group)."],
- ["proteins","What do we call proteins that control reaction rates?","Enzymes."],
+ ["proteins","What four jobs of proteins are on Slide 2?","Regulate, transport, structure, control reaction rates."],
+ ["proteins","What are proteins that control reaction rates called?","Enzymes."],
  ["proteins","What does STRUCTURE = FUNCTION mean?","Shape decides a protein's job."],
+ ["proteins","What is the monomer (building block) of proteins?","Amino acids."],
+ ["proteins","About how many different amino acids are there?","About 20."],
+ ["proteins","What are the three parts of an amino acid?","Amino group, carboxyl group, side chain."],
+ ["proteins","Which part is different in each amino acid?","The side chain (R-group)."],
+ ["proteins","What three groups does the amino acid chart show?","Nonpolar, polar, electrically charged."],
+ ["proteins","What two groups are charged side chains split into?","Acidic and basic."],
  ["proteins","About how many amino acids are in a peptide?","About 2 to 50."],
  ["proteins","About how many amino acids are in a polypeptide?","About 51 or more."],
- ["levels","Primary, secondary, tertiary... what is the fourth level?","Quaternary."],
+ ["proteins","How many polypeptides make up a protein?","1 or more."],
+ ["levels","What are the four levels of protein structure, in order?","Primary, secondary, tertiary, quaternary."],
  ["levels","Which three levels does every protein have?","Primary, secondary, tertiary."],
- ["levels","In the writing analogy, what matches primary structure?","Letters."],
- ["levels","In the writing analogy, what matches tertiary structure?","Sentences."],
+ ["levels","In the writing analogy, what matches the four levels?","Letters, words, sentences, paragraphs."],
  ["primary","What is primary structure?","The order of amino acids."],
  ["primary","What bond joins amino acids in a chain?","Peptide bonds."],
+ ["primary","What kind of bond is a peptide bond?","Covalent."],
  ["primary","What process makes a peptide bond?","Dehydration synthesis."],
+ ["primary","What are the two ends of a protein chain called?","N-terminus and C-terminus."],
  ["primary","What sets the order of amino acids in a protein?","The DNA of a gene."],
- ["secondary","What are the two common secondary shapes?","Alpha helix and beta pleated sheet."],
- ["secondary","What bonds hold secondary structure in shape?","Hydrogen bonds."],
+ ["primary","What can happen if just one amino acid changes?","The shape and job can change."],
+ ["secondary","What are the two most common secondary shapes?","Alpha helix and beta pleated sheet."],
+ ["secondary","What causes secondary structure?","Hydrogen bonds."],
+ ["secondary","What is the backbone of a protein chain?","The chain without the R-groups."],
+ ["secondary","In secondary structure, a hydrogen bond links which two atoms?","Carbonyl O and amino H."],
  ["tertiary","What is tertiary structure?","One chain's whole 3D shape."],
+ ["tertiary","Tertiary structure is due to interactions between which parts?","Amino acid side chains."],
+ ["tertiary","What four side-chain interactions are on Slide 6?","Ionic bond, hydrogen bond, disulfide bridge, hydrophobic interaction."],
  ["tertiary","When a chain folds in water, where do nonpolar amino acids go?","To the center."],
+ ["tertiary","When a chain folds in water, where do polar amino acids go?","To the outside."],
+ ["tertiary","On Slide 8, what is the blue layer around the chain labeled?","Hydration layer."],
+ ["quaternary","What is quaternary structure?","2 or more subunits together."],
  ["quaternary","Do all proteins have quaternary structure?","No. Only proteins with 2+ chains."],
+ ["quaternary","What is a dimer with 2 matching subunits called?","Homodimer."],
+ ["quaternary","What is the trimer example on Slide 9?","Collagen."],
+ ["quaternary","What is the tetramer example on Slide 9?","Hemoglobin."],
+ ["nucleic","What are the two jobs of nucleic acids?","Store hereditary info; encode proteins."],
  ["nucleic","What is the monomer (building block) of nucleic acids?","Nucleotides."],
- ["nucleic","What are the 3 parts of a nucleotide?","Sugar, phosphate group, base."],
+ ["nucleic","What are the 3 parts of a nucleotide?","5-carbon sugar, phosphate group, nitrogenous base."],
+ ["nucleic","What are the four bases in DNA?","A, T, C, G."],
  ["nucleic","Which base is in RNA but not in DNA?","Uracil (U)."],
+ ["nucleic","Which bases are labeled purines on Slide 11?","Adenine and guanine."],
+ ["nucleic","Which bases are labeled pyrimidines on Slide 11?","Cytosine and thymine (in DNA)."],
+ ["nucleic","Which sugar is in RNA?","Ribose."],
+ ["dna","What is the shape of DNA called?","Double helix."],
+ ["dna","What is on the outside of the DNA helix?","The sugar-phosphate backbone."],
  ["dna","Which bases pair up in DNA?","A with T, C with G."],
  ["dna","What holds DNA base pairs together?","Hydrogen bonds."],
- ["dna","What does antiparallel mean for DNA?","Strands run in opposite directions."]
+ ["dna","What does antiparallel mean for DNA?","Strands run in opposite directions."],
+ ["dna","How many strands do DNA and RNA have?","DNA two; RNA one."]
 ].map((c,i)=>({id:i,t:c[0],q:c[1],a:c[2]}));
 
 const QUIZ = [
- ["What is the building block of a protein?",["Amino acid","Nucleotide","Sugar","Phosphate group"],0,"proteins"],
- ["What is a chain of 30 amino acids called?",["Peptide","Polypeptide","Nucleotide","Double helix"],0,"proteins"],
- ["What does STRUCTURE = FUNCTION mean?",["A protein's shape decides its job","A protein's size decides its color","Every protein does the same job","Proteins store genetic information"],0,"proteins"],
- ["What is primary structure?",["The order of amino acids","The whole 3D shape","Coils and zigzag sheets","Two or more chains together"],0,"primary"],
- ["How do peptide bonds form?",["Dehydration synthesis","Base pairing","Protein folding","Melting"],0,"primary"],
+ ["What is the building block of a protein?",["Amino acid","Nucleotide","Phosphate group","Double helix"],0,"proteins"],
+ ["What are proteins that control reaction rates called?",["Enzymes","Nucleotides","Hydration layers","Base pairs"],0,"proteins"],
+ ["What does STRUCTURE = FUNCTION mean?",["A protein's shape decides its job","Proteins are made of nucleotides","DNA has two strands","Water is given off when bonds form"],0,"proteins"],
+ ["Which part of an amino acid is different in each one?",["The side chain (R-group)","The peptide bond","The hydration layer","The phosphate group"],0,"proteins"],
+ ["Which group appears on the Slide 2 amino acid chart?",["Electrically charged side chains","Pyrimidine bases","Sugar-phosphate backbones","Hydration layers"],0,"proteins"],
+ ["What is primary structure?",["The order of amino acids","The whole 3D shape","Coils and pleated sheets","Two or more chains together"],0,"primary"],
+ ["How do peptide bonds form?",["Dehydration synthesis","Complementary base pairing","The hydrophobic effect","Hydrogen bonding"],0,"primary"],
+ ["What are the two ends of a protein chain called?",["N-terminus and C-terminus","5′ end and 3′ end","Purine and pyrimidine","Homodimer and heterodimer"],0,"primary"],
+ ["What sets the order of amino acids in a protein?",["The gene's DNA","The hydration layer","The disulfide bridges","The sugar ribose"],0,"primary"],
  ["Which level has the alpha helix and beta pleated sheet?",["Secondary structure","Primary structure","Tertiary structure","Quaternary structure"],0,"secondary"],
- ["What holds secondary structure in shape?",["Hydrogen bonds","Peptide bonds","Phosphate groups","Sugars"],0,"secondary"],
- ["Tertiary structure comes from pulls between which parts?",["Side chains","Nucleotides","Separate proteins","DNA strands"],0,"tertiary"],
- ["When a chain folds in water, where do nonpolar amino acids go?",["Gather in the center","They turn into DNA","They break off the chain","They turn into water"],0,"tertiary"],
- ["Which proteins have quaternary structure?",["Only proteins with 2 or more chains","Every protein","Only proteins in plants","Only very small proteins"],0,"quaternary"],
+ ["What holds secondary structure in shape?",["Hydrogen bonds","Disulfide bridges","Phosphate groups","Uracil"],0,"secondary"],
+ ["Tertiary structure is due to interactions between which parts?",["Amino acid side chains","Nucleotides","DNA strands","Separate proteins"],0,"tertiary"],
+ ["Which Slide 6 interaction is drawn as S–S?",["Disulfide bridge","Ionic bond","Peptide bond","Hydration layer"],0,"tertiary"],
+ ["When a chain folds in water, where do nonpolar amino acids go?",["They gather in the center","They turn into DNA","They break off the chain","They become the hydration layer"],0,"tertiary"],
+ ["What does quaternary structure need?",["2 or more subunits","A phosphate group","The base uracil","A 5-carbon sugar"],0,"quaternary"],
  ["In the writing analogy, sentences match which level?",["Tertiary","Primary","Secondary","Quaternary"],0,"levels"],
- ["What is the building block of nucleic acids?",["Nucleotide","Amino acid","Peptide","Side chain"],0,"nucleic"],
- ["Which base is in RNA but not in DNA?",["Uracil (U)","Thymine (T)","Adenine (A)","Guanine (G)"],0,"nucleic"],
- ["In DNA, which base does A pair with?",["T","G","C","A"],0,"dna"],
- ["DNA's two strands are antiparallel. What does that mean?",["They run in opposite directions","They are made of amino acids","They never touch","Use different sugars"],0,"dna"]
+ ["What are the three parts of a nucleotide?",["5-carbon sugar, phosphate group, nitrogenous base","Ionic bond, hydrogen bond, disulfide bridge","Dimer, trimer, tetramer","Alpha helix, beta sheet, backbone"],0,"nucleic"],
+ ["Which base is in RNA but not in DNA?",["Uracil (U)","Adenine (A)","Guanine (G)","Cytosine (C)"],0,"nucleic"],
+ ["What is on the outside of the DNA double helix?",["The sugar-phosphate backbone","The base pairs","Amino acids","A hydration layer"],0,"dna"],
+ ["DNA's two strands are antiparallel. What does that mean?",["They run in opposite directions","They are made of amino acids","They are joined by peptide bonds","They are folded into sheets"],0,"dna"]
 ].map((x,i)=>({id:i,q:x[0],opts:x[1],correct:x[2],t:x[3]}));
 
 const SCENARIOS = [
  ["You bend your house key, and now it won't open the door. Which lesson idea is this like?",
   ["STRUCTURE = FUNCTION: shape decides the job","Proteins are made of nucleotides","Every protein has four levels","DNA uses the base U"],0,
   "A key works because of its shape. A protein's shape decides its job too.","proteins"],
- ["You shake salad dressing, and the oil drops clump together away from the water. What in a folding protein acts like the oil?",
-  ["Nonpolar amino acids","The sugar in DNA","The bases in RNA","Peptide bonds"],0,
-  "Nonpolar amino acids are water-fearing. They clump in the center when a protein folds.","tertiary"],
+ ["You string 30 beads to make a bracelet. If each bead were an amino acid, what would the chain be called?",
+  ["A peptide","A nucleotide","A double helix","A hydration layer"],0,
+  "A peptide is about 2 to 50 amino acids. A polypeptide is about 51 or more.","proteins"],
  ["When you text, letters make words and words make a sentence. Which protein level is like the sentence?",
   ["Tertiary structure","Primary structure","Secondary structure","Quaternary structure"],0,
   "In the Slide 10 analogy, sentences match tertiary structure. It is the whole 3D shape of one chain.","levels"],
- ["Your friend says every protein has all four levels. How many levels does a protein with just one chain have?",
-  ["Three levels","Four levels","One level","No levels"],0,
-  "Quaternary structure needs 2 or more chains. Not all proteins have it.","quaternary"],
- ["Your paper DNA ladder reads A-T-G-C on one side. What goes on the other side?",
-  ["T-A-C-G","A-T-G-C","C-G-A-T","G-C-A-T"],0,
-  "A pairs with T, and C pairs with G.","dna"]
+ ["You snap 4 building blocks together into one toy. If each block were a protein subunit, what would the toy be called?",
+  ["A tetramer","A nucleotide","A peptide bond","A side chain"],0,
+  "A tetramer has 4 subunits. Hemoglobin is the tetramer example on Slide 9.","quaternary"],
+ ["You build a paper DNA ladder and put an A on one rail. What goes across from it on the other rail?",
+  ["T","C","G","A phosphate"],0,
+  "A pairs with T, and C pairs with G. Hydrogen bonds hold each pair together.","dna"]
 ].map((x,i)=>({id:i,q:x[0],opts:x[1],correct:x[2],rat:x[3],t:x[4]}));
 
 const GLOSS_CATS={prot:"Protein building blocks",struct:"Levels of protein structure",nuc:"Nucleic acids & DNA"};
 const GLOSSARY = [
- ["Protein","One or more chains of amino acids with a working 3D shape.","prot"],
- ["Monomer","One small building block that links with others.","prot"],
- ["Amino acid","The building block of proteins. There are about 20 kinds.","prot"],
- ["Side chain (R-group)","The part of an amino acid that is different in each one.","prot"],
- ["Peptide","A short chain of about 2-50 amino acids.","prot"],
- ["Polypeptide","A long chain of about 51 or more amino acids.","prot"],
- ["Enzyme","A protein that controls how fast reactions go.","prot"],
- ["Primary structure","The order of amino acids in a chain.","struct"],
- ["Peptide bond","The strong covalent bond that joins two amino acids.","struct"],
- ["Dehydration synthesis","Joining two pieces by giving off water.","struct"],
- ["Secondary structure","Small coils and zigzag sheets held by hydrogen bonds.","struct"],
- ["Hydrogen bond","A weak pull between atoms (OpenStax Biology 2e).","struct"],
- ["Tertiary structure","The whole 3D shape of one chain.","struct"],
- ["Hydrophobic effect","Water-fearing amino acids hide in the center when a chain folds.","struct"],
- ["Quaternary structure","Two or more chains fitted together. Not all proteins have it.","struct"],
- ["Subunit","One polypeptide chain inside a bigger protein.","struct"],
- ["Nucleic acid","A molecule that stores and passes on information from parents.","nuc"],
- ["Nucleotide","The building block of nucleic acids: sugar, phosphate group, and base.","nuc"],
- ["DNA","A nucleic acid with bases A, T, C, G and the sugar deoxyribose.","nuc"],
- ["RNA","A nucleic acid with bases A, U, C, G and the sugar ribose.","nuc"],
- ["Uracil (U)","The base RNA uses in place of thymine (T).","nuc"],
- ["Double helix","DNA's shape: two strands twisted around each other.","nuc"],
- ["Antiparallel","DNA's two strands run in opposite directions.","nuc"]
+ ["Protein", "Slide 2: 1+ polypeptides with a 3D structure. It is functional.", "prot"],
+ ["Functional", "Slide 2 says a protein is functional. Outside source: Able to do its job. Example: a phone that turns on and makes calls is functional. (Merriam-Webster Dictionary)", "prot"],
+ ["Regulate", "A protein function on Slide 2. Outside source: To control how something works. Example: a thermostat regulates a room's heat. (Merriam-Webster Dictionary)", "prot"],
+ ["Transport", "A protein function on Slide 2. Outside source: To carry things from place to place. Example: a school bus transports students. (Merriam-Webster Dictionary)", "prot"],
+ ["Structure", "A protein function on Slide 2. The slide also says \"STRUCTURE = FUNCTION!\"", "prot"],
+ ["Enzyme", "Listed on Slide 2 under \"Control reaction rates.\" Outside source: A protein that speeds up a reaction. Example: an enzyme in saliva starts breaking down bread. (OpenStax Biology 2e)", "prot"],
+ ["Monomer", "Slide 2: amino acids. Slide 11: nucleotides. Outside source: One small building block that links with others. Example: one Lego brick. (OpenStax Biology 2e)", "prot"],
+ ["Amino acid", "The monomer of proteins. Slide 2: about 20 different kinds.", "prot"],
+ ["Amino group", "Labeled in the Slide 2 amino acid picture: the N with two H's.", "prot"],
+ ["Carboxyl group", "Labeled in the Slide 2 amino acid picture: the C with an O and an OH.", "prot"],
+ ["Side chain (R-group)", "Slide 2: \"R-group / side chain = differs!\" It is different in each amino acid.", "prot"],
+ ["Nonpolar side chain", "A group on the Slide 2 chart, with 9 amino acids. Slide 8: nonpolar amino acids gather in the center. Outside source: Nonpolar things don't mix with water. Example: oil floats on water. (OpenStax Biology 2e)", "prot"],
+ ["Polar side chain", "A group on the Slide 2 chart, with 6 amino acids. Slide 8: polar amino acids stay outside. Outside source: Polar things mix with water. Example: sugar dissolves in tea. (OpenStax Biology 2e)", "prot"],
+ ["Electrically charged side chain", "A group on the Slide 2 chart: 5 amino acids, split into acidic and basic.", "prot"],
+ ["Acidic", "The charged group on Slide 2 with aspartate and glutamate.", "prot"],
+ ["Basic", "The charged group on Slide 2 with lysine, arginine, and histidine.", "prot"],
+ ["Peptide", "Slide 2: about 2–50 amino acids.", "prot"],
+ ["Polypeptide", "Slide 2: about 51 or more amino acids.", "prot"],
+ ["Primary structure", "Slide 4 notes: the sequence (order) of amino acids in a polypeptide chain.", "struct"],
+ ["Peptide bond", "Slide 4: covalent, formed via dehydration synthesis. It joins the amino acids.", "struct"],
+ ["Covalent", "Slide 4: the kind of bond a peptide bond is. Outside source: A strong bond where atoms share electrons. Example: the bonds inside a water molecule. (OpenStax Biology 2e)", "struct"],
+ ["Dehydration synthesis", "Slide 4: how peptide bonds form. The chart shows water (H₂O) given off.", "struct"],
+ ["N-terminus", "Labeled on Slide 4 at one end of the chain.", "struct"],
+ ["C-terminus", "Labeled on Slide 4 at the other end of the chain.", "struct"],
+ ["Amino end and carboxyl end", "Labeled on the Slide 4 chart at the two ends of the joined amino acids.", "struct"],
+ ["Secondary structure", "Slide 5: most common are the α helix and β pleated sheet. Caused by hydrogen bonds.", "struct"],
+ ["α helix (alpha helix)", "Slide 5: a secondary structure, drawn as a coil.", "struct"],
+ ["β pleated sheet (beta pleated sheet)", "Slide 5: a secondary structure, drawn as a zigzag.", "struct"],
+ ["Hydrogen bond", "Slide 5: causes secondary structure. Also on Slides 6, 12, and 13. Outside source: A weak pull between atoms. Example: it pulls water molecules together into drops. (OpenStax Biology 2e)", "struct"],
+ ["Backbone", "Slide 5 notes: the polypeptide chain apart from the R groups.", "struct"],
+ ["Carbonyl O", "Slide 5 notes: the O of one amino acid in a hydrogen bond. Outside source: The O in a C=O group. Example: nail polish remover also has a C=O group. (OpenStax Biology 2e)", "struct"],
+ ["Amino H", "Slide 5 notes: the H of another amino acid in that hydrogen bond. Outside source: The H in an N–H group. Example: the N with two H's at the left of the Slide 2 amino acid drawing. (OpenStax Biology 2e)", "struct"],
+ ["Tertiary structure", "Slide 6: 3D shape, due to interactions between amino acid side chains.", "struct"],
+ ["Ionic bond", "Labeled on Slide 6 as a side-chain interaction. Outside source: A pull between a plus and a minus charge. Example: table salt is held together this way. (OpenStax Biology 2e)", "struct"],
+ ["Disulfide bridge", "Labeled on Slide 6 as a side-chain interaction, drawn as S–S. Outside source: A link between two sulfur atoms, like a staple. Example: links like these help shape your hair. (OpenStax Biology 2e)", "struct"],
+ ["Hydrophobic interaction", "Labeled on Slide 6 as a side-chain interaction.", "struct"],
+ ["Hydrophobic", "Used in \"hydrophobic interaction\" and \"hydrophobic effect\" (Slides 6–8). Outside source: Water-fearing. Hydrophobic things clump together away from water. Example: oil drops in salad dressing. (OpenStax Biology 2e)", "struct"],
+ ["Hydrophobic effect", "Title of Slides 7–8. It minimizes the hydration layer and helps weak interactions between residues.", "struct"],
+ ["Hydration layer", "Labeled on Slide 8: the blue layer around the chain. Outside source: Hydration means water, so it is the water around the chain. Example: the thin coat of water on a washed grape. (Merriam-Webster Dictionary)", "struct"],
+ ["Protein folding", "Labeled on Slide 8: the arrow from unfolded to folded polypeptide.", "struct"],
+ ["Residue", "Slide 8: \"amino acid residues.\" Outside source: One amino acid inside a chain. Example: one bead on a necklace. (OpenStax Biology 2e)", "struct"],
+ ["Quaternary structure", "Slide 9: 2+ subunits. \"*NOT ALL PROTEINS HAVE THIS!!!!\"", "struct"],
+ ["Subunit", "Slide 9: quaternary structure has 2+ subunits. Slide 6 notes: two or more polypeptide chains.", "struct"],
+ ["Dimer", "A Slide 9 box, shown as a homodimer and a heterodimer.", "struct"],
+ ["Homodimer", "Slide 9: a dimer drawn with 2 matching shapes.", "struct"],
+ ["Heterodimer", "Slide 9: a dimer drawn with 2 different shapes.", "struct"],
+ ["Trimer", "A Slide 9 box: \"e.g. Collagen.\"", "struct"],
+ ["Tetramer", "A Slide 9 box: \"e.g. Hemoglobin (alpha-2-beta-2 tetramer).\"", "struct"],
+ ["Collagen", "Slide 9: the trimer example. Outside source: A protein that makes skin, bones, and tendons strong. Example: gelatin in gummy candy comes from collagen. (OpenStax Biology 2e)", "struct"],
+ ["Hemoglobin", "Slide 9: the tetramer example, an \"alpha-2-beta-2 tetramer.\" Outside source: A protein in red blood cells that carries oxygen. Example: it is why blood looks red. (OpenStax Biology 2e)", "struct"],
+ ["Antibody", "Slide 10 sample text: \"Antibodies are a useful tool.\" Outside source: A protein that helps your body fight germs. Example: vaccines teach your body to make antibodies. (OpenStax Biology 2e)", "struct"],
+ ["Nucleic acid", "Slide 11: stores and transmits hereditary info, and encodes protein products. Examples: DNA, RNA.", "nuc"],
+ ["Hereditary information", "Slide 11: what nucleic acids store and transmit. Outside source: Information passed from parents to children. Example: eye color. (OpenStax Biology 2e)", "nuc"],
+ ["Encode", "Slide 11: nucleic acids \"encode protein products.\" Outside source: To hold the code for something. Example: a recipe holds the code for a cake. (Merriam-Webster Dictionary)", "nuc"],
+ ["Nucleotide", "Slide 11: the monomer of nucleic acids. Each has a 5-carbon sugar, phosphate group, and nitrogenous base.", "nuc"],
+ ["5-carbon sugar", "Slide 11: one part of each nucleotide.", "nuc"],
+ ["Phosphate group", "Slide 11: one part of each nucleotide. Drawn as P on Slides 12 and 13.", "nuc"],
+ ["Nitrogenous base", "Slide 11: one part of each nucleotide. DNA: A, T, C, G. RNA: A, U, C, G.", "nuc"],
+ ["Nucleobases", "Slide 14's label for thymine, adenine, cytosine, guanine, and uracil.", "nuc"],
+ ["Adenine (A)", "Slide 11: a purine base. Slide 14: in DNA and RNA.", "nuc"],
+ ["Guanine (G)", "Slide 11: a purine base. Slide 14: in DNA and RNA.", "nuc"],
+ ["Cytosine (C)", "Slide 11: a pyrimidine base. Slide 14: in DNA and RNA.", "nuc"],
+ ["Thymine (T)", "Slide 11: a pyrimidine base (in DNA). Slide 14: DNA only.", "nuc"],
+ ["Uracil (U)", "Slide 11: \"uracil (in RNA).\" Slide 14: RNA only.", "nuc"],
+ ["Purine bases", "Labeled on Slide 11 as the purine bases: adenine and guanine.", "nuc"],
+ ["Pyrimidine bases", "Labeled on Slide 11 as the pyrimidine bases: cytosine and thymine (in DNA).", "nuc"],
+ ["Deoxyribose", "Labeled on Slide 11. Slide 13 key: S = deoxyribose (sugar). Slide 14: by DNA.", "nuc"],
+ ["Ribose", "Slide 11: \"ribose (in RNA).\" Slide 14: by RNA.", "nuc"],
+ ["DNA", "Slide 14: deoxyribonucleic acid. Slide 11: bases A, T, C, G. Drawn as two twisted strands.", "nuc"],
+ ["RNA", "Slide 14: ribonucleic acid. Slide 11: bases A, U, C, G. Drawn as one strand.", "nuc"],
+ ["Double helix", "Labeled on Slide 12 for DNA's twisted shape.", "nuc"],
+ ["Sugar-phosphate backbone", "Slide 12 notes: the sugars and phosphates on the outside of the helix.", "nuc"],
+ ["Base pair", "Labeled on Slide 13. Slide 12 notes: bases in a pair are bound by hydrogen bonds.", "nuc"],
+ ["Complementary base pairing", "Labeled on Slides 12 and 13. The pictures pair A with T and C with G.", "nuc"],
+ ["5′ end and 3′ end", "Labeled on Slides 11 and 13 at the ends of a strand. Outside source: say \"five prime\" and \"three prime\" (OpenStax Biology 2e).", "nuc"],
+ ["Antiparallel", "Slide 12 notes: the two strands run in opposite directions. It is important for copying DNA.", "nuc"]
 ];
 
 const SLIDE_NOTES = {
  1:{note:"Title slide: 2.5 Proteins & Nucleic Acids, from Unit Two: Biomolecules."},
- 2:{star:true,note:"Proteins are built from amino acids. Their shape decides their job: STRUCTURE = FUNCTION."},
- 3:{star:true,note:"The four levels of protein shape in one picture: primary, secondary, tertiary, quaternary."},
- 4:{star:true,note:"Primary structure is the order of amino acids. Peptide bonds join them, and water is given off."},
- 5:{note:"Secondary structure is coils and zigzag sheets, held by hydrogen bonds along the backbone."},
- 6:{star:true,note:"Tertiary structure is the whole 3D shape. Side chains pull on each other in four ways."},
- 7:{note:"An unfolded chain in water. Yellow dots are polar, red dots are nonpolar. The folded result is hidden."},
- 8:{star:true,note:"After folding, nonpolar amino acids hide in the center. Polar amino acids stay outside near water."},
- 9:{star:true,note:"Quaternary structure is 2 or more chains together. Not all proteins have it."},
- 10:{star:true,note:"Letters, words, sentences, and paragraphs match primary, secondary, tertiary, and quaternary."},
- 11:{star:true,note:"Nucleic acids are DNA and RNA. Their building block is the nucleotide: sugar, phosphate, base."},
- 12:{star:true,note:"DNA is a twisted ladder. Backbone outside, base pairs inside: A with T, C with G."},
- 13:{note:"Extra drawings of the same DNA ideas. You don't need to memorize these."},
- 14:{note:"DNA has thymine and deoxyribose. RNA has uracil and ribose. Both have A, C, and G."}
+ 2:{note:"Proteins regulate, transport, give structure, and control reaction rates. An amino acid has an amino group, carboxyl group, and side chain. Peptide is about 2-50, polypeptide about 51+."},
+ 3:{note:"The four levels of protein shape in order: primary, secondary, tertiary, quaternary."},
+ 4:{note:"Primary structure is the order of amino acids, from N-terminus to C-terminus. Covalent peptide bonds form by dehydration synthesis. DNA sets the order."},
+ 5:{note:"The alpha helix and beta pleated sheet are held by hydrogen bonds. They link a C=O oxygen to an N-H hydrogen along the backbone."},
+ 6:{note:"Tertiary structure is one chain's 3D shape. Side chains link by ionic bonds, hydrogen bonds, disulfide bridges, and hydrophobic interactions."},
+ 7:{note:"An unfolded chain in water. Yellow circles are polar amino acids. Red circles are nonpolar. A green box covers the folded result."},
+ 8:{note:"When the chain folds, nonpolar amino acids gather in the center. Polar ones stay outside, and the hydration layer shrinks."},
+ 9:{note:"Quaternary structure is 2+ subunits. The slide says not all proteins have this. Examples: dimers, collagen (trimer), hemoglobin (tetramer)."},
+ 10:{note:"Letters, words, sentences, and paragraphs match primary, secondary, tertiary, and quaternary. The sample text is about antibodies."},
+ 11:{note:"Nucleic acids store hereditary info and encode proteins. A nucleotide has a 5-carbon sugar, phosphate group, and nitrogenous base."},
+ 12:{note:"DNA is a double helix. The sugar-phosphate backbone is outside. Base pairs A-T and C-G are inside, held by hydrogen bonds. Strands are antiparallel."},
+ 13:{note:"Three more DNA drawings: backbones, base pairs, hydrogen bonds, 5' and 3' ends, a nucleotide, and a letter key."},
+ 14:{note:"DNA has thymine, deoxyribose, and two strands. RNA has uracil, ribose, and one strand. Both have A, C, and G."}
 };
 
 /* ---------- STORAGE ---------- */
@@ -903,17 +995,19 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.querySel
 /* Overview test chips — each links to its section in the Study guide (Read tab) */
 document.getElementById('testChips').innerHTML = [
  ["their jobs","Protein jobs · STRUCTURE = FUNCTION"],
- ["building blocks","Amino acids · peptides · polypeptides"],
+ ["building blocks","Amino acid parts · chart of 20 amino acids"],
+ ["amino acid to protein","Peptides · polypeptides · proteins"],
  ["four levels","The four levels of structure"],
- ["primary structure","Level 1: order of amino acids"],
- ["secondary structure","Level 2: coils and sheets"],
- ["tertiary structure","Level 3: whole 3D shape"],
- ["hydrophobic effect","Hydrophobic effect"],
- ["quaternary","Level 4: 2+ chains, not all proteins"],
+ ["primary structure","Level 1: order of amino acids · peptide bonds"],
+ ["secondary structure","Level 2: helices and pleated sheets"],
+ ["tertiary structure","Level 3: 3D shape · side-chain interactions"],
+ ["hydrophobic effect","Hydrophobic effect · folding in water"],
+ ["quaternary","Level 4: 2+ subunits · dimer, trimer, tetramer"],
  ["alphabet analogy","Letters · words · sentences · paragraphs"],
- ["nucleic acids","Nucleotides and their 3 parts"],
+ ["nucleic acids","Nucleotides · bases · purines and pyrimidines"],
  ["dna vs. rna","DNA vs. RNA"],
- ["double helix","DNA double helix · base pairs"]
+ ["double helix","DNA double helix · base pairs · antiparallel"],
+ ["more dna pictures","More DNA drawings (Slide 13)"]
 ].map(([kw,label])=>`<button class="chip chip-link" onclick="openGuide('${kw}')">${esc(label)} ${icon('arrowright')}</button>`).join('');
 
 /* Overview mnemonics — interactive reveal cards */
@@ -1152,7 +1246,7 @@ function renderSlideGroups(){
   document.getElementById('slideGroups').innerHTML=
     `<span class="tool" style="cursor:default"><svg class="i"><use href="#i-filter"/></svg><select onchange="setSlideGroup(this.value)">`
     +SLIDE_GROUPS.map(gr=>`<option value="${gr.k}"${slideGroup===gr.k?' selected':''}>${esc(gr.k==='all'?'All slides':'Slides '+gr.label)}</option>`).join('')+`</select></span>`
-    +`<button class="tool${slideKeyOnly?' on':''}" onclick="slideKeyOnly=!slideKeyOnly;renderSlideGroups();renderGallery(document.getElementById('slideSearch').value)"><svg class="i"><use href="#i-star"/></svg>Key images</button>`
+    +``
     +`<div class="spacer"></div>`
     +`<button class="tool${dOpen?' on':''}" id="deckToggle" onclick="toggleDeck()"><svg class="i"><use href="#i-list"/></svg>How the deck breaks down</button>`;
 }
@@ -1165,7 +1259,7 @@ function renderGallery(filter=''){
   g.innerHTML=SLIDES.filter(s=>{ if(s.n<gr.lo||s.n>gr.hi) return false;
       const sn=SLIDE_NOTES[s.n]; if(slideKeyOnly && !(sn&&sn.star)) return false;
       const note=sn?sn.note:''; return !f||(s.text+' '+note).toLowerCase().includes(f); })
-   .map(s=>{ const sn=SLIDE_NOTES[s.n]||{}; const star=sn.star?`<span class="tbadge" style="background:#fef3c7;color:#b45309"><svg class="i"><use href="#i-star"/></svg></span>`:'';
+   .map(s=>{ const sn=SLIDE_NOTES[s.n]||{}; const star=false?`<span class="tbadge" style="background:#fef3c7;color:#b45309"><svg class="i"><use href="#i-star"/></svg></span>`:'';
      const cap=s.text?s.text.split('\n')[0]:'(diagram — no text)';
      return `<div class="gitem"><img loading="lazy" src="${IMG[s.n]}" alt="Slide ${s.n}" onclick="LB.open(${s.n})">
        <div class="cap">${star}<span class="snum">Slide ${s.n}</span> <span class="stext">${esc(cap)}</span></div>${sn.note?`<div class="note">${esc(sn.note)}</div>`:''}</div>`; }).join('');
@@ -1233,12 +1327,14 @@ function speak(text){ if(!('speechSynthesis'in window))return; window.speechSynt
   const u=new SpeechSynthesisUtterance(text); u.rate=.98; u.onend=()=>{speaking=false;updateListen();}; speaking=true; window.speechSynthesis.speak(u); updateListen(); }
 function stopSpeak(){ if('speechSynthesis'in window)window.speechSynthesis.cancel(); speaking=false; updateListen(); }
 function updateListen(){ const b=document.getElementById('listenBtn'); if(b) b.innerHTML=(speaking?icon('x')+'Stop':icon('volume')+'Listen to summary'); }
-const SUMMARY="Let's go over proteins and nucleic acids. Proteins do many jobs. Some proteins, called enzymes, control how fast reactions go. Proteins are built from amino acids. A protein's shape decides its job. This is structure equals function. A protein's shape builds up in four levels. Think of writing. Primary structure is like letters. It is the order of amino acids. Secondary structure is like words. The chain folds into small coils and zigzag sheets. Tertiary structure is like a sentence. It is the whole 3D shape of one chain. In water, the water-fearing parts hide in the middle. Quaternary structure is like a paragraph. Two or more chains fit together. Not all proteins have this level. Now, nucleic acids. DNA and RNA are nucleic acids. They hold information passed down from parents. Their building block is the nucleotide. A nucleotide has a sugar, a phosphate group, and a base. DNA uses the bases A, T, C, and G. RNA uses U in place of T. DNA is a twisted ladder. A pairs with T, and C pairs with G.";
+const SUMMARY="Let's go over proteins and nucleic acids. Proteins do many jobs. They regulate, transport, and give structure. Enzymes are proteins that control how fast reactions go. A protein's shape decides its job. Structure equals function. Proteins are built from about twenty amino acids. Each amino acid has an amino group, a carboxyl group, and a side chain. The side chain is different in each one. Side chains can be nonpolar, polar, or charged. A peptide is about two to fifty amino acids. A polypeptide is fifty-one or more. A protein's shape builds up in four levels. Think of writing. Primary structure is like letters. It is the order of amino acids, joined by peptide bonds. Secondary structure is like words. Hydrogen bonds fold the chain into coils and pleated sheets. Tertiary structure is like a sentence. Side chains pull on each other to make one chain's 3D shape. When a chain folds in water, nonpolar amino acids gather in the middle. Quaternary structure is like a paragraph. Two or more chains fit together, like in hemoglobin. Not all proteins have this level. Now, nucleic acids. DNA and RNA store and pass on hereditary information. Their building block is the nucleotide. A nucleotide has a sugar, a phosphate group, and a base. DNA uses A, T, C, and G. RNA uses U in place of T. DNA has two strands. RNA has one. DNA is a double helix, like a twisted ladder. A pairs with T, and C pairs with G. The two strands run in opposite directions.";
 function toggleSummary(){ if(speaking) stopSpeak(); else speak(SUMMARY); }
 
 /* ---------- PRINT CHEAT SHEET ---------- */
+function showCheat(html){ document.getElementById('cheatFrame').srcdoc=html; openModal('cheatModal'); }
+function printCheatFrame(){ const w=document.getElementById('cheatFrame').contentWindow; w.focus(); w.print(); }
 function printCheat(){
-  const w=window.open('','_blank');
+  
   const css=`body{font:13px/1.5 -apple-system,Arial,sans-serif;color:#111;margin:22px;max-width:800px}
    h1{font-size:19px;color:#7c3aed;margin:0 0 2px} .sub{color:#555;font-size:11px;margin-bottom:10px}
    h2{font-size:12px;color:#7c3aed;border-bottom:1.5px solid #7c3aed;padding-bottom:2px;margin:12px 0 4px;text-transform:uppercase;letter-spacing:.5px}
@@ -1252,233 +1348,468 @@ function printCheat(){
 </head><body>
   <h1>2.5 Proteins &amp; Nucleic Acids — Cheat Sheet</h1><div class="sub">Biology · Unit Two: Biomolecules</div>
   <div class="cols">
-  <div class="blk"><h2>Proteins</h2><ul>
-   <li>Building block = <b>amino acid</b> (about 20 kinds)</li>
-   <li>The <b>side chain</b> is different in each one</li>
-   <li><b>Peptide</b> about 2–50 · <b>polypeptide</b> about 51+</li>
-   <li>Enzymes control reaction rates</li>
+  <div class="blk"><h2>1. Protein jobs</h2><ul>
+   <li>Regulate · transport · structure · control reaction rates</li>
+   <li><b>Enzymes</b> control reaction rates</li>
    <li><b>STRUCTURE = FUNCTION</b>: shape decides the job</li></ul></div>
-  <div class="blk"><h2>The four levels</h2><table>
-   <tr><td><b>Primary</b></td><td>Order of amino acids · peptide bonds</td><td>Letters</td></tr>
-   <tr><td><b>Secondary</b></td><td>Coils and zigzag sheets · hydrogen bonds</td><td>Words</td></tr>
-   <tr><td><b>Tertiary</b></td><td>Whole 3D shape · side chains pull</td><td>Sentences</td></tr>
-   <tr><td><b>Quaternary</b></td><td>2+ chains · <b>not all proteins</b></td><td>Paragraphs</td></tr></table></div>
-  <div class="blk"><h2>Folding in water</h2><ul>
-   <li>Nonpolar amino acids hide in the <b>center</b></li>
-   <li>Polar amino acids stay on the <b>outside</b></li></ul></div>
-  <div class="blk"><h2>Nucleic acids</h2><ul>
-   <li>Store and pass on information from parents</li>
-   <li>Examples: <b>DNA</b>, <b>RNA</b></li>
-   <li>Nucleotide = sugar + phosphate group + base</li></ul></div>
-  <div class="blk"><h2>DNA vs. RNA</h2><table>
+  <div class="blk"><h2>2. Amino acids</h2><ul>
+   <li>Monomer = <b>amino acid</b> (about 20 kinds)</li>
+   <li>Parts: <b>amino group</b> · <b>carboxyl group</b> · <b>side chain (R-group)</b></li>
+   <li>The side chain differs in each one</li>
+   <li>Chart: <b>nonpolar</b> (9) · <b>polar</b> (6) · <b>electrically charged</b> (5): acidic (2), basic (3)</li></ul></div>
+  <div class="blk"><h2>3. Amino acid to protein</h2><ul>
+   <li><b>Peptide</b> about 2–50 aa · <b>polypeptide</b> about 51+ aa</li>
+   <li><b>Protein</b> = 1+ polypeptides, 3D, functional</li></ul></div>
+  <div class="blk"><h2>4–10. The four levels</h2><table>
+   <tr><td><b>Primary</b></td><td>Order of amino acids · covalent peptide bonds by dehydration synthesis · N-terminus to C-terminus · DNA sets the order</td><td>Letters</td></tr>
+   <tr><td><b>Secondary</b></td><td>α helix · β pleated sheet · hydrogen bonds (carbonyl O to amino H) along the backbone</td><td>Words</td></tr>
+   <tr><td><b>Tertiary</b></td><td>One chain's 3D shape · side chains: ionic bond, hydrogen bond, disulfide bridge, hydrophobic interaction</td><td>Sentences</td></tr>
+   <tr><td><b>Quaternary</b></td><td>2+ subunits · <b>not all proteins</b> · dimer (homo/hetero), trimer (collagen), tetramer (hemoglobin, alpha-2-beta-2)</td><td>Paragraphs</td></tr></table></div>
+  <div class="blk"><h2>8. Hydrophobic effect</h2><ul>
+   <li>Nonpolar amino acids fold to the <b>center</b></li>
+   <li>Polar amino acids stay on the <b>outside</b></li>
+   <li>Folding shrinks the <b>hydration layer</b> (water around the chain)</li></ul></div>
+  <div class="blk"><h2>11. Nucleic acids</h2><ul>
+   <li>Store &amp; pass on hereditary info · encode proteins</li>
+   <li>Examples: <b>DNA</b>, <b>RNA</b> · monomer = <b>nucleotide</b></li>
+   <li>Nucleotide = 5-carbon sugar + phosphate group + nitrogenous base</li>
+   <li>Purine bases: adenine, guanine · pyrimidine bases: cytosine, thymine (in DNA)</li></ul></div>
+  <div class="blk"><h2>12. DNA vs. RNA</h2><table>
    <tr><td></td><td><b>DNA</b></td><td><b>RNA</b></td></tr>
    <tr><td>Bases</td><td>A, <b>T</b>, C, G</td><td>A, <b>U</b>, C, G</td></tr>
-   <tr><td>Sugar</td><td>Deoxyribose</td><td>Ribose</td></tr></table></div>
-  <div class="blk"><h2>DNA shape</h2><ul>
+   <tr><td>Sugar</td><td>Deoxyribose</td><td>Ribose</td></tr>
+   <tr><td>Strands</td><td>Two</td><td>One</td></tr></table></div>
+  <div class="blk"><h2>13–14. DNA shape</h2><ul>
    <li><b>Double helix</b>: a twisted ladder</li>
-   <li>Backbone outside · base pairs inside</li>
-   <li><b>A–T</b> and <b>C–G</b>, held by hydrogen bonds</li>
-   <li>Strands run in opposite directions</li></ul></div>
+   <li>Sugar-phosphate backbone outside · base pairs inside</li>
+   <li><b>A–T</b> and <b>C–G</b> (complementary base pairing), held by hydrogen bonds</li>
+   <li><b>Antiparallel</b>: 5′ end pairs with 3′ end · matters for copying DNA</li>
+   <li>Slide 13: more drawings of backbones, base pairs, a nucleotide</li></ul></div>
+  <div class="blk"><h2>From your teacher</h2><ul>
+   <li>No test list shared for this lesson, so study everything.</li></ul></div>
   </div></body></html>`;
-  w.document.write(html); w.document.close(); w.focus(); setTimeout(()=>w.print(),350);
+  showCheat(html);
 }
 </script>
 
 <script type="text/html" id="doc-outline"><h1>2.5 Proteins &amp; Nucleic Acids — Lesson Outline</h1>
-<p>One short section per slide. There is no recording, so this follows the slides.
-<strong><span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span> = core idea · <span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> = extra detail (don't memorize)</strong></p>
+<p>One short section per slide. There is no recording, so this follows the slides and their notes.</p>
 <hr />
 <h2>1. Title <em>(<span class="slidelink" onclick="LB.open(1)">Slide 1</span>)</em></h2>
 <ul>
 <li>2.5: Proteins &amp; Nucleic Acids, from Unit Two: Biomolecules.</li>
 </ul>
-<h2>2. Proteins <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span> <em>(<span class="slidelink" onclick="LB.open(2)">Slide 2</span>)</em></h2>
+<h2>2. Proteins <em>(<span class="slidelink" onclick="LB.open(2)">Slide 2</span>)</em></h2>
 <ul>
-<li>Jobs: regulate, transport, structure, control reaction rates (enzymes). STRUCTURE = FUNCTION!</li>
-<li>Monomer = amino acid. About 20 kinds. The side chain (R-group) is the part that differs.</li>
-<li>Peptide = about 2–50 amino acids. Polypeptide = about 51+. Protein = working 3D shape.</li>
+<li>Jobs: regulate, transport, structure, control reaction rates (enzymes).</li>
+<li>STRUCTURE = FUNCTION! Shape decides the job.</li>
+<li>Monomer = amino acid. About 20 different kinds.</li>
+<li>Amino acid parts: amino group, carboxyl group, side chain. Green boxes cover these labels on the slide.</li>
+<li>The R-group / side chain differs in each amino acid.</li>
+<li>Nonpolar (9): Gly G, Ala A, Val V, Leu L, Ile I, Met M, Phe F, Trp W, Pro P.</li>
+<li>Polar (6): Ser S, Thr T, Cys C, Tyr Y, Asn N, Gln Q.</li>
+<li>Electrically charged (5): acidic Asp D, Glu E; basic Lys K, Arg R, His H.</li>
+<li>Each amino acid has a name, one-letter code, and three-letter code (Glycine, G, Gly).</li>
+<li>Peptide ≈ 2–50 amino acids. Polypeptide ≈ 51+ amino acids ("aa").</li>
+<li>Protein = 1+ polypeptides, 3D structure, functional.</li>
+<li>Bottom strip: amino acid → peptide → protein.</li>
 </ul>
-<h2>3. Levels of protein structure <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span> <em>(<span class="slidelink" onclick="LB.open(3)">Slide 3</span>)</em></h2>
+<h2>3. Levels of protein structure <em>(<span class="slidelink" onclick="LB.open(3)">Slide 3</span>)</em></h2>
 <ul>
-<li>Primary → secondary → tertiary → quaternary.</li>
-<li>Every protein has the first three levels.</li>
+<li>Primary (amino acid chain) → secondary (α-helix, β-pleated sheet) → tertiary (one folded chain) → quaternary (chains packed together).</li>
+<li>All proteins have levels 1–3. Level 4 only with 2+ chains (<span class="slidelink" onclick="LB.open(6)">Slide 6</span> notes).</li>
 </ul>
-<h2>4. Primary structure <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span> <em>(<span class="slidelink" onclick="LB.open(4)">Slide 4</span>)</em></h2>
+<h2>4. Primary structure <em>(<span class="slidelink" onclick="LB.open(4)">Slide 4</span>)</em></h2>
 <ul>
-<li>The order of amino acids in a chain.</li>
-<li>Peptide bonds join them. They are covalent and form by dehydration synthesis (water given off).</li>
-<li>A gene's DNA sets the order. One change can change shape and job.</li>
+<li>The order (sequence) of amino acids in a chain.</li>
+<li>Peptide bonds join them. Covalent. Formed by dehydration synthesis (water given off).</li>
+<li>Chain picture ends: N-terminus and C-terminus. Chart ends: amino end and carboxyl end.</li>
+<li>Picture: Leu–Phe–Ser–Cys ("Set" on the slide), with a peptide bond.</li>
+<li>Chart: aa₁ + aa₂ + aa₃ give 2 peptide bonds + 2 H₂O.</li>
+<li>Notes: the gene's DNA sets the order (or part of it, for multi-subunit proteins). A DNA change can change the order.</li>
+<li>Notes: one changed amino acid can change the protein's shape and job.</li>
 </ul>
-<h2>5. Secondary structure <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span> <em>(<span class="slidelink" onclick="LB.open(5)">Slide 5</span>)</em></h2>
+<h2>5. Secondary structure <em>(<span class="slidelink" onclick="LB.open(5)">Slide 5</span>)</em></h2>
 <ul>
-<li>Small folds: the α helix (coil) and the β pleated sheet (zigzag).</li>
-<li>Held by hydrogen bonds along the backbone, not the side chains.</li>
+<li>Most common: α helix (coil) and β pleated sheet (zigzag).</li>
+<li>Caused by hydrogen bonds!</li>
+<li>Notes: pulls between backbone atoms. The backbone is the chain without the R-groups.</li>
+<li>Notes: hydrogen bonds link the carbonyl O (C=O) of one amino acid to the amino H (N–H) of another.</li>
+<li>Picture caption: beta sheet = two chains side by side; alpha helix = coiling; red dots = hydrogen bonds.</li>
 </ul>
-<h2>6. Tertiary structure <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span> <em>(<span class="slidelink" onclick="LB.open(6)">Slide 6</span>)</em></h2>
+<h2>6. Tertiary structure <em>(<span class="slidelink" onclick="LB.open(6)">Slide 6</span>)</em></h2>
 <ul>
 <li>The whole 3D shape of one chain.</li>
-<li>Side chains stick to each other in a few ways. <span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> The names of each link.</li>
+<li>Due to interactions between amino acid side chains.</li>
+<li>Ionic bond: drawn with a + next to a −.</li>
+<li>Hydrogen bond: drawn as OH linked to O between two side chains.</li>
+<li>Disulfide bridge: drawn as S–S.</li>
+<li>Hydrophobic interaction: two side chains meeting in a pink box.</li>
+<li>Full-size picture: "Types of side chain interactions" → "Overall 3D shape (3° Structure)."</li>
+<li>Notes: all proteins have 1°, 2°, and 3°. 4° only with 2+ chains.</li>
 </ul>
-<h2>7. Hydrophobic effect, part 1 <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span> <em>(<span class="slidelink" onclick="LB.open(7)">Slide 7</span>)</em></h2>
+<h2>7. Hydrophobic effect, part 1 <em>(<span class="slidelink" onclick="LB.open(7)">Slide 7</span>)</em></h2>
 <ul>
-<li>An unfolded chain in water. Polar (yellow) and nonpolar (red) amino acids are mixed.</li>
+<li>Unfolded chain in water. Yellow = polar amino acids. Red = nonpolar amino acids.</li>
+<li>Ends marked NH₃⁺ and COO⁻. A green box covers the folded result.</li>
 </ul>
-<h2>8. Hydrophobic effect, part 2 <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span> <em>(<span class="slidelink" onclick="LB.open(8)">Slide 8</span>)</em></h2>
+<h2>8. Hydrophobic effect, part 2 <em>(<span class="slidelink" onclick="LB.open(8)">Slide 8</span>)</em></h2>
 <ul>
-<li>After folding, nonpolar amino acids sit in the center. Polar ones stay outside.</li>
-<li>Folding shrinks the hydration layer (the water around the chain).</li>
+<li>Unfolded polypeptide → protein folding → folded polypeptide.</li>
+<li>Nonpolar amino acids gather in the center. Polar ones stay outside.</li>
+<li>Hydration layer: the blue layer drawn around the chain.</li>
+<li>Hydrophobic effects shrink the hydration layer and help weak pulls between amino acid residues.</li>
 </ul>
-<h2>9. Quaternary structure <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span> <em>(<span class="slidelink" onclick="LB.open(9)">Slide 9</span>)</em></h2>
+<h2>9. Quaternary structure <em>(<span class="slidelink" onclick="LB.open(9)">Slide 9</span>)</em></h2>
 <ul>
-<li>2 or more subunits (chains) fit together.</li>
-<li>NOT ALL PROTEINS HAVE THIS!</li>
-<li><span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> Dimer, trimer, and tetramer examples.</li>
+<li>2+ subunits (chains) fit together.</li>
+<li>*NOT ALL PROTEINS HAVE THIS!!!!</li>
+<li>Dimer (2): homodimer (matching) and heterodimer (different).</li>
+<li>Trimer (3): e.g. collagen.</li>
+<li>Tetramer (4): e.g. hemoglobin, an alpha-2-beta-2 tetramer.</li>
 </ul>
-<h2>10. Organization levels summary <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span> <em>(<span class="slidelink" onclick="LB.open(10)">Slide 10</span>)</em></h2>
+<h2>10. Organization levels summary <em>(<span class="slidelink" onclick="LB.open(10)">Slide 10</span>)</em></h2>
 <ul>
-<li>Letters = primary · words = secondary · sentences = tertiary · paragraphs = quaternary.</li>
+<li>Alphabets (letters) = primary · words = secondary · sentences = tertiary · paragraphs = quaternary.</li>
+<li>Sample boxes: letters (A, U, V, R, S, O, T, P), words (Antibodies, Useful, Science…), three short sentences, one paragraph.</li>
+<li>The paragraph says antibodies are a useful research tool.</li>
+<li>It names Western Blot, immunohistochemistry, immunofluorescence, immunoprecipitation, and flow cytometry.</li>
+<li>Pictures: amino acid dots, pleated sheet and alpha helix, one folded chain, two chains.</li>
+<li>Slide typo: "Quanternary."</li>
 </ul>
-<h2>11. Nucleic acids <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span> <em>(<span class="slidelink" onclick="LB.open(11)">Slide 11</span>)</em></h2>
+<h2>11. Nucleic acids <em>(<span class="slidelink" onclick="LB.open(11)">Slide 11</span>)</em></h2>
 <ul>
-<li>Jobs: store and pass on hereditary info. Hold the code for proteins.</li>
-<li>Examples: DNA, RNA. Monomer = nucleotide (5-carbon sugar + phosphate group + nitrogenous base).</li>
+<li>Jobs: store and transmit hereditary info. Encode protein products.</li>
+<li>Examples: DNA, RNA. Monomer = nucleotide.</li>
+<li>Nucleotide = 5-carbon sugar + phosphate group + nitrogenous base.</li>
 <li>DNA: A, T, C, G · RNA: A, U, C, G.</li>
+<li>Drawing: phosphate, deoxyribose, 5′ end, 3′ end.</li>
+<li>Adenine and guanine = purine bases. Cytosine and thymine (in DNA) = pyrimidine bases.</li>
+<li>Box: ribose (in RNA) and uracil (in RNA).</li>
+<li>Small drawing: phosphate, ribose, base. A green box covers a small corner.</li>
 </ul>
-<h2>12. DNA structure <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span> <em>(<span class="slidelink" onclick="LB.open(12)">Slide 12</span>)</em></h2>
+<h2>12. DNA structure <em>(<span class="slidelink" onclick="LB.open(12)">Slide 12</span>)</em></h2>
 <ul>
-<li>Double helix. Sugar-phosphate backbone outside, base pairs inside.</li>
-<li>Hydrogen bonds hold the pairs: A with T, C with G.</li>
-<li>Antiparallel: the strands run in opposite directions. This matters for copying DNA.</li>
+<li>Double helix. Picture labels: backbone, complementary base pairing.</li>
+<li>Notes: sugars and phosphates on the outside = sugar-phosphate backbone.</li>
+<li>Notes: bases reach inside in pairs, like staircase steps, held by hydrogen bonds.</li>
+<li>A pairs with T (2 dashed lines). C pairs with G (3 dashed lines).</li>
+<li>Notes: strands run in opposite directions. 5′ end pairs with 3′ end.</li>
+<li>Notes: this is antiparallel, and it matters for copying DNA.</li>
 </ul>
-<h2>13. Extra illustrations <span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> <em>(<span class="slidelink" onclick="LB.open(13)">Slide 13</span>)</em></h2>
+<h2>13. Additional helpful illustrations <em>(<span class="slidelink" onclick="LB.open(13)">Slide 13</span>)</em></h2>
 <ul>
-<li>More drawings of the backbone, base pairs, and hydrogen bonds.</li>
+<li>Top left: S and P backbone, pairs A–T, T–A, G–C, C–G, dotted hydrogen bonds, 5′ and 3′ ends.</li>
+<li>Key: A adenine, C cytosine, G guanine, T thymine, P phosphate, S deoxyribose (sugar).</li>
+<li>Middle: complementary base pairing, 5′→3′ arrows in opposite directions, hydrogen bonds.</li>
+<li>Right: sugar phosphate backbones, base pairs, hydrogen bonds, one base pair, one nucleotide, a double helix.</li>
+<li>Slide typo: "&amp;mages" means "Images."</li>
 </ul>
-<h2>14. DNA vs. RNA <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span> <em>(<span class="slidelink" onclick="LB.open(14)">Slide 14</span>)</em></h2>
+<h2>14. DNA vs. RNA <em>(<span class="slidelink" onclick="LB.open(14)">Slide 14</span>)</em></h2>
 <ul>
-<li>DNA has thymine and deoxyribose. RNA has uracil and ribose.</li>
-<li>Both have adenine, cytosine, and guanine.</li>
-</ul></script>
+<li>Deoxyribonucleic acid (DNA): thymine, deoxyribose, two strands.</li>
+<li>Ribonucleic acid (RNA): uracil, ribose, one strand.</li>
+<li>Both have adenine, cytosine, and guanine (nucleobases).</li>
+<li>Green boxes cover the labels above each name.</li>
+</ul>
+<hr />
+<p><strong>From your teacher:</strong> Your teacher hasn't shared a test list for this lesson, so study everything here.</p></script>
 <script type="text/html" id="doc-guide"><h1>2.5 Proteins &amp; Nucleic Acids — Study Guide</h1>
 <p><strong>Course:</strong> Biology (high school)
 <strong>Unit:</strong> Unit Two: Biomolecules
-<strong>Source:</strong> Your teacher's slides (14 slides). There is no recording for this lesson.</p>
-<p><strong><span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span> = core idea to learn · <span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> = extra detail (you don't need to memorize it)</strong></p>
+<strong>Source:</strong> Your teacher's slides (14 slides) and the notes under Slides 4, 5, 6, and 12. There is no recording for this lesson.
+Anything that is not from your teacher starts with <strong>Outside source:</strong>.</p>
 <hr />
 <h2>What you'll learn</h2>
 <ul>
-<li>What proteins do and what they are made of.</li>
+<li>What proteins do.</li>
+<li>The three parts of an amino acid, and the chart of 20 amino acids.</li>
+<li>How amino acids build peptides, polypeptides, and proteins.</li>
 <li>The four levels of a protein's shape.</li>
-<li>Why a protein's shape decides its job.</li>
+<li>Level 1: the order of amino acids.</li>
+<li>Level 2: coils and pleated sheets.</li>
+<li>Level 3: the whole 3D shape of one chain.</li>
+<li>How water helps a chain fold.</li>
+<li>Level 4: two or more chains together.</li>
+<li>How the four levels match letters, words, sentences, and paragraphs.</li>
 <li>What nucleic acids do and what they are made of.</li>
 <li>How DNA and RNA are different.</li>
 <li>How DNA is shaped.</li>
+<li>The extra DNA drawings on <span class="slidelink" onclick="LB.open(13)">Slide 13</span>.</li>
 </ul>
 <hr />
-<h2>1. Proteins and their jobs <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>1. Proteins and their jobs</h2>
 <p><strong>Proteins do many jobs, and a protein's shape decides its job.</strong></p>
+<p><strong>Jobs on the slide:</strong></p>
 <ul>
-<li>Proteins <strong>regulate</strong>, <strong>transport</strong>, and give <strong>structure</strong>.</li>
-<li>Some proteins <strong>control reaction rates</strong> (how fast reactions go).</li>
-<li>Proteins that control reaction rates are called <strong>enzymes</strong>.</li>
-<li><strong>STRUCTURE = FUNCTION!</strong> A protein's shape decides the job it can do.</li>
+<li>Regulate.</li>
+<li>Transport.</li>
+<li>Structure.</li>
+<li>Control reaction rates.</li>
+<li>The slide lists <strong>enzymes</strong> under "Control reaction rates."</li>
+<li><strong>Outside source:</strong> To regulate means to control how something works. To transport means to carry something from place to place. Example: a thermostat regulates a room's heat. Example: a school bus transports students. <em>(Merriam-Webster Dictionary)</em></li>
+<li><strong>Outside source:</strong> An enzyme is a protein that speeds up a reaction in your body. Example: an enzyme in your saliva starts breaking down bread while you chew. <em>(OpenStax Biology 2e)</em></li>
+<li>The slide says <strong>"STRUCTURE = FUNCTION!"</strong> A protein's shape decides the job it can do.</li>
 </ul>
 <blockquote>
 <p><strong>Analogy:</strong> A key opens a lock because of its shape. Bend the key, and it stops working.</p>
-<p> See <strong><span class="slidelink" onclick="LB.open(2)">Slide 2</span></strong> — "STRUCTURE = FUNCTION!" is written in pink on the left.</p>
+<p> See <strong><span class="slidelink" onclick="LB.open(2)">Slide 2</span></strong> — the jobs are listed on the left. "STRUCTURE = FUNCTION!" is written in pink below them.</p>
 </blockquote>
 <hr />
-<h2>2. Protein building blocks <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>2. Amino acids: the building blocks</h2>
 <p><strong>Proteins are built from small pieces called amino acids.</strong></p>
+<p><strong>What it is:</strong></p>
 <ul>
-<li>A <strong>monomer</strong> is one building block. The monomer of proteins is the <strong>amino acid</strong>.</li>
+<li>The slide says <strong>"Monomer = amino acids."</strong></li>
+<li><strong>Outside source:</strong> A monomer is one small building block. Many monomers link together into a chain. Example: one Lego brick is like a monomer. <em>(OpenStax Biology 2e)</em></li>
 <li>There are about <strong>20</strong> different amino acids.</li>
-<li>Each amino acid has a <strong>side chain</strong>, also called the <strong>R-group</strong>. It is different in each one.</li>
-<li>A <strong>peptide</strong> is a short chain of about 2–50 amino acids. A <strong>polypeptide</strong> is about 51 or more. A <strong>protein</strong> is 1 or more polypeptides with a working 3D shape.</li>
+</ul>
+<p><strong>The amino acid drawing:</strong></p>
+<ul>
+<li>On the left is an N with two H's.</li>
+<li>On the right is a C with an O and an OH.</li>
+<li>At the bottom is an R.</li>
+<li>These all attach to one C in the middle. That C also has an H on top.</li>
+<li>On the slide, green boxes cover three labels. The full-size picture shows all three.</li>
+<li><strong>Amino group:</strong> the N with two H's.</li>
+<li><strong>Carboxyl group:</strong> the C with an O and an OH.</li>
+<li><strong>Side chain:</strong> the R at the bottom.</li>
+<li>The slide says the <strong>R-group / side chain "differs!"</strong> It is different in each amino acid.</li>
+</ul>
+<p><strong>The chart of 20 amino acids:</strong></p>
+<ul>
+<li>The chart sorts amino acids by their side chains.</li>
+<li><strong>Nonpolar side chains (9):</strong> glycine (G, Gly), alanine (A, Ala), valine (V, Val).</li>
+<li>More nonpolar: leucine (L, Leu), isoleucine (I, Ile), methionine (M, Met).</li>
+<li>More nonpolar: phenylalanine (F, Phe), tryptophan (W, Trp), proline (P, Pro).</li>
+<li><strong>Polar side chains (6):</strong> serine (S, Ser), threonine (T, Thr), cysteine (C, Cys).</li>
+<li>More polar: tyrosine (Y, Tyr), asparagine (N, Asn), glutamine (Q, Gln).</li>
+<li><strong>Electrically charged side chains:</strong> 5 amino acids, split into two groups.</li>
+<li><strong>Acidic (2):</strong> aspartate (D, Asp) and glutamate (E, Glu).</li>
+<li><strong>Basic (3):</strong> lysine (K, Lys), arginine (R, Arg), and histidine (H, His).</li>
+<li>Each amino acid has a name, a one-letter code, and a three-letter code. Example: Glycine (G), Gly.</li>
+<li>Every drawing has the same top part. Only the shaded side chain changes.</li>
 </ul>
 <blockquote>
-<p><strong>Analogy:</strong> Amino acids are like beads. String beads together, and you get a chain.</p>
-<p> See <strong><span class="slidelink" onclick="LB.open(2)">Slide 2</span></strong> — the bottom strip shows one amino acid, then a peptide, then a folded protein.</p>
+<p> See <strong><span class="slidelink" onclick="LB.open(2)">Slide 2</span></strong> — the amino acid drawing is in the middle. Green boxes cover its three labels. The chart of 20 is on the top right.</p>
 </blockquote>
 <hr />
-<h2>3. The four levels of protein structure <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>3. From amino acid to protein</h2>
+<p><strong>Amino acids join into chains, and chains fold into proteins.</strong></p>
+<ul>
+<li><strong>Peptide:</strong> a short chain of about <strong>2–50</strong> amino acids.</li>
+<li><strong>Polypeptide:</strong> a longer chain of about <strong>51 or more</strong> amino acids.</li>
+<li><strong>Protein:</strong> <strong>1 or more</strong> polypeptides.</li>
+<li>A protein has a <strong>3D structure</strong>, and it is <strong>functional</strong>.</li>
+<li><strong>Outside source:</strong> Functional means able to do its job. Example: a phone that turns on and makes calls is functional. <em>(Merriam-Webster Dictionary)</em></li>
+<li>The slide uses "aa" as a short way to write "amino acid."</li>
+</ul>
+<blockquote>
+<p><strong>Analogy:</strong> Amino acids are like beads. String a few, and you get a short chain. String many, and you get a long chain.</p>
+<p> See <strong><span class="slidelink" onclick="LB.open(2)">Slide 2</span></strong> — arrows go from Amino Acid to Polypeptide to Protein. The bottom strip shows one amino acid, then a peptide, then a protein.</p>
+</blockquote>
+<hr />
+<h2>4. The four levels of protein structure</h2>
 <p><strong>A protein's shape is built in four levels. Each level builds on the one before.</strong></p>
 <ul>
 <li>In order, the levels are <strong>primary</strong>, <strong>secondary</strong>, <strong>tertiary</strong>, and <strong>quaternary</strong>.</li>
-<li>Every protein has the first three levels.</li>
-<li>Only some proteins have the fourth level.</li>
+<li>Every protein has the first three levels <em>(<span class="slidelink" onclick="LB.open(6)">Slide 6</span> notes)</em>.</li>
+<li>Only proteins with two or more chains have the fourth level <em>(<span class="slidelink" onclick="LB.open(6)">Slide 6</span> notes)</em>.</li>
+</ul>
+<p><strong>In the picture:</strong></p>
+<ul>
+<li>Primary: a chain of beads. The beads are labeled amino acids.</li>
+<li>Secondary: a blue coil (<strong>α-helix</strong>) and a red wavy strip (<strong>β-pleated sheet</strong>).</li>
+<li>Tertiary: one chain folded into a blob. It still has α-helices and a β-pleated sheet inside.</li>
+<li>Quaternary: folded chains packed together.</li>
 </ul>
 <blockquote>
-<p><strong>Analogy:</strong> Think of writing. Letters make words. Words make sentences. Sentences make paragraphs. The four levels stack up the same way. <em>(<span class="slidelink" onclick="LB.open(10)">Slide 10</span>)</em></p>
-<p> See <strong><span class="slidelink" onclick="LB.open(3)">Slide 3</span></strong> — follow the arrows. First a bead chain. Then a coil and a wavy sheet. Then one folded blob. Last, chains packed together.</p>
+<p><strong>Analogy:</strong> Think of writing. Letters make words. Words make sentences. Sentences make paragraphs. <em>(<span class="slidelink" onclick="LB.open(10)">Slide 10</span>)</em></p>
+<p> See <strong><span class="slidelink" onclick="LB.open(3)">Slide 3</span></strong> — follow the arrows from left to right.</p>
 </blockquote>
 <hr />
-<h2>4. Level 1 — Primary structure <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>5. Level 1 — Primary structure</h2>
 <p><strong>Primary structure is the order of amino acids in the chain.</strong></p>
+<p><strong>What it is:</strong></p>
 <ul>
-<li><strong>What it is:</strong> amino acids lined up in a certain order.</li>
-<li><strong>Key fact:</strong> <strong>peptide bonds</strong> join the amino acids. A peptide bond is <strong>covalent</strong>, a strong bond where atoms share electrons <em>(OpenStax Biology 2e)</em>.</li>
+<li>Amino acids lined up in a certain order.</li>
+<li>Each chain has its own set of amino acids in a certain order <em>(<span class="slidelink" onclick="LB.open(4)">Slide 4</span> notes)</em>.</li>
+</ul>
+<p><strong>Key fact:</strong></p>
+<ul>
+<li><strong>Peptide bonds</strong> join the amino acids.</li>
+<li>A peptide bond is <strong>covalent</strong>.</li>
+<li><strong>Outside source:</strong> Covalent means the atoms share electrons. Sharing makes the bond strong and hard to break. Example: the bonds inside one water molecule are covalent too. <em>(OpenStax Biology 2e)</em></li>
 <li>Peptide bonds form by <strong>dehydration synthesis</strong>. Two pieces join, and water is given off.</li>
-<li>A gene's <strong>DNA</strong> sets the order. Changing one amino acid can change its shape and job.</li>
+</ul>
+<p><strong>Chain ends:</strong></p>
+<ul>
+<li>The left picture labels one end <strong>N-terminus</strong> and the other end <strong>C-terminus</strong>.</li>
+<li>The right chart labels its two ends <strong>Amino end</strong> and <strong>Carboxyl end</strong>.</li>
+</ul>
+<p><strong>From the notes:</strong></p>
+<ul>
+<li>The DNA of a gene sets the order of amino acids.</li>
+<li>The notes add: the gene may code for only part of a protein.</li>
+<li>That happens in proteins made of more than one subunit (piece).</li>
+<li>A change in the gene's DNA can change the amino acid order.</li>
+<li>Changing just one amino acid can change the protein's shape and job.</li>
+<li><strong>Outside source:</strong> A gene is a part of DNA. It holds the code for making a protein. Example: a gene is like a recipe, and one typo can ruin the cake. <em>(OpenStax Biology 2e)</em></li>
+</ul>
+<p><strong>In the picture:</strong></p>
+<ul>
+<li>The big chain is labeled N-terminus at one end and C-terminus at the other.</li>
+<li>A zoom shows four amino acids: Leu, Phe, Ser, and Cys. (The slide spells Ser as "Set.")</li>
+<li>A pink box points to the <strong>peptide bond</strong> between two amino acids.</li>
+<li>A circle zooms in on one amino acid. Its side chain is shaded.</li>
+<li>The right chart shows three amino acids (aa₁, aa₂, aa₃) joining.</li>
+<li>An OH and an H come off at each joint. They leave as water.</li>
+<li>The result shows two peptide bonds and "+ 2(H₂O)." That means two waters were given off.</li>
 </ul>
 <blockquote>
 <p><strong>Analogy:</strong> Level 1 is like <strong>letters</strong>. Order matters. Change one letter, and "cat" becomes "cut."</p>
-<p> See <strong><span class="slidelink" onclick="LB.open(4)">Slide 4</span></strong> — the chart on the right shows three amino acids joining, with water given off.</p>
+<p> See <strong><span class="slidelink" onclick="LB.open(4)">Slide 4</span></strong> — the chain is on the left. The joining chart is on the right.</p>
 </blockquote>
 <hr />
-<h2>5. Level 2 — Secondary structure <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
-<p><strong>Secondary structure is small folds in the chain, like coils and zigzags.</strong></p>
+<h2>6. Level 2 — Secondary structure</h2>
+<p><strong>Secondary structure is small folds in the chain, like coils and pleated sheets.</strong></p>
+<p><strong>What it is:</strong></p>
 <ul>
-<li><strong>What it is:</strong> small folded shapes. The <strong>α helix</strong> (alpha helix) is a coil, like a spring.</li>
-<li>The <strong>β pleated sheet</strong> (beta pleated sheet) is a zigzag, like a folded paper fan.</li>
-<li><strong>Key fact:</strong> <strong>hydrogen bonds</strong> hold these shapes. A hydrogen bond is a weak pull between atoms <em>(OpenStax Biology 2e)</em>.</li>
-<li>They form along the <strong>backbone</strong>: the chain itself, not the side chains.</li>
+<li>Small folded shapes that form in parts of one chain <em>(<span class="slidelink" onclick="LB.open(5)">Slide 5</span> notes)</em>.</li>
+<li>The slide says the most common ones are the α helix and the β pleated sheet.</li>
+<li>The <strong>α helix</strong> (alpha helix) is drawn as a coil, like a spring.</li>
+<li>The <strong>β pleated sheet</strong> (beta pleated sheet) is drawn as a zigzag, like a folded paper fan.</li>
+</ul>
+<p><strong>Key fact:</strong></p>
+<ul>
+<li>The slide says they are <strong>"Caused by hydrogen bonds!"</strong></li>
+<li><strong>Outside source:</strong> A hydrogen bond is a weak pull between atoms. Example: hydrogen bonds pull water molecules together, so water forms drops. <em>(OpenStax Biology 2e)</em></li>
+</ul>
+<p><strong>From the notes:</strong></p>
+<ul>
+<li>These folds come from pulls between atoms of the <strong>backbone</strong>.</li>
+<li>The backbone is the chain itself, without the R-groups.</li>
+<li>So side chains are not part of secondary structure.</li>
+<li>Each hydrogen bond links two amino acids.</li>
+<li>It forms between the <strong>carbonyl O</strong> of one amino acid and the <strong>amino H</strong> of another.</li>
+<li><strong>Outside source:</strong> Carbonyl O is the O in a C=O group. Amino H is the H in an N–H group. Example: nail polish remover also has a C=O group. <em>(OpenStax Biology 2e)</em></li>
+</ul>
+<p><strong>In the picture:</strong></p>
+<ul>
+<li>Simple drawings show a beta sheet (zigzag) and an alpha helix (coil).</li>
+<li>The middle drawing shows the atoms. Red dotted lines link each C=O to an H–N.</li>
+<li>Those red dotted lines are the hydrogen bonds.</li>
+<li>The right drawing labels the hydrogen bonds with dashed lines.</li>
+<li>The full-size middle picture has a caption. It says the beta sheet has two amino acid chains side by side.</li>
+<li>The caption says the alpha helix has coiling.</li>
+<li>It says the red dots are hydrogen bonds. They hold together both the beta pleated sheets and the alpha helix.</li>
 </ul>
 <blockquote>
 <p><strong>Analogy:</strong> Level 2 is like <strong>words</strong>. Letters group into words. The chain groups into coils and sheets.</p>
-<p> See <strong><span class="slidelink" onclick="LB.open(5)">Slide 5</span></strong> — dotted lines on the coil and the zigzag show the hydrogen bonds.</p>
+<p> See <strong><span class="slidelink" onclick="LB.open(5)">Slide 5</span></strong> — look for the dotted lines on the coil and the zigzag.</p>
 </blockquote>
 <hr />
-<h2>6. Level 3 — Tertiary structure <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>7. Level 3 — Tertiary structure</h2>
 <p><strong>Tertiary structure is the whole 3D shape of one folded chain.</strong></p>
+<p><strong>What it is:</strong></p>
 <ul>
-<li><strong>What it is:</strong> the full 3D shape of one polypeptide.</li>
-<li><strong>Key fact:</strong> side chains pull on each other to make this shape.</li>
-<li>Side chains stick to each other in a few different ways.</li>
-<li><span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> The slide names each kind of link (ionic bond, hydrogen bond, disulfide bridge, hydrophobic interaction). You don't need to memorize these names.</li>
-<li>Every protein has this level.</li>
+<li>The full <strong>3D shape</strong> of one polypeptide.</li>
+<li>Every protein has this level <em>(<span class="slidelink" onclick="LB.open(6)">Slide 6</span> notes)</em>.</li>
+</ul>
+<p><strong>Key fact:</strong></p>
+<ul>
+<li>The slide says it is "due to interactions between amino acid side chains."</li>
+<li>That means side chains pull on each other to make the shape.</li>
+</ul>
+<p><strong>The four side-chain interactions on the slide:</strong></p>
+<ul>
+<li><strong>Ionic bond:</strong> the picture shows a + and a − side by side.</li>
+<li><strong>Outside source:</strong> An ionic bond is a pull between a plus (+) charge and a minus (−) charge. Opposite charges attract, like the ends of two magnets. Example: table salt is held together by ionic bonds. <em>(OpenStax Biology 2e)</em></li>
+<li><strong>Hydrogen bond:</strong> the picture shows an OH on one side chain linked to an O on another.</li>
+<li><strong>Disulfide bridge:</strong> the picture shows it as S–S, linking two parts of the chain.</li>
+<li><strong>Outside source:</strong> S is the symbol for sulfur. A disulfide bridge links two sulfur atoms, like a staple. Example: links like these help hold the shape of your hair. <em>(OpenStax Biology 2e)</em></li>
+<li><strong>Hydrophobic interaction:</strong> the picture shows two side chains meeting in a pink box.</li>
+<li>Section 8 explains the word "hydrophobic."</li>
+</ul>
+<p><strong>In the full-size left picture:</strong></p>
+<ul>
+<li>The drawing of the four interactions is labeled "Types of side chain interactions."</li>
+<li>The disulfide bridge is drawn as CH₂–S–S–CH₂.</li>
+<li>An arrow points to the folded ribbon, labeled "Overall 3D shape (3° Structure)."</li>
+</ul>
+<p><strong>From the notes:</strong></p>
+<ul>
+<li>The notes call tertiary structure the "overall three-dimensional structure of a polypeptide."</li>
+<li>It is mostly due to pulls between the R-groups.</li>
+<li>All proteins have primary, secondary, and tertiary structures.</li>
+<li>Quaternary structure only happens when a protein has two or more chains.</li>
 </ul>
 <blockquote>
 <p><strong>Analogy:</strong> Level 3 is like a <strong>sentence</strong>. Words come together into one complete thought.</p>
-<p> See <strong><span class="slidelink" onclick="LB.open(6)">Slide 6</span></strong> — each of the four pulls is labeled in pink where two side chains meet.</p>
+<p> See <strong><span class="slidelink" onclick="LB.open(6)">Slide 6</span></strong> — each interaction is labeled in pink where two side chains meet. The ribbon on the left is a folded chain.</p>
 </blockquote>
 <hr />
-<h2>7. The hydrophobic effect <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
-<p><strong>In water, a chain folds so its water-fearing parts hide in the middle.</strong></p>
+<h2>8. The hydrophobic effect</h2>
+<p><strong>In water, a chain folds so its nonpolar amino acids gather in the middle.</strong></p>
+<p><strong>What the words mean:</strong></p>
 <ul>
-<li><strong>Hydrophobic</strong> means "water-fearing." Hydrophobic things don't mix with water <em>(OpenStax Biology 2e)</em>.</li>
-<li><strong>Nonpolar</strong> amino acids are hydrophobic. <strong>Polar</strong> amino acids mix with water.</li>
-<li>When the chain folds, nonpolar amino acids gather in the <strong>center</strong>. Polar amino acids stay on the <strong>outside</strong>.</li>
-<li>Folding shrinks the <strong>hydration layer</strong>, the layer of water around the chain.</li>
+<li><strong>Outside source:</strong> Hydrophobic means "water-fearing." Hydrophobic things don't mix with water, so they clump together. Example: oil forms drops in salad dressing. Example: rain beads up on a waxed car. <em>(OpenStax Biology 2e)</em></li>
+<li><strong>Outside source:</strong> Polar things mix with water. Nonpolar things do not. Example: sugar (polar) dissolves in tea, but oil (nonpolar) floats on water. <em>(OpenStax Biology 2e)</em></li>
+</ul>
+<p><strong>What happens:</strong></p>
+<ul>
+<li>The unfolded chain has polar and nonpolar amino acids mixed along it.</li>
+<li>A blue layer around the chain is labeled <strong>hydration layer</strong>.</li>
+<li><strong>Outside source:</strong> Hydration means water. The hydration layer is the water around the chain. Example: it is like the thin coat of water on a washed grape. <em>(Merriam-Webster Dictionary)</em></li>
+<li>During <strong>protein folding</strong>, nonpolar amino acids gather in the <strong>center</strong>.</li>
+<li>Polar amino acids stay on the <strong>outside</strong>, near the water.</li>
+</ul>
+<p><strong>The slide's label says two things:</strong></p>
+<ul>
+<li>Hydrophobic effects make the hydration layer smaller.</li>
+<li>They help weak interactions form between amino acid <strong>residues</strong>.</li>
+<li><strong>Outside source:</strong> A residue is one amino acid inside a chain. Example: it is like one bead on a necklace. <em>(OpenStax Biology 2e)</em></li>
+</ul>
+<p><strong>In the pictures:</strong></p>
+<ul>
+<li>Yellow circles are <strong>polar amino acids</strong>.</li>
+<li>Red circles are <strong>nonpolar amino acids</strong>.</li>
+<li>The chain ends are marked NH₃⁺ and COO⁻.</li>
 </ul>
 <blockquote>
-<p><strong>Analogy:</strong> Oil drops in water clump together. Nonpolar amino acids do the same.</p>
-<p> See <strong><span class="slidelink" onclick="LB.open(8)">Slide 8</span></strong> — red dots (nonpolar) end up in the middle. Yellow dots (polar) stay on the edge. <span class="slidelink" onclick="LB.open(7)">Slide 7</span> shows the chain before folding.</p>
+<p> See <strong>Slides 7 and 8</strong> — <span class="slidelink" onclick="LB.open(7)">Slide 7</span> shows the unfolded chain. A green box covers the folded result. <span class="slidelink" onclick="LB.open(8)">Slide 8</span> shows the "Unfolded polypeptide," then "Protein folding," then the "Folded polypeptide."</p>
 </blockquote>
 <hr />
-<h2>8. Level 4 — Quaternary structure <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>9. Level 4 — Quaternary structure</h2>
 <p><strong>Quaternary structure is two or more chains fitting together into one protein.</strong></p>
+<p><strong>What it is:</strong></p>
 <ul>
-<li><strong>What it is:</strong> <strong>2 or more subunits</strong> packed together.</li>
-<li>A <strong>subunit</strong> is one polypeptide chain inside a bigger protein.</li>
-<li><strong>Key fact:</strong> NOT ALL PROTEINS HAVE THIS! A protein with only one chain stops at Level 3.</li>
+<li><strong>2+ subunits</strong> packed together.</li>
+<li>A <strong>subunit</strong> is one polypeptide chain in the protein <em>(<span class="slidelink" onclick="LB.open(6)">Slide 6</span> notes: "two or more polypeptide chains")</em>.</li>
+</ul>
+<p><strong>Key fact:</strong></p>
+<ul>
+<li>The slide says: <strong>"*NOT ALL PROTEINS HAVE THIS!!!!"</strong></li>
+<li>A protein with only one chain stops at Level 3 <em>(<span class="slidelink" onclick="LB.open(6)">Slide 6</span> notes)</em>.</li>
+</ul>
+<p><strong>Kinds shown on the slide:</strong></p>
+<ul>
+<li><strong>Dimer:</strong> 2 subunits.</li>
+<li><strong>Homodimer:</strong> a dimer with 2 matching subunits.</li>
+<li><strong>Heterodimer:</strong> a dimer with 2 different subunits.</li>
+<li><strong>Trimer:</strong> 3 subunits. Example: <strong>collagen</strong>, drawn as three twisted strands.</li>
+<li><strong>Tetramer:</strong> 4 subunits. Example: <strong>hemoglobin</strong>.</li>
+<li>The slide calls hemoglobin an "alpha-2-beta-2 tetramer."</li>
+<li><strong>Outside source:</strong> Alpha-2-beta-2 means hemoglobin has 2 alpha subunits and 2 beta subunits. Alpha and beta are names for two kinds of chains. Example: it is like a chair with two pairs of matching legs. <em>(OpenStax Biology 2e)</em></li>
+<li><strong>Outside source:</strong> Collagen is a protein that makes skin, bones, and tendons strong. Example: it helps your skin stretch and snap back. Example: gelatin in gummy candy comes from collagen. <em>(OpenStax Biology 2e)</em></li>
+<li><strong>Outside source:</strong> Hemoglobin is a protein in red blood cells. It carries oxygen around your body. Example: it is why blood looks red. <em>(OpenStax Biology 2e)</em></li>
 </ul>
 <blockquote>
 <p><strong>Analogy:</strong> Level 4 is like a <strong>paragraph</strong>. Several sentences work together, like several chains.</p>
-<p> See <strong><span class="slidelink" onclick="LB.open(9)">Slide 9</span></strong> — one folded chain, then an arrow, then several chains packed into one protein.</p>
+<p> See <strong><span class="slidelink" onclick="LB.open(9)">Slide 9</span></strong> — one pink folded chain, an arrow, then pink and yellow chains packed together. The dimer, trimer, and tetramer boxes are on the right.</p>
 </blockquote>
 <hr />
-<h2>9. Summary: the alphabet analogy <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>10. Summary: the alphabet analogy</h2>
 <p><strong><span class="slidelink" onclick="LB.open(10)">Slide 10</span> matches each level of a protein to a part of writing.</strong></p>
 <table>
 <thead>
@@ -1492,11 +1823,11 @@ function printCheat(){
 <tr>
 <td><strong>Primary</strong></td>
 <td>The order of amino acids</td>
-<td>Letters</td>
+<td>Letters (the slide says "Alphabets")</td>
 </tr>
 <tr>
 <td><strong>Secondary</strong></td>
-<td>Coils and zigzag sheets</td>
+<td>Coils and pleated sheets</td>
 <td>Words</td>
 </tr>
 <tr>
@@ -1514,24 +1845,75 @@ function printCheat(){
 <ul>
 <li>Each level is built from the one before it.</li>
 </ul>
+<p><strong>The sample writing on the slide:</strong></p>
+<ul>
+<li><strong>Alphabets box:</strong> the letters A, U, V, R, S, O, T, and P.</li>
+<li><strong>Words box:</strong> words made from letters, like "Antibodies," "Useful," and "Science."</li>
+<li><strong>Sentences box:</strong> "Antibodies are a useful tool." "Routine practices rely on antibodies." "Science is vital."</li>
+<li><strong>Paragraphs box:</strong> a few sentences joined together about antibodies.</li>
+<li>The paragraph says antibodies are a useful tool in research.</li>
+<li>It names lab methods that rely on antibodies.</li>
+<li>The methods are Western Blot, immunohistochemistry, immunofluorescence, immunoprecipitation, and flow cytometry.</li>
+<li><strong>Outside source:</strong> Antibodies are proteins that help your body fight germs. Each one grabs a certain kind of germ. Example: after chickenpox, antibodies help keep you from getting sick again. Example: vaccines teach your body to make antibodies. <em>(OpenStax Biology 2e)</em></li>
+</ul>
+<p><strong>In the picture:</strong></p>
+<ul>
+<li>Primary: a string of pink dots labeled "Amino Acids."</li>
+<li>Secondary: a "Pleated Sheet" and an "Alpha Helix."</li>
+<li>Tertiary: one folded chain with a pleated sheet and an alpha helix inside.</li>
+<li>Quaternary: two folded chains in two colors.</li>
+</ul>
 <blockquote>
 <p> See <strong><span class="slidelink" onclick="LB.open(10)">Slide 10</span></strong> — pink arrows link each writing box to its protein level. (The slide spells it "Quanternary.")</p>
 </blockquote>
 <hr />
-<h2>10. Nucleic acids <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
-<p><strong>Nucleic acids hold the information passed down from parents.</strong></p>
+<h2>11. Nucleic acids</h2>
+<p><strong>Nucleic acids store and pass on hereditary information.</strong></p>
+<p><strong>Jobs:</strong></p>
 <ul>
-<li><strong>Jobs:</strong> they store and pass on <strong>hereditary information</strong>, the information passed from parents to offspring. They also hold the code for making proteins.</li>
+<li>They store and transmit <strong>hereditary information</strong>.</li>
+<li>They <strong>encode protein products</strong>.</li>
+<li><strong>Outside source:</strong> Hereditary information is passed from parents to their children. To encode means to hold the code for something. Example: eye color can be passed from parents to children. <em>(OpenStax Biology 2e)</em></li>
+</ul>
+<p><strong>What they are:</strong></p>
+<ul>
 <li><strong>Examples:</strong> DNA and RNA.</li>
 <li>The monomer of nucleic acids is the <strong>nucleotide</strong>.</li>
-<li>Each nucleotide has three parts: a <strong>5-carbon sugar</strong>, a <strong>phosphate group</strong>, and a <strong>nitrogenous base</strong>. The base is the "letter" part: A, T, C, G, or U.</li>
+</ul>
+<p><strong>The three parts of a nucleotide:</strong></p>
+<ul>
+<li>A <strong>5-carbon sugar</strong>.</li>
+<li>A <strong>phosphate group</strong>.</li>
+<li>A <strong>nitrogenous base</strong>.</li>
+</ul>
+<p><strong>The bases:</strong></p>
+<ul>
+<li><strong>DNA:</strong> A, T, C, G.</li>
+<li><strong>RNA:</strong> A, U, C, G.</li>
+<li>A is <strong>adenine</strong>. G is <strong>guanine</strong>. C is <strong>cytosine</strong>.</li>
+<li>T is <strong>thymine</strong>. It is in DNA.</li>
+<li>U is <strong>uracil</strong>. It is in RNA.</li>
+</ul>
+<p><strong>In the big drawing:</strong></p>
+<ul>
+<li>A strand of four nucleotides is linked together.</li>
+<li>Red circles are <strong>phosphates</strong>. Blue rings are the sugar <strong>deoxyribose</strong>.</li>
+<li>The top of the strand is labeled <strong>5′ end</strong>. The bottom is labeled <strong>3′ end</strong>.</li>
+<li>Adenine and guanine are labeled <strong>purine bases</strong>.</li>
+<li>Cytosine and thymine (in DNA) are labeled <strong>pyrimidine bases</strong>.</li>
+<li>A small box shows <strong>ribose (in RNA)</strong> and <strong>uracil (in RNA)</strong>.</li>
+<li>A green box covers a small spot at the bottom right of this drawing.</li>
+</ul>
+<p><strong>In the small drawing:</strong></p>
+<ul>
+<li>One nucleotide is labeled <strong>phosphate</strong>, <strong>ribose</strong>, and <strong>base</strong>.</li>
 </ul>
 <blockquote>
 <p><strong>Why:</strong> This links back to Level 1. A gene's DNA sets the order of amino acids in a protein.</p>
-<p> See <strong><span class="slidelink" onclick="LB.open(11)">Slide 11</span></strong> — the picture on the right labels one nucleotide: phosphate, ribose (a sugar), and base.</p>
+<p> See <strong><span class="slidelink" onclick="LB.open(11)">Slide 11</span></strong> — an arrow goes from "Monomer = nucleotides" to the list of three parts.</p>
 </blockquote>
 <hr />
-<h2>11. DNA vs. RNA <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>12. DNA vs. RNA</h2>
 <p><strong>DNA and RNA share three bases, but each has one base of its own.</strong></p>
 <table>
 <thead>
@@ -1557,58 +1939,130 @@ function printCheat(){
 <td>Deoxyribose</td>
 <td>Ribose</td>
 </tr>
+<tr>
+<td><strong>Strands</strong></td>
+<td>Two (double helix)</td>
+<td>One</td>
+</tr>
 </tbody>
 </table>
 <ul>
 <li>DNA uses <strong>T</strong>, which stands for <strong>thymine</strong>.</li>
 <li>RNA uses <strong>U</strong>, which stands for <strong>uracil</strong>, in place of T.</li>
-<li>Both use A, C, and G.</li>
+<li>Both use <strong>A</strong> (adenine), <strong>C</strong> (cytosine), and <strong>G</strong> (guanine).</li>
+<li>The picture calls these bases <strong>nucleobases</strong>.</li>
+</ul>
+<p><strong>In the picture:</strong></p>
+<ul>
+<li>Thymine has an arrow to DNA only.</li>
+<li>Adenine, cytosine, and guanine have arrows to both.</li>
+<li>Uracil has an arrow to RNA only.</li>
+<li>DeoxyRibose sits by DNA. Ribose sits by RNA.</li>
+<li>DNA is drawn as two twisted strands.</li>
+<li>RNA is drawn as one strand.</li>
+<li>Green boxes cover the labels above each name.</li>
 </ul>
 <blockquote>
-<p> See <strong><span class="slidelink" onclick="LB.open(14)">Slide 14</span></strong> — thymine goes to DNA only, and uracil goes to RNA only. A, C, and G go to both.</p>
+<p> See <strong><span class="slidelink" onclick="LB.open(14)">Slide 14</span></strong> — DNA is on the left. RNA is on the right. The bases are in the middle.</p>
 </blockquote>
 <hr />
-<h2>12. DNA structure: the double helix <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span></h2>
+<h2>13. DNA structure: the double helix</h2>
 <p><strong>DNA is a double helix: two strands twisted around each other.</strong></p>
+<p><strong>Outside and inside:</strong></p>
 <ul>
 <li><strong>Outside:</strong> sugars and phosphates form the <strong>sugar-phosphate backbone</strong>.</li>
-<li><strong>Inside:</strong> the bases pair up, like the steps of a staircase. <strong>Hydrogen bonds</strong> hold each pair together.</li>
-<li><strong>Pairing rule:</strong> A pairs with T. C pairs with G.</li>
-<li>The strands are <strong>antiparallel</strong>. They run in opposite directions. This matters when DNA is copied.</li>
+<li><strong>Inside:</strong> the bases reach into the middle in pairs, like the steps of a staircase.</li>
+<li><strong>Hydrogen bonds</strong> hold the two bases of each pair together.</li>
+</ul>
+<p><strong>Pairing rule:</strong></p>
+<ul>
+<li>A pairs with T.</li>
+<li>C pairs with G.</li>
+<li>The picture calls this <strong>complementary base pairing</strong>. Each base has one matching partner.</li>
+</ul>
+<p><strong>Direction of the strands:</strong></p>
+<ul>
+<li>The two strands run in opposite directions.</li>
+<li>The <strong>5′ end</strong> of one strand pairs with the <strong>3′ end</strong> of the other.</li>
+<li>This is called <strong>antiparallel</strong>. The notes say it matters when DNA is copied.</li>
+<li><strong>Outside source:</strong> You say 5′ as "five prime" and 3′ as "three prime." Example: "5′ end" is read "five prime end." <em>(OpenStax Biology 2e)</em></li>
+</ul>
+<p><strong>In the picture:</strong></p>
+<ul>
+<li>The left drawing is labeled "Double helix."</li>
+<li>The right drawing zooms in. It is labeled "Backbone" and "Complementary base pairing."</li>
+<li>P circles (phosphates) and sugars sit on the outside.</li>
+<li>A–T and C–G pairs sit in the middle.</li>
+<li>Dashed lines between each pair are the hydrogen bonds.</li>
+<li>A–T pairs have 2 dashed lines. C–G pairs have 3.</li>
 </ul>
 <blockquote>
 <p><strong>Analogy:</strong> DNA is like a twisted ladder. The backbones are the rails. The base pairs are the rungs.</p>
-<p> See <strong><span class="slidelink" onclick="LB.open(12)">Slide 12</span></strong> — P circles and sugars sit outside. A–T and C–G pairs sit in the middle. <span class="slidelink" onclick="LB.open(13)">Slide 13</span> shows more drawings of the same ideas.</p>
+<p> See <strong><span class="slidelink" onclick="LB.open(12)">Slide 12</span></strong> — compare the twisted ladder on the left with the zoomed-in pairs on the right.</p>
+</blockquote>
+<hr />
+<h2>14. More DNA pictures</h2>
+<p><strong><span class="slidelink" onclick="LB.open(13)">Slide 13</span> shows the same DNA ideas in three more drawings.</strong></p>
+<p><strong>Top-left drawing:</strong></p>
+<ul>
+<li>Two strands with S (sugar) and P (phosphate) on the outside.</li>
+<li>Base pairs in the middle: A–T, T–A, G–C, and C–G.</li>
+<li>Red dots between the bases show the hydrogen bonds.</li>
+<li>Each strand has a <strong>5′ end</strong> and a <strong>3′ end</strong>.</li>
+<li>The top strand goes from 3′ (left) to 5′ (right). The bottom strand goes from 5′ (left) to 3′ (right).</li>
+<li><strong>Key:</strong> A = adenine, C = cytosine, G = guanine, T = thymine.</li>
+<li><strong>Key:</strong> P = phosphate, S = deoxyribose (sugar).</li>
+</ul>
+<p><strong>Middle drawing:</strong></p>
+<ul>
+<li>It is titled "Complementary base pairing."</li>
+<li>One strand runs from 5′ down to 3′. The other runs from 5′ up to 3′.</li>
+<li>Arrows on the sides show the two opposite directions.</li>
+<li>Hydrogen bonds are labeled between the paired bases.</li>
+</ul>
+<p><strong>Right drawing:</strong></p>
+<ul>
+<li>Two <strong>sugar-phosphate backbones</strong> run down the sides.</li>
+<li><strong>Base pairs</strong> sit between them, joined by <strong>hydrogen bonds</strong>.</li>
+<li>One pair is boxed and labeled <strong>base pair</strong>.</li>
+<li>One P, one S, and one base are boxed and labeled <strong>nucleotide</strong>.</li>
+<li>A tall double helix is drawn next to it.</li>
+</ul>
+<blockquote>
+<p> See <strong><span class="slidelink" onclick="LB.open(13)">Slide 13</span></strong> — the slide title has a typo, "&amp;mages." It means "Images."</p>
 </blockquote>
 <hr />
 <h2>Quick review</h2>
 <ul>
-<li>Proteins are made of amino acids. Nucleic acids are made of nucleotides.</li>
-<li>STRUCTURE = FUNCTION: a protein's shape decides its job.</li>
+<li>Proteins regulate, transport, give structure, and control reaction rates (enzymes).</li>
+<li>The monomer of proteins is the amino acid. There are about 20.</li>
+<li>An amino acid has an amino group, a carboxyl group, and a side chain.</li>
+<li>The R-group, or side chain, is different in each amino acid.</li>
+<li>The chart groups side chains: nonpolar, polar, and electrically charged (acidic or basic).</li>
 <li>A peptide is about 2–50 amino acids. A polypeptide is about 51 or more.</li>
+<li>A protein is 1 or more polypeptides with a functional 3D structure.</li>
+<li>The four levels are primary, secondary, tertiary, and quaternary.</li>
+<li>Primary is the amino acid order, joined by covalent peptide bonds. It runs from N-terminus to C-terminus.</li>
+<li>Secondary is α helices and β pleated sheets, held by backbone hydrogen bonds.</li>
+<li>Tertiary comes from ionic bonds, hydrogen bonds, disulfide bridges, and hydrophobic interactions.</li>
+<li>In water, nonpolar amino acids fold to the center. Polar ones stay outside.</li>
+<li>Quaternary is 2+ subunits, like dimers, trimers (collagen), and tetramers (hemoglobin). Not all proteins have it.</li>
 <li>The four levels match letters, words, sentences, and paragraphs.</li>
-<li>Peptide bonds join Level 1. Hydrogen bonds hold Level 2. Side chains shape Level 3.</li>
-<li>Not all proteins have Level 4, quaternary structure.</li>
-<li>DNA uses A, T, C, G. RNA uses A, U, C, G.</li>
-<li>In DNA, A pairs with T, and C pairs with G.</li>
+<li>A nucleotide has a 5-carbon sugar, a phosphate group, and a nitrogenous base.</li>
+<li>Adenine and guanine are purine bases. Cytosine and thymine are pyrimidine bases.</li>
+<li>DNA uses A, T, C, G and deoxyribose. RNA uses A, U, C, G and ribose.</li>
+<li>DNA has two strands. RNA has one.</li>
+<li>In DNA, A pairs with T, and C pairs with G, held by hydrogen bonds.</li>
+<li>DNA's strands are antiparallel: 5′ end pairs with 3′ end.</li>
+<li><span class="slidelink" onclick="LB.open(13)">Slide 13</span> shows the backbone, base pairs, and nucleotides in more drawings.</li>
 </ul>
 <hr />
-<h2>Exam scope</h2>
-<p>There is no teacher test list for this lesson. <span class="tbadge on"><svg class="i"><use href="#i-check"/></svg></span> items are the core ideas from the slides. <span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> items are extra details you don't need to memorize.</p>
-<p><strong><span class="tbadge off"><svg class="i"><use href="#i-x"/></svg></span> Extra details:</strong></p>
-<ul>
-<li>The chart of all 20 amino acids <em>(<span class="slidelink" onclick="LB.open(2)">Slide 2</span>)</em></li>
-<li>Drawings of atoms and rings <em>(Slides 2, 4, 5, 11, 14)</em></li>
-<li>End labels: N-terminus, C-terminus, 5′ end, 3′ end</li>
-<li>Which atoms form the hydrogen bonds in helices and sheets <em>(<span class="slidelink" onclick="LB.open(5)">Slide 5</span> notes)</em></li>
-<li>Dimer, trimer, and tetramer examples <em>(<span class="slidelink" onclick="LB.open(9)">Slide 9</span>)</em></li>
-<li>Purine and pyrimidine labels <em>(<span class="slidelink" onclick="LB.open(11)">Slide 11</span>)</em></li>
-<li>The extra drawings on <span class="slidelink" onclick="LB.open(13)">Slide 13</span></li>
-</ul></script>
+<h2>From your teacher</h2>
+<p>Your teacher hasn't shared a test list for this lesson, so study everything here.</p></script>
 <script type="text/html" id="doc-transcript"><h1>Source Notes — 2.5 Proteins &amp; Nucleic Acids</h1>
 <p><strong>There is no recording for this lesson.</strong> Everything here comes from your teacher's 14 slides and
-the notes under a few of them. The study guide already uses the correct wording, so you can study
-from it with confidence.</p>
+the notes under Slides 4, 5, 6, and 12. Anything that is not from your teacher starts with
+<strong>Outside source:</strong>.</p>
 <h2>Small typos on the slides</h2>
 <table>
 <thead>
@@ -1631,7 +2085,7 @@ from it with confidence.</p>
 </tr>
 <tr>
 <td>"Set"</td>
-<td>Ser</td>
+<td>Ser (serine)</td>
 <td><span class="slidelink" onclick="LB.open(4)">Slide 4</span> picture</td>
 </tr>
 <tr>
@@ -1641,18 +2095,32 @@ from it with confidence.</p>
 </tr>
 </tbody>
 </table>
-<p>Some green boxes cover labels on Slides 2, 7, 11, and 14. <span class="slidelink" onclick="LB.open(8)">Slide 8</span> shows what <span class="slidelink" onclick="LB.open(7)">Slide 7</span> hides.</p>
-<h2>Two things said more clearly</h2>
+<h2>Covered labels</h2>
+<p>Green boxes cover some labels on the slides.</p>
+<ul>
+<li>
+<p><strong><span class="slidelink" onclick="LB.open(2)">Slide 2</span>:</strong> three labels on the amino acid drawing. The full-size picture shows them: Amino
+  Group, Carboxyl Group, and Side Chain.</p>
+</li>
+<li>
+<p><strong><span class="slidelink" onclick="LB.open(7)">Slide 7</span>:</strong> the folded chain. <span class="slidelink" onclick="LB.open(8)">Slide 8</span> shows it.</p>
+</li>
+<li><strong><span class="slidelink" onclick="LB.open(11)">Slide 11</span>:</strong> a small corner of the big drawing.</li>
+<li><strong><span class="slidelink" onclick="LB.open(14)">Slide 14</span>:</strong> the labels above "Deoxyribonucleic Acid" and "Ribonucleic Acid."</li>
+</ul>
+<h2>Things said more clearly</h2>
 <ul>
 <li>
 <p><strong><span class="slidelink" onclick="LB.open(6)">Slide 6</span> notes</strong> first call tertiary structure the 3D arrangement of "polypeptide chains."
-  Clearer: tertiary structure is the shape of <strong>one</strong> chain, and several chains together is
-  quaternary <em>(<span class="slidelink" onclick="LB.open(6)">Slide 6</span> notes; OpenStax Biology 2e)</em>.</p>
+  Later, the same notes call it the structure "of a polypeptide." So tertiary structure is the
+  shape of <strong>one</strong> chain. The notes say two or more chains together is quaternary.</p>
 </li>
 <li>
-<p><strong><span class="slidelink" onclick="LB.open(2)">Slide 2</span></strong> says a peptide is about 2–50 amino acids and a polypeptide is 51 or more. Other books
-  may split them differently, so use your teacher's numbers for this class <em>(OpenStax Biology 2e)</em>.</p>
+<p><strong><span class="slidelink" onclick="LB.open(10)">Slide 10</span></strong> says "Alphabets." It means single letters.</p>
 </li>
+<li><strong><span class="slidelink" onclick="LB.open(5)">Slide 5</span> notes</strong> say "carbonyl O" and "amino H."</li>
+<li><strong>Outside source:</strong> Carbonyl O is the oxygen in a C=O group. Amino H is the hydrogen in an N–H
+  group. Example: nail polish remover also has a C=O group. <em>(OpenStax Biology 2e)</em></li>
 </ul></script>
 <script>
 /* ---------- READ tab: render embedded docs ---------- */
@@ -1897,7 +2365,7 @@ const PAL_PAGES=[
   {title:'Progress',ic:'trend',v:'progress'}
 ];
 const PAL_ACTIONS=[
-  {title:'Print 1-page cheat sheet',ic:'printer',fn:()=>printCheat()},
+  {title:'View cheat sheet',ic:'doc',fn:()=>printCheat()},
   {title:'Print this section',ic:'printer',fn:()=>printView()},
   {title:'Listen to the summary',ic:'volume',fn:()=>{goView('overview');toggleSummary();}},
   {title:'Open settings',ic:'gear',fn:()=>openModal('settingsModal')},

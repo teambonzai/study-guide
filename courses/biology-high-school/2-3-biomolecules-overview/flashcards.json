@@ -3,7 +3,7 @@
     "course": "Biology (high school)",
     "lecture": "Unit Two: Biomolecules — 2.3 Biomolecules Overview",
     "source": "Teacher's slides and speaker notes. No recording.",
-    "note": "Core ideas only, drawn from the slides and speaker notes. Import into Anki/Quizlet as Q/A pairs.",
+    "note": "Every section of the lesson, from the teacher slides, speaker notes, and slide pictures. Import into Anki/Quizlet as Q/A pairs.",
     "topics": [
       "carbon",
       "energy",
@@ -20,7 +20,7 @@
   "cards": [
     {
       "t": "carbon",
-      "q": "Many monomers joined together make a…?",
+      "q": "What do many monomers joined together make?",
       "a": "A polymer"
     },
     {
@@ -40,23 +40,53 @@
     },
     {
       "t": "energy",
-      "q": "What does the 1st law say about energy?",
-      "a": "It can't be created or destroyed"
+      "q": "What two kinds of energy are on the Slide 3 chart?",
+      "a": "Potential and kinetic"
     },
     {
       "t": "energy",
-      "q": "What is entropy?",
-      "a": "Disorder"
+      "q": "Chemical, nuclear, elastic: potential or kinetic?",
+      "a": "Potential"
+    },
+    {
+      "t": "energy",
+      "q": "Light, sound, wind: potential or kinetic?",
+      "a": "Kinetic"
+    },
+    {
+      "t": "energy",
+      "q": "What does the 1st law say about energy?",
+      "a": "Can't destroy or create it"
+    },
+    {
+      "t": "energy",
+      "q": "What does the 2nd law say?",
+      "a": "Entropy always increases"
+    },
+    {
+      "t": "energy",
+      "q": "When the cannonball lands, its energy turns into what?",
+      "a": "Heat"
     },
     {
       "t": "reactions",
       "q": "What happens to bonds in a chemical reaction?",
-      "a": "They break or form"
+      "a": "They break and/or form"
+    },
+    {
+      "t": "reactions",
+      "q": "Is melting ice a chemical change?",
+      "a": "No, it's still water"
     },
     {
       "t": "reactions",
       "q": "What does a coefficient tell you?",
-      "a": "How many you need"
+      "a": "How many of that substance"
+    },
+    {
+      "t": "reactions",
+      "q": "What does (aq) mean?",
+      "a": "Aqueous (dissolved)"
     },
     {
       "t": "exoendo",
@@ -69,49 +99,9 @@
       "a": "Absorbs it"
     },
     {
-      "t": "buildbreak",
-      "q": "What is anabolism?",
-      "a": "Building big molecules (uses energy)"
-    },
-    {
-      "t": "buildbreak",
-      "q": "What is catabolism?",
-      "a": "Breaking big molecules (releases energy)"
-    },
-    {
-      "t": "atp",
-      "q": "What is ATP's nickname?",
-      "a": "Energy currency of the cell"
-    },
-    {
-      "t": "atp",
-      "q": "ATP + water makes what?",
-      "a": "ADP + Pi + energy"
-    },
-    {
-      "t": "lipids",
-      "q": "What are the building blocks of lipids?",
-      "a": "Fatty acids and glycerol"
-    },
-    {
-      "t": "carbs",
-      "q": "What are the building blocks of carbohydrates?",
-      "a": "Monosaccharides"
-    },
-    {
-      "t": "proteins",
-      "q": "What are the building blocks of proteins?",
-      "a": "Amino acids"
-    },
-    {
-      "t": "nucleic",
-      "q": "What are the building blocks of nucleic acids?",
-      "a": "Nucleotides"
-    },
-    {
-      "t": "reactions",
-      "q": "Is melting ice a chemical change?",
-      "a": "No. It's still H₂O."
+      "t": "exoendo",
+      "q": "Which kind can happen on its own?",
+      "a": "Exothermic"
     },
     {
       "t": "exoendo",
@@ -119,19 +109,99 @@
       "a": "Exothermic"
     },
     {
+      "t": "exoendo",
+      "q": "What does the blue arrow on the Slide 7 graphs show?",
+      "a": "Activation energy"
+    },
+    {
       "t": "buildbreak",
-      "q": "Which one adds water: dehydration synthesis or hydrolysis?",
-      "a": "Hydrolysis"
+      "q": "What is anabolism?",
+      "a": "Building large molecules (uses energy)"
+    },
+    {
+      "t": "buildbreak",
+      "q": "What is catabolism?",
+      "a": "Breaking large molecules (releases energy)"
+    },
+    {
+      "t": "buildbreak",
+      "q": "What is dehydration synthesis?",
+      "a": "Building molecules by losing water"
+    },
+    {
+      "t": "buildbreak",
+      "q": "What is hydrolysis?",
+      "a": "Splitting a compound by adding water"
+    },
+    {
+      "t": "atp",
+      "q": "What does ATP stand for?",
+      "a": "Adenosine triphosphate"
+    },
+    {
+      "t": "atp",
+      "q": "What are ATP's three parts?",
+      "a": "Three phosphates, ribose, adenine"
+    },
+    {
+      "t": "atp",
+      "q": "ATP + water makes what?",
+      "a": "ADP + Pi + energy"
+    },
+    {
+      "t": "atp",
+      "q": "In the ATP cycle, what is the dead battery?",
+      "a": "ADP + Pi"
     },
     {
       "t": "lipids",
-      "q": "Which stores long-term energy: lipids or carbs?",
-      "a": "Lipids (9 kcal per gram)"
+      "q": "What are the building blocks of lipids?",
+      "a": "Fatty acids and glycerol"
+    },
+    {
+      "t": "lipids",
+      "q": "How many kcal per gram: lipids vs. carbs?",
+      "a": "Lipids 9, carbs 4"
+    },
+    {
+      "t": "lipids",
+      "q": "What is a triglyceride made of?",
+      "a": "Glycerol + three fatty acids"
+    },
+    {
+      "t": "lipids",
+      "q": "What three lipid types are in the Slide 14 picture?",
+      "a": "Phospholipid, triglyceride, cholesterol"
     },
     {
       "t": "carbs",
-      "q": "Which word ending marks a carbohydrate?",
+      "q": "What are the building blocks of carbohydrates?",
+      "a": "Monosaccharides"
+    },
+    {
+      "t": "carbs",
+      "q": "Which suffix identifies a carbohydrate?",
       "a": "-ose"
+    },
+    {
+      "t": "carbs",
+      "q": "What is drawn as two rings joined together?",
+      "a": "A disaccharide"
+    },
+    {
+      "t": "carbs",
+      "q": "What does glucose get converted to?",
+      "a": "ATP (energy)"
+    },
+    {
+      "t": "proteins",
+      "q": "What are the building blocks of proteins?",
+      "a": "Amino acids"
+    },
+    {
+      "t": "proteins",
+      "q": "What are the three labeled groups on an amino acid?",
+      "a": "Amine, carboxyl, variable (R)"
     },
     {
       "t": "proteins",
@@ -139,9 +209,39 @@
       "a": "Proteins"
     },
     {
+      "t": "proteins",
+      "q": "Which digestive enzyme on Slide 24 is for oil?",
+      "a": "Lipase"
+    },
+    {
       "t": "nucleic",
-      "q": "Which biomolecule contains phosphorus (CHONP)?",
-      "a": "Nucleic acids"
+      "q": "What are the building blocks of nucleic acids?",
+      "a": "Nucleotides"
+    },
+    {
+      "t": "nucleic",
+      "q": "What are the three parts of a nucleotide?",
+      "a": "Phosphate, sugar, base"
+    },
+    {
+      "t": "nucleic",
+      "q": "What sugar is in DNA?",
+      "a": "Deoxyribose"
+    },
+    {
+      "t": "nucleic",
+      "q": "Which base is in RNA but not DNA?",
+      "a": "Uracil"
+    },
+    {
+      "t": "nucleic",
+      "q": "How many strands: DNA vs. RNA?",
+      "a": "DNA two, RNA usually one"
+    },
+    {
+      "t": "nucleic",
+      "q": "What is RNA involved with?",
+      "a": "Protein synthesis"
     }
   ]
 }

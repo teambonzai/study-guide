@@ -20,7 +20,7 @@
     {
       "t": "polarity",
       "q": "What does polar mean?",
-      "a": "One end negative, one end positive"
+      "a": "One end partly negative, one partly positive"
     },
     {
       "t": "polarity",
@@ -35,7 +35,27 @@
     {
       "t": "polarity",
       "q": "Why is oxygen partial negative?",
-      "a": "It pulls electrons toward itself"
+      "a": "Electrons are pulled toward it"
+    },
+    {
+      "t": "polarity",
+      "q": "What does the δ sign mean?",
+      "a": "Partial"
+    },
+    {
+      "t": "polarity",
+      "q": "What angle does Slide 2 show between water's hydrogens?",
+      "a": "104.45°"
+    },
+    {
+      "t": "polarity",
+      "q": "How long is each oxygen-to-hydrogen bond on Slide 2?",
+      "a": "95.84 pm"
+    },
+    {
+      "t": "polarity",
+      "q": "What three ways does Slide 2 draw water?",
+      "a": "Geometric structure, ball-and-stick, space-filling"
     },
     {
       "t": "hbond",
@@ -49,8 +69,18 @@
     },
     {
       "t": "hbond",
-      "q": "Besides oxygen, which atoms can hydrogen bond?",
-      "a": "Nitrogen and fluorine"
+      "q": "Which atoms can hydrogen bonds involve?",
+      "a": "Nitrogen, oxygen, or fluorine"
+    },
+    {
+      "t": "hbond",
+      "q": "Do hydrogen bonds happen only in water?",
+      "a": "No, in other molecules too"
+    },
+    {
+      "t": "hbond",
+      "q": "What does Slide 3 call the solid lines inside one molecule?",
+      "a": "Intramolecular polar covalent bonding"
     },
     {
       "t": "cohesion",
@@ -63,6 +93,21 @@
       "a": "Water sticking to something different"
     },
     {
+      "t": "cohesion",
+      "q": "What do \"Co\" and \"Ad\" mean on Slide 4?",
+      "a": "Co = together; Ad = between"
+    },
+    {
+      "t": "cohesion",
+      "q": "In the Slide 4 plant picture, what is the brown wall labeled?",
+      "a": "Xylem wall"
+    },
+    {
+      "t": "cohesion",
+      "q": "In the Slide 4 plant picture, what are the dotted links?",
+      "a": "Hydrogen bonds"
+    },
+    {
       "t": "capillary",
       "q": "What is capillary action?",
       "a": "Water rising up a thin tube"
@@ -71,6 +116,11 @@
       "t": "capillary",
       "q": "What two things cause capillary action?",
       "a": "Cohesion and adhesion"
+    },
+    {
+      "t": "capillary",
+      "q": "What is the curved top of water in a tube?",
+      "a": "Meniscus"
     },
     {
       "t": "capillary",
@@ -85,16 +135,41 @@
     {
       "t": "surface",
       "q": "What causes surface tension?",
-      "a": "Cohesion only"
+      "a": "Cohesion"
+    },
+    {
+      "t": "surface",
+      "q": "How is a surface molecule pulled?",
+      "a": "Inward"
+    },
+    {
+      "t": "surface",
+      "q": "How is an inner molecule pulled?",
+      "a": "In all directions"
+    },
+    {
+      "t": "surface",
+      "q": "Where are cohesive pulls stronger: surface or bulk?",
+      "a": "At the surface"
     },
     {
       "t": "heat",
       "q": "What is specific heat capacity?",
-      "a": "Energy to raise temperature 1°C"
+      "a": "Energy to raise water 1°C"
     },
     {
       "t": "heat",
-      "q": "Does water heat up fast or slowly?",
+      "q": "What are the specific heats on Slide 7?",
+      "a": "Copper 390, aluminum 910, water 4200"
+    },
+    {
+      "t": "heat",
+      "q": "How does a lower specific heat warm and cool?",
+      "a": "Quickly"
+    },
+    {
+      "t": "heat",
+      "q": "How does a higher specific heat warm and cool?",
       "a": "Slowly"
     },
     {
@@ -109,13 +184,13 @@
     },
     {
       "t": "hydro",
-      "q": "What does hydrophilic mean?",
-      "a": "Water-loving; dissolves easily"
+      "q": "What does hydrophilic mean? Give examples.",
+      "a": "Water-loving; dissolves (salts, sugars)"
     },
     {
       "t": "hydro",
-      "q": "What does hydrophobic mean?",
-      "a": "Water-fearing; does not dissolve"
+      "q": "What does hydrophobic mean? Give examples.",
+      "a": "Water-fearing; doesn't dissolve (oils, fats)"
     },
     {
       "t": "hydro",
@@ -124,18 +199,53 @@
     },
     {
       "t": "hydro",
-      "q": "What do amphipathic molecules help build?",
-      "a": "Cell membranes"
+      "q": "What example of amphipathic is on Slide 8?",
+      "a": "Soap bubbles"
+    },
+    {
+      "t": "hydro",
+      "q": "What do amphipathic molecules form?",
+      "a": "Cell membranes (phospholipid bilayers)"
+    },
+    {
+      "t": "hydro",
+      "q": "What are the two parts of a phospholipid?",
+      "a": "Hydrophilic head, hydrophobic tail"
     },
     {
       "t": "mixtures",
       "q": "What is a suspension?",
-      "a": "Big bits that don't dissolve"
+      "a": "Large particles that don't dissolve"
+    },
+    {
+      "t": "mixtures",
+      "q": "What are the suspension examples on Slide 9?",
+      "a": "Blood cells in plasma; sand in water"
     },
     {
       "t": "mixtures",
       "q": "What is an emulsion?",
       "a": "Two liquids that don't normally mix"
+    },
+    {
+      "t": "mixtures",
+      "q": "What are the emulsion examples on Slide 9?",
+      "a": "Oil droplets in water; bile and fats"
+    },
+    {
+      "t": "density",
+      "q": "What is density?",
+      "a": "Mass per unit volume"
+    },
+    {
+      "t": "density",
+      "q": "What is the density formula?",
+      "a": "D = m / V (or ρ = M / V)"
+    },
+    {
+      "t": "density",
+      "q": "At what temperature is water most dense?",
+      "a": "4°C"
     },
     {
       "t": "density",
