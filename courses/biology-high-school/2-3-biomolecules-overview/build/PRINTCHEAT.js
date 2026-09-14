@@ -32,8 +32,8 @@ function printCheat(){
   <div class="blk"><h2>5 · Potential energy diagrams</h2><ul>
    <li>Products lower = <b>exothermic</b> (energy released)</li>
    <li>Products higher = <b>endothermic</b> (energy absorbed)</li>
-   <li><b>Activation energy:</b> blue arrow up to the hump</li>
-   <li>Teacher's note (Slide 7): &ldquo;We will talk more about the &lsquo;activation energy&rsquo; concept in a future unit, for now we are just focusing on the exo/endo thermic ideas (energy releasing/absorbing)&rdquo;</li>
+   <li><b>Activation energy:</b> the rise up to the hump</li>
+   <li>Your teacher says: &ldquo;We will talk more about the &lsquo;activation energy&rsquo; concept in a future unit, for now we are just focusing on the exo/endo thermic ideas (energy releasing/absorbing)&rdquo;</li>
    <li>Outside source: activation energy is the energy needed to start a reaction</li></ul></div>
   <div class="blk"><h2>6 · Building &amp; breaking</h2><ul>
    <li><b>Anabolism</b> builds, energy required</li>

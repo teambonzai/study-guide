@@ -7,9 +7,9 @@
 <title>2.5 Proteins &amp; Nucleic Acids — Interactive Study</title>
 <style>
   :root{
-    --bg:#f4f7f6; --panel:#ffffff; --panel2:#eef4f2; --ink:#152825; --muted:#5a726c;
-    --line:#e5ece9; --accent:#0d9488; --accent2:#0f766e; --ink-on:#ffffff;
-    --good:#0e9f6e; --bad:#e02424; --warn:#c2760c; --chip:#e6f4f1;
+    --bg:#fdf6fa; --panel:#ffffff; --panel2:#fbecf4; --ink:#2a1622; --muted:#77596a;
+    --line:#f3e3ec; --accent:#db2777; --accent2:#be185d; --ink-on:#ffffff;
+    --good:#0e9f6e; --bad:#e02424; --warn:#c2760c; --chip:#fce7f3;
   }
   *{box-sizing:border-box}
   html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
@@ -26,7 +26,7 @@
   main{max-width:940px;margin:0 auto;padding:26px 18px 100px}
   .view{display:none} .view.active{display:block;animation:fade .2s ease}
   @keyframes fade{from{opacity:.4}to{opacity:1}}
-  .card{background:var(--panel);border-radius:16px;padding:24px 26px;margin:20px 0;box-shadow:0 1px 3px rgba(20,50,45,.07)}
+  .card{background:var(--panel);border-radius:16px;padding:24px 26px;margin:20px 0;box-shadow:0 1px 3px rgba(60,20,40,.07)}
   h2{font-size:18px;margin:.1em 0 .7em;display:flex;align-items:center;gap:10px}
   h2 svg.i{width:20px;height:20px;color:var(--accent)}
   h3{font-size:13px;color:var(--muted);margin:1.6em 0 .55em;text-transform:uppercase;letter-spacing:.7px;font-weight:700}
@@ -40,7 +40,7 @@
   .btn.primary{background:var(--accent);color:var(--ink-on);font-weight:600}
   .btn.primary:hover{background:var(--accent2)}
   .btn.qnav{border:1.5px solid #cdddd7;background:var(--panel);padding:9px 15px}
-  .btn.qnav:hover{background:#eef4f2}
+  .btn.qnav:hover{background:#fbecf4}
   .btn.qnav.primary{border-color:var(--accent);background:var(--accent);color:var(--ink-on)}
   .btn.qnav.primary:hover{background:var(--accent2);border-color:var(--accent2)}
   /* doc switcher = underline TABS (distinct from the pill/segmented page filters) */
@@ -83,15 +83,15 @@
   .qtext{font-size:20px;line-height:1.4;font-weight:500;margin:8px 0 18px}
   .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;align-items:start;margin-top:6px}
   .gitem{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;
-    box-shadow:0 1px 3px rgba(20,50,45,.06);transition:box-shadow .16s,transform .16s,border-color .16s}
-  .gitem:hover{box-shadow:0 8px 22px rgba(20,50,45,.13);transform:translateY(-2px);border-color:#d3e2dd}
+    box-shadow:0 1px 3px rgba(60,20,40,.06);transition:box-shadow .16s,transform .16s,border-color .16s}
+  .gitem:hover{box-shadow:0 8px 22px rgba(60,20,40,.13);transform:translateY(-2px);border-color:#f5cfe2}
   .gitem img{width:100%;display:block;background:#f7faf9;cursor:zoom-in;aspect-ratio:4/3;object-fit:contain;border-bottom:1px solid var(--line)}
   .gitem .cap{padding:11px 13px 8px;font-size:13px;color:var(--ink);font-weight:600;display:flex;align-items:baseline;gap:5px;flex-wrap:wrap}
   .gitem .cap .snum{color:var(--muted);font-weight:700;font-size:11px;letter-spacing:.4px;text-transform:uppercase}
   .gitem .cap .stext{color:var(--muted);font-weight:400}
   .gitem .note{margin:0;border-radius:0;border-left:none;background:transparent;color:var(--accent2);padding:0 13px 12px;font-size:12.5px;line-height:1.45}
   .note{background:var(--chip);border-left:3px solid var(--accent);padding:6px 10px;margin-top:6px;font-size:12.5px;color:var(--accent2);border-radius:0 6px 6px 0}
-  #lightbox{position:fixed;inset:0;background:rgba(21,40,37,.82);display:none;align-items:center;justify-content:center;z-index:50;padding:20px;cursor:zoom-out;flex-direction:column}
+  #lightbox{position:fixed;inset:0;background:rgba(45,20,35,.82);display:none;align-items:center;justify-content:center;z-index:50;padding:20px;cursor:zoom-out;flex-direction:column}
   #lightbox img{max-width:96vw;max-height:82vh;background:#fff;border-radius:8px}
   #lightbox .lcap{color:#fff;margin-top:12px;max-width:900px;text-align:center;font-size:14px}
   .search{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:15px}
@@ -166,10 +166,10 @@
   .htitle .hhome:hover{opacity:.62}
   .hburger{font-size:0}
   /* nav drawer — modern slide-out (crisp, not ghosted) */
-  .scrim{position:fixed;inset:0;background:rgba(21,40,37,.42);z-index:40;display:none;opacity:0;transition:opacity .22s ease}
+  .scrim{position:fixed;inset:0;background:rgba(45,20,35,.42);z-index:40;display:none;opacity:0;transition:opacity .22s ease}
   .scrim.open{display:block;opacity:1}
   nav.drawer{position:fixed;top:0;left:0;bottom:0;width:280px;max-width:84vw;background:var(--panel);z-index:41;
-    transform:translateX(-100%);transition:transform .24s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;gap:3px;padding:12px 12px 16px;overflow-y:auto;box-shadow:2px 0 28px rgba(20,50,45,.16)}
+    transform:translateX(-100%);transition:transform .24s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;gap:3px;padding:12px 12px 16px;overflow-y:auto;box-shadow:2px 0 28px rgba(60,20,40,.16)}
   nav.drawer.open{transform:translateX(0)}
   nav.drawer .drawer-head{display:flex;align-items:center;justify-content:space-between;font-weight:700;color:var(--muted);
     font-size:11px;text-transform:uppercase;letter-spacing:.8px;padding:6px 8px 10px;margin-bottom:2px}
@@ -180,7 +180,7 @@
   nav.drawer button[data-v].active{background:var(--accent);color:#fff}
   nav.drawer button[data-v].active svg.i{color:#fff}
   /* modal */
-  .modal{position:fixed;inset:0;background:rgba(21,40,37,.5);z-index:60;display:none;align-items:center;justify-content:center;padding:18px}
+  .modal{position:fixed;inset:0;background:rgba(45,20,35,.5);z-index:60;display:none;align-items:center;justify-content:center;padding:18px}
   .modal.open{display:flex}
   .modal .sheet{background:var(--panel);border-radius:16px;max-width:460px;width:100%;max-height:86vh;overflow-y:auto;overflow-x:visible;padding:18px 18px 20px}
   /* proper modal header: title left, close vertically centered right */
@@ -191,7 +191,7 @@
   /* settings grouped as cards */
   .set-sec{background:var(--panel2);border-radius:12px;padding:2px 14px;margin:12px 0}
   .set-sec h3{font-size:12px;color:var(--accent2);font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin:13px 0 2px}
-  .setrow{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(20,50,45,.07)}
+  .setrow{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(60,20,40,.07)}
   .setrow:last-child{border-bottom:none}
   .setrow .lab{flex:1} .setrow .lab b{display:block;font-size:14.5px;margin-bottom:1px} .setrow .lab small{color:var(--muted);font-size:12.5px;line-height:1.4}
   /* iOS-style switch */
@@ -203,7 +203,7 @@
   .switch input:checked+span::before{transform:translateX(18px)}
   /* return to top */
   #toTop{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;border:none;
-    display:none;align-items:center;justify-content:center;cursor:pointer;z-index:30;box-shadow:0 3px 12px rgba(20,50,45,.28)}
+    display:none;align-items:center;justify-content:center;cursor:pointer;z-index:30;box-shadow:0 3px 12px rgba(60,20,40,.28)}
   #toTop.show{display:flex} #toTop svg.i{width:22px;height:22px}
   /* consistent toolbar toggle buttons (icon + tooltip) */
   .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
@@ -220,7 +220,7 @@
   /* JS-positioned tooltip — clamped inside the viewport, single consistent color */
   .tipbubble{position:fixed;z-index:200;max-width:min(280px,92vw);white-space:normal;text-align:center;
     background:var(--ink);color:#fff;font:500 12px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;letter-spacing:.2px;
-    padding:7px 11px;border-radius:8px;box-shadow:0 6px 20px rgba(20,50,45,.28);pointer-events:none;display:none}
+    padding:7px 11px;border-radius:8px;box-shadow:0 6px 20px rgba(60,20,40,.28);pointer-events:none;display:none}
   .tipbubble::after{content:"";position:absolute;left:var(--ax,50%);transform:translateX(-50%);bottom:-5px;border:5px solid transparent;border-top-color:var(--ink)}
   .tipbubble.below::after{bottom:auto;top:-5px;border-top-color:transparent;border-bottom-color:var(--ink)}
   /* lightbox multi-slide nav */
@@ -242,7 +242,7 @@
   .doc .co-slide{background:#eff8fe;border-color:#d3e9f9;--tip-bg:#0284c7} .co-slide .co-badge{background:#0284c7} .co-slide .co-lbl{color:#0369a1}
   .doc .co-analogy{background:#f6f0ff;border-color:#e6dbfb;--tip-bg:#7c3aed} .co-analogy .co-badge{background:#7c3aed} .co-analogy .co-lbl{color:#6d28d9}
   .doc .co-wait{background:#fff8ec;border-color:#f6e5c3;--tip-bg:#b45309} .co-wait .co-badge{background:#d97706} .co-wait .co-lbl{color:#b45309}
-  .doc .co-why{background:#e6f4f1;border-color:#c7e6de;--tip-bg:#0f766e} .co-why .co-badge{background:#0d9488} .co-why .co-lbl{color:#0f766e}
+  .doc .co-why{background:#fce7f3;border-color:#f5cfe2;--tip-bg:#be185d} .co-why .co-badge{background:#db2777} .co-why .co-lbl{color:#be185d}
   .doc .co-note{background:#eef2f6;border-color:#dbe3ea;--tip-bg:#475569} .co-note .co-badge{background:#64748b} .co-note .co-lbl{color:#475569}
   .doc .co-quote{background:#eef1fe;border-color:#dbe0fb;--tip-bg:#4f46e5} .co-quote .co-badge{background:#4f46e5} .co-quote .co-lbl{color:#4338ca} .doc .co-quote p{font-style:italic}
   .doc .cdot{display:inline-block;width:11px;height:11px;border-radius:50%;vertical-align:-1px;margin-right:3px}
@@ -259,7 +259,7 @@
   .seg{display:inline-flex;flex-wrap:wrap;gap:2px;background:var(--panel2);border-radius:10px;padding:3px}
   .seg button{border:none;background:transparent;color:var(--muted);font:inherit;font-size:13px;padding:6px 12px;border-radius:8px;cursor:pointer;white-space:nowrap}
   .seg button:hover{color:var(--ink)}
-  .seg button.on{background:var(--panel);color:var(--accent2);box-shadow:0 1px 2px rgba(20,50,45,.12)}
+  .seg button.on{background:var(--panel);color:var(--accent2);box-shadow:0 1px 2px rgba(60,20,40,.12)}
   .seg-wrap{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
   /* global search results */
   .s-grp{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin:12px 0 3px;padding:0 2px}
@@ -331,9 +331,9 @@
   .modal .sheet.cheat{max-width:900px;height:88vh;display:flex;flex-direction:column}
   #cheatFrame{flex:1;width:100%;border:0;border-radius:10px;background:#fff;margin-top:10px}
 </style>
-<style>/* Macy's profile theme: violet instead of teal */
-  :root{--bg:#f7f5fc;--panel2:#f0ecfa;--ink:#1e1b2e;--muted:#645d78;--line:#e9e5f3;--accent:#7c3aed;--accent2:#6d28d9;--chip:#f1eafe}
-  .btn.qnav:hover{background:var(--panel2)} .gitem:hover{border-color:#ddd3f3}
+<style>/* Macy's profile theme: pink instead of teal */
+  :root{--bg:#fdf6fa;--panel2:#fbecf4;--ink:#2a1622;--muted:#77596a;--line:#f3e3ec;--accent:#db2777;--accent2:#be185d;--chip:#fce7f3}
+  .btn.qnav:hover{background:var(--panel2)} .gitem:hover{border-color:#f5cfe2}
 </style>
 </head>
 <body>
@@ -699,7 +699,7 @@ function icon(id){return '<svg class="i"><use href="#i-'+id+'"/></svg>';}
 
 /* topic meta: color + icon */
 const TOPICS = {
- "proteins":{name:"Protein building blocks",color:"#0d9488",icon:"layers"},
+ "proteins":{name:"Protein building blocks",color:"#db2777",icon:"layers"},
  "levels":{name:"Levels of structure",color:"#475569",icon:"list"},
  "primary":{name:"Primary structure",color:"#0284c7",icon:"tag"},
  "secondary":{name:"Secondary structure",color:"#7c3aed",icon:"shuffle"},
@@ -710,14 +710,14 @@ const TOPICS = {
 };
 
 const CARDS = [
- ["proteins","What four jobs of proteins are on Slide 2?","Regulate, transport, structure, control reaction rates."],
+ ["proteins","What are four jobs of proteins?","Regulate, transport, structure, control reaction rates."],
  ["proteins","What are proteins that control reaction rates called?","Enzymes."],
  ["proteins","What does STRUCTURE = FUNCTION mean?","Shape decides a protein's job."],
  ["proteins","What is the monomer (building block) of proteins?","Amino acids."],
  ["proteins","About how many different amino acids are there?","About 20."],
  ["proteins","What are the three parts of an amino acid?","Amino group, carboxyl group, side chain."],
  ["proteins","Which part is different in each amino acid?","The side chain (R-group)."],
- ["proteins","What three groups does the amino acid chart show?","Nonpolar, polar, electrically charged."],
+ ["proteins","Amino acids are sorted by side chain into which three groups?","Nonpolar, polar, electrically charged."],
  ["proteins","What two groups are charged side chains split into?","Acidic and basic."],
  ["proteins","About how many amino acids are in a peptide?","About 2 to 50."],
  ["proteins","About how many amino acids are in a polypeptide?","About 51 or more."],
@@ -738,22 +738,22 @@ const CARDS = [
  ["secondary","In secondary structure, a hydrogen bond links which two atoms?","Carbonyl O and amino H."],
  ["tertiary","What is tertiary structure?","One chain's whole 3D shape."],
  ["tertiary","Tertiary structure is due to interactions between which parts?","Amino acid side chains."],
- ["tertiary","What four side-chain interactions are on Slide 6?","Ionic bond, hydrogen bond, disulfide bridge, hydrophobic interaction."],
+ ["tertiary","What are the four kinds of side-chain interactions?","Ionic bond, hydrogen bond, disulfide bridge, hydrophobic interaction."],
  ["tertiary","When a chain folds in water, where do nonpolar amino acids go?","To the center."],
  ["tertiary","When a chain folds in water, where do polar amino acids go?","To the outside."],
- ["tertiary","On Slide 8, what is the blue layer around the chain labeled?","Hydration layer."],
+ ["tertiary","What layer around a protein chain shrinks when it folds?","Hydration layer."],
  ["quaternary","What is quaternary structure?","2 or more subunits together."],
  ["quaternary","Do all proteins have quaternary structure?","No. Only proteins with 2+ chains."],
  ["quaternary","What is a dimer with 2 matching subunits called?","Homodimer."],
- ["quaternary","What is the trimer example on Slide 9?","Collagen."],
- ["quaternary","What is the tetramer example on Slide 9?","Hemoglobin."],
+ ["quaternary","What protein is the example of a trimer?","Collagen."],
+ ["quaternary","What protein is the example of a tetramer?","Hemoglobin."],
  ["nucleic","What are the two jobs of nucleic acids?","Store hereditary info; encode proteins."],
  ["nucleic","What is the monomer (building block) of nucleic acids?","Nucleotides."],
  ["nucleic","What are the 3 parts of a nucleotide?","5-carbon sugar, phosphate group, nitrogenous base."],
  ["nucleic","What are the four bases in DNA?","A, T, C, G."],
  ["nucleic","Which base is in RNA but not in DNA?","Uracil (U)."],
- ["nucleic","Which bases are labeled purines on Slide 11?","Adenine and guanine."],
- ["nucleic","Which bases are labeled pyrimidines on Slide 11?","Cytosine and thymine (in DNA)."],
+ ["nucleic","Which bases are purine bases?","Adenine and guanine."],
+ ["nucleic","Which bases are pyrimidine bases?","Cytosine and thymine (in DNA)."],
  ["nucleic","Which sugar is in RNA?","Ribose."],
  ["dna","What is the shape of DNA called?","Double helix."],
  ["dna","What is on the outside of the DNA helix?","The sugar-phosphate backbone."],
@@ -768,7 +768,7 @@ const QUIZ = [
  ["What are proteins that control reaction rates called?",["Enzymes","Nucleotides","Hydration layers","Base pairs"],0,"proteins"],
  ["What does STRUCTURE = FUNCTION mean?",["A protein's shape decides its job","Proteins are made of nucleotides","DNA has two strands","Water is given off when bonds form"],0,"proteins"],
  ["Which part of an amino acid is different in each one?",["The side chain (R-group)","The peptide bond","The hydration layer","The phosphate group"],0,"proteins"],
- ["Which group appears on the Slide 2 amino acid chart?",["Electrically charged side chains","Pyrimidine bases","Sugar-phosphate backbones","Hydration layers"],0,"proteins"],
+ ["Which is one of the groups amino acids are sorted into by their side chains?",["Electrically charged side chains","Pyrimidine bases","Sugar-phosphate backbones","Hydration layers"],0,"proteins"],
  ["What is primary structure?",["The order of amino acids","The whole 3D shape","Coils and pleated sheets","Two or more chains together"],0,"primary"],
  ["How do peptide bonds form?",["Dehydration synthesis","Complementary base pairing","The hydrophobic effect","Hydrogen bonding"],0,"primary"],
  ["What are the two ends of a protein chain called?",["N-terminus and C-terminus","5′ end and 3′ end","Purine and pyrimidine","Homodimer and heterodimer"],0,"primary"],
@@ -776,10 +776,10 @@ const QUIZ = [
  ["Which level has the alpha helix and beta pleated sheet?",["Secondary structure","Primary structure","Tertiary structure","Quaternary structure"],0,"secondary"],
  ["What holds secondary structure in shape?",["Hydrogen bonds","Disulfide bridges","Phosphate groups","Uracil"],0,"secondary"],
  ["Tertiary structure is due to interactions between which parts?",["Amino acid side chains","Nucleotides","DNA strands","Separate proteins"],0,"tertiary"],
- ["Which Slide 6 interaction is drawn as S–S?",["Disulfide bridge","Ionic bond","Peptide bond","Hydration layer"],0,"tertiary"],
+ ["Which side-chain interaction is written as S–S?",["Disulfide bridge","Ionic bond","Peptide bond","Hydration layer"],0,"tertiary"],
  ["When a chain folds in water, where do nonpolar amino acids go?",["They gather in the center","They turn into DNA","They break off the chain","They become the hydration layer"],0,"tertiary"],
  ["What does quaternary structure need?",["2 or more subunits","A phosphate group","The base uracil","A 5-carbon sugar"],0,"quaternary"],
- ["In the writing analogy, sentences match which level?",["Tertiary","Primary","Secondary","Quaternary"],0,"levels"],
+ ["In the writing analogy, sentences match which level of protein structure?",["Tertiary","Primary","Secondary","Quaternary"],0,"levels"],
  ["What are the three parts of a nucleotide?",["5-carbon sugar, phosphate group, nitrogenous base","Ionic bond, hydrogen bond, disulfide bridge","Dimer, trimer, tetramer","Alpha helix, beta sheet, backbone"],0,"nucleic"],
  ["Which base is in RNA but not in DNA?",["Uracil (U)","Adenine (A)","Guanine (G)","Cytosine (C)"],0,"nucleic"],
  ["What is on the outside of the DNA double helix?",["The sugar-phosphate backbone","The base pairs","Amino acids","A hydration layer"],0,"dna"],
@@ -795,10 +795,10 @@ const SCENARIOS = [
   "A peptide is about 2 to 50 amino acids. A polypeptide is about 51 or more.","proteins"],
  ["When you text, letters make words and words make a sentence. Which protein level is like the sentence?",
   ["Tertiary structure","Primary structure","Secondary structure","Quaternary structure"],0,
-  "In the Slide 10 analogy, sentences match tertiary structure. It is the whole 3D shape of one chain.","levels"],
+  "In the writing analogy, sentences match tertiary structure. It is the whole 3D shape of one chain.","levels"],
  ["You snap 4 building blocks together into one toy. If each block were a protein subunit, what would the toy be called?",
   ["A tetramer","A nucleotide","A peptide bond","A side chain"],0,
-  "A tetramer has 4 subunits. Hemoglobin is the tetramer example on Slide 9.","quaternary"],
+  "A tetramer has 4 subunits. Hemoglobin is the example of a tetramer.","quaternary"],
  ["You build a paper DNA ladder and put an A on one rail. What goes across from it on the other rail?",
   ["T","C","G","A phosphate"],0,
   "A pairs with T, and C pairs with G. Hydrogen bonds hold each pair together.","dna"]
@@ -806,82 +806,82 @@ const SCENARIOS = [
 
 const GLOSS_CATS={prot:"Protein building blocks",struct:"Levels of protein structure",nuc:"Nucleic acids & DNA"};
 const GLOSSARY = [
- ["Protein", "Slide 2: 1+ polypeptides with a 3D structure. It is functional.", "prot"],
- ["Functional", "Slide 2 says a protein is functional. Outside source: Able to do its job. Example: a phone that turns on and makes calls is functional. (Merriam-Webster Dictionary)", "prot"],
- ["Regulate", "A protein function on Slide 2. Outside source: To control how something works. Example: a thermostat regulates a room's heat. (Merriam-Webster Dictionary)", "prot"],
- ["Transport", "A protein function on Slide 2. Outside source: To carry things from place to place. Example: a school bus transports students. (Merriam-Webster Dictionary)", "prot"],
- ["Structure", "A protein function on Slide 2. The slide also says \"STRUCTURE = FUNCTION!\"", "prot"],
- ["Enzyme", "Listed on Slide 2 under \"Control reaction rates.\" Outside source: A protein that speeds up a reaction. Example: an enzyme in saliva starts breaking down bread. (OpenStax Biology 2e)", "prot"],
- ["Monomer", "Slide 2: amino acids. Slide 11: nucleotides. Outside source: One small building block that links with others. Example: one Lego brick. (OpenStax Biology 2e)", "prot"],
- ["Amino acid", "The monomer of proteins. Slide 2: about 20 different kinds.", "prot"],
- ["Amino group", "Labeled in the Slide 2 amino acid picture: the N with two H's.", "prot"],
- ["Carboxyl group", "Labeled in the Slide 2 amino acid picture: the C with an O and an OH.", "prot"],
- ["Side chain (R-group)", "Slide 2: \"R-group / side chain = differs!\" It is different in each amino acid.", "prot"],
- ["Nonpolar side chain", "A group on the Slide 2 chart, with 9 amino acids. Slide 8: nonpolar amino acids gather in the center. Outside source: Nonpolar things don't mix with water. Example: oil floats on water. (OpenStax Biology 2e)", "prot"],
- ["Polar side chain", "A group on the Slide 2 chart, with 6 amino acids. Slide 8: polar amino acids stay outside. Outside source: Polar things mix with water. Example: sugar dissolves in tea. (OpenStax Biology 2e)", "prot"],
- ["Electrically charged side chain", "A group on the Slide 2 chart: 5 amino acids, split into acidic and basic.", "prot"],
- ["Acidic", "The charged group on Slide 2 with aspartate and glutamate.", "prot"],
- ["Basic", "The charged group on Slide 2 with lysine, arginine, and histidine.", "prot"],
- ["Peptide", "Slide 2: about 2–50 amino acids.", "prot"],
- ["Polypeptide", "Slide 2: about 51 or more amino acids.", "prot"],
- ["Primary structure", "Slide 4 notes: the sequence (order) of amino acids in a polypeptide chain.", "struct"],
- ["Peptide bond", "Slide 4: covalent, formed via dehydration synthesis. It joins the amino acids.", "struct"],
- ["Covalent", "Slide 4: the kind of bond a peptide bond is. Outside source: A strong bond where atoms share electrons. Example: the bonds inside a water molecule. (OpenStax Biology 2e)", "struct"],
- ["Dehydration synthesis", "Slide 4: how peptide bonds form. The chart shows water (H₂O) given off.", "struct"],
- ["N-terminus", "Labeled on Slide 4 at one end of the chain.", "struct"],
- ["C-terminus", "Labeled on Slide 4 at the other end of the chain.", "struct"],
- ["Amino end and carboxyl end", "Labeled on the Slide 4 chart at the two ends of the joined amino acids.", "struct"],
- ["Secondary structure", "Slide 5: most common are the α helix and β pleated sheet. Caused by hydrogen bonds.", "struct"],
- ["α helix (alpha helix)", "Slide 5: a secondary structure, drawn as a coil.", "struct"],
- ["β pleated sheet (beta pleated sheet)", "Slide 5: a secondary structure, drawn as a zigzag.", "struct"],
- ["Hydrogen bond", "Slide 5: causes secondary structure. Also on Slides 6, 12, and 13. Outside source: A weak pull between atoms. Example: it pulls water molecules together into drops. (OpenStax Biology 2e)", "struct"],
- ["Backbone", "Slide 5 notes: the polypeptide chain apart from the R groups.", "struct"],
- ["Carbonyl O", "Slide 5 notes: the O of one amino acid in a hydrogen bond. Outside source: The O in a C=O group. Example: nail polish remover also has a C=O group. (OpenStax Biology 2e)", "struct"],
- ["Amino H", "Slide 5 notes: the H of another amino acid in that hydrogen bond. Outside source: The H in an N–H group. Example: the N with two H's at the left of the Slide 2 amino acid drawing. (OpenStax Biology 2e)", "struct"],
- ["Tertiary structure", "Slide 6: 3D shape, due to interactions between amino acid side chains.", "struct"],
- ["Ionic bond", "Labeled on Slide 6 as a side-chain interaction. Outside source: A pull between a plus and a minus charge. Example: table salt is held together this way. (OpenStax Biology 2e)", "struct"],
- ["Disulfide bridge", "Labeled on Slide 6 as a side-chain interaction, drawn as S–S. Outside source: A link between two sulfur atoms, like a staple. Example: links like these help shape your hair. (OpenStax Biology 2e)", "struct"],
- ["Hydrophobic interaction", "Labeled on Slide 6 as a side-chain interaction.", "struct"],
- ["Hydrophobic", "Used in \"hydrophobic interaction\" and \"hydrophobic effect\" (Slides 6–8). Outside source: Water-fearing. Hydrophobic things clump together away from water. Example: oil drops in salad dressing. (OpenStax Biology 2e)", "struct"],
- ["Hydrophobic effect", "Title of Slides 7–8. It minimizes the hydration layer and helps weak interactions between residues.", "struct"],
- ["Hydration layer", "Labeled on Slide 8: the blue layer around the chain. Outside source: Hydration means water, so it is the water around the chain. Example: the thin coat of water on a washed grape. (Merriam-Webster Dictionary)", "struct"],
- ["Protein folding", "Labeled on Slide 8: the arrow from unfolded to folded polypeptide.", "struct"],
- ["Residue", "Slide 8: \"amino acid residues.\" Outside source: One amino acid inside a chain. Example: one bead on a necklace. (OpenStax Biology 2e)", "struct"],
- ["Quaternary structure", "Slide 9: 2+ subunits. \"*NOT ALL PROTEINS HAVE THIS!!!!\"", "struct"],
- ["Subunit", "Slide 9: quaternary structure has 2+ subunits. Slide 6 notes: two or more polypeptide chains.", "struct"],
- ["Dimer", "A Slide 9 box, shown as a homodimer and a heterodimer.", "struct"],
- ["Homodimer", "Slide 9: a dimer drawn with 2 matching shapes.", "struct"],
- ["Heterodimer", "Slide 9: a dimer drawn with 2 different shapes.", "struct"],
- ["Trimer", "A Slide 9 box: \"e.g. Collagen.\"", "struct"],
- ["Tetramer", "A Slide 9 box: \"e.g. Hemoglobin (alpha-2-beta-2 tetramer).\"", "struct"],
- ["Collagen", "Slide 9: the trimer example. Outside source: A protein that makes skin, bones, and tendons strong. Example: gelatin in gummy candy comes from collagen. (OpenStax Biology 2e)", "struct"],
- ["Hemoglobin", "Slide 9: the tetramer example, an \"alpha-2-beta-2 tetramer.\" Outside source: A protein in red blood cells that carries oxygen. Example: it is why blood looks red. (OpenStax Biology 2e)", "struct"],
- ["Antibody", "Slide 10 sample text: \"Antibodies are a useful tool.\" Outside source: A protein that helps your body fight germs. Example: vaccines teach your body to make antibodies. (OpenStax Biology 2e)", "struct"],
- ["Nucleic acid", "Slide 11: stores and transmits hereditary info, and encodes protein products. Examples: DNA, RNA.", "nuc"],
- ["Hereditary information", "Slide 11: what nucleic acids store and transmit. Outside source: Information passed from parents to children. Example: eye color. (OpenStax Biology 2e)", "nuc"],
- ["Encode", "Slide 11: nucleic acids \"encode protein products.\" Outside source: To hold the code for something. Example: a recipe holds the code for a cake. (Merriam-Webster Dictionary)", "nuc"],
- ["Nucleotide", "Slide 11: the monomer of nucleic acids. Each has a 5-carbon sugar, phosphate group, and nitrogenous base.", "nuc"],
- ["5-carbon sugar", "Slide 11: one part of each nucleotide.", "nuc"],
- ["Phosphate group", "Slide 11: one part of each nucleotide. Drawn as P on Slides 12 and 13.", "nuc"],
- ["Nitrogenous base", "Slide 11: one part of each nucleotide. DNA: A, T, C, G. RNA: A, U, C, G.", "nuc"],
- ["Nucleobases", "Slide 14's label for thymine, adenine, cytosine, guanine, and uracil.", "nuc"],
- ["Adenine (A)", "Slide 11: a purine base. Slide 14: in DNA and RNA.", "nuc"],
- ["Guanine (G)", "Slide 11: a purine base. Slide 14: in DNA and RNA.", "nuc"],
- ["Cytosine (C)", "Slide 11: a pyrimidine base. Slide 14: in DNA and RNA.", "nuc"],
- ["Thymine (T)", "Slide 11: a pyrimidine base (in DNA). Slide 14: DNA only.", "nuc"],
- ["Uracil (U)", "Slide 11: \"uracil (in RNA).\" Slide 14: RNA only.", "nuc"],
- ["Purine bases", "Labeled on Slide 11 as the purine bases: adenine and guanine.", "nuc"],
- ["Pyrimidine bases", "Labeled on Slide 11 as the pyrimidine bases: cytosine and thymine (in DNA).", "nuc"],
- ["Deoxyribose", "Labeled on Slide 11. Slide 13 key: S = deoxyribose (sugar). Slide 14: by DNA.", "nuc"],
- ["Ribose", "Slide 11: \"ribose (in RNA).\" Slide 14: by RNA.", "nuc"],
- ["DNA", "Slide 14: deoxyribonucleic acid. Slide 11: bases A, T, C, G. Drawn as two twisted strands.", "nuc"],
- ["RNA", "Slide 14: ribonucleic acid. Slide 11: bases A, U, C, G. Drawn as one strand.", "nuc"],
- ["Double helix", "Labeled on Slide 12 for DNA's twisted shape.", "nuc"],
- ["Sugar-phosphate backbone", "Slide 12 notes: the sugars and phosphates on the outside of the helix.", "nuc"],
- ["Base pair", "Labeled on Slide 13. Slide 12 notes: bases in a pair are bound by hydrogen bonds.", "nuc"],
- ["Complementary base pairing", "Labeled on Slides 12 and 13. The pictures pair A with T and C with G.", "nuc"],
- ["5′ end and 3′ end", "Labeled on Slides 11 and 13 at the ends of a strand. Outside source: say \"five prime\" and \"three prime\" (OpenStax Biology 2e).", "nuc"],
- ["Antiparallel", "Slide 12 notes: the two strands run in opposite directions. It is important for copying DNA.", "nuc"]
+ ["Protein", "1+ polypeptides with a 3D structure. It is functional.", "prot"],
+ ["Functional", "A protein is functional. Outside source: Able to do its job. Example: a phone that turns on and makes calls is functional. (Merriam-Webster Dictionary)", "prot"],
+ ["Regulate", "One job of proteins. Outside source: To control how something works. Example: a thermostat regulates a room's heat. (Merriam-Webster Dictionary)", "prot"],
+ ["Transport", "One job of proteins. Outside source: To carry things from place to place. Example: a school bus transports students. (Merriam-Webster Dictionary)", "prot"],
+ ["Structure", "One job of proteins. Your teacher also says \"STRUCTURE = FUNCTION!\"", "prot"],
+ ["Enzyme", "Proteins that \"Control reaction rates.\" Outside source: A protein that speeds up a reaction. Example: an enzyme in saliva starts breaking down bread. (OpenStax Biology 2e)", "prot"],
+ ["Monomer", "For proteins: amino acids. For nucleic acids: nucleotides. Outside source: One small building block that links with others. Example: one Lego brick. (OpenStax Biology 2e)", "prot"],
+ ["Amino acid", "The monomer of proteins. There are about 20 different kinds.", "prot"],
+ ["Amino group", "One part of an amino acid: the N with two H's.", "prot"],
+ ["Carboxyl group", "One part of an amino acid: the C with an O and an OH.", "prot"],
+ ["Side chain (R-group)", "\"R-group / side chain = differs!\" It is different in each amino acid.", "prot"],
+ ["Nonpolar side chain", "A side-chain group with 9 amino acids. Nonpolar amino acids gather in the center when a chain folds. Outside source: Nonpolar things don't mix with water. Example: oil floats on water. (OpenStax Biology 2e)", "prot"],
+ ["Polar side chain", "A side-chain group with 6 amino acids. Polar amino acids stay outside when a chain folds. Outside source: Polar things mix with water. Example: sugar dissolves in tea. (OpenStax Biology 2e)", "prot"],
+ ["Electrically charged side chain", "A side-chain group with 5 amino acids, split into acidic and basic.", "prot"],
+ ["Acidic", "The charged side-chain group with aspartate and glutamate.", "prot"],
+ ["Basic", "The charged side-chain group with lysine, arginine, and histidine.", "prot"],
+ ["Peptide", "A chain of about 2–50 amino acids.", "prot"],
+ ["Polypeptide", "A chain of about 51 or more amino acids.", "prot"],
+ ["Primary structure", "The sequence (order) of amino acids in a polypeptide chain.", "struct"],
+ ["Peptide bond", "A covalent bond, formed via dehydration synthesis. It joins the amino acids.", "struct"],
+ ["Covalent", "The kind of bond a peptide bond is. Outside source: A strong bond where atoms share electrons. Example: the bonds inside a water molecule. (OpenStax Biology 2e)", "struct"],
+ ["Dehydration synthesis", "How peptide bonds form. Water (H₂O) is given off.", "struct"],
+ ["N-terminus", "One end of a protein chain.", "struct"],
+ ["C-terminus", "The other end of a protein chain.", "struct"],
+ ["Amino end and carboxyl end", "The names for the two ends of a row of joined amino acids.", "struct"],
+ ["Secondary structure", "Most common are the α helix and β pleated sheet. Caused by hydrogen bonds.", "struct"],
+ ["α helix (alpha helix)", "A secondary structure shaped like a coil.", "struct"],
+ ["β pleated sheet (beta pleated sheet)", "A secondary structure shaped like a zigzag.", "struct"],
+ ["Hydrogen bond", "Causes secondary structure. Also links side chains in tertiary structure and holds DNA base pairs together. Outside source: A weak pull between atoms. Example: it pulls water molecules together into drops. (OpenStax Biology 2e)", "struct"],
+ ["Backbone", "The polypeptide chain apart from the R groups.", "struct"],
+ ["Carbonyl O", "The O of one amino acid in a secondary-structure hydrogen bond. Outside source: The O in a C=O group. Example: nail polish remover also has a C=O group. (OpenStax Biology 2e)", "struct"],
+ ["Amino H", "The H of another amino acid in that hydrogen bond. Outside source: The H in an N–H group. Example: the amino group, the N with two H's, has N–H groups. (OpenStax Biology 2e)", "struct"],
+ ["Tertiary structure", "3D shape, due to interactions between amino acid side chains.", "struct"],
+ ["Ionic bond", "A side-chain interaction in tertiary structure. Outside source: A pull between a plus and a minus charge. Example: table salt is held together this way. (OpenStax Biology 2e)", "struct"],
+ ["Disulfide bridge", "A side-chain interaction in tertiary structure, written as S–S. Outside source: A link between two sulfur atoms, like a staple. Example: links like these help shape your hair. (OpenStax Biology 2e)", "struct"],
+ ["Hydrophobic interaction", "A side-chain interaction in tertiary structure.", "struct"],
+ ["Hydrophobic", "Used in \"hydrophobic interaction\" and \"hydrophobic effect.\" Outside source: Water-fearing. Hydrophobic things clump together away from water. Example: oil drops in salad dressing. (OpenStax Biology 2e)", "struct"],
+ ["Hydrophobic effect", "It minimizes the hydration layer and helps weak interactions between residues.", "struct"],
+ ["Hydration layer", "The layer around a protein chain. It shrinks when the chain folds. Outside source: Hydration means water, so it is the water around the chain. Example: the thin coat of water on a washed grape. (Merriam-Webster Dictionary)", "struct"],
+ ["Protein folding", "The change from an unfolded to a folded polypeptide.", "struct"],
+ ["Residue", "Used in \"amino acid residues.\" Outside source: One amino acid inside a chain. Example: one bead on a necklace. (OpenStax Biology 2e)", "struct"],
+ ["Quaternary structure", "2+ subunits. \"*NOT ALL PROTEINS HAVE THIS!!!!\"", "struct"],
+ ["Subunit", "One polypeptide chain in a protein. Quaternary structure has two or more.", "struct"],
+ ["Dimer", "2 subunits. Comes as a homodimer or a heterodimer.", "struct"],
+ ["Homodimer", "A dimer with 2 matching subunits.", "struct"],
+ ["Heterodimer", "A dimer with 2 different subunits.", "struct"],
+ ["Trimer", "3 subunits. \"e.g. Collagen.\"", "struct"],
+ ["Tetramer", "4 subunits. \"e.g. Hemoglobin (alpha-2-beta-2 tetramer).\"", "struct"],
+ ["Collagen", "The trimer example. Outside source: A protein that makes skin, bones, and tendons strong. Example: gelatin in gummy candy comes from collagen. (OpenStax Biology 2e)", "struct"],
+ ["Hemoglobin", "The tetramer example, an \"alpha-2-beta-2 tetramer.\" Outside source: A protein in red blood cells that carries oxygen. Example: it is why blood looks red. (OpenStax Biology 2e)", "struct"],
+ ["Antibody", "From the writing analogy's sample text: \"Antibodies are a useful tool.\" Outside source: A protein that helps your body fight germs. Example: vaccines teach your body to make antibodies. (OpenStax Biology 2e)", "struct"],
+ ["Nucleic acid", "Stores and transmits hereditary info, and encodes protein products. Examples: DNA, RNA.", "nuc"],
+ ["Hereditary information", "What nucleic acids store and transmit. Outside source: Information passed from parents to children. Example: eye color. (OpenStax Biology 2e)", "nuc"],
+ ["Encode", "Nucleic acids \"encode protein products.\" Outside source: To hold the code for something. Example: a recipe holds the code for a cake. (Merriam-Webster Dictionary)", "nuc"],
+ ["Nucleotide", "The monomer of nucleic acids. Each has a 5-carbon sugar, phosphate group, and nitrogenous base.", "nuc"],
+ ["5-carbon sugar", "One part of each nucleotide.", "nuc"],
+ ["Phosphate group", "One part of each nucleotide. Written as P.", "nuc"],
+ ["Nitrogenous base", "One part of each nucleotide. DNA: A, T, C, G. RNA: A, U, C, G.", "nuc"],
+ ["Nucleobases", "Another name for thymine, adenine, cytosine, guanine, and uracil.", "nuc"],
+ ["Adenine (A)", "A purine base. In DNA and RNA.", "nuc"],
+ ["Guanine (G)", "A purine base. In DNA and RNA.", "nuc"],
+ ["Cytosine (C)", "A pyrimidine base. In DNA and RNA.", "nuc"],
+ ["Thymine (T)", "A pyrimidine base (in DNA). DNA only.", "nuc"],
+ ["Uracil (U)", "\"Uracil (in RNA).\" RNA only.", "nuc"],
+ ["Purine bases", "Adenine and guanine.", "nuc"],
+ ["Pyrimidine bases", "Cytosine and thymine (in DNA).", "nuc"],
+ ["Deoxyribose", "The sugar in DNA. Written as S (sugar).", "nuc"],
+ ["Ribose", "\"Ribose (in RNA).\" The sugar in RNA.", "nuc"],
+ ["DNA", "Deoxyribonucleic acid. Bases A, T, C, G. Two twisted strands.", "nuc"],
+ ["RNA", "Ribonucleic acid. Bases A, U, C, G. One strand.", "nuc"],
+ ["Double helix", "DNA's twisted shape.", "nuc"],
+ ["Sugar-phosphate backbone", "The sugars and phosphates on the outside of the helix.", "nuc"],
+ ["Base pair", "Two bases paired inside DNA. They are bound by hydrogen bonds.", "nuc"],
+ ["Complementary base pairing", "A pairs with T, and C pairs with G.", "nuc"],
+ ["5′ end and 3′ end", "The two ends of a strand. Outside source: say \"five prime\" and \"three prime\" (OpenStax Biology 2e).", "nuc"],
+ ["Antiparallel", "The two strands run in opposite directions. It is important for copying DNA.", "nuc"]
 ];
 
 const SLIDE_NOTES = {
@@ -891,13 +891,13 @@ const SLIDE_NOTES = {
  4:{note:"Primary structure is the order of amino acids, from N-terminus to C-terminus. Covalent peptide bonds form by dehydration synthesis. DNA sets the order."},
  5:{note:"The alpha helix and beta pleated sheet are held by hydrogen bonds. They link a C=O oxygen to an N-H hydrogen along the backbone."},
  6:{note:"Tertiary structure is one chain's 3D shape. Side chains link by ionic bonds, hydrogen bonds, disulfide bridges, and hydrophobic interactions."},
- 7:{note:"An unfolded chain in water. Yellow circles are polar amino acids. Red circles are nonpolar. A green box covers the folded result."},
+ 7:{note:"An unfolded chain in water. Yellow circles are polar amino acids. Red circles are nonpolar."},
  8:{note:"When the chain folds, nonpolar amino acids gather in the center. Polar ones stay outside, and the hydration layer shrinks."},
  9:{note:"Quaternary structure is 2+ subunits. The slide says not all proteins have this. Examples: dimers, collagen (trimer), hemoglobin (tetramer)."},
  10:{note:"Letters, words, sentences, and paragraphs match primary, secondary, tertiary, and quaternary. The sample text is about antibodies."},
  11:{note:"Nucleic acids store hereditary info and encode proteins. A nucleotide has a 5-carbon sugar, phosphate group, and nitrogenous base."},
  12:{note:"DNA is a double helix. The sugar-phosphate backbone is outside. Base pairs A-T and C-G are inside, held by hydrogen bonds. Strands are antiparallel."},
- 13:{note:"Three more DNA drawings: backbones, base pairs, hydrogen bonds, 5' and 3' ends, a nucleotide, and a letter key."},
+ 13:{note:"DNA shown three ways: backbones, base pairs, hydrogen bonds, 5' and 3' ends, a nucleotide, and a letter key."},
  14:{note:"DNA has thymine, deoxyribose, and two strands. RNA has uracil, ribose, and one strand. Both have A, C, and G."}
 };
 
@@ -995,7 +995,7 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.querySel
 /* Overview test chips — each links to its section in the Study guide (Read tab) */
 document.getElementById('testChips').innerHTML = [
  ["their jobs","Protein jobs · STRUCTURE = FUNCTION"],
- ["building blocks","Amino acid parts · chart of 20 amino acids"],
+ ["building blocks","Amino acid parts · 20 amino acids by side chain"],
  ["amino acid to protein","Peptides · polypeptides · proteins"],
  ["four levels","The four levels of structure"],
  ["primary structure","Level 1: order of amino acids · peptide bonds"],
@@ -1007,7 +1007,7 @@ document.getElementById('testChips').innerHTML = [
  ["nucleic acids","Nucleotides · bases · purines and pyrimidines"],
  ["dna vs. rna","DNA vs. RNA"],
  ["double helix","DNA double helix · base pairs · antiparallel"],
- ["more dna pictures","More DNA drawings (Slide 13)"]
+ ["more dna","More DNA: backbones · base pairs · nucleotide"]
 ].map(([kw,label])=>`<button class="chip chip-link" onclick="openGuide('${kw}')">${esc(label)} ${icon('arrowright')}</button>`).join('');
 
 /* Overview mnemonics — interactive reveal cards */
@@ -1192,7 +1192,7 @@ const MAPS = [
    ${down('grows longer into a')}
    <div class="frow">${n('#0284c7',"Polypeptide","about 51 or more amino acids")}</div>
    ${down('folds into a working shape')}
-   <div class="frow" style="align-items:center">${n(C['proteins'].color,"Protein","working 3D shape")}${arrowR('its shape decides')}${n('#0f766e',"Its job","STRUCTURE = FUNCTION")}</div>
+   <div class="frow" style="align-items:center">${n(C['proteins'].color,"Protein","working 3D shape")}${arrowR('its shape decides')}${n('#be185d',"Its job","STRUCTURE = FUNCTION")}</div>
  </div>`},
  {title:"2 · The four levels of protein structure", html:`<div class="flow">
    <div class="frow">${n(C['primary'].color,"Primary","order of amino acids · like letters")}</div>
@@ -1336,14 +1336,14 @@ function printCheatFrame(){ const w=document.getElementById('cheatFrame').conten
 function printCheat(){
   
   const css=`body{font:13px/1.5 -apple-system,Arial,sans-serif;color:#111;margin:22px;max-width:800px}
-   h1{font-size:19px;color:#7c3aed;margin:0 0 2px} .sub{color:#555;font-size:11px;margin-bottom:10px}
-   h2{font-size:12px;color:#7c3aed;border-bottom:1.5px solid #7c3aed;padding-bottom:2px;margin:12px 0 4px;text-transform:uppercase;letter-spacing:.5px}
-   .cols{column-count:2;column-gap:22px} .blk{break-inside:avoid;margin-bottom:8px} b{color:#6d28d9}
+   h1{font-size:19px;color:#db2777;margin:0 0 2px} .sub{color:#555;font-size:11px;margin-bottom:10px}
+   h2{font-size:12px;color:#db2777;border-bottom:1.5px solid #db2777;padding-bottom:2px;margin:12px 0 4px;text-transform:uppercase;letter-spacing:.5px}
+   .cols{column-count:2;column-gap:22px} .blk{break-inside:avoid;margin-bottom:8px} b{color:#be185d}
    ul{margin:2px 0 2px 16px;padding:0} li{margin:2px 0} table{border-collapse:collapse;width:100%;font-size:12px}
    td{border:1px solid #ccc;padding:3px 5px;vertical-align:top} @media print{body{margin:10px}}`;
-  const html=`<!doctype html><html><head><meta charset="utf-8"><title>2.5 Proteins &amp; Nucleic Acids — Cheat Sheet</title><style>${css}</style><style>/* Macy's profile theme: violet instead of teal */
-  :root{--bg:#f7f5fc;--panel2:#f0ecfa;--ink:#1e1b2e;--muted:#645d78;--line:#e9e5f3;--accent:#7c3aed;--accent2:#6d28d9;--chip:#f1eafe}
-  .btn.qnav:hover{background:var(--panel2)} .gitem:hover{border-color:#ddd3f3}
+  const html=`<!doctype html><html><head><meta charset="utf-8"><title>2.5 Proteins &amp; Nucleic Acids — Cheat Sheet</title><style>${css}</style><style>/* Macy's profile theme: pink instead of teal */
+  :root{--bg:#fdf6fa;--panel2:#fbecf4;--ink:#2a1622;--muted:#77596a;--line:#f3e3ec;--accent:#db2777;--accent2:#be185d;--chip:#fce7f3}
+  .btn.qnav:hover{background:var(--panel2)} .gitem:hover{border-color:#f5cfe2}
 </style>
 </head><body>
   <h1>2.5 Proteins &amp; Nucleic Acids — Cheat Sheet</h1><div class="sub">Biology · Unit Two: Biomolecules</div>
@@ -1356,7 +1356,7 @@ function printCheat(){
    <li>Monomer = <b>amino acid</b> (about 20 kinds)</li>
    <li>Parts: <b>amino group</b> · <b>carboxyl group</b> · <b>side chain (R-group)</b></li>
    <li>The side chain differs in each one</li>
-   <li>Chart: <b>nonpolar</b> (9) · <b>polar</b> (6) · <b>electrically charged</b> (5): acidic (2), basic (3)</li></ul></div>
+   <li>Side-chain groups: <b>nonpolar</b> (9) · <b>polar</b> (6) · <b>electrically charged</b> (5): acidic (2), basic (3)</li></ul></div>
   <div class="blk"><h2>3. Amino acid to protein</h2><ul>
    <li><b>Peptide</b> about 2–50 aa · <b>polypeptide</b> about 51+ aa</li>
    <li><b>Protein</b> = 1+ polypeptides, 3D, functional</li></ul></div>
@@ -1384,7 +1384,7 @@ function printCheat(){
    <li>Sugar-phosphate backbone outside · base pairs inside</li>
    <li><b>A–T</b> and <b>C–G</b> (complementary base pairing), held by hydrogen bonds</li>
    <li><b>Antiparallel</b>: 5′ end pairs with 3′ end · matters for copying DNA</li>
-   <li>Slide 13: more drawings of backbones, base pairs, a nucleotide</li></ul></div>
+   <li>Key: <b>P</b> = phosphate · <b>S</b> = deoxyribose (sugar) · a <b>nucleotide</b> = one P, one S, one base</li></ul></div>
   <div class="blk"><h2>From your teacher</h2><ul>
    <li>No test list shared for this lesson, so study everything.</li></ul></div>
   </div></body></html>`;

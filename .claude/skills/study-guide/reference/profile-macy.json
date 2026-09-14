@@ -1,22 +1,140 @@
 [
-  ["</head>", "<style>/* Macy's profile theme: violet instead of teal */\n  :root{--bg:#f7f5fc;--panel2:#f0ecfa;--ink:#1e1b2e;--muted:#645d78;--line:#e9e5f3;--accent:#7c3aed;--accent2:#6d28d9;--chip:#f1eafe}\n  .btn.qnav:hover{background:var(--panel2)} .gitem:hover{border-color:#ddd3f3}\n</style>\n</head>"],
-  ["Teal notes explain key diagrams and tables.", "Colored notes explain the pictures."],
-  [" <span class=\"pill\" style=\"background:#fef3c7;color:#b45309\"><svg class=\"i\"><use href=\"#i-star\"/></svg>key image</span> marks the deck's most important diagrams and tables.", ""],
-  ["<button class=\"tool${slideKeyOnly?' on':''}\" onclick=\"slideKeyOnly=!slideKeyOnly;renderSlideGroups();renderGallery(document.getElementById('slideSearch').value)\"><svg class=\"i\"><use href=\"#i-star\"/></svg>Key images</button>", ""],
-  ["const star=sn.star?", "const star=false?"],
-  ["<h2><span class=\"tbadge on\"><svg class=\"i\"><use href=\"#i-check\"/></svg></span>On the test</h2>", "<h2><svg class=\"i\"><use href=\"#i-list\"/></svg>Topics in this lesson</h2>"],
-  ["<span class=\"tbadge off\"><svg class=\"i\"><use href=\"#i-x\"/></svg></span> From your teacher</h3>", "<svg class=\"i\"><use href=\"#i-quote\"/></svg> From your teacher</h3>"],
-  ["<use href=\"#i-stethoscope\"/></svg>Scenarios</button>", "<use href=\"#i-bulb\"/></svg>Scenarios</button>"],
-  ["<use href=\"#i-stethoscope\"/></svg>Scenarios</h2>", "<use href=\"#i-bulb\"/></svg>Scenarios</h2>"],
-  ["Apply the concepts to a clinical situation", "Apply the concepts to a real-life situation"],
-  ["The full outline, study guide, and transcript fixes are in the", "The full outline, study guide, and source notes are in the"],
-  ["</svg>Lecture outline</button>", "</svg>Lesson outline</button>"],
-  ["</svg>Transcript fixes</button>", "</svg>Source notes</button>"],
-  ["{title:'Read — lecture outline'", "{title:'Read — lesson outline'"],
-  ["{title:'Read — transcript fixes'", "{title:'Read — source notes'"],
-  [",'Transcript fixes')", ",'Source notes')"],
-  ["href=\"../../../index.html\"", "href=\"../../../index.html#macy\""],
-  ["color:#0d9488", "color:#7c3aed", true],
-  ["solid #0d9488", "solid #7c3aed", true],
-  ["b{color:#0f766e}", "b{color:#6d28d9}", true]
+ [
+  "</head>",
+  "<style>/* Macy's profile theme: pink instead of teal */\n  :root{--bg:#fdf6fa;--panel2:#fbecf4;--ink:#2a1622;--muted:#77596a;--line:#f3e3ec;--accent:#db2777;--accent2:#be185d;--chip:#fce7f3}\n  .btn.qnav:hover{background:var(--panel2)} .gitem:hover{border-color:#f5cfe2}\n</style>\n</head>"
+ ],
+ [
+  "Teal notes explain key diagrams and tables.",
+  "Colored notes explain the pictures."
+ ],
+ [
+  " <span class=\"pill\" style=\"background:#fef3c7;color:#b45309\"><svg class=\"i\"><use href=\"#i-star\"/></svg>key image</span> marks the deck's most important diagrams and tables.",
+  ""
+ ],
+ [
+  "<button class=\"tool${slideKeyOnly?' on':''}\" onclick=\"slideKeyOnly=!slideKeyOnly;renderSlideGroups();renderGallery(document.getElementById('slideSearch').value)\"><svg class=\"i\"><use href=\"#i-star\"/></svg>Key images</button>",
+  ""
+ ],
+ [
+  "const star=sn.star?",
+  "const star=false?"
+ ],
+ [
+  "<h2><span class=\"tbadge on\"><svg class=\"i\"><use href=\"#i-check\"/></svg></span>On the test</h2>",
+  "<h2><svg class=\"i\"><use href=\"#i-list\"/></svg>Topics in this lesson</h2>"
+ ],
+ [
+  "<span class=\"tbadge off\"><svg class=\"i\"><use href=\"#i-x\"/></svg></span> From your teacher</h3>",
+  "<svg class=\"i\"><use href=\"#i-quote\"/></svg> From your teacher</h3>"
+ ],
+ [
+  "<use href=\"#i-stethoscope\"/></svg>Scenarios</button>",
+  "<use href=\"#i-bulb\"/></svg>Scenarios</button>"
+ ],
+ [
+  "<use href=\"#i-stethoscope\"/></svg>Scenarios</h2>",
+  "<use href=\"#i-bulb\"/></svg>Scenarios</h2>"
+ ],
+ [
+  "Apply the concepts to a clinical situation",
+  "Apply the concepts to a real-life situation"
+ ],
+ [
+  "The full outline, study guide, and transcript fixes are in the",
+  "The full outline, study guide, and source notes are in the"
+ ],
+ [
+  "</svg>Lecture outline</button>",
+  "</svg>Lesson outline</button>"
+ ],
+ [
+  "</svg>Transcript fixes</button>",
+  "</svg>Source notes</button>"
+ ],
+ [
+  "{title:'Read — lecture outline'",
+  "{title:'Read — lesson outline'"
+ ],
+ [
+  "{title:'Read — transcript fixes'",
+  "{title:'Read — source notes'"
+ ],
+ [
+  ",'Transcript fixes')",
+  ",'Source notes')"
+ ],
+ [
+  "href=\"../../../index.html\"",
+  "href=\"../../../index.html#macy\""
+ ],
+ [
+  "#0d9488",
+  "#db2777",
+  true
+ ],
+ [
+  "#0f766e",
+  "#be185d",
+  true
+ ],
+ [
+  "#14b8a6",
+  "#ec4899",
+  true
+ ],
+ [
+  "#e6f4f1",
+  "#fce7f3",
+  true
+ ],
+ [
+  "#c7e6de",
+  "#f5cfe2",
+  true
+ ],
+ [
+  "#d3e2dd",
+  "#f5cfe2",
+  true
+ ],
+ [
+  "#cfe0dc",
+  "#f5cfe2",
+  true
+ ],
+ [
+  "#eef4f2",
+  "#fbecf4",
+  true
+ ],
+ [
+  "#f4f7f6",
+  "#fdf6fa",
+  true
+ ],
+ [
+  "#5a726c",
+  "#77596a",
+  true
+ ],
+ [
+  "#152825",
+  "#2a1622",
+  true
+ ],
+ [
+  "#e5ece9",
+  "#f3e3ec",
+  true
+ ],
+ [
+  "rgba(20,50,45,",
+  "rgba(60,20,40,",
+  true
+ ],
+ [
+  "rgba(21,40,37,",
+  "rgba(45,20,35,",
+  true
+ ]
 ]

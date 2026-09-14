@@ -7,10 +7,10 @@ const SCENARIOS = [
   "A peptide is about 2 to 50 amino acids. A polypeptide is about 51 or more.","proteins"],
  ["When you text, letters make words and words make a sentence. Which protein level is like the sentence?",
   ["Tertiary structure","Primary structure","Secondary structure","Quaternary structure"],0,
-  "In the Slide 10 analogy, sentences match tertiary structure. It is the whole 3D shape of one chain.","levels"],
+  "In the writing analogy, sentences match tertiary structure. It is the whole 3D shape of one chain.","levels"],
  ["You snap 4 building blocks together into one toy. If each block were a protein subunit, what would the toy be called?",
   ["A tetramer","A nucleotide","A peptide bond","A side chain"],0,
-  "A tetramer has 4 subunits. Hemoglobin is the tetramer example on Slide 9.","quaternary"],
+  "A tetramer has 4 subunits. Hemoglobin is the example of a tetramer.","quaternary"],
  ["You build a paper DNA ladder and put an A on one rail. What goes across from it on the other rail?",
   ["T","C","G","A phosphate"],0,
   "A pairs with T, and C pairs with G. Hydrogen bonds hold each pair together.","dna"]

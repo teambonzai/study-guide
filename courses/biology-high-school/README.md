@@ -2,8 +2,7 @@
 
 Macy's high school biology class. The teacher's decks are the only source — there are no
 recordings — so each lesson's study guide uses the slides and the teacher's **speaker notes**.
-The 🎯 core / ⛔ background-only flags mark what the deck emphasizes, not a teacher-provided
-test list.
+Nothing is marked on or off the test unless the teacher said so; study everything in each lesson.
 
 ## Unit 2: Biomolecules
 

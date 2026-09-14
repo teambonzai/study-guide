@@ -10,7 +10,7 @@ const SCENARIOS = [
   "Melted ice is still H₂O. Only its state changed, so it is a physical change.","reactions"],
  ["You eat a slice of bread. Your body splits the starch into glucose by adding water. What is this called?",
   ["Hydrolysis","Dehydration synthesis","Anabolism"],0,
-  "Hydrolysis splits molecules by adding water. Starch into glucose is the example from the notes.","buildbreak"],
+  "Hydrolysis splits molecules by adding water. Starch breaking into glucose is one example.","buildbreak"],
  ["You sprint to catch the bus, and your muscles need energy fast. Which reaction releases it?",
   ["ATP breaking into ADP + Pi","Glucose joining into starch","Water freezing into ice"],0,
   "Breaking ATP releases energy, like using a charged battery.","atp"],

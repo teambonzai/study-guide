@@ -7,9 +7,9 @@
 <title>2.3 Biomolecules Overview — Interactive Study</title>
 <style>
   :root{
-    --bg:#f4f7f6; --panel:#ffffff; --panel2:#eef4f2; --ink:#152825; --muted:#5a726c;
-    --line:#e5ece9; --accent:#0d9488; --accent2:#0f766e; --ink-on:#ffffff;
-    --good:#0e9f6e; --bad:#e02424; --warn:#c2760c; --chip:#e6f4f1;
+    --bg:#fdf6fa; --panel:#ffffff; --panel2:#fbecf4; --ink:#2a1622; --muted:#77596a;
+    --line:#f3e3ec; --accent:#db2777; --accent2:#be185d; --ink-on:#ffffff;
+    --good:#0e9f6e; --bad:#e02424; --warn:#c2760c; --chip:#fce7f3;
   }
   *{box-sizing:border-box}
   html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
@@ -26,7 +26,7 @@
   main{max-width:940px;margin:0 auto;padding:26px 18px 100px}
   .view{display:none} .view.active{display:block;animation:fade .2s ease}
   @keyframes fade{from{opacity:.4}to{opacity:1}}
-  .card{background:var(--panel);border-radius:16px;padding:24px 26px;margin:20px 0;box-shadow:0 1px 3px rgba(20,50,45,.07)}
+  .card{background:var(--panel);border-radius:16px;padding:24px 26px;margin:20px 0;box-shadow:0 1px 3px rgba(60,20,40,.07)}
   h2{font-size:18px;margin:.1em 0 .7em;display:flex;align-items:center;gap:10px}
   h2 svg.i{width:20px;height:20px;color:var(--accent)}
   h3{font-size:13px;color:var(--muted);margin:1.6em 0 .55em;text-transform:uppercase;letter-spacing:.7px;font-weight:700}
@@ -40,7 +40,7 @@
   .btn.primary{background:var(--accent);color:var(--ink-on);font-weight:600}
   .btn.primary:hover{background:var(--accent2)}
   .btn.qnav{border:1.5px solid #cdddd7;background:var(--panel);padding:9px 15px}
-  .btn.qnav:hover{background:#eef4f2}
+  .btn.qnav:hover{background:#fbecf4}
   .btn.qnav.primary{border-color:var(--accent);background:var(--accent);color:var(--ink-on)}
   .btn.qnav.primary:hover{background:var(--accent2);border-color:var(--accent2)}
   /* doc switcher = underline TABS (distinct from the pill/segmented page filters) */
@@ -83,15 +83,15 @@
   .qtext{font-size:20px;line-height:1.4;font-weight:500;margin:8px 0 18px}
   .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;align-items:start;margin-top:6px}
   .gitem{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;
-    box-shadow:0 1px 3px rgba(20,50,45,.06);transition:box-shadow .16s,transform .16s,border-color .16s}
-  .gitem:hover{box-shadow:0 8px 22px rgba(20,50,45,.13);transform:translateY(-2px);border-color:#d3e2dd}
+    box-shadow:0 1px 3px rgba(60,20,40,.06);transition:box-shadow .16s,transform .16s,border-color .16s}
+  .gitem:hover{box-shadow:0 8px 22px rgba(60,20,40,.13);transform:translateY(-2px);border-color:#f5cfe2}
   .gitem img{width:100%;display:block;background:#f7faf9;cursor:zoom-in;aspect-ratio:4/3;object-fit:contain;border-bottom:1px solid var(--line)}
   .gitem .cap{padding:11px 13px 8px;font-size:13px;color:var(--ink);font-weight:600;display:flex;align-items:baseline;gap:5px;flex-wrap:wrap}
   .gitem .cap .snum{color:var(--muted);font-weight:700;font-size:11px;letter-spacing:.4px;text-transform:uppercase}
   .gitem .cap .stext{color:var(--muted);font-weight:400}
   .gitem .note{margin:0;border-radius:0;border-left:none;background:transparent;color:var(--accent2);padding:0 13px 12px;font-size:12.5px;line-height:1.45}
   .note{background:var(--chip);border-left:3px solid var(--accent);padding:6px 10px;margin-top:6px;font-size:12.5px;color:var(--accent2);border-radius:0 6px 6px 0}
-  #lightbox{position:fixed;inset:0;background:rgba(21,40,37,.82);display:none;align-items:center;justify-content:center;z-index:50;padding:20px;cursor:zoom-out;flex-direction:column}
+  #lightbox{position:fixed;inset:0;background:rgba(45,20,35,.82);display:none;align-items:center;justify-content:center;z-index:50;padding:20px;cursor:zoom-out;flex-direction:column}
   #lightbox img{max-width:96vw;max-height:82vh;background:#fff;border-radius:8px}
   #lightbox .lcap{color:#fff;margin-top:12px;max-width:900px;text-align:center;font-size:14px}
   .search{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:15px}
@@ -166,10 +166,10 @@
   .htitle .hhome:hover{opacity:.62}
   .hburger{font-size:0}
   /* nav drawer — modern slide-out (crisp, not ghosted) */
-  .scrim{position:fixed;inset:0;background:rgba(21,40,37,.42);z-index:40;display:none;opacity:0;transition:opacity .22s ease}
+  .scrim{position:fixed;inset:0;background:rgba(45,20,35,.42);z-index:40;display:none;opacity:0;transition:opacity .22s ease}
   .scrim.open{display:block;opacity:1}
   nav.drawer{position:fixed;top:0;left:0;bottom:0;width:280px;max-width:84vw;background:var(--panel);z-index:41;
-    transform:translateX(-100%);transition:transform .24s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;gap:3px;padding:12px 12px 16px;overflow-y:auto;box-shadow:2px 0 28px rgba(20,50,45,.16)}
+    transform:translateX(-100%);transition:transform .24s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;gap:3px;padding:12px 12px 16px;overflow-y:auto;box-shadow:2px 0 28px rgba(60,20,40,.16)}
   nav.drawer.open{transform:translateX(0)}
   nav.drawer .drawer-head{display:flex;align-items:center;justify-content:space-between;font-weight:700;color:var(--muted);
     font-size:11px;text-transform:uppercase;letter-spacing:.8px;padding:6px 8px 10px;margin-bottom:2px}
@@ -180,7 +180,7 @@
   nav.drawer button[data-v].active{background:var(--accent);color:#fff}
   nav.drawer button[data-v].active svg.i{color:#fff}
   /* modal */
-  .modal{position:fixed;inset:0;background:rgba(21,40,37,.5);z-index:60;display:none;align-items:center;justify-content:center;padding:18px}
+  .modal{position:fixed;inset:0;background:rgba(45,20,35,.5);z-index:60;display:none;align-items:center;justify-content:center;padding:18px}
   .modal.open{display:flex}
   .modal .sheet{background:var(--panel);border-radius:16px;max-width:460px;width:100%;max-height:86vh;overflow-y:auto;overflow-x:visible;padding:18px 18px 20px}
   /* proper modal header: title left, close vertically centered right */
@@ -191,7 +191,7 @@
   /* settings grouped as cards */
   .set-sec{background:var(--panel2);border-radius:12px;padding:2px 14px;margin:12px 0}
   .set-sec h3{font-size:12px;color:var(--accent2);font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin:13px 0 2px}
-  .setrow{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(20,50,45,.07)}
+  .setrow{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(60,20,40,.07)}
   .setrow:last-child{border-bottom:none}
   .setrow .lab{flex:1} .setrow .lab b{display:block;font-size:14.5px;margin-bottom:1px} .setrow .lab small{color:var(--muted);font-size:12.5px;line-height:1.4}
   /* iOS-style switch */
@@ -203,7 +203,7 @@
   .switch input:checked+span::before{transform:translateX(18px)}
   /* return to top */
   #toTop{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;border:none;
-    display:none;align-items:center;justify-content:center;cursor:pointer;z-index:30;box-shadow:0 3px 12px rgba(20,50,45,.28)}
+    display:none;align-items:center;justify-content:center;cursor:pointer;z-index:30;box-shadow:0 3px 12px rgba(60,20,40,.28)}
   #toTop.show{display:flex} #toTop svg.i{width:22px;height:22px}
   /* consistent toolbar toggle buttons (icon + tooltip) */
   .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
@@ -220,7 +220,7 @@
   /* JS-positioned tooltip — clamped inside the viewport, single consistent color */
   .tipbubble{position:fixed;z-index:200;max-width:min(280px,92vw);white-space:normal;text-align:center;
     background:var(--ink);color:#fff;font:500 12px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;letter-spacing:.2px;
-    padding:7px 11px;border-radius:8px;box-shadow:0 6px 20px rgba(20,50,45,.28);pointer-events:none;display:none}
+    padding:7px 11px;border-radius:8px;box-shadow:0 6px 20px rgba(60,20,40,.28);pointer-events:none;display:none}
   .tipbubble::after{content:"";position:absolute;left:var(--ax,50%);transform:translateX(-50%);bottom:-5px;border:5px solid transparent;border-top-color:var(--ink)}
   .tipbubble.below::after{bottom:auto;top:-5px;border-top-color:transparent;border-bottom-color:var(--ink)}
   /* lightbox multi-slide nav */
@@ -242,7 +242,7 @@
   .doc .co-slide{background:#eff8fe;border-color:#d3e9f9;--tip-bg:#0284c7} .co-slide .co-badge{background:#0284c7} .co-slide .co-lbl{color:#0369a1}
   .doc .co-analogy{background:#f6f0ff;border-color:#e6dbfb;--tip-bg:#7c3aed} .co-analogy .co-badge{background:#7c3aed} .co-analogy .co-lbl{color:#6d28d9}
   .doc .co-wait{background:#fff8ec;border-color:#f6e5c3;--tip-bg:#b45309} .co-wait .co-badge{background:#d97706} .co-wait .co-lbl{color:#b45309}
-  .doc .co-why{background:#e6f4f1;border-color:#c7e6de;--tip-bg:#0f766e} .co-why .co-badge{background:#0d9488} .co-why .co-lbl{color:#0f766e}
+  .doc .co-why{background:#fce7f3;border-color:#f5cfe2;--tip-bg:#be185d} .co-why .co-badge{background:#db2777} .co-why .co-lbl{color:#be185d}
   .doc .co-note{background:#eef2f6;border-color:#dbe3ea;--tip-bg:#475569} .co-note .co-badge{background:#64748b} .co-note .co-lbl{color:#475569}
   .doc .co-quote{background:#eef1fe;border-color:#dbe0fb;--tip-bg:#4f46e5} .co-quote .co-badge{background:#4f46e5} .co-quote .co-lbl{color:#4338ca} .doc .co-quote p{font-style:italic}
   .doc .cdot{display:inline-block;width:11px;height:11px;border-radius:50%;vertical-align:-1px;margin-right:3px}
@@ -259,7 +259,7 @@
   .seg{display:inline-flex;flex-wrap:wrap;gap:2px;background:var(--panel2);border-radius:10px;padding:3px}
   .seg button{border:none;background:transparent;color:var(--muted);font:inherit;font-size:13px;padding:6px 12px;border-radius:8px;cursor:pointer;white-space:nowrap}
   .seg button:hover{color:var(--ink)}
-  .seg button.on{background:var(--panel);color:var(--accent2);box-shadow:0 1px 2px rgba(20,50,45,.12)}
+  .seg button.on{background:var(--panel);color:var(--accent2);box-shadow:0 1px 2px rgba(60,20,40,.12)}
   .seg-wrap{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
   /* global search results */
   .s-grp{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin:12px 0 3px;padding:0 2px}
@@ -331,9 +331,9 @@
   .modal .sheet.cheat{max-width:900px;height:88vh;display:flex;flex-direction:column}
   #cheatFrame{flex:1;width:100%;border:0;border-radius:10px;background:#fff;margin-top:10px}
 </style>
-<style>/* Macy's profile theme: violet instead of teal */
-  :root{--bg:#f7f5fc;--panel2:#f0ecfa;--ink:#1e1b2e;--muted:#645d78;--line:#e9e5f3;--accent:#7c3aed;--accent2:#6d28d9;--chip:#f1eafe}
-  .btn.qnav:hover{background:var(--panel2)} .gitem:hover{border-color:#ddd3f3}
+<style>/* Macy's profile theme: pink instead of teal */
+  :root{--bg:#fdf6fa;--panel2:#fbecf4;--ink:#2a1622;--muted:#77596a;--line:#f3e3ec;--accent:#db2777;--accent2:#be185d;--chip:#fce7f3}
+  .btn.qnav:hover{background:var(--panel2)} .gitem:hover{border-color:#f5cfe2}
 </style>
 </head>
 <body>
@@ -699,7 +699,7 @@ function icon(id){return '<svg class="i"><use href="#i-'+id+'"/></svg>';}
 
 /* topic meta: color + icon */
 const TOPICS = {
- "carbon":{name:"Monomers, polymers & carbon",color:"#0d9488",icon:"layers"},
+ "carbon":{name:"Monomers, polymers & carbon",color:"#db2777",icon:"layers"},
  "energy":{name:"Energy",color:"#b45309",icon:"zap"},
  "reactions":{name:"Chemical reactions",color:"#0284c7",icon:"flip"},
  "exoendo":{name:"Exothermic & endothermic",color:"#dc2626",icon:"trend"},
@@ -716,7 +716,7 @@ const CARDS = [
  ["carbon","How many valence electrons does carbon have?","Four"],
  ["carbon","What does organic mean?","It contains carbon"],
  ["energy","What is energy?","Ability to change or move matter"],
- ["energy","What two kinds of energy are on the Slide 3 chart?","Potential and kinetic"],
+ ["energy","What two groups is energy sorted into?","Potential and kinetic"],
  ["energy","Chemical, nuclear, elastic: potential or kinetic?","Potential"],
  ["energy","Light, sound, wind: potential or kinetic?","Kinetic"],
  ["energy","What does the 1st law say about energy?","Can't destroy or create it"],
@@ -730,7 +730,7 @@ const CARDS = [
  ["exoendo","What does an endothermic reaction do with heat?","Absorbs it"],
  ["exoendo","Which kind can happen on its own?","Exothermic"],
  ["exoendo","Products end lower than reactants. Which type of reaction?","Exothermic"],
- ["exoendo","What does the blue arrow on the Slide 7 graphs show?","Activation energy"],
+ ["exoendo","On a potential energy diagram, what is the rise up to the hump called?","Activation energy"],
  ["buildbreak","What is anabolism?","Building large molecules (uses energy)"],
  ["buildbreak","What is catabolism?","Breaking large molecules (releases energy)"],
  ["buildbreak","What is dehydration synthesis?","Building molecules by losing water"],
@@ -742,15 +742,15 @@ const CARDS = [
  ["lipids","What are the building blocks of lipids?","Fatty acids and glycerol"],
  ["lipids","How many kcal per gram: lipids vs. carbs?","Lipids 9, carbs 4"],
  ["lipids","What is a triglyceride made of?","Glycerol + three fatty acids"],
- ["lipids","What three lipid types are in the Slide 14 picture?","Phospholipid, triglyceride, cholesterol"],
+ ["lipids","What are three types of lipids?","Phospholipid, triglyceride, cholesterol"],
  ["carbs","What are the building blocks of carbohydrates?","Monosaccharides"],
  ["carbs","Which suffix identifies a carbohydrate?","-ose"],
- ["carbs","What is drawn as two rings joined together?","A disaccharide"],
+ ["carbs","Which carbohydrate is two rings joined together?","A disaccharide"],
  ["carbs","What does glucose get converted to?","ATP (energy)"],
  ["proteins","What are the building blocks of proteins?","Amino acids"],
- ["proteins","What are the three labeled groups on an amino acid?","Amine, carboxyl, variable (R)"],
+ ["proteins","What are the three groups on an amino acid?","Amine, carboxyl, variable (R)"],
  ["proteins","Which biomolecule forms enzymes?","Proteins"],
- ["proteins","Which digestive enzyme on Slide 24 is for oil?","Lipase"],
+ ["proteins","Which digestive enzyme is for oil?","Lipase"],
  ["nucleic","What are the building blocks of nucleic acids?","Nucleotides"],
  ["nucleic","What are the three parts of a nucleotide?","Phosphate, sugar, base"],
  ["nucleic","What sugar is in DNA?","Deoxyribose"],
@@ -763,21 +763,21 @@ const QUIZ = [
  ["What do many monomers joined together make?",["Polymer","Enzyme","Nucleotide","Reactant"],0,"carbon"],
  ["What makes a molecule organic?",["It contains carbon","It contains water","It is a gas","It is dissolved"],0,"carbon"],
  ["What does the 1st law of thermodynamics say?",["You can't destroy or create energy","Molecules lose water when they join","Carbon has four valence electrons"],0,"energy"],
- ["Which is a kind of kinetic energy on the Slide 3 chart?",["Sound","Nuclear","Gravitational","Elastic"],0,"energy"],
+ ["Which is a kind of kinetic energy?",["Sound","Nuclear","Gravitational","Elastic"],0,"energy"],
  ["Which one is a chemical change?",["Breaking water into hydrogen and oxygen gas","Ice melting","Water boiling","Cutting something into pieces"],0,"reactions"],
  ["In 2 H₂ + O₂ → 2 H₂O, what is the 2 in front of H₂ called?",["Coefficient","Product","Letter in parentheses"],0,"reactions"],
  ["Which reaction can happen on its own, without energy put in?",["Exothermic","Melting ice","Dehydration synthesis"],0,"exoendo"],
  ["On an energy diagram, products end higher than reactants. What kind of reaction is it?",["Endothermic","A physical change","Hydrolysis"],0,"exoendo"],
- ["What does the blue arrow on the Slide 7 graphs show?",["Activation energy","The products","The reaction progress axis"],0,"exoendo"],
+ ["On a potential energy diagram, what is the rise up to the hump called?",["Activation energy","The products","The reaction progress axis"],0,"exoendo"],
  ["What does catabolism do?",["Breaks large molecules and releases energy","Stores genetic information","Melts solids into liquids"],0,"buildbreak"],
  ["What is breaking starch into glucose by adding water called?",["Hydrolysis","Dehydration synthesis","Melting"],0,"buildbreak"],
  ["What does ATP stand for?",["Adenosine triphosphate","Amino acid chain","Carboxyl group"],0,"atp"],
  ["When water splits ATP into ADP and Pi, what else is released?",["Energy","Glucose","Oxygen gas"],0,"atp"],
  ["What is a triglyceride made of?",["Glycerol and three fatty acids","Amino acids","Nucleotides"],0,"lipids"],
  ["Which biomolecule stores long-term energy at 9 kcal per gram?",["Lipids","Carbohydrates","Proteins","Nucleic acids"],0,"lipids"],
- ["What is drawn as many rings joined in a branching chain?",["Polysaccharide","Phospholipid","Amino acid"],0,"carbs"],
- ["Which group on the Slide 22 amino acid is labeled R?",["The variable group","The amine group","The carboxyl group"],0,"proteins"],
- ["On the Slide 24 chart, which digestive enzyme is for oil?",["Lipase","Pepsin","Amylase"],0,"proteins"],
+ ["Which carbohydrate is many rings joined in a branching chain?",["Polysaccharide","Phospholipid","Amino acid"],0,"carbs"],
+ ["Which group on an amino acid is called R?",["The variable group","The amine group","The carboxyl group"],0,"proteins"],
+ ["Which digestive enzyme is for oil?",["Lipase","Pepsin","Amylase"],0,"proteins"],
  ["Which base is found in RNA but not in DNA?",["Uracil","Adenine","Glucose"],0,"nucleic"],
  ["What sugar is in DNA?",["Deoxyribose","Glucose","Glycerol"],0,"nucleic"]
 ].map((x,i)=>({id:i,q:x[0],opts:x[1],correct:x[2],t:x[3]}));
@@ -794,7 +794,7 @@ const SCENARIOS = [
   "Melted ice is still H₂O. Only its state changed, so it is a physical change.","reactions"],
  ["You eat a slice of bread. Your body splits the starch into glucose by adding water. What is this called?",
   ["Hydrolysis","Dehydration synthesis","Anabolism"],0,
-  "Hydrolysis splits molecules by adding water. Starch into glucose is the example from the notes.","buildbreak"],
+  "Hydrolysis splits molecules by adding water. Starch breaking into glucose is one example.","buildbreak"],
  ["You sprint to catch the bus, and your muscles need energy fast. Which reaction releases it?",
   ["ATP breaking into ADP + Pi","Glucose joining into starch","Water freezing into ice"],0,
   "Breaking ATP releases energy, like using a charged battery.","atp"],
@@ -805,30 +805,30 @@ const SCENARIOS = [
 
 const GLOSS_CATS={mol:"Molecules & carbon",energy:"Energy",react:"Reactions & energy graphs",build:"Building & breaking",atp:"ATP",lipid:"Lipids",carb:"Carbohydrates",prot:"Proteins",nuc:"Nucleic acids"};
 const GLOSSARY = [
- ["Macromolecule","Slide 2's heading. Outside source: a big molecule made of smaller pieces.","mol"],
+ ["Macromolecule","Outside source: a big molecule made of smaller pieces.","mol"],
  ["Monomer","Monomers + monomers = polymer.","mol"],
  ["Polymer","What monomers make when they join.","mol"],
- ["Polymerization","The label on the arrow from monomers to polymer.","mol"],
+ ["Polymerization","Monomers joining to make a polymer.","mol"],
  ["Valence electrons","Carbon has four. Outside source: outer electrons an atom uses to bond.","mol"],
  ["Organic","Contains carbon.","mol"],
  ["Inorganic","Does not contain carbon.","mol"],
  ["Energy","The ability to change or move matter.","energy"],
- ["Laws of thermodynamics","The 1st and 2nd laws about energy on Slide 3.","energy"],
+ ["Laws of thermodynamics","The 1st and 2nd laws about energy.","energy"],
  ["1st law of thermodynamics","Can't destroy or create energy. It just changes forms.","energy"],
  ["2nd law of thermodynamics","Entropy always increases.","energy"],
  ["Entropy","Low entropy is highly ordered. High entropy is more disordered.","energy"],
- ["Potential energy","Chart: chemical, gravitational, electrical, nuclear, elastic. Outside source: stored energy.","energy"],
- ["Kinetic energy","Chart: electrical, light, sound, thermal, wind. Outside source: energy of motion.","energy"],
- ["Chemical energy","Potential energy; the cannon starts with it. Outside source: energy stored in bonds.","energy"],
- ["Gravitational energy","A potential energy on the chart. Outside source: stored energy from height.","energy"],
- ["Electrical energy","On both sides of the chart. Outside source: energy from electric charges.","energy"],
- ["Nuclear energy","A potential energy on the chart. Outside source: energy stored inside atoms.","energy"],
- ["Elastic energy","A potential energy on the chart. Outside source: energy in stretched things.","energy"],
- ["Light energy","A kinetic energy on the chart.","energy"],
- ["Sound energy","A kinetic energy on the chart. Outside source: energy carried by vibrations.","energy"],
- ["Thermal energy","A kinetic energy on the chart. Outside source: heat energy.","energy"],
- ["Wind energy","A kinetic energy on the chart.","energy"],
- ["Heat","The kinetic energy of molecules (cannon picture).","energy"],
+ ["Potential energy","Chemical, gravitational, electrical, nuclear, elastic. Outside source: stored energy.","energy"],
+ ["Kinetic energy","Electrical, light, sound, thermal, wind. Outside source: energy of motion.","energy"],
+ ["Chemical energy","Potential energy; a cannon starts with it. Outside source: energy stored in bonds.","energy"],
+ ["Gravitational energy","A kind of potential energy. Outside source: stored energy from height.","energy"],
+ ["Electrical energy","Both a potential and a kinetic energy. Outside source: energy from electric charges.","energy"],
+ ["Nuclear energy","A kind of potential energy. Outside source: energy stored inside atoms.","energy"],
+ ["Elastic energy","A kind of potential energy. Outside source: energy in stretched things.","energy"],
+ ["Light energy","A kind of kinetic energy.","energy"],
+ ["Sound energy","A kind of kinetic energy. Outside source: energy carried by vibrations.","energy"],
+ ["Thermal energy","A kind of kinetic energy. Outside source: heat energy.","energy"],
+ ["Wind energy","A kind of kinetic energy.","energy"],
+ ["Heat","The kinetic energy of molecules. A fired cannonball's energy ends as heat.","energy"],
  ["Chemical reaction","Bonds break and/or form. The chemical itself changes.","react"],
  ["Physical change","Changing state or being cut into pieces. Melted ice is still water.","react"],
  ["Reactants","The substances on the left of the arrow.","react"],
@@ -840,71 +840,71 @@ const GLOSSARY = [
  ["Endothermic","Absorbs energy from its surroundings as heat. Cooler than its surroundings.","react"],
  ["Spontaneously","Happening on its own.","react"],
  ["Potential energy diagram","A graph that shows if a reaction is endothermic or exothermic.","react"],
- ["Reaction coordinate / reaction progress","The across axis on the potential energy diagrams.","react"],
- ["Activation energy","The blue arrow up to the hump. Outside source: energy needed to start a reaction.","react"],
+ ["Reaction coordinate / reaction progress","The across axis on a potential energy diagram.","react"],
+ ["Activation energy","On a potential energy diagram, the rise up to the hump. Outside source: energy needed to start a reaction.","react"],
  ["Anabolism (anabolic)","Creating large molecules from smaller ones, using energy.","build"],
  ["Catabolism (catabolic)","Breaking large molecules into smaller ones, releasing energy.","build"],
  ["Dehydration synthesis","Builds up molecules by losing water molecules.","build"],
  ["Hydrolysis","Splits a compound into pieces by adding water.","build"],
- ["Digestion","Slide 9's label for hydrolysis. Outside source: breaking down food in your body.","build"],
+ ["Digestion","Another name for hydrolysis. Outside source: breaking down food in your body.","build"],
  ["Starch","Hydrolysis breaks starch into glucose.","build"],
  ["ATP (adenosine triphosphate)","The energy currency of the cell.","atp"],
  ["Phosphate group","ATP has three. Outside source: a group containing phosphorus.","atp"],
  ["Ribose","ATP's sugar. Also the sugar in RNA.","atp"],
  ["Adenine","ATP's nitrogenous base. Also a base in DNA and RNA.","atp"],
- ["Nitrogenous base","What the slide calls adenine. Outside source: a base containing nitrogen.","atp"],
+ ["Nitrogenous base","What adenine is. Outside source: a base containing nitrogen.","atp"],
  ["ADP (adenosine diphosphate)","What's left of ATP, with two phosphates.","atp"],
  ["Inorganic phosphate (Pi)","The phosphate that breaks off in ATP hydrolysis.","atp"],
  ["ATP hydrolysis","ATP + H₂O → Pi + ADP + energy.","atp"],
  ["Lipid","CHO; fatty acids and glycerol; long-term energy storage.","lipid"],
- ["Fatty acid","A lipid building block, drawn as a carbon chain.","lipid"],
+ ["Fatty acid","A lipid building block; a carbon chain.","lipid"],
  ["Glycerol","A lipid building block. It holds three fatty acids in a triglyceride.","lipid"],
  ["Triglyceride","Glycerol plus three fatty acids.","lipid"],
  ["Phospholipid","A lipid type. Phospholipids form the bilayer (cell membrane).","lipid"],
- ["Omega-3 phospholipid","A phospholipid shown fitting into the cell membrane lipid bilayer.","lipid"],
- ["Cholesterol","A lipid type shown on Slide 14.","lipid"],
+ ["Omega-3 phospholipid","A phospholipid that fits into the cell membrane lipid bilayer.","lipid"],
+ ["Cholesterol","A type of lipid.","lipid"],
  ["Phospholipid bilayer","The cell membrane.","lipid"],
  ["Cell membrane","Formed by the phospholipid bilayer. Outside source: a cell's outer layer.","lipid"],
  ["kcal","Lipids: 9 per gram. Carbs: 4. Outside source: a food-label Calorie.","lipid"],
  ["Insulation","A lipid job. Outside source: keeping heat in.","lipid"],
  ["Cell signaling","A lipid job. Outside source: cells sending messages.","lipid"],
  ["Carbohydrate","CHO in a 1:2:1 ratio; monosaccharides; short-term energy storage.","carb"],
- ["Monosaccharide","The carb building block. Drawn as one ring.","carb"],
- ["Disaccharide","Drawn as two rings joined.","carb"],
- ["Polysaccharide","Drawn as many rings in a branching chain.","carb"],
+ ["Monosaccharide","The carb building block. One ring.","carb"],
+ ["Disaccharide","Two rings joined.","carb"],
+ ["Polysaccharide","Many rings in a branching chain.","carb"],
  ["Glucose","A carb that gets converted to ATP.","carb"],
  ["-ose","The carbohydrate suffix identifier.","carb"],
  ["Cell wall","Carbs form cell walls. Outside source: a stiff layer around plant cells.","carb"],
  ["Cell recognition","A carb job. Outside source: cells identifying each other.","carb"],
  ["Protein","CHON(S); amino acids; secondary energy source and structural support.","prot"],
  ["Amino acid","The protein building block.","prot"],
- ["Amine group","The H–N–H part of the amino acid picture.","prot"],
- ["Carboxyl group","The C=O with OH part of the amino acid picture.","prot"],
+ ["Amine group","The H–N–H part of an amino acid.","prot"],
+ ["Carboxyl group","The C=O with OH part of an amino acid.","prot"],
  ["Variable group (R)","The R part of the amino acid. Outside source: different in each amino acid.","prot"],
- ["Peptide bond","The label on the link between amino acids in the chain.","prot"],
- ["N-terminus / C-terminus","Labels on the two ends of the protein chain.","prot"],
+ ["Peptide bond","The link between amino acids in a protein chain.","prot"],
+ ["N-terminus / C-terminus","The two ends of a protein chain.","prot"],
  ["-ase","The protein suffix identifier. Outside source: it marks enzymes.","prot"],
  ["Secondary energy source","A protein job. Outside source: a backup energy source.","prot"],
  ["Enzyme","Proteins form enzymes. Outside source: a protein that speeds up a reaction.","prot"],
- ["Digestive enzymes","The Slide 24 chart. Outside source: enzymes that break down food.","prot"],
- ["Amylase","A digestive enzyme for bread on the chart.","prot"],
- ["Sucrase-isomaltase","A digestive enzyme for bread on the chart.","prot"],
- ["Maltase","A digestive enzyme for bread on the chart.","prot"],
- ["Lactase","A digestive enzyme for bread on the chart.","prot"],
- ["Pepsin","A digestive enzyme for meat on the chart.","prot"],
- ["Trypsin","A digestive enzyme for meat on the chart.","prot"],
- ["Peptidase","A digestive enzyme for meat on the chart.","prot"],
- ["Lipase","The digestive enzyme for oil on the chart.","prot"],
+ ["Digestive enzymes","Enzymes for bread, meat, and oil. Outside source: enzymes that break down food.","prot"],
+ ["Amylase","A digestive enzyme for bread.","prot"],
+ ["Sucrase-isomaltase","A digestive enzyme for bread.","prot"],
+ ["Maltase","A digestive enzyme for bread.","prot"],
+ ["Lactase","A digestive enzyme for bread.","prot"],
+ ["Pepsin","A digestive enzyme for meat.","prot"],
+ ["Trypsin","A digestive enzyme for meat.","prot"],
+ ["Peptidase","A digestive enzyme for meat.","prot"],
+ ["Lipase","The digestive enzyme for oil.","prot"],
  ["Cell transport","A protein job. Outside source: moving things into and out of cells.","prot"],
  ["Structural support","A protein job. Outside source: giving shape and strength.","prot"],
  ["Signaling","A protein job. Outside source: cells sending messages.","prot"],
  ["Immune defense","A protein job. Outside source: the body fighting off germs.","prot"],
- ["Myofiber","A muscle picture label. Outside source: one muscle fiber.","prot"],
- ["Myofibril","A muscle picture label. Outside source: a thin thread inside a muscle fiber.","prot"],
- ["Actin","A muscle picture label. Outside source: a protein that helps muscle shorten.","prot"],
- ["Myosin","A muscle picture label. Outside source: a protein that pulls on actin.","prot"],
- ["Troponin","A muscle picture label. Outside source: a protein that helps switch contraction on.","prot"],
- ["Tropomyosin","A muscle picture label. Outside source: a protein that helps control contraction.","prot"],
+ ["Myofiber","Found in muscle. Outside source: one muscle fiber.","prot"],
+ ["Myofibril","Found in muscle. Outside source: a thin thread inside a muscle fiber.","prot"],
+ ["Actin","Found in muscle. Outside source: a protein that helps muscle shorten.","prot"],
+ ["Myosin","Found in muscle. Outside source: a protein that pulls on actin.","prot"],
+ ["Troponin","Found in muscle. Outside source: a protein that helps switch contraction on.","prot"],
+ ["Tropomyosin","Found in muscle. Outside source: a protein that helps control contraction.","prot"],
  ["Nucleic acid","CHONP; nucleotides; stores and carries genetic information.","nuc"],
  ["Nucleotide","The building block: a phosphate, a sugar, and a base.","nuc"],
  ["Base (nucleobase)","A nucleotide part: adenine, thymine, guanine, cytosine, or uracil.","nuc"],
@@ -912,14 +912,14 @@ const GLOSSARY = [
  ["RNA (ribonucleic acid)","Involved with protein synthesis. Usually single-stranded, with ribose.","nuc"],
  ["Deoxyribose","The sugar in DNA.","nuc"],
  ["Double-stranded / single-stranded","DNA has two strands. RNA usually has one.","nuc"],
- ["Base pair","Adenine with thymine, guanine with cytosine (Slide 27).","nuc"],
- ["Sugar phosphate backbone","The label along the long sides of DNA.","nuc"],
+ ["Base pair","Adenine with thymine, guanine with cytosine.","nuc"],
+ ["Sugar phosphate backbone","The long sides of DNA.","nuc"],
  ["Thymine (T)","A DNA base. Pairs with adenine.","nuc"],
  ["Uracil (U)","An RNA base.","nuc"],
  ["Guanine (G)","A DNA and RNA base. Pairs with cytosine.","nuc"],
  ["Cytosine (C)","A DNA and RNA base. Pairs with guanine.","nuc"],
  ["Protein synthesis","What RNA is involved with. Outside source: making proteins.","nuc"],
- ["Genetic information","What DNA stores. The cartoon calls DNA a blueprint for a living thing.","nuc"]
+ ["Genetic information","What DNA stores. DNA is called a blueprint for building a living thing.","nuc"]
 ];
 
 const SLIDE_NOTES = {
@@ -1383,7 +1383,7 @@ function speak(text){ if(!('speechSynthesis'in window))return; window.speechSynt
   const u=new SpeechSynthesisUtterance(text); u.rate=.98; u.onend=()=>{speaking=false;updateListen();}; speaking=true; window.speechSynthesis.speak(u); updateListen(); }
 function stopSpeak(){ if('speechSynthesis'in window)window.speechSynthesis.cancel(); speaking=false; updateListen(); }
 function updateListen(){ const b=document.getElementById('listenBtn'); if(b) b.innerHTML=(speaking?icon('x')+'Stop':icon('volume')+'Listen to summary'); }
-const SUMMARY="Let's go over biomolecules, one step at a time. Monomers plus monomers make a polymer. Carbon has four valence electrons, so it forms rings and chains. Molecules with carbon are called organic. Energy is the ability to change or move matter. The chart splits it into potential and kinetic energy. You can't destroy or create energy. It just changes forms. And entropy always increases. In a chemical reaction, bonds break or form. Melting ice is not a reaction, because it is still water. The number in front of a substance is the coefficient. Exothermic reactions release heat. Endothermic reactions absorb heat. On an energy graph, products lower means exothermic, and products higher means endothermic. The blue arrow up to the hump is labeled activation energy. Cells build big molecules by losing water. They break them apart by adding water, and that is called hydrolysis. A T P is the cell's energy currency. The slide shows it as a charged battery. Now the four biomolecules. Lipids are built from fatty acids and glycerol. They store long-term energy, nine kcal per gram. Carbohydrates are built from monosaccharides, and their names end in o s e. They store short-term energy, four kcal per gram. Proteins are built from amino acids. They give structural support and form enzymes. Nucleic acids are built from nucleotides. D N A stores genetic information, and R N A is involved with protein synthesis. You're doing great. Take it one section at a time.";
+const SUMMARY="Let's go over biomolecules, one step at a time. Monomers plus monomers make a polymer. Carbon has four valence electrons, so it forms rings and chains. Molecules with carbon are called organic. Energy is the ability to change or move matter. Energy can be potential or kinetic. You can't destroy or create energy. It just changes forms. And entropy always increases. In a chemical reaction, bonds break or form. Melting ice is not a reaction, because it is still water. The number in front of a substance is the coefficient. Exothermic reactions release heat. Endothermic reactions absorb heat. On a potential energy diagram, products lower means exothermic, and products higher means endothermic. The rise up to the hump is called activation energy. Cells build big molecules by losing water. They break them apart by adding water, and that is called hydrolysis. A T P is the cell's energy currency. Think of it as a charged battery. Now the four biomolecules. Lipids are built from fatty acids and glycerol. They store long-term energy, nine kcal per gram. Carbohydrates are built from monosaccharides, and their names end in o s e. They store short-term energy, four kcal per gram. Proteins are built from amino acids. They give structural support and form enzymes. Nucleic acids are built from nucleotides. D N A stores genetic information, and R N A is involved with protein synthesis. You're doing great. Take it one section at a time.";
 function toggleSummary(){ if(speaking) stopSpeak(); else speak(SUMMARY); }
 
 /* ---------- PRINT CHEAT SHEET ---------- */
@@ -1392,14 +1392,14 @@ function printCheatFrame(){ const w=document.getElementById('cheatFrame').conten
 function printCheat(){
   
   const css=`body{font:13px/1.5 -apple-system,Arial,sans-serif;color:#111;margin:22px;max-width:800px}
-   h1{font-size:19px;color:#7c3aed;margin:0 0 2px} .sub{color:#555;font-size:11px;margin-bottom:10px}
-   h2{font-size:12px;color:#7c3aed;border-bottom:1.5px solid #7c3aed;padding-bottom:2px;margin:12px 0 4px;text-transform:uppercase;letter-spacing:.5px}
-   .cols{column-count:2;column-gap:22px} .blk{break-inside:avoid;margin-bottom:8px} b{color:#6d28d9}
+   h1{font-size:19px;color:#db2777;margin:0 0 2px} .sub{color:#555;font-size:11px;margin-bottom:10px}
+   h2{font-size:12px;color:#db2777;border-bottom:1.5px solid #db2777;padding-bottom:2px;margin:12px 0 4px;text-transform:uppercase;letter-spacing:.5px}
+   .cols{column-count:2;column-gap:22px} .blk{break-inside:avoid;margin-bottom:8px} b{color:#be185d}
    ul{margin:2px 0 2px 16px;padding:0} li{margin:2px 0} table{border-collapse:collapse;width:100%;font-size:12px}
    td{border:1px solid #ccc;padding:3px 5px;vertical-align:top} @media print{body{margin:10px}}`;
-  const html=`<!doctype html><html><head><meta charset="utf-8"><title>2.3 Biomolecules Overview — Cheat Sheet</title><style>${css}</style><style>/* Macy's profile theme: violet instead of teal */
-  :root{--bg:#f7f5fc;--panel2:#f0ecfa;--ink:#1e1b2e;--muted:#645d78;--line:#e9e5f3;--accent:#7c3aed;--accent2:#6d28d9;--chip:#f1eafe}
-  .btn.qnav:hover{background:var(--panel2)} .gitem:hover{border-color:#ddd3f3}
+  const html=`<!doctype html><html><head><meta charset="utf-8"><title>2.3 Biomolecules Overview — Cheat Sheet</title><style>${css}</style><style>/* Macy's profile theme: pink instead of teal */
+  :root{--bg:#fdf6fa;--panel2:#fbecf4;--ink:#2a1622;--muted:#77596a;--line:#f3e3ec;--accent:#db2777;--accent2:#be185d;--chip:#fce7f3}
+  .btn.qnav:hover{background:var(--panel2)} .gitem:hover{border-color:#f5cfe2}
 </style>
 </head><body>
   <h1>2.3 Biomolecules Overview — Cheat Sheet</h1><div class="sub">Biology · Unit Two: Biomolecules</div>
@@ -1427,8 +1427,8 @@ function printCheat(){
   <div class="blk"><h2>5 · Potential energy diagrams</h2><ul>
    <li>Products lower = <b>exothermic</b> (energy released)</li>
    <li>Products higher = <b>endothermic</b> (energy absorbed)</li>
-   <li><b>Activation energy:</b> blue arrow up to the hump</li>
-   <li>Teacher's note (Slide 7): &ldquo;We will talk more about the &lsquo;activation energy&rsquo; concept in a future unit, for now we are just focusing on the exo/endo thermic ideas (energy releasing/absorbing)&rdquo;</li>
+   <li><b>Activation energy:</b> the rise up to the hump</li>
+   <li>Your teacher says: &ldquo;We will talk more about the &lsquo;activation energy&rsquo; concept in a future unit, for now we are just focusing on the exo/endo thermic ideas (energy releasing/absorbing)&rdquo;</li>
    <li>Outside source: activation energy is the energy needed to start a reaction</li></ul></div>
   <div class="blk"><h2>6 · Building &amp; breaking</h2><ul>
    <li><b>Anabolism</b> builds, energy required</li>

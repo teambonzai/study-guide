@@ -18,7 +18,7 @@
   "cards": [
     {
       "t": "proteins",
-      "q": "What four jobs of proteins are on Slide 2?",
+      "q": "What are four jobs of proteins?",
       "a": "Regulate, transport, structure, control reaction rates."
     },
     {
@@ -53,7 +53,7 @@
     },
     {
       "t": "proteins",
-      "q": "What three groups does the amino acid chart show?",
+      "q": "Amino acids are sorted by side chain into which three groups?",
       "a": "Nonpolar, polar, electrically charged."
     },
     {
@@ -158,7 +158,7 @@
     },
     {
       "t": "tertiary",
-      "q": "What four side-chain interactions are on Slide 6?",
+      "q": "What are the four kinds of side-chain interactions?",
       "a": "Ionic bond, hydrogen bond, disulfide bridge, hydrophobic interaction."
     },
     {
@@ -173,7 +173,7 @@
     },
     {
       "t": "tertiary",
-      "q": "On Slide 8, what is the blue layer around the chain labeled?",
+      "q": "What layer around a protein chain shrinks when it folds?",
       "a": "Hydration layer."
     },
     {
@@ -193,12 +193,12 @@
     },
     {
       "t": "quaternary",
-      "q": "What is the trimer example on Slide 9?",
+      "q": "What protein is the example of a trimer?",
       "a": "Collagen."
     },
     {
       "t": "quaternary",
-      "q": "What is the tetramer example on Slide 9?",
+      "q": "What protein is the example of a tetramer?",
       "a": "Hemoglobin."
     },
     {
@@ -228,12 +228,12 @@
     },
     {
       "t": "nucleic",
-      "q": "Which bases are labeled purines on Slide 11?",
+      "q": "Which bases are purine bases?",
       "a": "Adenine and guanine."
     },
     {
       "t": "nucleic",
-      "q": "Which bases are labeled pyrimidines on Slide 11?",
+      "q": "Which bases are pyrimidine bases?",
       "a": "Cytosine and thymine (in DNA)."
     },
     {

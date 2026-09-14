@@ -40,7 +40,7 @@
     },
     {
       "t": "energy",
-      "q": "What two kinds of energy are on the Slide 3 chart?",
+      "q": "What two groups is energy sorted into?",
       "a": "Potential and kinetic"
     },
     {
@@ -110,7 +110,7 @@
     },
     {
       "t": "exoendo",
-      "q": "What does the blue arrow on the Slide 7 graphs show?",
+      "q": "On a potential energy diagram, what is the rise up to the hump called?",
       "a": "Activation energy"
     },
     {
@@ -170,7 +170,7 @@
     },
     {
       "t": "lipids",
-      "q": "What three lipid types are in the Slide 14 picture?",
+      "q": "What are three types of lipids?",
       "a": "Phospholipid, triglyceride, cholesterol"
     },
     {
@@ -185,7 +185,7 @@
     },
     {
       "t": "carbs",
-      "q": "What is drawn as two rings joined together?",
+      "q": "Which carbohydrate is two rings joined together?",
       "a": "A disaccharide"
     },
     {
@@ -200,7 +200,7 @@
     },
     {
       "t": "proteins",
-      "q": "What are the three labeled groups on an amino acid?",
+      "q": "What are the three groups on an amino acid?",
       "a": "Amine, carboxyl, variable (R)"
     },
     {
@@ -210,7 +210,7 @@
     },
     {
       "t": "proteins",
-      "q": "Which digestive enzyme on Slide 24 is for oil?",
+      "q": "Which digestive enzyme is for oil?",
       "a": "Lipase"
     },
     {

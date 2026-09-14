@@ -80,6 +80,14 @@ The quick-scan version: one `##` per slide-topic with short one-line bullets cov
 Every term that appears in the lesson, including terms only shown in slide pictures. Definition =
 one short plain sentence (≤ 15 words).
 
+## Practice items stand on their own (user, 2026-09-13)
+Flashcards, quiz, scenarios, mnemonics, concept maps, glossary, audio summary, and cheat sheet
+must make sense with nothing else open. **Never mention slides, slide numbers, pictures,
+drawings, charts, photos, "the notes", the deck, or green boxes** in them. Ask about the idea
+itself: not "What is the brown wall labeled in the Slide 4 picture?" but "What part of a plant
+do water molecules stick to by adhesion?" Teacher quotes are fine as "Your teacher says…".
+Slide references belong only in the study guide, outline, source notes, and the slide gallery.
+
 ## Flashcards
 - Cover every section and every fact a quiz could ask about. Count follows the content
   (typically 25–45); order them the same way as the guide so they build up.

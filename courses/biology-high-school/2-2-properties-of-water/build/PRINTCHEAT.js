@@ -22,14 +22,14 @@ function printCheat(){
   <div class="blk"><h2>Cohesion and adhesion</h2><ul>
    <li><b>Cohesion</b> = water to water ("Co" = together)</li>
    <li><b>Adhesion</b> = water to something else ("Ad" = between)</li>
-   <li>Both are hydrogen bonds in the wall picture</li></ul></div>
+   <li>In a plant's xylem, both are hydrogen bonds</li></ul></div>
   <div class="blk"><h2>Capillary action</h2><ul>
    <li>Water rises up a thin <b>capillary tube</b></li>
    <li>Caused by cohesion + adhesion</li>
    <li>Curved top = <b>meniscus</b>; thinnest tube = highest water</li></ul></div>
   <div class="blk"><h2>Surface tension</h2><ul>
    <li>Surface resists an outside force</li>
-   <li>Caused by <b>cohesion</b>; an insect stands on it (photo)</li>
+   <li>Caused by <b>cohesion</b>; an insect can stand on it</li>
    <li>Surface molecule pulled <b>inward</b></li>
    <li>Inner molecule pulled <b>all directions</b></li>
    <li>Stronger pulls at surface, weaker in the bulk</li></ul></div>

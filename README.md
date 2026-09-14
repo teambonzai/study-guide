@@ -3,7 +3,7 @@
 Personal study materials for two students, each with a profile on the home page:
 
 - **Mindy** — Nursing program prerequisites at Austin Community College (ACC).
-- **Macy** — High school biology.
+- **Macy** — High school (Biology so far; more classes to come).
 
 Source lectures come from their teachers; everything else here is study aids built from those
 sources. Each profile lists its current classes, with finished classes in a collapsed **Archive**.
@@ -60,7 +60,6 @@ shortcuts. The Overview tab also has a **printable one-page cheat sheet** and an
 
 ## Courses
 
-- [Microbiology (BIOL 2420)](courses/microbiology-biol2420/) — immune response & complement; determinants of health & disease; epidemiology; control of microorganisms; and future topics.
 **Mindy**
 
 - [Microbiology (BIOL 2420)](courses/microbiology-biol2420/) — immune response & complement; determinants of health & disease; epidemiology (archived); control of microorganisms; and future topics.

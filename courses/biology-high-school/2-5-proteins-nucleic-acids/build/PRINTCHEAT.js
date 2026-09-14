@@ -17,7 +17,7 @@ function printCheat(){
    <li>Monomer = <b>amino acid</b> (about 20 kinds)</li>
    <li>Parts: <b>amino group</b> · <b>carboxyl group</b> · <b>side chain (R-group)</b></li>
    <li>The side chain differs in each one</li>
-   <li>Chart: <b>nonpolar</b> (9) · <b>polar</b> (6) · <b>electrically charged</b> (5): acidic (2), basic (3)</li></ul></div>
+   <li>Side-chain groups: <b>nonpolar</b> (9) · <b>polar</b> (6) · <b>electrically charged</b> (5): acidic (2), basic (3)</li></ul></div>
   <div class="blk"><h2>3. Amino acid to protein</h2><ul>
    <li><b>Peptide</b> about 2–50 aa · <b>polypeptide</b> about 51+ aa</li>
    <li><b>Protein</b> = 1+ polypeptides, 3D, functional</li></ul></div>
@@ -45,7 +45,7 @@ function printCheat(){
    <li>Sugar-phosphate backbone outside · base pairs inside</li>
    <li><b>A–T</b> and <b>C–G</b> (complementary base pairing), held by hydrogen bonds</li>
    <li><b>Antiparallel</b>: 5′ end pairs with 3′ end · matters for copying DNA</li>
-   <li>Slide 13: more drawings of backbones, base pairs, a nucleotide</li></ul></div>
+   <li>Key: <b>P</b> = phosphate · <b>S</b> = deoxyribose (sugar) · a <b>nucleotide</b> = one P, one S, one base</li></ul></div>
   <div class="blk"><h2>From your teacher</h2><ul>
    <li>No test list shared for this lesson, so study everything.</li></ul></div>
   </div></body></html>`;

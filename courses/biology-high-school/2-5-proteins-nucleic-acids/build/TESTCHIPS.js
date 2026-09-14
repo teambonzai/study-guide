@@ -1,6 +1,6 @@
 document.getElementById('testChips').innerHTML = [
  ["their jobs","Protein jobs · STRUCTURE = FUNCTION"],
- ["building blocks","Amino acid parts · chart of 20 amino acids"],
+ ["building blocks","Amino acid parts · 20 amino acids by side chain"],
  ["amino acid to protein","Peptides · polypeptides · proteins"],
  ["four levels","The four levels of structure"],
  ["primary structure","Level 1: order of amino acids · peptide bonds"],
@@ -12,5 +12,5 @@ document.getElementById('testChips').innerHTML = [
  ["nucleic acids","Nucleotides · bases · purines and pyrimidines"],
  ["dna vs. rna","DNA vs. RNA"],
  ["double helix","DNA double helix · base pairs · antiparallel"],
- ["more dna pictures","More DNA drawings (Slide 13)"]
+ ["more dna","More DNA: backbones · base pairs · nucleotide"]
 ].map(([kw,label])=>`<button class="chip chip-link" onclick="openGuide('${kw}')">${esc(label)} ${icon('arrowright')}</button>`).join('');

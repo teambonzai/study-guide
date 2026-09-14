@@ -48,7 +48,7 @@ lecture's files and copy the pattern exactly. Do not invent a new design.
     language, short sections, fewer and simpler cards/questions) for every file. Say "teacher",
     no clinical content. Titles carry the lesson number ("2.2 Properties of Water"); landing
     sections are per unit ("Biology · Unit 2: Biomolecules"). Assemble with
-    `--replacements reference/profile-macy.json` (violet theme, friendly labels, bulb icon for
+    `--replacements reference/profile-macy.json` (pink theme, friendly labels, bulb icon for
     Scenarios, "Source notes", home button → `#macy`).
   Every other rule (source-only content, citations, flags, design) applies to both.
 - **Never guess test scope; never cut deck material.** On-test / not-tested flags come ONLY from the

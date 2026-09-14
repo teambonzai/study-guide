@@ -44,17 +44,17 @@
     },
     {
       "t": "polarity",
-      "q": "What angle does Slide 2 show between water's hydrogens?",
+      "q": "What is the angle between the two hydrogens in a water molecule?",
       "a": "104.45°"
     },
     {
       "t": "polarity",
-      "q": "How long is each oxygen-to-hydrogen bond on Slide 2?",
+      "q": "How long is each oxygen-to-hydrogen bond in water?",
       "a": "95.84 pm"
     },
     {
       "t": "polarity",
-      "q": "What three ways does Slide 2 draw water?",
+      "q": "What are three ways to draw a water molecule?",
       "a": "Geometric structure, ball-and-stick, space-filling"
     },
     {
@@ -79,7 +79,7 @@
     },
     {
       "t": "hbond",
-      "q": "What does Slide 3 call the solid lines inside one molecule?",
+      "q": "What are the bonds inside one water molecule called?",
       "a": "Intramolecular polar covalent bonding"
     },
     {
@@ -94,17 +94,17 @@
     },
     {
       "t": "cohesion",
-      "q": "What do \"Co\" and \"Ad\" mean on Slide 4?",
+      "q": "What do \"Co\" and \"Ad\" mean in cohesion and adhesion?",
       "a": "Co = together; Ad = between"
     },
     {
       "t": "cohesion",
-      "q": "In the Slide 4 plant picture, what is the brown wall labeled?",
+      "q": "In a plant, what wall do water molecules stick to by adhesion?",
       "a": "Xylem wall"
     },
     {
       "t": "cohesion",
-      "q": "In the Slide 4 plant picture, what are the dotted links?",
+      "q": "In a plant, what links water molecules to each other and to the xylem wall?",
       "a": "Hydrogen bonds"
     },
     {
@@ -159,7 +159,7 @@
     },
     {
       "t": "heat",
-      "q": "What are the specific heats on Slide 7?",
+      "q": "What are the specific heats of copper, aluminum, and water?",
       "a": "Copper 390, aluminum 910, water 4200"
     },
     {
@@ -199,7 +199,7 @@
     },
     {
       "t": "hydro",
-      "q": "What example of amphipathic is on Slide 8?",
+      "q": "What is an example of something amphipathic?",
       "a": "Soap bubbles"
     },
     {
@@ -219,7 +219,7 @@
     },
     {
       "t": "mixtures",
-      "q": "What are the suspension examples on Slide 9?",
+      "q": "What are two examples of a suspension?",
       "a": "Blood cells in plasma; sand in water"
     },
     {
@@ -229,7 +229,7 @@
     },
     {
       "t": "mixtures",
-      "q": "What are the emulsion examples on Slide 9?",
+      "q": "What are two examples of an emulsion?",
       "a": "Oil droplets in water; bile and fats"
     },
     {

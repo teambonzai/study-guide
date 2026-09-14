@@ -7,9 +7,9 @@
 <title>2.2 Properties of Water — Interactive Study</title>
 <style>
   :root{
-    --bg:#f4f7f6; --panel:#ffffff; --panel2:#eef4f2; --ink:#152825; --muted:#5a726c;
-    --line:#e5ece9; --accent:#0d9488; --accent2:#0f766e; --ink-on:#ffffff;
-    --good:#0e9f6e; --bad:#e02424; --warn:#c2760c; --chip:#e6f4f1;
+    --bg:#fdf6fa; --panel:#ffffff; --panel2:#fbecf4; --ink:#2a1622; --muted:#77596a;
+    --line:#f3e3ec; --accent:#db2777; --accent2:#be185d; --ink-on:#ffffff;
+    --good:#0e9f6e; --bad:#e02424; --warn:#c2760c; --chip:#fce7f3;
   }
   *{box-sizing:border-box}
   html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
@@ -26,7 +26,7 @@
   main{max-width:940px;margin:0 auto;padding:26px 18px 100px}
   .view{display:none} .view.active{display:block;animation:fade .2s ease}
   @keyframes fade{from{opacity:.4}to{opacity:1}}
-  .card{background:var(--panel);border-radius:16px;padding:24px 26px;margin:20px 0;box-shadow:0 1px 3px rgba(20,50,45,.07)}
+  .card{background:var(--panel);border-radius:16px;padding:24px 26px;margin:20px 0;box-shadow:0 1px 3px rgba(60,20,40,.07)}
   h2{font-size:18px;margin:.1em 0 .7em;display:flex;align-items:center;gap:10px}
   h2 svg.i{width:20px;height:20px;color:var(--accent)}
   h3{font-size:13px;color:var(--muted);margin:1.6em 0 .55em;text-transform:uppercase;letter-spacing:.7px;font-weight:700}
@@ -40,7 +40,7 @@
   .btn.primary{background:var(--accent);color:var(--ink-on);font-weight:600}
   .btn.primary:hover{background:var(--accent2)}
   .btn.qnav{border:1.5px solid #cdddd7;background:var(--panel);padding:9px 15px}
-  .btn.qnav:hover{background:#eef4f2}
+  .btn.qnav:hover{background:#fbecf4}
   .btn.qnav.primary{border-color:var(--accent);background:var(--accent);color:var(--ink-on)}
   .btn.qnav.primary:hover{background:var(--accent2);border-color:var(--accent2)}
   /* doc switcher = underline TABS (distinct from the pill/segmented page filters) */
@@ -83,15 +83,15 @@
   .qtext{font-size:20px;line-height:1.4;font-weight:500;margin:8px 0 18px}
   .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;align-items:start;margin-top:6px}
   .gitem{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;
-    box-shadow:0 1px 3px rgba(20,50,45,.06);transition:box-shadow .16s,transform .16s,border-color .16s}
-  .gitem:hover{box-shadow:0 8px 22px rgba(20,50,45,.13);transform:translateY(-2px);border-color:#d3e2dd}
+    box-shadow:0 1px 3px rgba(60,20,40,.06);transition:box-shadow .16s,transform .16s,border-color .16s}
+  .gitem:hover{box-shadow:0 8px 22px rgba(60,20,40,.13);transform:translateY(-2px);border-color:#f5cfe2}
   .gitem img{width:100%;display:block;background:#f7faf9;cursor:zoom-in;aspect-ratio:4/3;object-fit:contain;border-bottom:1px solid var(--line)}
   .gitem .cap{padding:11px 13px 8px;font-size:13px;color:var(--ink);font-weight:600;display:flex;align-items:baseline;gap:5px;flex-wrap:wrap}
   .gitem .cap .snum{color:var(--muted);font-weight:700;font-size:11px;letter-spacing:.4px;text-transform:uppercase}
   .gitem .cap .stext{color:var(--muted);font-weight:400}
   .gitem .note{margin:0;border-radius:0;border-left:none;background:transparent;color:var(--accent2);padding:0 13px 12px;font-size:12.5px;line-height:1.45}
   .note{background:var(--chip);border-left:3px solid var(--accent);padding:6px 10px;margin-top:6px;font-size:12.5px;color:var(--accent2);border-radius:0 6px 6px 0}
-  #lightbox{position:fixed;inset:0;background:rgba(21,40,37,.82);display:none;align-items:center;justify-content:center;z-index:50;padding:20px;cursor:zoom-out;flex-direction:column}
+  #lightbox{position:fixed;inset:0;background:rgba(45,20,35,.82);display:none;align-items:center;justify-content:center;z-index:50;padding:20px;cursor:zoom-out;flex-direction:column}
   #lightbox img{max-width:96vw;max-height:82vh;background:#fff;border-radius:8px}
   #lightbox .lcap{color:#fff;margin-top:12px;max-width:900px;text-align:center;font-size:14px}
   .search{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:15px}
@@ -166,10 +166,10 @@
   .htitle .hhome:hover{opacity:.62}
   .hburger{font-size:0}
   /* nav drawer — modern slide-out (crisp, not ghosted) */
-  .scrim{position:fixed;inset:0;background:rgba(21,40,37,.42);z-index:40;display:none;opacity:0;transition:opacity .22s ease}
+  .scrim{position:fixed;inset:0;background:rgba(45,20,35,.42);z-index:40;display:none;opacity:0;transition:opacity .22s ease}
   .scrim.open{display:block;opacity:1}
   nav.drawer{position:fixed;top:0;left:0;bottom:0;width:280px;max-width:84vw;background:var(--panel);z-index:41;
-    transform:translateX(-100%);transition:transform .24s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;gap:3px;padding:12px 12px 16px;overflow-y:auto;box-shadow:2px 0 28px rgba(20,50,45,.16)}
+    transform:translateX(-100%);transition:transform .24s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;gap:3px;padding:12px 12px 16px;overflow-y:auto;box-shadow:2px 0 28px rgba(60,20,40,.16)}
   nav.drawer.open{transform:translateX(0)}
   nav.drawer .drawer-head{display:flex;align-items:center;justify-content:space-between;font-weight:700;color:var(--muted);
     font-size:11px;text-transform:uppercase;letter-spacing:.8px;padding:6px 8px 10px;margin-bottom:2px}
@@ -180,7 +180,7 @@
   nav.drawer button[data-v].active{background:var(--accent);color:#fff}
   nav.drawer button[data-v].active svg.i{color:#fff}
   /* modal */
-  .modal{position:fixed;inset:0;background:rgba(21,40,37,.5);z-index:60;display:none;align-items:center;justify-content:center;padding:18px}
+  .modal{position:fixed;inset:0;background:rgba(45,20,35,.5);z-index:60;display:none;align-items:center;justify-content:center;padding:18px}
   .modal.open{display:flex}
   .modal .sheet{background:var(--panel);border-radius:16px;max-width:460px;width:100%;max-height:86vh;overflow-y:auto;overflow-x:visible;padding:18px 18px 20px}
   /* proper modal header: title left, close vertically centered right */
@@ -191,7 +191,7 @@
   /* settings grouped as cards */
   .set-sec{background:var(--panel2);border-radius:12px;padding:2px 14px;margin:12px 0}
   .set-sec h3{font-size:12px;color:var(--accent2);font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin:13px 0 2px}
-  .setrow{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(20,50,45,.07)}
+  .setrow{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(60,20,40,.07)}
   .setrow:last-child{border-bottom:none}
   .setrow .lab{flex:1} .setrow .lab b{display:block;font-size:14.5px;margin-bottom:1px} .setrow .lab small{color:var(--muted);font-size:12.5px;line-height:1.4}
   /* iOS-style switch */
@@ -203,7 +203,7 @@
   .switch input:checked+span::before{transform:translateX(18px)}
   /* return to top */
   #toTop{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;border:none;
-    display:none;align-items:center;justify-content:center;cursor:pointer;z-index:30;box-shadow:0 3px 12px rgba(20,50,45,.28)}
+    display:none;align-items:center;justify-content:center;cursor:pointer;z-index:30;box-shadow:0 3px 12px rgba(60,20,40,.28)}
   #toTop.show{display:flex} #toTop svg.i{width:22px;height:22px}
   /* consistent toolbar toggle buttons (icon + tooltip) */
   .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
@@ -220,7 +220,7 @@
   /* JS-positioned tooltip — clamped inside the viewport, single consistent color */
   .tipbubble{position:fixed;z-index:200;max-width:min(280px,92vw);white-space:normal;text-align:center;
     background:var(--ink);color:#fff;font:500 12px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;letter-spacing:.2px;
-    padding:7px 11px;border-radius:8px;box-shadow:0 6px 20px rgba(20,50,45,.28);pointer-events:none;display:none}
+    padding:7px 11px;border-radius:8px;box-shadow:0 6px 20px rgba(60,20,40,.28);pointer-events:none;display:none}
   .tipbubble::after{content:"";position:absolute;left:var(--ax,50%);transform:translateX(-50%);bottom:-5px;border:5px solid transparent;border-top-color:var(--ink)}
   .tipbubble.below::after{bottom:auto;top:-5px;border-top-color:transparent;border-bottom-color:var(--ink)}
   /* lightbox multi-slide nav */
@@ -242,7 +242,7 @@
   .doc .co-slide{background:#eff8fe;border-color:#d3e9f9;--tip-bg:#0284c7} .co-slide .co-badge{background:#0284c7} .co-slide .co-lbl{color:#0369a1}
   .doc .co-analogy{background:#f6f0ff;border-color:#e6dbfb;--tip-bg:#7c3aed} .co-analogy .co-badge{background:#7c3aed} .co-analogy .co-lbl{color:#6d28d9}
   .doc .co-wait{background:#fff8ec;border-color:#f6e5c3;--tip-bg:#b45309} .co-wait .co-badge{background:#d97706} .co-wait .co-lbl{color:#b45309}
-  .doc .co-why{background:#e6f4f1;border-color:#c7e6de;--tip-bg:#0f766e} .co-why .co-badge{background:#0d9488} .co-why .co-lbl{color:#0f766e}
+  .doc .co-why{background:#fce7f3;border-color:#f5cfe2;--tip-bg:#be185d} .co-why .co-badge{background:#db2777} .co-why .co-lbl{color:#be185d}
   .doc .co-note{background:#eef2f6;border-color:#dbe3ea;--tip-bg:#475569} .co-note .co-badge{background:#64748b} .co-note .co-lbl{color:#475569}
   .doc .co-quote{background:#eef1fe;border-color:#dbe0fb;--tip-bg:#4f46e5} .co-quote .co-badge{background:#4f46e5} .co-quote .co-lbl{color:#4338ca} .doc .co-quote p{font-style:italic}
   .doc .cdot{display:inline-block;width:11px;height:11px;border-radius:50%;vertical-align:-1px;margin-right:3px}
@@ -259,7 +259,7 @@
   .seg{display:inline-flex;flex-wrap:wrap;gap:2px;background:var(--panel2);border-radius:10px;padding:3px}
   .seg button{border:none;background:transparent;color:var(--muted);font:inherit;font-size:13px;padding:6px 12px;border-radius:8px;cursor:pointer;white-space:nowrap}
   .seg button:hover{color:var(--ink)}
-  .seg button.on{background:var(--panel);color:var(--accent2);box-shadow:0 1px 2px rgba(20,50,45,.12)}
+  .seg button.on{background:var(--panel);color:var(--accent2);box-shadow:0 1px 2px rgba(60,20,40,.12)}
   .seg-wrap{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
   /* global search results */
   .s-grp{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin:12px 0 3px;padding:0 2px}
@@ -331,9 +331,9 @@
   .modal .sheet.cheat{max-width:900px;height:88vh;display:flex;flex-direction:column}
   #cheatFrame{flex:1;width:100%;border:0;border-radius:10px;background:#fff;margin-top:10px}
 </style>
-<style>/* Macy's profile theme: violet instead of teal */
-  :root{--bg:#f7f5fc;--panel2:#f0ecfa;--ink:#1e1b2e;--muted:#645d78;--line:#e9e5f3;--accent:#7c3aed;--accent2:#6d28d9;--chip:#f1eafe}
-  .btn.qnav:hover{background:var(--panel2)} .gitem:hover{border-color:#ddd3f3}
+<style>/* Macy's profile theme: pink instead of teal */
+  :root{--bg:#fdf6fa;--panel2:#fbecf4;--ink:#2a1622;--muted:#77596a;--line:#f3e3ec;--accent:#db2777;--accent2:#be185d;--chip:#fce7f3}
+  .btn.qnav:hover{background:var(--panel2)} .gitem:hover{border-color:#f5cfe2}
 </style>
 </head>
 <body>
@@ -701,7 +701,7 @@ function icon(id){return '<svg class="i"><use href="#i-'+id+'"/></svg>';}
 const TOPICS = {
  "polarity":{name:"Water is polar",color:"#0284c7",icon:"zap"},
  "hbond":{name:"Hydrogen bonds",color:"#0891b2",icon:"share"},
- "cohesion":{name:"Cohesion and adhesion",color:"#0d9488",icon:"layers"},
+ "cohesion":{name:"Cohesion and adhesion",color:"#db2777",icon:"layers"},
  "capillary":{name:"Capillary action",color:"#059669",icon:"up"},
  "surface":{name:"Surface tension",color:"#4f46e5",icon:"shield"},
  "heat":{name:"Specific heat",color:"#dc2626",icon:"trend"},
@@ -716,19 +716,19 @@ const CARDS = [
  ["polarity","Which atoms in water are partial positive?","The two hydrogens"],
  ["polarity","Why is oxygen partial negative?","Electrons are pulled toward it"],
  ["polarity","What does the δ sign mean?","Partial"],
- ["polarity","What angle does Slide 2 show between water's hydrogens?","104.45°"],
- ["polarity","How long is each oxygen-to-hydrogen bond on Slide 2?","95.84 pm"],
- ["polarity","What three ways does Slide 2 draw water?","Geometric structure, ball-and-stick, space-filling"],
+ ["polarity","What is the angle between the two hydrogens in a water molecule?","104.45°"],
+ ["polarity","How long is each oxygen-to-hydrogen bond in water?","95.84 pm"],
+ ["polarity","What are three ways to draw a water molecule?","Geometric structure, ball-and-stick, space-filling"],
  ["hbond","What is a hydrogen bond?","Hydrogen pulled to another molecule's oxygen"],
  ["hbond","Is a hydrogen bond inside or between molecules?","Between molecules (intermolecular)"],
  ["hbond","Which atoms can hydrogen bonds involve?","Nitrogen, oxygen, or fluorine"],
  ["hbond","Do hydrogen bonds happen only in water?","No, in other molecules too"],
- ["hbond","What does Slide 3 call the solid lines inside one molecule?","Intramolecular polar covalent bonding"],
+ ["hbond","What are the bonds inside one water molecule called?","Intramolecular polar covalent bonding"],
  ["cohesion","What is cohesion?","Water sticking to water"],
  ["cohesion","What is adhesion?","Water sticking to something different"],
- ["cohesion","What do \"Co\" and \"Ad\" mean on Slide 4?","Co = together; Ad = between"],
- ["cohesion","In the Slide 4 plant picture, what is the brown wall labeled?","Xylem wall"],
- ["cohesion","In the Slide 4 plant picture, what are the dotted links?","Hydrogen bonds"],
+ ["cohesion","What do \"Co\" and \"Ad\" mean in cohesion and adhesion?","Co = together; Ad = between"],
+ ["cohesion","In a plant, what wall do water molecules stick to by adhesion?","Xylem wall"],
+ ["cohesion","In a plant, what links water molecules to each other and to the xylem wall?","Hydrogen bonds"],
  ["capillary","What is capillary action?","Water rising up a thin tube"],
  ["capillary","What two things cause capillary action?","Cohesion and adhesion"],
  ["capillary","What is the curved top of water in a tube?","Meniscus"],
@@ -739,7 +739,7 @@ const CARDS = [
  ["surface","How is an inner molecule pulled?","In all directions"],
  ["surface","Where are cohesive pulls stronger: surface or bulk?","At the surface"],
  ["heat","What is specific heat capacity?","Energy to raise water 1°C"],
- ["heat","What are the specific heats on Slide 7?","Copper 390, aluminum 910, water 4200"],
+ ["heat","What are the specific heats of copper, aluminum, and water?","Copper 390, aluminum 910, water 4200"],
  ["heat","How does a lower specific heat warm and cool?","Quickly"],
  ["heat","How does a higher specific heat warm and cool?","Slowly"],
  ["heat","What does water's high specific heat keep steady?","Climates and body temperatures"],
@@ -747,13 +747,13 @@ const CARDS = [
  ["hydro","What does hydrophilic mean? Give examples.","Water-loving; dissolves (salts, sugars)"],
  ["hydro","What does hydrophobic mean? Give examples.","Water-fearing; doesn't dissolve (oils, fats)"],
  ["hydro","What does amphipathic mean?","Has water-loving and water-fearing parts"],
- ["hydro","What example of amphipathic is on Slide 8?","Soap bubbles"],
+ ["hydro","What is an example of something amphipathic?","Soap bubbles"],
  ["hydro","What do amphipathic molecules form?","Cell membranes (phospholipid bilayers)"],
  ["hydro","What are the two parts of a phospholipid?","Hydrophilic head, hydrophobic tail"],
  ["mixtures","What is a suspension?","Large particles that don't dissolve"],
- ["mixtures","What are the suspension examples on Slide 9?","Blood cells in plasma; sand in water"],
+ ["mixtures","What are two examples of a suspension?","Blood cells in plasma; sand in water"],
  ["mixtures","What is an emulsion?","Two liquids that don't normally mix"],
- ["mixtures","What are the emulsion examples on Slide 9?","Oil droplets in water; bile and fats"],
+ ["mixtures","What are two examples of an emulsion?","Oil droplets in water; bile and fats"],
  ["density","What is density?","Mass per unit volume"],
  ["density","What is the density formula?","D = m / V (or ρ = M / V)"],
  ["density","At what temperature is water most dense?","4°C"],
@@ -762,17 +762,17 @@ const CARDS = [
 
 const QUIZ = [
  ["Which atom in water is partial negative?",["Oxygen","Hydrogen","Fluorine"],0,"polarity"],
- ["What angle does Slide 2 show between water's two hydrogens?",["104.45°","95.84 pm","4200 J/kg°C"],0,"polarity"],
- ["Which Slide 2 model shows atoms as balls joined by sticks?",["Ball-and-stick model","Space-filling model","Basic geometric structure"],0,"polarity"],
+ ["What is the angle between water's two hydrogens?",["104.45°","95.84 pm","4200 J/kg°C"],0,"polarity"],
+ ["Which model of water shows atoms as balls joined by sticks?",["Ball-and-stick model","Space-filling model","Basic geometric structure"],0,"polarity"],
  ["Where does a hydrogen bond form?",["Between two molecules","Inside an oxygen atom","Only inside ice"],0,"hbond"],
  ["Besides oxygen, which atoms can hydrogen bonds involve?",["Nitrogen and fluorine","Copper and aluminum","Salts and sugars"],0,"hbond"],
- ["What does Slide 3 call the solid lines inside one water molecule?",["Polar covalent bonding","Surface tension","An emulsion"],0,"hbond"],
+ ["What are the bonds inside one water molecule called?",["Polar covalent bonding","Surface tension","An emulsion"],0,"hbond"],
  ["What is water sticking to water called?",["Cohesion","Capillary action","Density"],0,"cohesion"],
  ["What is water sticking to a glass tube called?",["Adhesion","Surface tension","Specific heat"],0,"cohesion"],
  ["What causes capillary action?",["Cohesion and adhesion","Specific heat","Density"],0,"capillary"],
  ["What is the curved top of water in a thin tube called?",["Meniscus","Phospholipid","Emulsion"],0,"capillary"],
  ["What causes surface tension?",["Cohesion","Specific heat","Hydrophobic tails"],0,"surface"],
- ["Which material on Slide 7 has the highest specific heat?",["Water","Copper","Aluminum"],0,"heat"],
+ ["Which has the highest specific heat?",["Water","Copper","Aluminum"],0,"heat"],
  ["Water's high specific heat helps living things keep what steady?",["Their body temperature (homeostasis)","Their surface tension","Their capillary action"],0,"heat"],
  ["What are oils and fats?",["Hydrophobic","Amphipathic","Suspensions"],0,"hydro"],
  ["What do you call a molecule with a water-loving part and a water-fearing part?",["Amphipathic","Polar covalent bond","Meniscus"],0,"hydro"],
@@ -805,53 +805,53 @@ const SCENARIOS = [
 
 const GLOSS_CATS={mol:"The water molecule",prop:"Properties of water",subs:"Water and other substances",mix:"Mixtures and density",sym:"Symbols"};
 const GLOSSARY = [
- ["Electron","Slide 2: \"Electrons are pulled toward oxygen.\" Outside source: A tiny particle with a negative charge. A static shock is electrons jumping. (OpenStax Biology 2e)","mol"],
- ["Polar","Slide 2: hydrogens → partial +, oxygen → partial −.","mol"],
- ["Partial charge (δ+ / δ−)","Slide 2: oxygen has a partial negative charge (δ−). Hydrogens have a partial positive charge (δ+).","mol"],
- ["Picometer (pm)","The unit in \"95.84 pm\" on Slide 2. Outside source: One trillionth of a meter. Cut a one-meter baseball bat into a trillion pieces; each is one picometer. (NIST)","mol"],
- ["Basic geometric structure","A Slide 2 label. The drawing uses letters and lines, with the angle and length.","mol"],
- ["Ball-and-stick model","A Slide 2 label. The drawing uses balls joined by sticks.","mol"],
- ["Space-filling model","A Slide 2 label. The drawing has balls pressed together.","mol"],
+ ["Electron","In water, \"electrons are pulled toward oxygen.\" Outside source: A tiny particle with a negative charge. A static shock is electrons jumping. (OpenStax Biology 2e)","mol"],
+ ["Polar","Hydrogens → partial +, oxygen → partial −.","mol"],
+ ["Partial charge (δ+ / δ−)","Oxygen has a partial negative charge (δ−). Hydrogens have a partial positive charge (δ+).","mol"],
+ ["Picometer (pm)","The unit in \"95.84 pm,\" the length of each bond in water. Outside source: One trillionth of a meter. Cut a one-meter baseball bat into a trillion pieces; each is one picometer. (NIST)","mol"],
+ ["Basic geometric structure","A way to draw water with letters and lines, showing the bond angle and length.","mol"],
+ ["Ball-and-stick model","A way to draw water with balls joined by sticks.","mol"],
+ ["Space-filling model","A way to draw water with balls pressed together.","mol"],
  ["Hydrogen bond","Hydrogen from one molecule attracted to an oxygen atom on another molecule. Can involve nitrogen, oxygen, or fluorine.","mol"],
- ["Intermolecular force","Slide 3 calls a hydrogen bond an intermolecular force. Outside source: \"Inter\" means between. An interstate highway runs between states. (Merriam-Webster)","mol"],
- ["Intramolecular","Slide 3 label for the solid lines inside one water molecule. Outside source: \"Intra\" means inside. Intramural sports are played inside one school. (Merriam-Webster)","mol"],
- ["Polar covalent bond","Slide 3 label: \"intramolecular polar covalent bonding.\" Outside source: Two atoms share electrons unevenly, like two kids tugging one blanket. (OpenStax Biology 2e)","mol"],
+ ["Intermolecular force","Your teacher calls a hydrogen bond an intermolecular force. Outside source: \"Inter\" means between. An interstate highway runs between states. (Merriam-Webster)","mol"],
+ ["Intramolecular","Describes the bonds inside one water molecule. Outside source: \"Intra\" means inside. Intramural sports are played inside one school. (Merriam-Webster)","mol"],
+ ["Polar covalent bond","The bond inside one water molecule: \"intramolecular polar covalent bonding.\" Outside source: Two atoms share electrons unevenly, like two kids tugging one blanket. (OpenStax Biology 2e)","mol"],
  ["Cohesion","Attraction to one another. \"Co\" = together.","prop"],
  ["Adhesion","Attraction to a different substance. \"Ad\" = between.","prop"],
- ["Xylem wall","Labeled in the Slide 4 picture: the wall that water molecules stick to (adhesion). Outside source: xylem are tiny tubes that carry water up a plant, like the strings in celery (OpenStax Biology 2e).","prop"],
+ ["Xylem wall","The wall in a plant that water molecules stick to (adhesion). Hydrogen bonds link the molecules. Outside source: xylem are tiny tubes that carry water up a plant, like the strings in celery (OpenStax Biology 2e).","prop"],
  ["Capillary action","The tendency of water to rise in a thin tube. Caused by cohesion and adhesion.","prop"],
- ["Capillary tube","Slide 5 label for the thin tube standing in water.","prop"],
- ["Meniscus","Slide 5 label for the curved top of the water in the tube.","prop"],
+ ["Capillary tube","The thin tube, standing in water, that water rises up by capillary action.","prop"],
+ ["Meniscus","The curved top of the water in a thin tube.","prop"],
  ["Surface tension","Tendency of the surface of water to resist an external force. Caused by cohesion.","prop"],
- ["External force","Slide 6: the surface resists an external force. Outside source: A push or pull from outside, like a finger poking water. (Merriam-Webster)","prop"],
- ["Bulk","Slide 6: surface molecules are \"pulled more strongly into the bulk.\" Outside source: The main body of the water, like all the water under a pool's top layer. (Merriam-Webster)","prop"],
+ ["External force","The surface of water resists an external force. Outside source: A push or pull from outside, like a finger poking water. (Merriam-Webster)","prop"],
+ ["Bulk","Surface molecules are \"pulled more strongly into the bulk.\" Outside source: The main body of the water, like all the water under a pool's top layer. (Merriam-Webster)","prop"],
  ["Specific heat capacity","Amount of energy needed to raise the temperature of water by 1°C. Water's is 4200 J/kg°C.","prop"],
- ["Joule (J)","The \"J\" in J/kg°C on Slide 7. Outside source: A unit of energy. Lifting an apple one meter takes about one joule. (NIST)","prop"],
- ["Kilogram (kg)","The \"kg\" in J/kg°C on Slide 7. Outside source: A unit of mass. A one-liter bottle of water is about one kilogram. (NIST)","prop"],
- ["J/kg°C","The unit for the Slide 7 numbers. Outside source: Joules needed to warm 1 kilogram by 1°C, like a price tag for warming. (NIST)","prop"],
- ["Copper (Cu)","Slide 7: copper block, specific heat 390 J/kg°C.","prop"],
- ["Aluminum (Al)","Slide 7: aluminum block, specific heat 910 J/kg°C.","prop"],
- ["Homeostasis","Slide 7: water helps organisms maintain homeostasis. Outside source: Keeping the inside of a living thing steady, like your body temperature. (OpenStax Biology 2e)","prop"],
- ["Dissolve","Slide 8: hydrophilic substances dissolve easily in water. Outside source: To break apart and spread evenly through a liquid, like sugar in tea. (OpenStax Chemistry 2e)","subs"],
+ ["Joule (J)","The \"J\" in J/kg°C. Outside source: A unit of energy. Lifting an apple one meter takes about one joule. (NIST)","prop"],
+ ["Kilogram (kg)","The \"kg\" in J/kg°C. Outside source: A unit of mass. A one-liter bottle of water is about one kilogram. (NIST)","prop"],
+ ["J/kg°C","The unit for specific heat (copper 390, aluminum 910, water 4200). Outside source: Joules needed to warm 1 kilogram by 1°C, like a price tag for warming. (NIST)","prop"],
+ ["Copper (Cu)","Copper block: specific heat 390 J/kg°C.","prop"],
+ ["Aluminum (Al)","Aluminum block: specific heat 910 J/kg°C.","prop"],
+ ["Homeostasis","Water helps organisms maintain homeostasis. Outside source: Keeping the inside of a living thing steady, like your body temperature. (OpenStax Biology 2e)","prop"],
+ ["Dissolve","Hydrophilic substances dissolve easily in water. Outside source: To break apart and spread evenly through a liquid, like sugar in tea. (OpenStax Chemistry 2e)","subs"],
  ["Hydrophilic","\"Water-loving\"; substances that dissolve easily in water. Ex: salts, sugars.","subs"],
  ["Hydrophobic","\"Water-fearing\"; substances that do not dissolve in water. Ex: oils, fats.","subs"],
  ["Amphipathic","A molecule with both hydrophilic and hydrophobic regions. Ex: soap bubbles.","subs"],
- ["Lipids","Slide 8: amphipathic molecules interact with both water and lipids. Outside source: A group that includes fats and oils, like butter. (OpenStax Biology 2e)","subs"],
- ["Phospholipid","Slide 8 picture \"Phospholipid Structure\": a hydrophilic head and a hydrophobic tail.","subs"],
- ["Phospholipid bilayer","Slide 8: cell membranes are phospholipid bilayers. Outside source: \"Bi\" means two, so two layers, like the two wheels of a bicycle. (Merriam-Webster)","subs"],
- ["Cell membrane","Slide 8: amphipathic molecules allow cell membranes to form. Outside source: The thin outer layer of a cell, like a grape's skin. (OpenStax Biology 2e)","subs"],
+ ["Lipids","Amphipathic molecules interact with both water and lipids. Outside source: A group that includes fats and oils, like butter. (OpenStax Biology 2e)","subs"],
+ ["Phospholipid","A molecule with a hydrophilic head and a hydrophobic tail.","subs"],
+ ["Phospholipid bilayer","Cell membranes are phospholipid bilayers. Outside source: \"Bi\" means two, so two layers, like the two wheels of a bicycle. (Merriam-Webster)","subs"],
+ ["Cell membrane","Amphipathic molecules allow cell membranes to form. Outside source: The thin outer layer of a cell, like a grape's skin. (OpenStax Biology 2e)","subs"],
  ["Suspension","A mixture where large particles float in water but do not dissolve. Ex: blood cells in plasma, sand in water.","mix"],
- ["Plasma","Slide 9: \"Blood cells in plasma.\" Outside source: The liquid part of blood, mostly water. A donated blood bag holds cells in plasma. (OpenStax Biology 2e)","mix"],
+ ["Plasma","A suspension example: \"blood cells in plasma.\" Outside source: The liquid part of blood, mostly water. A donated blood bag holds cells in plasma. (OpenStax Biology 2e)","mix"],
  ["Emulsion","A mixture of two liquids that don't normally mix, where one is dispersed in the other. Ex: oil droplets in water.","mix"],
- ["Dispersed","Slide 9: one liquid is dispersed in the other. Outside source: Spread out in tiny bits, like seeds scattered over a field. (Merriam-Webster)","mix"],
- ["Bile","Slide 9: \"bile emulsifying fats.\" Outside source: A digestive juice your body makes. (OpenStax Biology 2e)","mix"],
- ["Emulsify","Slide 9: \"bile emulsifying fats.\" Outside source: To break fat into tiny drops in water, like dish soap on greasy pans. (OpenStax Biology 2e)","mix"],
+ ["Dispersed","In an emulsion, one liquid is dispersed in the other. Outside source: Spread out in tiny bits, like seeds scattered over a field. (Merriam-Webster)","mix"],
+ ["Bile","An emulsion example: \"bile emulsifying fats.\" Outside source: A digestive juice your body makes. (OpenStax Biology 2e)","mix"],
+ ["Emulsify","An emulsion example: \"bile emulsifying fats.\" Outside source: To break fat into tiny drops in water, like dish soap on greasy pans. (OpenStax Biology 2e)","mix"],
  ["Density","Mass per unit volume (D = m / V). Water is most dense at 4°C.","mix"],
- ["Mass","The \"M\" labeled in the Slide 9 formula. Outside source: How much matter something has. A bowling ball has lots of mass. (OpenStax Chemistry 2e)","mix"],
- ["Volume","The \"V\" labeled in the Slide 9 formula. Outside source: How much space something takes up. A beach ball has lots of volume. (OpenStax Chemistry 2e)","mix"],
- ["δ","Slide 2 puts δ− by \"Partial negative charge\" and δ+ by \"Partial positive charge.\"","sym"],
- ["ρ (rho)","Slide 9 picture labels ρ as density (ρ = M / V). Outside source: A Greek letter, like π (pi) in math. (OpenStax Chemistry 2e)","sym"],
- ["°C","Used on Slides 7 and 9 (1°C, 4°C). Outside source: Degrees Celsius, a unit of temperature. A warm summer day is about 30°C. (NIST)","sym"]
+ ["Mass","The \"M\" in the density formula ρ = M / V. Outside source: How much matter something has. A bowling ball has lots of mass. (OpenStax Chemistry 2e)","mix"],
+ ["Volume","The \"V\" in the density formula ρ = M / V. Outside source: How much space something takes up. A beach ball has lots of volume. (OpenStax Chemistry 2e)","mix"],
+ ["δ","δ− means partial negative charge. δ+ means partial positive charge.","sym"],
+ ["ρ (rho)","Stands for density (ρ = M / V). Outside source: A Greek letter, like π (pi) in math. (OpenStax Chemistry 2e)","sym"],
+ ["°C","Used for specific heat and density (1°C, 4°C). Outside source: Degrees Celsius, a unit of temperature. A warm summer day is about 30°C. (NIST)","sym"]
 ];
 
 const SLIDE_NOTES = {
@@ -1163,7 +1163,7 @@ const MAPS = [
        ${n(C['cohesion'].color,"Cohesion","water to water")}${down('alone causes')}${n(C['surface'].color,"Surface tension","the surface resists an outside force")}
      </div>
      <div class="flow" style="gap:6px">
-       ${n('#0f766e',"Adhesion","water to something else")}${down('plus cohesion causes')}${n(C['capillary'].color,"Capillary action","water rises up a thin tube")}
+       ${n('#be185d',"Adhesion","water to something else")}${down('plus cohesion causes')}${n(C['capillary'].color,"Capillary action","water rises up a thin tube")}
      </div>
    </div>
  </div>`},
@@ -1295,7 +1295,7 @@ function speak(text){ if(!('speechSynthesis'in window))return; window.speechSynt
   const u=new SpeechSynthesisUtterance(text); u.rate=.98; u.onend=()=>{speaking=false;updateListen();}; speaking=true; window.speechSynthesis.speak(u); updateListen(); }
 function stopSpeak(){ if('speechSynthesis'in window)window.speechSynthesis.cancel(); speaking=false; updateListen(); }
 function updateListen(){ const b=document.getElementById('listenBtn'); if(b) b.innerHTML=(speaking?icon('x')+'Stop':icon('volume')+'Listen to summary'); }
-const SUMMARY="A water molecule has one oxygen and two hydrogens. Water is polar. Oxygen pulls the electrons closer, so oxygen is partial negative. The hydrogens are partial positive. The angle between the hydrogens is 104.45 degrees. Each bond is 95.84 picometers long. Your slide draws water three ways: a geometric structure, a ball-and-stick model, and a space-filling model. The hydrogen of one molecule is pulled to the oxygen of another. That pull is a hydrogen bond. It happens between molecules. Cohesion is water sticking to water. Adhesion is water sticking to something else. Together, they make water climb up a thin tube. That is capillary action. Cohesion also makes surface tension. Surface molecules are pulled inward. The surface resists an outside force. Water has a high specific heat. Copper is 390, aluminum is 910, and water is 4200. Things with a low specific heat warm up and cool down quickly. Water warms up and cools down slowly. This keeps climates and body temperatures steady. Salt and sugar are hydrophilic, so they dissolve. Oil and fat are hydrophobic, so they don't. Amphipathic molecules have both parts. Phospholipids have a water-loving head and a water-fearing tail, and they build cell membranes. Sand in water is a suspension. Oil drops in water are an emulsion. Density is mass divided by volume. Water is most dense at four degrees Celsius. Ice is less dense, so it floats. Nice work.";
+const SUMMARY="A water molecule has one oxygen and two hydrogens. Water is polar. Oxygen pulls the electrons closer, so oxygen is partial negative. The hydrogens are partial positive. The angle between the hydrogens is 104.45 degrees. Each bond is 95.84 picometers long. Water can be drawn three ways: a geometric structure, a ball-and-stick model, and a space-filling model. The hydrogen of one molecule is pulled to the oxygen of another. That pull is a hydrogen bond. It happens between molecules. Cohesion is water sticking to water. Adhesion is water sticking to something else. Together, they make water climb up a thin tube. That is capillary action. Cohesion also makes surface tension. Surface molecules are pulled inward. The surface resists an outside force. Water has a high specific heat. Copper is 390, aluminum is 910, and water is 4200. Things with a low specific heat warm up and cool down quickly. Water warms up and cools down slowly. This keeps climates and body temperatures steady. Salt and sugar are hydrophilic, so they dissolve. Oil and fat are hydrophobic, so they don't. Amphipathic molecules have both parts. Phospholipids have a water-loving head and a water-fearing tail, and they build cell membranes. Sand in water is a suspension. Oil drops in water are an emulsion. Density is mass divided by volume. Water is most dense at four degrees Celsius. Ice is less dense, so it floats. Nice work.";
 function toggleSummary(){ if(speaking) stopSpeak(); else speak(SUMMARY); }
 
 /* ---------- PRINT CHEAT SHEET ---------- */
@@ -1304,13 +1304,13 @@ function printCheatFrame(){ const w=document.getElementById('cheatFrame').conten
 function printCheat(){
   
   const css=`body{font:13px/1.5 -apple-system,Arial,sans-serif;color:#111;margin:24px;max-width:780px}
-   h1{font-size:20px;color:#7c3aed;margin:0 0 2px} .sub{color:#555;font-size:12px;margin-bottom:12px}
-   h2{font-size:13px;color:#7c3aed;border-bottom:1.5px solid #7c3aed;padding-bottom:2px;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.5px}
-   .cols{column-count:2;column-gap:24px} .blk{break-inside:avoid;margin-bottom:8px} b{color:#6d28d9}
+   h1{font-size:20px;color:#db2777;margin:0 0 2px} .sub{color:#555;font-size:12px;margin-bottom:12px}
+   h2{font-size:13px;color:#db2777;border-bottom:1.5px solid #db2777;padding-bottom:2px;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.5px}
+   .cols{column-count:2;column-gap:24px} .blk{break-inside:avoid;margin-bottom:8px} b{color:#be185d}
    ul{margin:2px 0 2px 16px;padding:0} li{margin:2px 0} @media print{body{margin:10px}}`;
-  const html=`<!doctype html><html><head><meta charset="utf-8"><title>2.2 Properties of Water — Cheat Sheet</title><style>${css}</style><style>/* Macy's profile theme: violet instead of teal */
-  :root{--bg:#f7f5fc;--panel2:#f0ecfa;--ink:#1e1b2e;--muted:#645d78;--line:#e9e5f3;--accent:#7c3aed;--accent2:#6d28d9;--chip:#f1eafe}
-  .btn.qnav:hover{background:var(--panel2)} .gitem:hover{border-color:#ddd3f3}
+  const html=`<!doctype html><html><head><meta charset="utf-8"><title>2.2 Properties of Water — Cheat Sheet</title><style>${css}</style><style>/* Macy's profile theme: pink instead of teal */
+  :root{--bg:#fdf6fa;--panel2:#fbecf4;--ink:#2a1622;--muted:#77596a;--line:#f3e3ec;--accent:#db2777;--accent2:#be185d;--chip:#fce7f3}
+  .btn.qnav:hover{background:var(--panel2)} .gitem:hover{border-color:#f5cfe2}
 </style>
 </head><body>
   <h1>2.2 Properties of Water — Cheat Sheet</h1><div class="sub">Biology · Unit Two: Biomolecules</div>
@@ -1329,14 +1329,14 @@ function printCheat(){
   <div class="blk"><h2>Cohesion and adhesion</h2><ul>
    <li><b>Cohesion</b> = water to water ("Co" = together)</li>
    <li><b>Adhesion</b> = water to something else ("Ad" = between)</li>
-   <li>Both are hydrogen bonds in the wall picture</li></ul></div>
+   <li>In a plant's xylem, both are hydrogen bonds</li></ul></div>
   <div class="blk"><h2>Capillary action</h2><ul>
    <li>Water rises up a thin <b>capillary tube</b></li>
    <li>Caused by cohesion + adhesion</li>
    <li>Curved top = <b>meniscus</b>; thinnest tube = highest water</li></ul></div>
   <div class="blk"><h2>Surface tension</h2><ul>
    <li>Surface resists an outside force</li>
-   <li>Caused by <b>cohesion</b>; an insect stands on it (photo)</li>
+   <li>Caused by <b>cohesion</b>; an insect can stand on it</li>
    <li>Surface molecule pulled <b>inward</b></li>
    <li>Inner molecule pulled <b>all directions</b></li>
    <li>Stronger pulls at surface, weaker in the bulk</li></ul></div>
